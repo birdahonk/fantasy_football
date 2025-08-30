@@ -1,0 +1,409 @@
+/* Fantasy Football Web App - Retro Green Screen Terminal Style */
+
+/* CSS Variables for consistent theming */
+:root {
+    --primary-green: #00FF00;
+    --secondary-green: #00CC00;
+    --dark-green: #001100;
+    --black: #000000;
+    --yellow: #FFFF00;
+    --white: #FFFFFF;
+    --scan-line-opacity: 0.1;
+    --crt-flicker-opacity: 0.05;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
+    background-color: var(--dark-green);
+    color: var(--primary-green);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* CRT Scan Lines Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 0, var(--scan-line-opacity)) 2px,
+        rgba(0, 255, 0, var(--scan-line-opacity)) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* CRT Flicker Effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        rgba(0, 255, 0, var(--crt-flicker-opacity)) 100%
+    );
+    pointer-events: none;
+    z-index: 999;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+}
+
+/* ASCII Art Header */
+.ascii-header {
+    text-align: center;
+    padding: 1rem;
+    background: var(--black);
+    border-bottom: 3px solid var(--primary-green);
+    overflow-x: auto;
+}
+
+.ascii-art {
+    font-family: 'Fira Code', monospace;
+    font-size: 8px;
+    line-height: 1;
+    color: var(--primary-green);
+    text-shadow: 0 0 10px var(--primary-green);
+    margin: 0 auto;
+    white-space: pre;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.main-title {
+    font-size: 2rem;
+    color: var(--primary-green);
+    text-shadow: 0 0 20px var(--primary-green);
+    margin: 1rem 0 0.5rem 0;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-green);
+    margin-bottom: 1rem;
+}
+
+/* Navigation */
+.main-nav {
+    background: var(--black);
+    border-bottom: 2px solid var(--primary-green);
+    padding: 0.5rem 0;
+    overflow-x: auto;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+.nav-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: inline-block;
+    min-width: 44px; /* Touch target size */
+}
+
+.nav-link:hover {
+    background: var(--primary-green);
+    color: var(--black);
+    text-shadow: none;
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+.nav-link:active {
+    transform: scale(0.95);
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 60vh;
+}
+
+/* Dashboard Cards */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dashboard-card {
+    background: var(--black);
+    border: 2px solid var(--primary-green);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--primary-green);
+    padding-bottom: 0.5rem;
+}
+
+/* Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--black);
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid var(--primary-green);
+}
+
+.data-table th {
+    background: var(--black);
+    color: var(--yellow);
+    font-weight: 600;
+}
+
+.data-table tr:nth-child(even) {
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.data-table tr:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* Buttons */
+.btn {
+    background: var(--black);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    padding: 0.75rem 1.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    background: var(--primary-green);
+    color: var(--black);
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-primary {
+    background: var(--primary-green);
+    color: var(--black);
+}
+
+.btn-primary:hover {
+    background: var(--secondary-green);
+    box-shadow: 0 0 20px var(--primary-green);
+}
+
+/* Chat Interface */
+.chat-container {
+    background: var(--black);
+    border: 2px solid var(--primary-green);
+    border-radius: 8px;
+    padding: 1.5rem;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.chat-input {
+    flex: 1;
+    background: var(--black);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    padding: 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 4px;
+    min-height: 44px;
+}
+
+.chat-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--black);
+    border-top: 2px solid var(--primary-green);
+    color: var(--secondary-green);
+    margin-top: 3rem;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .ascii-art {
+        font-size: 10px;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .main-nav ul {
+        flex-wrap: nowrap;
+    }
+}
+
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .ascii-art {
+        font-size: 12px;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 767px) {
+    .ascii-art {
+        font-size: 6px;
+        line-height: 0.8;
+    }
+    
+    .main-title {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-link {
+        width: 100%;
+        text-align: center;
+        max-width: 200px;
+    }
+    
+    .main-content {
+        padding: 1rem 0.5rem;
+    }
+    
+    .dashboard-card {
+        padding: 1rem;
+    }
+    
+    .data-table {
+        font-size: 0.9rem;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 0.5rem 0.25rem;
+    }
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+
+/* Loading States */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--yellow);
+}
+
+.loading::after {
+    content: '...';
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}

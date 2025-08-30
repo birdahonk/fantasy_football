@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Fantasy Football AI General Manager{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2 class="card-title">🏠 Dashboard</h2>
+    <p class="mb-3">Welcome to your Fantasy Football Command Center. Here's your current status:</p>
+    
+    <div class="dashboard-grid">
+        <!-- Current Week & Matchup -->
+        <div class="dashboard-card">
+            <h3 class="card-title">📅 Week {{ data.current_week }}</h3>
+            <div class="matchup-info">
+                <p><strong>Current Matchup:</strong></p>
+                <p class="matchup-text">{{ data.matchup }}</p>
+                <p><strong>Opponent:</strong> {{ data.opponent }}</p>
+            </div>
+            <div class="mt-2">
+                <a href="{{ url_for('matchup') }}" class="btn btn-primary">View Matchup Details</a>
+            </div>
+        </div>
+        
+        <!-- Team Roster Summary -->
+        <div class="dashboard-card">
+            <h3 class="card-title">👥 Team Roster</h3>
+            <div class="roster-summary">
+                <p><strong>Active Players:</strong> {{ data.roster|length }}</p>
+                <p><strong>Positions:</strong></p>
+                <ul class="position-list">
+                    {% for position in ['QB', 'RB', 'WR', 'TE', 'K', 'DEF'] %}
+                        {% set count = data.roster|selectattr('position', 'equalto', position)|list|length %}
+                        {% if count > 0 %}
+                            <li>{{ position }}: {{ count }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="mt-2">
+                <a href="{{ url_for('team') }}" class="btn">View Full Roster</a>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="dashboard-card">
+            <h3 class="card-title">⚡ Quick Actions</h3>
+            <div class="quick-actions">
+                <div class="mb-2">
+                    <a href="{{ url_for('analysis') }}" class="btn">📊 Run Analysis</a>
+                </div>
+                <div class="mb-2">
+                    <a href="{{ url_for('free_agents') }}" class="btn">🆓 Browse Free Agents</a>
+                </div>
+                <div class="mb-2">
+                    <a href="{{ url_for('chat') }}" class="btn">🤖 AI Chat</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity -->
+        <div class="dashboard-card">
+            <h3 class="card-title">📈 Recent Activity</h3>
+            <div class="recent-activity">
+                <p><em>No recent activity to display</em></p>
+                <p class="text-center mt-2">
+                    <small>Activity will be populated once API integration is complete</small>
+                </p>
+            </div>
+        </div>
+        
+        <!-- System Status -->
+        <div class="dashboard-card">
+            <h3 class="card-title">🔧 System Status</h3>
+            <div class="system-status">
+                <p><strong>API Status:</strong> <span class="status-indicator">⏳ Waiting for Authentication</span></p>
+                <p><strong>Database:</strong> <span class="status-indicator">✅ Connected</span></p>
+                <p><strong>Analysis Scripts:</strong> <span class="status-indicator">⏳ Pending API Access</span></p>
+            </div>
+            <div class="mt-2">
+                <button class="btn" onclick="checkSystemStatus()">Check Status</button>
+            </div>
+        </div>
+        
+        <!-- AI Recommendations -->
+        <div class="dashboard-card">
+            <h3 class="card-title">🤖 AI Insights</h3>
+            <div class="ai-insights">
+                <p><em>AI recommendations will appear here once the system is fully operational</em></p>
+                <p class="text-center mt-2">
+                    <small>Powered by OpenAI/Anthropic APIs</small>
+                </p>
+            </div>
+            <div class="mt-2">
+                <a href="{{ url_for('chat') }}" class="btn btn-primary">Ask AI Assistant</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Development Notice -->
+    <div class="development-notice mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🚧 Development Status</h3>
+            <p><strong>Current Phase:</strong> Web App Development (Feature Branch)</p>
+            <p><strong>Mock Data:</strong> Using sample data for development. Real data will be integrated once Yahoo! API authentication is working.</p>
+            <p><strong>Next Steps:</strong> Complete web interface, then integrate with working API scripts.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+.position-list {
+    list-style: none;
+    margin-left: 1rem;
+}
+
+.position-list li {
+    margin-bottom: 0.25rem;
+}
+
+.status-indicator {
+    color: var(--yellow);
+}
+
+.matchup-text {
+    font-size: 1.1rem;
+    color: var(--yellow);
+    margin: 0.5rem 0;
+}
+
+.development-notice {
+    border: 2px solid var(--yellow);
+    background: rgba(255, 255, 0, 0.05);
+}
+
+.development-notice .dashboard-card {
+    background: rgba(0, 0, 0, 0.8);
+}
+</style>
+
+<script>
+function checkSystemStatus() {
+    fetch('/api/status')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('System Status: Online\nTimestamp: ' + data.timestamp + '\nVersion: ' + data.version);
+            } else {
+                alert('System Status: Error\nPlease check the console for details.');
+            }
+        })
+        .catch(error => {
+            console.error('Error checking system status:', error);
+            alert('System Status: Error\nPlease check the console for details.');
+        });
+}
+</script>
+{% endblock %}
