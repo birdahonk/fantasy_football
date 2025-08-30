@@ -166,14 +166,13 @@ class YahooFantasyAPI:
     def _get_request_token(self) -> Optional[str]:
         """Get request token from Yahoo! as per official docs"""
         try:
-            # For request token, we don't include oauth_callback in the signature
-            # Only include it in the request body
-            params = {}
+            # For request token, oauth_callback MUST be included in the signature
+            params = {'oauth_callback': 'oob'}  # Out-of-band callback for desktop apps
             
             headers = self._get_oauth_headers('POST', self.request_token_url, params)
             
-            # Add oauth_callback to the request body, not to the signature
-            data = {'oauth_callback': 'oob'}  # Out-of-band callback for desktop apps
+            # Send the same parameters in the request body
+            data = params
             
             response = requests.post(self.request_token_url, data=data, headers=headers)
             log_api_call(self.request_token_url, response.elapsed.total_seconds(), response.status_code)
