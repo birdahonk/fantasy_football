@@ -135,14 +135,21 @@ GET  /api/status           - System status
 GET  /api/database         - Database status (SQLite)
 ```
 
-## 📊 **Effort Estimation**
+## 📊 **Effort Estimation & Development Priority**
+
+### **🎯 Development Strategy: Merge-Friendly Branching**
+- **Current Branch**: `main` - Core API integration and scripts
+- **Development Branch**: `feature/web-app` - Web interface development
+- **Merge Strategy**: Web app can be developed independently while waiting for API authentication
+- **Conflict Avoidance**: Focus on UI/UX components that don't modify core script logic
 
 ### **Phase 1: Basic Web Framework (1-2 focused sessions)**
 - Flask application setup
 - Basic routing and templates
-- Integration with existing scripts
+- **Mock data integration** (simulate API responses for development)
 - Simple data display
 - SQLite database setup
+- **No modifications to existing scripts** (read-only integration)
 
 ### **Phase 2: Mobile-First Design (2-3 focused sessions)**
 - Mobile-first CSS framework
@@ -150,12 +157,14 @@ GET  /api/database         - Database status (SQLite)
 - Responsive layouts
 - Touch-friendly interactions
 - ASCII art header integration
+- **Mock data templates** (ready for real API data later)
 
 ### **Phase 3: AI Chat Integration (2-3 focused sessions)**
 - Chat interface design
 - OpenAI/Anthropic API integration
 - Context management
 - Response formatting
+- **Mock AI responses** (simulate chat functionality for development)
 
 ### **Phase 4: VPS Deployment & Optimization (1-2 focused sessions)**
 - VPS environment setup
@@ -163,6 +172,7 @@ GET  /api/database         - Database status (SQLite)
 - SSL certificate setup (already configured)
 - Performance optimization
 - SQLite database optimization
+- **Mock data replacement** (prepare for real API integration)
 
 ### **Total Estimated Effort: 6-10 focused development sessions**
 *Each session is approximately 2-4 hours of focused development with the Cursor AI Agent*
@@ -186,11 +196,18 @@ GET  /api/database         - Database status (SQLite)
 
 ## 🚀 **Implementation Strategy**
 
+### **🎯 Branching & Merge Strategy**
+- **Branch**: `feature/web-app` for independent development
+- **Timeline**: Develop web app while waiting for Yahoo! API authentication
+- **Merge Point**: After API authentication is working and core scripts are functional
+- **Conflict Resolution**: Web app reads from existing analysis files, doesn't modify core logic
+
 ### **Recommended Approach**
-1. **Start Simple**: Basic Flask app with existing script integration
+1. **Start Simple**: Basic Flask app with **mock data** (no script modifications)
 2. **Iterate Design**: Progressive enhancement of UI/UX
 3. **Add AI Chat**: OpenAI integration for natural language interaction
 4. **Optimize**: Performance and mobile experience improvements
+5. **API Integration**: Replace mock data with real API calls (post-merge)
 
 ### **Technology Stack**
 - **Backend**: Flask (Python)
@@ -263,12 +280,23 @@ GET  /api/database         - Database status (SQLite)
 
 ## 📋 **Next Steps**
 
-1. **Validate Requirements**: Confirm web app scope and features
-2. **Choose AI Integration**: Select OpenAI vs Anthropic vs hybrid
-3. **Design Mockups**: Create wireframes for key pages (mobile-first)
-4. **Technical Planning**: Detailed implementation roadmap
-5. **Development Start**: Begin with Phase 1 implementation
-6. **ASCII Art Integration**: Implement consistent branding across all pages
+### **Immediate Actions (Current Branch)**
+1. **Wait for API Rate Limits**: Let Yahoo! OAuth endpoints reset
+2. **Test Authentication**: Verify OAuth 1.0a implementation works
+3. **Validate Core Scripts**: Ensure data retrieval and analysis work correctly
+
+### **Parallel Development (Feature Branch)**
+4. **Create Feature Branch**: `git checkout -b feature/web-app`
+5. **Validate Requirements**: Confirm web app scope and features
+6. **Choose AI Integration**: Select OpenAI vs Anthropic vs hybrid
+7. **Design Mockups**: Create wireframes for key pages (mobile-first)
+8. **Technical Planning**: Detailed implementation roadmap
+9. **Development Start**: Begin with Phase 1 implementation (mock data)
+10. **ASCII Art Integration**: Implement consistent branding across all pages
+
+### **Post-Merge Integration**
+11. **Replace Mock Data**: Integrate real API calls from working scripts
+12. **End-to-End Testing**: Verify complete workflow functionality
 
 ## 🖥️ **VPS-Specific Considerations**
 
@@ -278,6 +306,24 @@ GET  /api/database         - Database status (SQLite)
 - **Security**: Private environment, custom security configurations
 - **Scalability**: Easy resource scaling as needed
 - **Cost Effective**: $20/month for full development environment
+
+## 🔄 **Development & Merge Strategy**
+
+### **Mock Data Strategy**
+- **Purpose**: Enable web app development without modifying core scripts
+- **Implementation**: Create sample data files that mirror expected API responses
+- **Benefits**: 
+  - No conflicts with main branch development
+  - Web app can be fully functional before API integration
+  - Easy to swap mock data for real API calls later
+  - Maintains development momentum during API troubleshooting
+
+### **Conflict Avoidance**
+- **File Structure**: Web app reads from `analysis/` directory (read-only)
+- **Script Integration**: Web app calls existing scripts as subprocesses
+- **Database**: SQLite files stored in separate `web_app/database/` directory
+- **Configuration**: Web app uses separate config files from core scripts
+- **Dependencies**: Minimal overlap between web app and core script requirements
 
 ### **VPS Deployment Benefits**
 - **No Hosting Fees**: Eliminates external hosting costs
@@ -296,3 +342,9 @@ GET  /api/database         - Database status (SQLite)
 - **Local SQLite database** (no external database dependencies)
 - **ASCII art branding** (consistent retro aesthetic)
 - **VPS hosting** (leverage existing infrastructure)
+
+**Development Benefits**:
+- **Parallel development** possible while waiting for API authentication
+- **Mock data strategy** enables full web app development without conflicts
+- **Clean merge path** when core functionality is ready
+- **No development downtime** during API troubleshooting
