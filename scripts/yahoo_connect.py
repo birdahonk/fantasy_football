@@ -18,16 +18,19 @@ import hmac
 import hashlib
 import base64
 import secrets
+import xml.etree.ElementTree as ET
 
 # Import local utilities
 try:
     from utils import log_api_call, load_config, save_config, ensure_directories
+    from xml_parser import parse_yahoo_response
 except ImportError:
     # Fallback for when running from root directory
     import sys
     from pathlib import Path
     sys.path.insert(0, str(Path(__file__).parent))
     from utils import log_api_call, load_config, save_config, ensure_directories
+    from xml_parser import parse_yahoo_response
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -42,7 +45,10 @@ class YahooFantasyAPI:
         if not all([self.client_id, self.client_secret]):
             raise ValueError("Missing required Yahoo API environment variables: YAHOO_CLIENT_ID and YAHOO_CLIENT_SECRET")
         
+        # Base URLs from official documentation
         self.base_url = "https://fantasysports.yahooapis.com/fantasy/v2"
+        
+        # OAuth endpoints from official documentation
         self.request_token_url = "https://api.login.yahoo.com/oauth/v2/get_request_token"
         self.authorize_url = "https://api.login.yahoo.com/oauth/v2/request_auth"
         self.access_token_url = "https://api.login.yahoo.com/oauth/v2/get_token"
@@ -78,7 +84,7 @@ class YahooFantasyAPI:
     
     def _generate_oauth_signature(self, method: str, url: str, params: Dict[str, str], 
                                  token_secret: str = "") -> str:
-        """Generate OAuth 1.0a signature"""
+        """Generate OAuth 1.0a signature using HMAC-SHA1 as per official docs"""
         # Sort parameters alphabetically
         sorted_params = sorted(params.items())
         param_string = '&'.join([f"{k}={v}" for k, v in sorted_params])
@@ -100,7 +106,7 @@ class YahooFantasyAPI:
     
     def _get_oauth_headers(self, method: str, url: str, params: Dict[str, str], 
                            token_secret: str = "") -> Dict[str, str]:
-        """Generate OAuth 1.0a headers"""
+        """Generate OAuth 1.0a headers as per official documentation"""
         timestamp = str(int(time.time()))
         nonce = secrets.token_urlsafe(32)
         
@@ -127,7 +133,7 @@ class YahooFantasyAPI:
         return {'Authorization': auth_header}
     
     def authenticate(self) -> bool:
-        """Complete OAuth 1.0a authentication flow"""
+        """Complete OAuth 1.0a authentication flow as per official docs"""
         if self.access_token and self.access_secret:
             logger.info("Using existing valid tokens")
             return True
@@ -136,7 +142,7 @@ class YahooFantasyAPI:
         return self._new_authentication()
     
     def _new_authentication(self) -> bool:
-        """Start new OAuth 1.0a flow"""
+        """Start new OAuth 1.0a flow following official documentation"""
         try:
             # Step 1: Get request token
             logger.info("Getting request token...")
@@ -158,7 +164,7 @@ class YahooFantasyAPI:
             return False
     
     def _get_request_token(self) -> Optional[str]:
-        """Get request token from Yahoo!"""
+        """Get request token from Yahoo! as per official docs"""
         try:
             # For request token, we don't include oauth_callback in the signature
             # Only include it in the request body
@@ -220,7 +226,7 @@ class YahooFantasyAPI:
             return False
     
     def _get_access_token(self, request_token: str) -> bool:
-        """Exchange request token for access token"""
+        """Exchange request token for access token as per official docs"""
         try:
             params = {
                 'oauth_token': request_token,
@@ -252,7 +258,7 @@ class YahooFantasyAPI:
             return False
     
     def make_request(self, endpoint: str, method: str = 'GET', params: Dict[str, str] = None) -> Optional[Dict]:
-        """Make authenticated request to Yahoo! Fantasy API"""
+        """Make authenticated request to Yahoo! Fantasy API as per official docs"""
         if not self.authenticate():
             logger.error("Authentication required")
             return None
@@ -272,9 +278,17 @@ class YahooFantasyAPI:
             log_api_call(url, response.elapsed.total_seconds(), response.status_code)
             
             if response.status_code == 200:
-                # Parse XML response (Yahoo! returns XML)
-                # For now, return raw text, we can add XML parsing later
-                return {'status': 'success', 'data': response.text}
+                # Parse XML response using our dedicated parser
+                try:
+                    parsed_data = parse_yahoo_response(response.text)
+                    return {
+                        'status': 'success', 
+                        'data': response.text, 
+                        'parsed': parsed_data
+                    }
+                except Exception as e:
+                    logger.warning(f"XML parsing failed, returning raw text: {e}")
+                    return {'status': 'success', 'data': response.text}
             else:
                 logger.error(f"API request failed: {response.status_code} - {response.text}")
                 return None
@@ -283,21 +297,54 @@ class YahooFantasyAPI:
             logger.error(f"Error making API request: {e}")
             return None
     
+    # API endpoints as per official documentation
     def discover_league_info(self) -> Optional[Dict]:
-        """Discover user's fantasy leagues and teams"""
+        """Discover user's fantasy leagues and teams using official endpoint"""
         endpoint = "users;use_login=1/games;game_keys=nfl/teams"
         return self.make_request(endpoint)
     
     def get_current_roster(self, team_key: str) -> Optional[Dict]:
-        """Get current roster for a specific team"""
+        """Get current roster for a specific team using official endpoint"""
         endpoint = f"team/{team_key}/roster"
         return self.make_request(endpoint)
     
     def get_available_players(self, league_key: str, position: str = None) -> Optional[Dict]:
-        """Get available free agents in a league"""
+        """Get available free agents in a league using official endpoint"""
         endpoint = f"league/{league_key}/players;status=FA"
         if position:
             endpoint += f";position={position}"
+        return self.make_request(endpoint)
+    
+    def get_league_info(self, league_key: str) -> Optional[Dict]:
+        """Get league information using official endpoint"""
+        endpoint = f"league/{league_key}"
+        return self.make_request(endpoint)
+    
+    def get_team_info(self, team_key: str) -> Optional[Dict]:
+        """Get team information using official endpoint"""
+        endpoint = f"team/{team_key}"
+        return self.make_request(endpoint)
+    
+    def get_player_info(self, player_key: str) -> Optional[Dict]:
+        """Get player information using official endpoint"""
+        endpoint = f"player/{player_key}"
+        return self.make_request(endpoint)
+    
+    def get_matchups(self, team_key: str) -> Optional[Dict]:
+        """Get team matchups using official endpoint"""
+        endpoint = f"team/{team_key}/matchups"
+        return self.make_request(endpoint)
+    
+    def get_standings(self, league_key: str) -> Optional[Dict]:
+        """Get league standings using official endpoint"""
+        endpoint = f"league/{league_key}/standings"
+        return self.make_request(endpoint)
+    
+    def get_transactions(self, league_key: str, team_key: str = None) -> Optional[Dict]:
+        """Get league transactions using official endpoint"""
+        endpoint = f"league/{league_key}/transactions"
+        if team_key:
+            endpoint += f";team_key={team_key}"
         return self.make_request(endpoint)
 
 def main():
