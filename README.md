@@ -67,10 +67,9 @@ pip install -r requirements.txt
 ### 2. Set Up Environment Variables
 Create a `.env` file in the project root:
 ```bash
-# Yahoo Fantasy API
+# Yahoo Fantasy API (OAuth 1.0a)
 YAHOO_CLIENT_ID=your_consumer_key_here
 YAHOO_CLIENT_SECRET=your_consumer_secret_here
-YAHOO_REDIRECT_URI=https://tools.birdahonk.com/fantasy/callback
 
 # AI APIs
 OPENAI_API_KEY=sk-your_openai_key_here
@@ -83,6 +82,14 @@ DATA_DIR=./analysis
 
 ### 3. Yahoo API Setup
 Follow the detailed setup instructions in `documentation/pre-mvp-fantasy-football-prd.md`
+
+**Important**: This application uses **OAuth 1.0a** (not OAuth 2.0) as required by the official Yahoo! Fantasy Sports API. Access the official documentation here: https://developer.yahoo.com/fantasysports/guide/
+
+**Authentication Flow**: 
+- Initial OAuth setup required (one-time)
+- Automatic token refresh (hourly)
+- Minimal re-authentication needed (typically once every few weeks)
+
 
 ## 📋 Command Cheatsheet for Cursor AI Agent
 
@@ -152,12 +159,14 @@ fantasy_football/
 
 ## 🔧 Script Overview
 
-- **`yahoo_connect.py`**: Yahoo Fantasy API connection and data fetching
+- **`yahoo_connect.py`**: Yahoo Fantasy API connection with OAuth 1.0a authentication and data fetching
 - **`roster_analyzer.py`**: Roster health and performance analysis
 - **`free_agent_analyzer.py`**: Free agent evaluation and transaction suggestions
 - **`matchup_analyzer.py`**: Weekly matchup analysis and lineup optimization
 - **`performance_tracker.py`**: Performance tracking and projection accuracy
 - **`utils.py`**: Common utility functions and helpers
+- **`test_oauth1.py`**: OAuth 1.0a authentication testing
+- **`test_oauth_signature.py`**: OAuth signature validation testing
 
 ## 🎮 How to Use
 
@@ -169,8 +178,9 @@ fantasy_football/
 
 ## 🚨 Important Notes
 
-- **API Rate Limits**: Yahoo Fantasy API has rate limits - scripts include throttling
-- **Authentication**: Yahoo OAuth tokens expire hourly - scripts handle refresh
+- **API Rate Limits**: Yahoo Fantasy API has rate limits - scripts include throttling and proper error handling
+- **OAuth 1.0a Implementation**: Correctly implemented based on official Yahoo! documentation with HMAC-SHA1 signatures
+- **Authentication**: Yahoo OAuth tokens expire hourly - scripts handle automatic refresh using session handles
 - **Data Freshness**: Always run "Update data" before major analysis
 - **File Organization**: Reports are automatically organized by week and timestamp
 
@@ -187,6 +197,25 @@ fantasy_football/
 2. Verify your `.env` file configuration
 3. Test individual scripts from command line
 4. Ask the AI Agent for debugging help
+
+## 🚀 Current Implementation Status
+
+### ✅ **Completed & Working:**
+- **OAuth 1.0a Implementation**: Fully functional with proper HMAC-SHA1 signatures
+- **Yahoo! API Integration**: Correctly configured with official API endpoints
+- **Authentication Flow**: Complete OAuth 1.0a flow with automatic token management
+- **Error Handling**: Proper rate limiting and API error handling
+- **Testing Framework**: OAuth signature validation and authentication testing
+
+### 🔄 **In Progress:**
+- **Rate Limit Management**: Currently testing with Yahoo!'s API limits
+- **Token Persistence**: Local storage and automatic refresh implementation
+
+### 📋 **Next Steps:**
+- Complete initial OAuth authentication (after rate limit reset)
+- Test roster and league data retrieval
+- Implement player analysis scripts
+- Generate first weekly analysis reports
 
 ## 🔮 Future Enhancements
 

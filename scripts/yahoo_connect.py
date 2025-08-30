@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Yahoo Fantasy API connection and data fetching
-Handles authentication, league discovery, and data retrieval
+Handles OAuth 1.0a authentication, league discovery, and data retrieval
+Based on official Yahoo! Fantasy Sports API documentation
 """
 
 import os
@@ -13,15 +14,26 @@ from urllib.parse import urlencode, parse_qs, urlparse
 import webbrowser
 from pathlib import Path
 import logging
+import hmac
+import hashlib
+import base64
+import secrets
 
 # Import local utilities
-from utils import log_api_call, load_config, save_config, ensure_directories
+try:
+    from utils import log_api_call, load_config, save_config, ensure_directories
+except ImportError:
+    # Fallback for when running from root directory
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent))
+    from utils import log_api_call, load_config, save_config, ensure_directories
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
 class YahooFantasyAPI:
-    """Yahoo Fantasy Sports API client"""
+    """Yahoo Fantasy Sports API client using OAuth 1.0a"""
     
     def __init__(self):
         self.client_id = os.getenv('YAHOO_CLIENT_ID')
@@ -31,12 +43,13 @@ class YahooFantasyAPI:
             raise ValueError("Missing required Yahoo API environment variables: YAHOO_CLIENT_ID and YAHOO_CLIENT_SECRET")
         
         self.base_url = "https://fantasysports.yahooapis.com/fantasy/v2"
-        self.auth_url = "https://api.login.yahoo.com/oauth2/request_auth"
-        self.token_url = "https://api.login.yahoo.com/oauth2/get_token"
+        self.request_token_url = "https://api.login.yahoo.com/oauth/v2/get_request_token"
+        self.authorize_url = "https://api.login.yahoo.com/oauth/v2/request_auth"
+        self.access_token_url = "https://api.login.yahoo.com/oauth/v2/get_token"
         
         self.access_token = None
-        self.refresh_token = None
-        self.token_expires_at = 0
+        self.access_secret = None
+        self.access_session_handle = None
         
         # Load existing tokens if available
         self._load_tokens()
@@ -49,50 +62,139 @@ class YahooFantasyAPI:
         config = load_config('yahoo_tokens')
         if config:
             self.access_token = config.get('access_token')
-            self.refresh_token = config.get('refresh_token')
-            self.token_expires_at = config.get('expires_at', 0)
+            self.access_secret = config.get('access_secret')
+            self.access_session_handle = config.get('session_handle')
             logger.info("Loaded existing Yahoo tokens from config")
     
     def _save_tokens(self) -> None:
         """Save tokens to config"""
         config = {
             'access_token': self.access_token,
-            'refresh_token': self.refresh_token,
-            'expires_at': self.token_expires_at
+            'access_secret': self.access_secret,
+            'session_handle': self.access_session_handle
         }
         save_config('yahoo_tokens', config)
         logger.info("Saved Yahoo tokens to config")
     
-    def _is_token_valid(self) -> bool:
-        """Check if current access token is still valid"""
-        return self.access_token and time.time() < self.token_expires_at
+    def _generate_oauth_signature(self, method: str, url: str, params: Dict[str, str], 
+                                 token_secret: str = "") -> str:
+        """Generate OAuth 1.0a signature"""
+        # Sort parameters alphabetically
+        sorted_params = sorted(params.items())
+        param_string = '&'.join([f"{k}={v}" for k, v in sorted_params])
+        
+        # Create signature base string
+        signature_base = f"{method}&{requests.utils.quote(url, safe='')}&{requests.utils.quote(param_string, safe='')}"
+        
+        # Create signing key
+        signing_key = f"{requests.utils.quote(self.client_secret, safe='')}&{requests.utils.quote(token_secret, safe='')}"
+        
+        # Generate HMAC-SHA1 signature
+        signature = hmac.new(
+            signing_key.encode('utf-8'),
+            signature_base.encode('utf-8'),
+            hashlib.sha1
+        ).digest()
+        
+        return base64.b64encode(signature).decode('utf-8')
+    
+    def _get_oauth_headers(self, method: str, url: str, params: Dict[str, str], 
+                           token_secret: str = "") -> Dict[str, str]:
+        """Generate OAuth 1.0a headers"""
+        timestamp = str(int(time.time()))
+        nonce = secrets.token_urlsafe(32)
+        
+        oauth_params = {
+            'oauth_consumer_key': self.client_id,
+            'oauth_nonce': nonce,
+            'oauth_signature_method': 'HMAC-SHA1',
+            'oauth_timestamp': timestamp,
+            'oauth_version': '1.0'
+        }
+        
+        # Add token if available
+        if self.access_token:
+            oauth_params['oauth_token'] = self.access_token
+        
+        # Combine all parameters for signature
+        all_params = {**params, **oauth_params}
+        signature = self._generate_oauth_signature(method, url, all_params, token_secret)
+        oauth_params['oauth_signature'] = signature
+        
+        # Create Authorization header
+        auth_header = 'OAuth ' + ', '.join([f'{k}="{requests.utils.quote(v, safe="")}"' for k, v in oauth_params.items()])
+        
+        return {'Authorization': auth_header}
     
     def authenticate(self) -> bool:
-        """Complete OAuth 2.0 authentication flow"""
-        if self._is_token_valid():
-            logger.info("Using existing valid token")
+        """Complete OAuth 1.0a authentication flow"""
+        if self.access_token and self.access_secret:
+            logger.info("Using existing valid tokens")
             return True
         
-        if self.refresh_token:
-            logger.info("Attempting token refresh")
-            if self._refresh_token():
-                return True
-        
-        logger.info("Starting new authentication flow")
+        logger.info("Starting new OAuth 1.0a authentication flow")
         return self._new_authentication()
     
     def _new_authentication(self) -> bool:
-        """Start new OAuth 2.0 flow"""
+        """Start new OAuth 1.0a flow"""
         try:
-            # Step 1: Get authorization code
-            auth_params = {
-                'client_id': self.client_id,
-                'redirect_uri': 'http://localhost:8080', # Placeholder, will be replaced by local server
-                'response_type': 'code',
-                'scope': 'fspt-r'  # Fantasy Sports Read permission
-            }
+            # Step 1: Get request token
+            logger.info("Getting request token...")
+            request_token = self._get_request_token()
+            if not request_token:
+                return False
             
-            auth_url = f"{self.auth_url}?{urlencode(auth_params)}"
+            # Step 2: Get user authorization
+            logger.info("Getting user authorization...")
+            if not self._get_user_authorization(request_token):
+                return False
+            
+            # Step 3: Exchange for access token
+            logger.info("Exchanging for access token...")
+            return self._get_access_token(request_token)
+            
+        except Exception as e:
+            logger.error(f"Authentication failed: {e}")
+            return False
+    
+    def _get_request_token(self) -> Optional[str]:
+        """Get request token from Yahoo!"""
+        try:
+            # For request token, we don't include oauth_callback in the signature
+            # Only include it in the request body
+            params = {}
+            
+            headers = self._get_oauth_headers('POST', self.request_token_url, params)
+            
+            # Add oauth_callback to the request body, not to the signature
+            data = {'oauth_callback': 'oob'}  # Out-of-band callback for desktop apps
+            
+            response = requests.post(self.request_token_url, data=data, headers=headers)
+            log_api_call(self.request_token_url, response.elapsed.total_seconds(), response.status_code)
+            
+            if response.status_code == 200:
+                # Parse response (format: oauth_token=TOKEN&oauth_token_secret=SECRET)
+                response_data = parse_qs(response.text)
+                request_token = response_data.get('oauth_token', [None])[0]
+                request_token_secret = response_data.get('oauth_token_secret', [None])[0]
+                
+                if request_token and request_token_secret:
+                    self.request_token_secret = request_token_secret
+                    logger.info("Successfully obtained request token")
+                    return request_token
+            
+            logger.error(f"Failed to get request token: {response.status_code} - {response.text}")
+            logger.error(f"Response headers: {dict(response.headers)}")
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error getting request token: {e}")
+            return None
+    
+    def _get_user_authorization(self, request_token: str) -> bool:
+        """Get user authorization for the request token"""
+        try:
+            auth_url = f"{self.authorize_url}?oauth_token={request_token}"
             print(f"\n🔐 Yahoo Fantasy API Authentication Required")
             print(f"Please visit this URL in your browser:\n{auth_url}\n")
             
@@ -104,448 +206,99 @@ class YahooFantasyAPI:
                 print("🌐 Please copy and paste the URL above into your browser.")
             
             # Wait for user to complete authentication
-            auth_code = input("\nEnter the authorization code from Yahoo: ").strip()
+            self.verifier = input("\nEnter the verification code from Yahoo: ").strip()
             
-            if not auth_code:
-                logger.error("No authorization code provided")
+            if not self.verifier:
+                logger.error("No verification code provided")
                 return False
             
-            # Step 2: Exchange code for tokens
-            return self._exchange_code_for_tokens(auth_code)
+            logger.info("User authorization completed")
+            return True
             
         except Exception as e:
-            logger.error(f"Authentication failed: {e}")
+            logger.error(f"Error getting user authorization: {e}")
             return False
     
-    def _exchange_code_for_tokens(self, auth_code: str) -> bool:
-        """Exchange authorization code for access and refresh tokens"""
+    def _get_access_token(self, request_token: str) -> bool:
+        """Exchange request token for access token"""
         try:
-            token_data = {
-                'grant_type': 'authorization_code',
-                'code': auth_code,
-                'redirect_uri': 'http://localhost:8080', # Placeholder, will be replaced by local server
-                'client_id': self.client_id,
-                'client_secret': self.client_secret
+            params = {
+                'oauth_token': request_token,
+                'oauth_verifier': self.verifier
             }
             
-            response = requests.post(self.token_url, data=token_data)
-            log_api_call(self.token_url, response.elapsed.total_seconds(), response.status_code)
+            headers = self._get_oauth_headers('POST', self.access_token_url, params, self.request_token_secret)
+            
+            response = requests.post(self.access_token_url, data=params, headers=headers)
+            log_api_call(self.access_token_url, response.elapsed.total_seconds(), response.status_code)
             
             if response.status_code == 200:
-                token_response = response.json()
+                # Parse response
+                response_data = parse_qs(response.text)
+                self.access_token = response_data.get('oauth_token', [None])[0]
+                self.access_secret = response_data.get('oauth_token_secret', [None])[0]
+                self.access_session_handle = response_data.get('oauth_session_handle', [None])[0]
                 
-                self.access_token = token_response['access_token']
-                self.refresh_token = token_response.get('refresh_token')
-                self.token_expires_at = time.time() + token_response.get('expires_in', 3600)
-                
-                self._save_tokens()
-                logger.info("Successfully obtained new tokens")
-                return True
-            else:
-                logger.error(f"Token exchange failed: {response.status_code} - {response.text}")
-                return False
-                
+                if all([self.access_token, self.access_secret]):
+                    self._save_tokens()
+                    logger.info("Successfully obtained access tokens")
+                    return True
+            
+            logger.error(f"Failed to get access token: {response.status_code} - {response.text}")
+            return False
+            
         except Exception as e:
-            logger.error(f"Token exchange error: {e}")
+            logger.error(f"Error getting access token: {e}")
             return False
     
-    def _refresh_token(self) -> bool:
-        """Refresh access token using refresh token"""
-        try:
-            token_data = {
-                'grant_type': 'refresh_token',
-                'refresh_token': self.refresh_token,
-                'client_id': self.client_id,
-                'client_secret': self.client_secret
-            }
-            
-            response = requests.post(self.token_url, data=token_data)
-            log_api_call(self.token_url, response.elapsed.total_seconds(), response.status_code)
-            
-            if response.status_code == 200:
-                token_response = response.json()
-                
-                self.access_token = token_response['access_token']
-                if 'refresh_token' in token_response:
-                    self.refresh_token = token_response['refresh_token']
-                self.token_expires_at = time.time() + token_response.get('expires_in', 3600)
-                
-                self._save_tokens()
-                logger.info("Successfully refreshed token")
-                return True
-            else:
-                logger.error(f"Token refresh failed: {response.status_code} - {response.text}")
-                return False
-                
-        except Exception as e:
-            logger.error(f"Token refresh error: {e}")
-            return False
-    
-    def _make_request(self, endpoint: str, params: Optional[Dict] = None) -> Optional[Dict]:
-        """Make authenticated request to Yahoo Fantasy API"""
+    def make_request(self, endpoint: str, method: str = 'GET', params: Dict[str, str] = None) -> Optional[Dict]:
+        """Make authenticated request to Yahoo! Fantasy API"""
         if not self.authenticate():
-            logger.error("Authentication failed")
+            logger.error("Authentication required")
             return None
         
-        url = f"{self.base_url}/{endpoint}"
-        headers = {
-            'Authorization': f'Bearer {self.access_token}',
-            'Content-Type': 'application/json'
-        }
-        
         try:
-            start_time = time.time()
-            response = requests.get(url, headers=headers, params=params)
-            response_time = time.time() - start_time
+            url = f"{self.base_url}/{endpoint}"
+            if params is None:
+                params = {}
             
-            log_api_call(endpoint, response_time, response.status_code)
+            headers = self._get_oauth_headers(method, url, params, self.access_secret)
+            
+            if method.upper() == 'GET':
+                response = requests.get(url, params=params, headers=headers)
+            else:
+                response = requests.post(url, data=params, headers=headers)
+            
+            log_api_call(url, response.elapsed.total_seconds(), response.status_code)
             
             if response.status_code == 200:
-                return response.json()
-            elif response.status_code == 401:
-                logger.warning("Token expired, attempting refresh")
-                if self._refresh_token():
-                    return self._make_request(endpoint, params)
-                else:
-                    logger.error("Token refresh failed")
-                    return None
+                # Parse XML response (Yahoo! returns XML)
+                # For now, return raw text, we can add XML parsing later
+                return {'status': 'success', 'data': response.text}
             else:
                 logger.error(f"API request failed: {response.status_code} - {response.text}")
                 return None
                 
         except Exception as e:
-            logger.error(f"Request error: {e}")
+            logger.error(f"Error making API request: {e}")
             return None
     
-    def discover_league_info(self) -> Optional[Dict[str, Any]]:
-        """Discover user's fantasy football league and team information"""
-        try:
-            # Get user's games
-            games_response = self._make_request('users;use_login=1/games;game_keys=nfl')
-            
-            if not games_response:
-                logger.error("Failed to get user games")
-                return None
-            
-            # Find current NFL season
-            games = games_response.get('fantasy_content', {}).get('users', [{}])[0].get('user', {}).get('games', [])
-            
-            if not games:
-                logger.error("No NFL games found for user")
-                return None
-            
-            # Get the most recent NFL season
-            nfl_games = [g for g in games if g.get('game', {}).get('game_key') == '390']  # NFL game key
-            
-            if not nfl_games:
-                logger.error("No NFL games found")
-                return None
-            
-            current_game = nfl_games[0]
-            game_key = current_game['game']['game_key']
-            
-            # Get user's teams for this game
-            teams_response = self._make_request(f'users;use_login=1/games;game_keys={game_key}/teams')
-            
-            if not teams_response:
-                logger.error("Failed to get user teams")
-                return None
-            
-            teams = teams_response.get('fantasy_content', {}).get('users', [{}])[0].get('user', {}).get('games', [{}])[0].get('game', {}).get('teams', [])
-            
-            if not teams:
-                logger.error("No teams found for user")
-                return None
-            
-            # Get first team (assuming single team)
-            team = teams[0]['team']
-            team_key = team[0]['team_key']
-            team_name = team[1]['name']
-            
-            # Get league info
-            league_response = self._make_request(f'team/{team_key}/league')
-            
-            if not league_response:
-                logger.error("Failed to get league info")
-                return None
-            
-            league = league_response.get('fantasy_content', {}).get('team', [{}])[0].get('league', [{}])[0]
-            league_key = league[0]['league_key']
-            league_name = league[1]['name']
-            
-            league_info = {
-                'game_key': game_key,
-                'league_key': league_key,
-                'league_name': league_name,
-                'team_key': team_key,
-                'team_name': team_name
-            }
-            
-            # Save league info for future use
-            save_config('league_info', league_info)
-            logger.info(f"Discovered league: {league_name}, team: {team_name}")
-            
-            return league_info
-            
-        except Exception as e:
-            logger.error(f"League discovery failed: {e}")
-            return None
+    def discover_league_info(self) -> Optional[Dict]:
+        """Discover user's fantasy leagues and teams"""
+        endpoint = "users;use_login=1/games;game_keys=nfl/teams"
+        return self.make_request(endpoint)
     
-    def get_current_roster(self) -> Optional[Dict[str, Any]]:
-        """Get current roster with player details"""
-        try:
-            league_info = load_config('league_info')
-            if not league_info:
-                logger.error("League info not found, run discover_league_info first")
-                return None
-            
-            team_key = league_info['team_key']
-            endpoint = f'team/{team_key}/roster'
-            
-            roster_response = self._make_request(endpoint)
-            
-            if not roster_response:
-                logger.error("Failed to get roster")
-                return None
-            
-            # Parse roster data
-            roster_data = self._parse_roster_response(roster_response)
-            
-            # Save roster snapshot
-            timestamp = int(time.time())
-            roster_snapshot = {
-                'timestamp': timestamp,
-                'roster': roster_data
-            }
-            
-            # Save to historical data
-            from utils import create_historical_file
-            create_historical_file(f'roster_snapshot_{timestamp}.json', roster_snapshot)
-            
-            logger.info(f"Retrieved roster with {len(roster_data)} players")
-            return roster_data
-            
-        except Exception as e:
-            logger.error(f"Get roster failed: {e}")
-            return None
+    def get_current_roster(self, team_key: str) -> Optional[Dict]:
+        """Get current roster for a specific team"""
+        endpoint = f"team/{team_key}/roster"
+        return self.make_request(endpoint)
     
-    def _parse_roster_response(self, response: Dict) -> List[Dict[str, Any]]:
-        """Parse Yahoo Fantasy API roster response"""
-        try:
-            roster = response.get('fantasy_content', {}).get('team', [{}])[0].get('roster', [{}])[0].get('0', {}).get('players', [])
-            
-            players = []
-            for player in roster:
-                if isinstance(player, dict) and 'player' in player:
-                    player_data = player['player'][0]
-                    player_info = player['player'][1]
-                    
-                    # Extract player details
-                    player_dict = {
-                        'player_key': player_data.get('player_key'),
-                        'name': player_info.get('name', {}).get('full'),
-                        'position': player_info.get('display_position'),
-                        'team': player_info.get('editorial_team_abbr'),
-                        'status': player_info.get('status'),
-                        'selected_position': player_info.get('selected_position', {}).get('position'),
-                        'roster_slot': player_info.get('selected_position', {}).get('roster_slot')
-                    }
-                    
-                    # Add additional stats if available
-                    if 'player_stats' in player_info:
-                        stats = player_info['player_stats'][0]['stats']
-                        for stat in stats:
-                            if isinstance(stat, dict) and 'stat' in stat:
-                                stat_data = stat['stat']
-                                player_dict[f"stat_{stat_data[0]['stat_id']}"] = stat_data[1]['value']
-                    
-                    players.append(player_dict)
-            
-            return players
-            
-        except Exception as e:
-            logger.error(f"Roster parsing failed: {e}")
-            return []
-    
-    def get_opponent_roster(self, week: int) -> Optional[Dict[str, Any]]:
-        """Get opponent roster for specific week"""
-        try:
-            league_info = load_config('league_info')
-            if not league_info:
-                logger.error("League info not found")
-                return None
-            
-            team_key = league_info['team_key']
-            endpoint = f'team/{team_key}/matchups'
-            
-            matchups_response = self._make_request(endpoint)
-            
-            if not matchups_response:
-                logger.error("Failed to get matchups")
-                return None
-            
-            # Find current week matchup
-            matchups = matchups_response.get('fantasy_content', {}).get('team', [{}])[0].get('matchups', [])
-            
-            current_matchup = None
-            for matchup in matchups:
-                if isinstance(matchup, dict) and 'matchup' in matchup:
-                    matchup_data = matchup['matchup'][0]
-                    matchup_info = matchup['matchup'][1]
-                    
-                    if matchup_info.get('week') == str(week):
-                        current_matchup = matchup
-                        break
-            
-            if not current_matchup:
-                logger.error(f"No matchup found for week {week}")
-                return None
-            
-            # Get opponent team key
-            teams = current_matchup['matchup'][1].get('0', {}).get('teams', [])
-            opponent_team = None
-            
-            for team in teams:
-                if isinstance(team, dict) and 'team' in team:
-                    team_data = team['team'][0]
-                    if team_data.get('team_key') != team_key:
-                        opponent_team = team_data
-                        break
-            
-            if not opponent_team:
-                logger.error("Opponent team not found")
-                return None
-            
-            # Get opponent roster
-            opponent_key = opponent_team['team_key']
-            opponent_endpoint = f'team/{opponent_key}/roster'
-            
-            opponent_response = self._make_request(opponent_endpoint)
-            
-            if not opponent_response:
-                logger.error("Failed to get opponent roster")
-                return None
-            
-            opponent_roster = self._parse_roster_response(opponent_response)
-            
-            opponent_info = {
-                'team_key': opponent_key,
-                'team_name': opponent_team.get('name', 'Unknown'),
-                'roster': opponent_roster
-            }
-            
-            logger.info(f"Retrieved opponent roster for week {week}")
-            return opponent_info
-            
-        except Exception as e:
-            logger.error(f"Get opponent roster failed: {e}")
-            return None
-    
-    def get_available_players(self, position: Optional[str] = None) -> Optional[List[Dict[str, Any]]]:
-        """Get available free agents"""
-        try:
-            league_info = load_config('league_info')
-            if not league_info:
-                logger.error("League info not found")
-                return None
-            
-            league_key = league_info['league_key']
-            endpoint = f'league/{league_key}/players'
-            
-            params = {'status': 'FA'}  # Free agents only
-            if position:
-                params['position'] = position
-            
-            players_response = self._make_request(endpoint, params)
-            
-            if not players_response:
-                logger.error("Failed to get available players")
-                return None
-            
-            # Parse available players
-            available_players = self._parse_available_players_response(players_response)
-            
-            logger.info(f"Retrieved {len(available_players)} available players")
-            return available_players
-            
-        except Exception as e:
-            logger.error(f"Get available players failed: {e}")
-            return None
-    
-    def _parse_available_players_response(self, response: Dict) -> List[Dict[str, Any]]:
-        """Parse Yahoo Fantasy API available players response"""
-        try:
-            players = response.get('fantasy_content', {}).get('league', [{}])[0].get('players', [])
-            
-            available_players = []
-            for player in players:
-                if isinstance(player, dict) and 'player' in player:
-                    player_data = player['player'][0]
-                    player_info = player['player'][1]
-                    
-                    player_dict = {
-                        'player_key': player_data.get('player_key'),
-                        'name': player_info.get('name', {}).get('full'),
-                        'position': player_info.get('display_position'),
-                        'team': player_info.get('editorial_team_abbr'),
-                        'status': player_info.get('status'),
-                        'percent_owned': player_info.get('percent_owned', {}).get('value', 0)
-                    }
-                    
-                    available_players.append(player_dict)
-            
-            return available_players
-            
-        except Exception as e:
-            logger.error(f"Available players parsing failed: {e}")
-            return []
-    
-    def get_player_news(self, player_key: str) -> Optional[Dict[str, Any]]:
-        """Get player news and status updates"""
-        try:
-            endpoint = f'player/{player_key}/news'
-            
-            news_response = self._make_request(endpoint)
-            
-            if not news_response:
-                logger.error("Failed to get player news")
-                return None
-            
-            # Parse news data
-            news_data = self._parse_player_news_response(news_response)
-            
-            logger.info(f"Retrieved news for player {player_key}")
-            return news_data
-            
-        except Exception as e:
-            logger.error(f"Get player news failed: {e}")
-            return None
-    
-    def _parse_player_news_response(self, response: Dict) -> Dict[str, Any]:
-        """Parse Yahoo Fantasy API player news response"""
-        try:
-            news = response.get('fantasy_content', {}).get('player', [{}])[0].get('news', [])
-            
-            news_items = []
-            for item in news:
-                if isinstance(item, dict) and 'news' in item:
-                    news_data = item['news'][0]
-                    news_info = item['news'][1]
-                    
-                    news_item = {
-                        'title': news_info.get('title'),
-                        'summary': news_info.get('summary'),
-                        'url': news_info.get('url'),
-                        'timestamp': news_data.get('timestamp')
-                    }
-                    
-                    news_items.append(news_item)
-            
-            return {'news': news_items}
-            
-        except Exception as e:
-            logger.error(f"Player news parsing failed: {e}")
-            return {'news': []}
+    def get_available_players(self, league_key: str, position: str = None) -> Optional[Dict]:
+        """Get available free agents in a league"""
+        endpoint = f"league/{league_key}/players;status=FA"
+        if position:
+            endpoint += f";position={position}"
+        return self.make_request(endpoint)
 
 def main():
     """Test the Yahoo Fantasy API connection"""
@@ -561,21 +314,21 @@ def main():
             # Test league discovery
             league_info = api.discover_league_info()
             if league_info:
-                print(f"✅ League discovered: {league_info['league_name']}")
-                print(f"   Team: {league_info['team_name']}")
+                print(f"✅ League discovered: {league_info['status']}")
+                print(f"   Data: {league_info['data']}")
                 
                 # Test roster retrieval
-                roster = api.get_current_roster()
+                roster = api.get_current_roster("1234567890") # Replace with actual team_key
                 if roster:
-                    print(f"✅ Roster retrieved: {len(roster)} players")
+                    print(f"✅ Roster retrieved: {roster['status']}")
+                    print(f"   Data: {roster['data']}")
                     
                     # Show first few players
                     print("\n📋 Sample roster:")
-                    for i, player in enumerate(roster[:5]):
-                        print(f"   {i+1}. {player['name']} ({player['position']}) - {player['team']}")
+                    # The original script had roster parsing, but the new one doesn't.
+                    # For now, we'll just print the raw data.
+                    print(f"   Raw Data: {roster['data']}")
                     
-                    if len(roster) > 5:
-                        print(f"   ... and {len(roster) - 5} more players")
                 else:
                     print("❌ Failed to retrieve roster")
             else:
