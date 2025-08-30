@@ -26,10 +26,9 @@ class YahooFantasyAPI:
     def __init__(self):
         self.client_id = os.getenv('YAHOO_CLIENT_ID')
         self.client_secret = os.getenv('YAHOO_CLIENT_SECRET')
-        self.redirect_uri = os.getenv('YAHOO_REDIRECT_URI')
         
-        if not all([self.client_id, self.client_secret, self.redirect_uri]):
-            raise ValueError("Missing required Yahoo API environment variables")
+        if not all([self.client_id, self.client_secret]):
+            raise ValueError("Missing required Yahoo API environment variables: YAHOO_CLIENT_ID and YAHOO_CLIENT_SECRET")
         
         self.base_url = "https://fantasysports.yahooapis.com/fantasy/v2"
         self.auth_url = "https://api.login.yahoo.com/oauth2/request_auth"
@@ -88,7 +87,7 @@ class YahooFantasyAPI:
             # Step 1: Get authorization code
             auth_params = {
                 'client_id': self.client_id,
-                'redirect_uri': self.redirect_uri,
+                'redirect_uri': 'http://localhost:8080', # Placeholder, will be replaced by local server
                 'response_type': 'code',
                 'scope': 'fspt-r'  # Fantasy Sports Read permission
             }
@@ -124,7 +123,7 @@ class YahooFantasyAPI:
             token_data = {
                 'grant_type': 'authorization_code',
                 'code': auth_code,
-                'redirect_uri': self.redirect_uri,
+                'redirect_uri': 'http://localhost:8080', # Placeholder, will be replaced by local server
                 'client_id': self.client_id,
                 'client_secret': self.client_secret
             }

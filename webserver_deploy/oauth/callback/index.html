@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Callback - Fantasy Football API</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1a1a1a;
+            color: #00ff00;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+        }
+        h1 {
+            color: #00ff00;
+            text-align: center;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+        }
+        .status {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #00ff00;
+        }
+        .code-display {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 OAuth Callback Handler</h1>
+        
+        <div class="status">
+            <h3>✅ OAuth Flow Complete</h3>
+            <p>This page handles the OAuth callback from Yahoo! after successful authentication.</p>
+        </div>
+
+        <div class="code-display">
+            <h3>📡 Callback URL</h3>
+            <p><strong>Endpoint:</strong> https://tools.birdahonk.com/fantasy/oauth/callback</p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Purpose:</strong> Receive authorization code from Yahoo!</p>
+        </div>
+
+        <div class="status">
+            <h3>🔄 Next Steps</h3>
+            <p>After receiving the authorization code, the application will:</p>
+            <ol>
+                <li>Exchange the code for access tokens</li>
+                <li>Store tokens securely</li>
+                <li>Redirect to the main application</li>
+            </ol>
+        </div>
+
+        <div class="code-display">
+            <h3>🔧 Implementation Notes</h3>
+            <p>This endpoint will be implemented as a server-side handler that:</p>
+            <ul>
+                <li>Receives the authorization code</li>
+                <li>Makes a token exchange request</li>
+                <li>Handles the OAuth flow completion</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

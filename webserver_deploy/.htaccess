@@ -1,0 +1,25 @@
+# Force HTTPS for all traffic
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove Apache authentication popup for this directory
+<Directory "/usr/home/birdahonk/public_html/tools.birdahonk.com/fantasy">
+    Satisfy Any
+    Allow from all
+    Require all granted
+</Directory>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Cache control for HTML files
+<FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</FilesMatch>
