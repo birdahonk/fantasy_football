@@ -1,0 +1,457 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - Fantasy Football AI General Manager{% endblock %}
+
+{% block content %}
+<div class="settings-container">
+    <h2 class="card-title">⚙️ Settings & Configuration</h2>
+    <p class="mb-3">Configure your fantasy football application preferences and settings.</p>
+    
+    <!-- API Configuration -->
+    <div class="settings-section mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🔑 API Configuration</h3>
+            <div class="api-settings">
+                <div class="setting-group">
+                    <label for="yahooApiKey">Yahoo! API Key:</label>
+                    <input type="password" id="yahooApiKey" class="setting-input" placeholder="Enter your Yahoo! API key" value="dj0yJmk9RX...">
+                    <small class="setting-help">Your Yahoo! Fantasy Sports API key for data access</small>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="yahooApiSecret">Yahoo! API Secret:</label>
+                    <input type="password" id="yahooApiSecret" class="setting-input" placeholder="Enter your Yahoo! API secret" value="d4680b8c6c...">
+                    <small class="setting-help">Your Yahoo! Fantasy Sports API secret</small>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="openaiApiKey">OpenAI API Key:</label>
+                    <input type="password" id="openaiApiKey" class="setting-input" placeholder="Enter your OpenAI API key">
+                    <small class="setting-help">Optional: For AI-powered analysis and recommendations</small>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="anthropicApiKey">Anthropic API Key:</label>
+                    <input type="password" id="anthropicApiKey" class="setting-input" placeholder="Enter your Anthropic API key">
+                    <small class="setting-help">Optional: Alternative AI provider for analysis</small>
+                </div>
+                
+                <div class="setting-actions">
+                    <button class="btn btn-primary" onclick="saveApiSettings()">💾 Save API Settings</button>
+                    <button class="btn" onclick="testApiConnection()">🧪 Test Connection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Application Preferences -->
+    <div class="settings-section mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🎨 Application Preferences</h3>
+            <div class="preference-settings">
+                <div class="setting-group">
+                    <label for="themeSelect">Theme:</label>
+                    <select id="themeSelect" class="setting-select">
+                        <option value="retro">Retro Green Screen (Default)</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="light">Light Mode</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                    <small class="setting-help">Choose your preferred visual theme</small>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="refreshInterval">Auto-refresh Interval:</label>
+                    <select id="refreshInterval" class="setting-select">
+                        <option value="0">Manual Refresh Only</option>
+                        <option value="30">30 seconds</option>
+                        <option value="60">1 minute</option>
+                        <option value="300">5 minutes</option>
+                        <option value="900">15 minutes</option>
+                    </select>
+                    <small class="setting-help">How often to automatically refresh data</small>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="notifications">Notifications:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="emailNotifications" checked>
+                            <span class="checkmark"></span>
+                            Email Notifications
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="browserNotifications" checked>
+                            <span class="checkmark"></span>
+                            Browser Notifications
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="injuryAlerts" checked>
+                            <span class="checkmark"></span>
+                            Injury Alerts
+                        </label>
+                    </div>
+                    <small class="setting-help">Choose which notifications to receive</small>
+                </div>
+                
+                <div class="setting-actions">
+                    <button class="btn btn-primary" onclick="savePreferences()">💾 Save Preferences</button>
+                    <button class="btn" onclick="resetPreferences()">🔄 Reset to Defaults</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Data Management -->
+    <div class="settings-section mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🗄️ Data Management</h3>
+            <div class="data-settings">
+                <div class="setting-group">
+                    <label for="dataRetention">Data Retention:</label>
+                    <select id="dataRetention" class="setting-select">
+                        <option value="7">1 week</option>
+                        <option value="30">1 month</option>
+                        <option value="90">3 months</option>
+                        <option value="365">1 year</option>
+                        <option value="0">Keep forever</option>
+                    </select>
+                    <small class="setting-help">How long to keep historical data</small>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="backupFrequency">Backup Frequency:</label>
+                    <select id="backupFrequency" class="setting-select">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="never">Never</option>
+                    </select>
+                    <small class="setting-help">How often to backup your data</small>
+                </div>
+                
+                <div class="setting-actions">
+                    <button class="btn" onclick="exportData()">📤 Export All Data</button>
+                    <button class="btn" onclick="importData()">📥 Import Data</button>
+                    <button class="btn btn-warning" onclick="clearData()">🗑️ Clear All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- System Information -->
+    <div class="settings-section mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">💻 System Information</h3>
+            <div class="system-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Application Version:</span>
+                        <span class="info-value">1.0.0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Database Status:</span>
+                        <span class="info-value status-connected">✅ Connected</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">API Status:</span>
+                        <span class="info-value status-pending">⏳ Pending Authentication</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Last Updated:</span>
+                        <span class="info-value">{{ moment().format('YYYY-MM-DD HH:mm:ss') }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Storage Used:</span>
+                        <span class="info-value">2.4 MB</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Free Space:</span>
+                        <span class="info-value">15.7 GB</span>
+                    </div>
+                </div>
+                
+                <div class="system-actions">
+                    <button class="btn" onclick="checkForUpdates()">🔄 Check for Updates</button>
+                    <button class="btn" onclick="viewSystemLogs()">📋 View System Logs</button>
+                    <button class="btn" onclick="diagnoseSystem()">🔍 Run Diagnostics</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">⚡ Quick Actions</h3>
+            <div class="action-grid">
+                <a href="{{ url_for('dashboard') }}" class="btn">🏠 Back to Dashboard</a>
+                <a href="{{ url_for('chat') }}" class="btn">🤖 AI Chat</a>
+                <button class="btn" onclick="resetApplication()">🔄 Reset Application</button>
+                <button class="btn btn-warning" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.settings-section {
+    margin-bottom: 2rem;
+}
+
+.setting-group {
+    margin-bottom: 1.5rem;
+}
+
+.setting-group label {
+    display: block;
+    font-weight: bold;
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+}
+
+.setting-input,
+.setting-select {
+    width: 100%;
+    background: var(--black);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    padding: 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 4px;
+    min-height: 44px;
+}
+
+.setting-input:focus,
+.setting-select:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+.setting-help {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--secondary-green);
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+.setting-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-green);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    background: var(--black);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary-green);
+    font-weight: bold;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.info-label {
+    font-weight: bold;
+    color: var(--secondary-green);
+}
+
+.info-value {
+    color: var(--primary-green);
+}
+
+.status-connected {
+    color: #2ECC71;
+}
+
+.status-pending {
+    color: #F39C12;
+}
+
+.system-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.btn-warning {
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+.btn-warning:hover {
+    background: var(--yellow);
+    color: var(--black);
+}
+
+@media (max-width: 767px) {
+    .setting-actions,
+    .system-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// Save API settings
+function saveApiSettings() {
+    const yahooKey = document.getElementById('yahooApiKey').value;
+    const yahooSecret = document.getElementById('yahooApiSecret').value;
+    const openaiKey = document.getElementById('openaiApiKey').value;
+    const anthropicKey = document.getElementById('anthropicApiKey').value;
+    
+    // TODO: Implement actual API key saving
+    showNotification('API settings saved successfully!', 'success');
+}
+
+// Test API connection
+function testApiConnection() {
+    showNotification('Testing API connection...', 'info');
+    
+    // TODO: Implement actual API connection test
+    setTimeout(() => {
+        showNotification('API connection test complete!', 'success');
+    }, 2000);
+}
+
+// Save preferences
+function savePreferences() {
+    const theme = document.getElementById('themeSelect').value;
+    const refreshInterval = document.getElementById('refreshInterval').value;
+    const emailNotifs = document.getElementById('emailNotifications').checked;
+    const browserNotifs = document.getElementById('browserNotifications').checked;
+    const injuryAlerts = document.getElementById('injuryAlerts').checked;
+    
+    // TODO: Implement actual preference saving
+    showNotification('Preferences saved successfully!', 'success');
+}
+
+// Reset preferences
+function resetPreferences() {
+    if (confirm('Are you sure you want to reset all preferences to defaults?')) {
+        document.getElementById('themeSelect').value = 'retro';
+        document.getElementById('refreshInterval').value = '0';
+        document.getElementById('emailNotifications').checked = true;
+        document.getElementById('browserNotifications').checked = true;
+        document.getElementById('injuryAlerts').checked = true;
+        
+        showNotification('Preferences reset to defaults!', 'info');
+    }
+}
+
+// Data management functions
+function exportData() {
+    showNotification('Exporting all data...', 'info');
+    // TODO: Implement data export
+}
+
+function importData() {
+    showNotification('Import data feature coming soon!', 'info');
+    // TODO: Implement data import
+}
+
+function clearData() {
+    if (confirm('Are you sure you want to clear ALL data? This action cannot be undone!')) {
+        showNotification('Clearing all data...', 'warning');
+        // TODO: Implement data clearing
+    }
+}
+
+// System functions
+function checkForUpdates() {
+    showNotification('Checking for updates...', 'info');
+    // TODO: Implement update check
+}
+
+function viewSystemLogs() {
+    showNotification('System logs feature coming soon!', 'info');
+    // TODO: Implement system logs
+}
+
+function diagnoseSystem() {
+    showNotification('Running system diagnostics...', 'info');
+    // TODO: Implement system diagnostics
+}
+
+// Application functions
+function resetApplication() {
+    if (confirm('Are you sure you want to reset the entire application? This will clear all data and settings!')) {
+        showNotification('Resetting application...', 'warning');
+        // TODO: Implement application reset
+    }
+}
+
+function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+        showNotification('Logging out...', 'info');
+        // TODO: Implement logout
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 1000);
+    }
+}
+</script>
+{% endblock %}

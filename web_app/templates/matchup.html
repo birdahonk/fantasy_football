@@ -1,0 +1,470 @@
+{% extends "base.html" %}
+
+{% block title %}Matchup - Fantasy Football AI General Manager{% endblock %}
+
+{% block content %}
+<div class="matchup-container">
+    <h2 class="card-title">⚔️ Weekly Matchup</h2>
+    <p class="mb-3">Analyze your current week matchup and get strategic advice for victory.</p>
+    
+    <!-- Current Matchup Overview -->
+    <div class="matchup-overview mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">📅 Week {{ data.current_week }} Matchup</h3>
+            <div class="matchup-header">
+                <div class="team-vs-team">
+                    <div class="team your-team">
+                        <h4>Your Team</h4>
+                        <div class="team-stats">
+                            <span class="stat">Record: 0-0</span>
+                            <span class="stat">Points: 0.00</span>
+                            <span class="stat">Rank: --</span>
+                        </div>
+                    </div>
+                    <div class="vs-divider">
+                        <span class="vs-text">VS</span>
+                        <div class="matchup-date">{{ data.matchup }}</div>
+                    </div>
+                    <div class="team opponent-team">
+                        <h4>{{ data.opponent }}</h4>
+                        <div class="team-stats">
+                            <span class="stat">Record: 0-0</span>
+                            <span class="stat">Points: 0.00</span>
+                            <span class="stat">Rank: --</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Matchup Analysis -->
+    <div class="matchup-analysis mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🔍 Matchup Analysis</h3>
+            <div class="analysis-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="projections">Projections</button>
+                    <button class="tab-btn" data-tab="advantages">Advantages</button>
+                    <button class="tab-btn" data-tab="strategy">Strategy</button>
+                    <button class="tab-btn" data-tab="risks">Risks</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="projections">
+                        <h4>Weekly Projections</h4>
+                        <div class="projection-grid">
+                            <div class="projection-card">
+                                <h5>Your Team</h5>
+                                <div class="projection-score">125.4</div>
+                                <div class="projection-label">Projected Points</div>
+                            </div>
+                            <div class="projection-card">
+                                <h5>{{ data.opponent }}</h5>
+                                <div class="projection-score">118.7</div>
+                                <div class="projection-label">Projected Points</div>
+                            </div>
+                            <div class="projection-card">
+                                <h5>Win Probability</h5>
+                                <div class="projection-score win-prob">62%</div>
+                                <div class="projection-label">Your Chances</div>
+                            </div>
+                        </div>
+                        <p class="analysis-text">
+                            Based on current projections, you have a slight advantage this week. 
+                            Your team's strength at quarterback and running back positions gives you 
+                            the edge, but the matchup could be close.
+                        </p>
+                    </div>
+                    
+                    <div class="tab-pane" id="advantages">
+                        <h4>Your Advantages</h4>
+                        <div class="advantage-list">
+                            <div class="advantage-item">
+                                <span class="advantage-icon">✅</span>
+                                <div class="advantage-content">
+                                    <h5>QB Advantage</h5>
+                                    <p>Patrick Mahomes vs. opponent's QB gives you a significant edge</p>
+                                </div>
+                            </div>
+                            <div class="advantage-item">
+                                <span class="advantage-icon">✅</span>
+                                <div class="advantage-content">
+                                    <h5>RB Depth</h5>
+                                    <p>Christian McCaffrey provides consistent high-level production</p>
+                                </div>
+                            </div>
+                            <div class="advantage-item">
+                                <span class="advantage-icon">✅</span>
+                                <div class="advantage-content">
+                                    <h5>Big Play Potential</h5>
+                                    <p>Tyreek Hill can single-handedly win weeks with explosive plays</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="strategy">
+                        <h4>Strategic Recommendations</h4>
+                        <div class="strategy-list">
+                            <div class="strategy-item">
+                                <span class="strategy-priority high">High Priority</span>
+                                <h5>Start Your Studs</h5>
+                                <p>Mahomes, McCaffrey, and Hill should all be in your starting lineup</p>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-priority medium">Medium Priority</span>
+                                <h5>Monitor Injuries</h5>
+                                <p>Keep an eye on player injury reports throughout the week</p>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-priority low">Low Priority</span>
+                                <h5>Flex Position</h5>
+                                <p>Consider your best matchup for the flex position</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="risks">
+                        <h4>Potential Risks</h4>
+                        <div class="risk-list">
+                            <div class="risk-item">
+                                <span class="risk-level high">High Risk</span>
+                                <h5>Injury Concerns</h5>
+                                <p>Some players have injury history that could impact performance</p>
+                            </div>
+                            <div class="risk-item">
+                                <span class="risk-level medium">Medium Risk</span>
+                                <h5>Matchup Difficulty</h5>
+                                <p>Opponent has strong defensive players that could limit scoring</p>
+                            </div>
+                            <div class="risk-item">
+                                <span class="risk-level low">Low Risk</span>
+                                <h5>Weather Conditions</h5>
+                                <p>Monitor weather reports for outdoor games</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Start/Sit Recommendations -->
+    <div class="start-sit-recommendations mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🎯 Start/Sit Recommendations</h3>
+            <div class="recommendation-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="start">Start</button>
+                    <button class="tab-btn" data-tab="sit">Sit</button>
+                    <button class="tab-btn" data-tab="flex">Flex</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="start">
+                        <h4>Must Start Players</h4>
+                        <div class="player-recommendations">
+                            <div class="player-rec">
+                                <span class="player-name">Patrick Mahomes (QB)</span>
+                                <span class="rec-reason">Elite QB with great matchup</span>
+                            </div>
+                            <div class="player-rec">
+                                <span class="player-name">Christian McCaffrey (RB)</span>
+                                <span class="rec-reason">RB1 with high floor and ceiling</span>
+                            </div>
+                            <div class="player-rec">
+                                <span class="player-name">Tyreek Hill (WR)</span>
+                                <span class="rec-reason">Big play potential, favorable matchup</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="sit">
+                        <h4>Consider Sitting</h4>
+                        <div class="player-recommendations">
+                            <div class="player-rec">
+                                <span class="player-name">Bench Players</span>
+                                <span class="rec-reason">No clear sit candidates this week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="flex">
+                        <h4>Flex Options</h4>
+                        <div class="player-recommendations">
+                            <div class="player-rec">
+                                <span class="player-name">Travis Kelce (TE)</span>
+                                <span class="rec-reason">High floor TE with touchdown upside</span>
+                            </div>
+                            <div class="player-rec">
+                                <span class="player-name">Justin Tucker (K)</span>
+                                <span class="rec-reason">Reliable kicker in good weather</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">⚡ Quick Actions</h3>
+            <div class="action-grid">
+                <a href="{{ url_for('team') }}" class="btn">👥 View Roster</a>
+                <a href="{{ url_for('free_agents') }}" class="btn">🆓 Browse Free Agents</a>
+                <a href="{{ url_for('analysis') }}" class="btn">📊 Run Analysis</a>
+                <a href="{{ url_for('chat') }}" class="btn">🤖 AI Chat</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.matchup-header {
+    text-align: center;
+    padding: 1rem;
+}
+
+.team-vs-team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.team {
+    text-align: center;
+    padding: 1rem;
+    border: 2px solid var(--primary-green);
+    border-radius: 8px;
+    background: rgba(0, 255, 0, 0.05);
+    min-width: 200px;
+}
+
+.team h4 {
+    color: var(--yellow);
+    margin-bottom: 1rem;
+}
+
+.team-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat {
+    font-size: 0.9rem;
+    color: var(--secondary-green);
+}
+
+.vs-divider {
+    text-align: center;
+    padding: 1rem;
+}
+
+.vs-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--yellow);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.matchup-date {
+    font-size: 0.9rem;
+    color: var(--secondary-green);
+}
+
+.projection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.projection-card {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.projection-card h5 {
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+}
+
+.projection-score {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.projection-score.win-prob {
+    color: var(--yellow);
+}
+
+.projection-label {
+    font-size: 0.8rem;
+    color: var(--secondary-green);
+}
+
+.advantage-list,
+.strategy-list,
+.risk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.advantage-item,
+.strategy-item,
+.risk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.advantage-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.advantage-content h5,
+.strategy-item h5,
+.risk-item h5 {
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+}
+
+.advantage-content p,
+.strategy-item p,
+.risk-item p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.strategy-priority,
+.risk-level {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.strategy-priority.high { background: rgba(255, 0, 0, 0.2); color: #E74C3C; }
+.strategy-priority.medium { background: rgba(255, 165, 0, 0.2); color: #F39C12; }
+.strategy-priority.low { background: rgba(0, 255, 0, 0.2); color: #2ECC71; }
+
+.risk-level.high { background: rgba(255, 0, 0, 0.2); color: #E74C3C; }
+.risk-level.medium { background: rgba(255, 165, 0, 0.2); color: #F39C12; }
+.risk-level.low { background: rgba(0, 255, 0, 0.2); color: #2ECC71; }
+
+.player-recommendations {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.player-rec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.player-name {
+    font-weight: bold;
+    color: var(--primary-green);
+}
+
+.rec-reason {
+    font-size: 0.9rem;
+    color: var(--secondary-green);
+    text-align: right;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 767px) {
+    .team-vs-team {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .team {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .projection-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .player-rec {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .rec-reason {
+        text-align: left;
+    }
+    
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// Tab functionality for matchup analysis
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const tabId = this.dataset.tab;
+        
+        // Update active tab button
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update active tab content
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+    });
+});
+
+// Tab functionality for start/sit recommendations
+document.querySelectorAll('.recommendation-tabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const tabId = this.dataset.tab;
+        
+        // Update active tab button
+        document.querySelectorAll('.recommendation-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update active tab content
+        document.querySelectorAll('.recommendation-tabs .tab-pane').forEach(pane => pane.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+    });
+});
+</script>
+{% endblock %}

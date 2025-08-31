@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chat - Fantasy Football AI General Manager{% endblock %}
+
+{% block content %}
+<div class="chat-page-container">
+    <h2 class="card-title">🤖 AI Chat Assistant</h2>
+    <p class="mb-3">Get AI-powered advice for your fantasy football decisions. Ask questions about your roster, get recommendations, and receive analysis.</p>
+    
+    <!-- Chat Interface -->
+    <div class="chat-interface">
+        <div class="dashboard-card">
+            <h3 class="card-title">💬 AI Chat</h3>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome message -->
+                    <div class="message ai-message">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="ai-avatar">🤖</span>
+                                <span class="sender-name">Fantasy Football AI</span>
+                                <span class="message-time">{{ moment().format('HH:mm') }}</span>
+                            </div>
+                            <div class="message-text">
+                                Hello! I'm your Fantasy Football AI Assistant. I can help you with:
+                                <ul>
+                                    <li>📊 Roster analysis and recommendations</li>
+                                    <li>🆓 Free agent suggestions</li>
+                                    <li>⚔️ Matchup analysis</li>
+                                    <li>📈 Player performance insights</li>
+                                    <li>🎯 Strategy advice</li>
+                                </ul>
+                                What would you like to know about your team?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <input type="text" id="chatInput" class="chat-input" placeholder="Ask me anything about your fantasy football team..." maxlength="500">
+                    <button class="btn btn-primary" onclick="sendMessage()" id="sendButton">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Questions -->
+    <div class="quick-questions mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">💡 Quick Questions</h3>
+            <div class="question-grid">
+                <button class="btn question-btn" onclick="askQuickQuestion('Who should I start this week?')">
+                    🎯 Who should I start this week?
+                </button>
+                <button class="btn question-btn" onclick="askQuickQuestion('What players should I drop?')">
+                    🗑️ What players should I drop?
+                </button>
+                <button class="btn question-btn" onclick="askQuickQuestion('Who are the best free agents?')">
+                    🆓 Who are the best free agents?
+                </button>
+                <button class="btn question-btn" onclick="askQuickQuestion('How is my team looking?')">
+                    👥 How is my team looking?
+                </button>
+                <button class="btn question-btn" onclick="askQuickQuestion('What trades should I consider?')">
+                    🔄 What trades should I consider?
+                </button>
+                <button class="btn question-btn" onclick="askQuickQuestion('Give me a roster analysis')">
+                    📊 Give me a roster analysis
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat History -->
+    <div class="chat-history mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">📚 Chat History</h3>
+            <div class="history-content">
+                <p><em>Chat history will be saved once the system is fully operational.</em></p>
+                <p class="text-center mt-2">
+                    <small>Your conversations will be stored locally for future reference</small>
+                </p>
+                <div class="mt-2">
+                    <button class="btn" onclick="clearChatHistory()">Clear History</button>
+                    <button class="btn" onclick="exportChatHistory()">Export History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI Capabilities -->
+    <div class="ai-capabilities mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🚀 AI Capabilities</h3>
+            <div class="capabilities-grid">
+                <div class="capability-item">
+                    <h4>📊 Roster Analysis</h4>
+                    <p>Get detailed analysis of your current roster, identify weaknesses, and find improvement opportunities.</p>
+                </div>
+                <div class="capability-item">
+                    <h4>🆓 Free Agent Advice</h4>
+                    <p>Receive recommendations on which free agents to target based on your team's needs.</p>
+                </div>
+                <div class="capability-item">
+                    <h4>⚔️ Matchup Strategy</h4>
+                    <p>Get strategic advice for your weekly matchups, including start/sit recommendations.</p>
+                </div>
+                <div class="capability-item">
+                    <h4>📈 Player Insights</h4>
+                    <p>Access detailed player analysis, injury updates, and performance projections.</p>
+                </div>
+                <div class="capability-item">
+                    <h4>🎯 Trade Analysis</h4>
+                    <p>Evaluate potential trades and get advice on whether to accept or decline offers.</p>
+                </div>
+                <div class="capability-item">
+                    <h4>🏆 Championship Strategy</h4>
+                    <p>Long-term planning advice to help you win your league championship.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.chat-interface {
+    margin-bottom: 2rem;
+}
+
+.chat-container {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.user-message {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--primary-green);
+    margin-left: auto;
+}
+
+.ai-message {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--secondary-green);
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.ai-avatar {
+    font-size: 1.2rem;
+}
+
+.sender-name {
+    font-weight: bold;
+    color: var(--yellow);
+}
+
+.message-time {
+    color: var(--secondary-green);
+    font-size: 0.8rem;
+    margin-left: auto;
+}
+
+.message-text {
+    line-height: 1.5;
+}
+
+.message-text ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.chat-input {
+    flex: 1;
+    background: var(--black);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    padding: 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 4px;
+    min-height: 44px;
+}
+
+.chat-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+.question-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.question-btn {
+    text-align: left;
+    justify-content: flex-start;
+    padding: 1rem;
+    min-height: 60px;
+}
+
+.capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.capability-item {
+    padding: 1rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.capability-item h4 {
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+}
+
+.capability-item p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.history-content {
+    text-align: center;
+    padding: 1rem;
+}
+
+@media (max-width: 767px) {
+    .chat-container {
+        height: 500px;
+    }
+    
+    .question-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .capabilities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chat-input-container {
+        flex-direction: column;
+    }
+    
+    .message {
+        max-width: 95%;
+    }
+}
+</style>
+
+<script>
+let messageCount = 0;
+
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addMessage(message, 'user');
+    input.value = '';
+    
+    // Simulate AI response (will be replaced with real AI API calls)
+    setTimeout(() => {
+        const aiResponse = generateMockAIResponse(message);
+        addMessage(aiResponse, 'ai');
+    }, 1000);
+}
+
+function addMessage(text, sender) {
+    const messagesContainer = document.getElementById('chatMessages');
+    const messageDiv = document.createElement('div');
+    const timestamp = new Date().toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+    
+    messageDiv.className = `message ${sender}-message`;
+    messageDiv.innerHTML = `
+        <div class="message-content">
+            <div class="message-header">
+                ${sender === 'ai' ? '<span class="ai-avatar">🤖</span>' : '<span class="user-avatar">👤</span>'}
+                <span class="sender-name">${sender === 'ai' ? 'Fantasy Football AI' : 'You'}</span>
+                <span class="message-time">${timestamp}</span>
+            </div>
+            <div class="message-text">${text}</div>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    messageCount++;
+}
+
+function generateMockAIResponse(userMessage) {
+    const responses = {
+        'start': 'Based on your roster and this week\'s matchups, I recommend starting these players: [Player recommendations will appear here once the system is fully operational]',
+        'drop': 'Looking at your roster, these players might be candidates for dropping: [Drop recommendations will appear here once the system is fully operational]',
+        'free agents': 'Here are the top free agents available this week: [Free agent analysis will appear here once the system is fully operational]',
+        'team': 'Your team analysis: [Team analysis will appear here once the system is fully operational]',
+        'trades': 'Trade analysis: [Trade recommendations will appear here once the system is fully operational]',
+        'analysis': 'Roster analysis: [Detailed analysis will appear here once the system is fully operational]'
+    };
+    
+    const lowerMessage = userMessage.toLowerCase();
+    
+    if (lowerMessage.includes('start')) return responses.start;
+    if (lowerMessage.includes('drop')) return responses.drop;
+    if (lowerMessage.includes('free agent')) return responses.free_agents;
+    if (lowerMessage.includes('team') && lowerMessage.includes('look')) return responses.team;
+    if (lowerMessage.includes('trade')) return responses.trades;
+    if (lowerMessage.includes('analysis')) return responses.analysis;
+    
+    return 'That\'s a great question! [AI response will appear here once the system is fully operational with OpenAI/Anthropic integration]';
+}
+
+function askQuickQuestion(question) {
+    document.getElementById('chatInput').value = question;
+    sendMessage();
+}
+
+function clearChatHistory() {
+    const messagesContainer = document.getElementById('chatMessages');
+    // Keep only the welcome message
+    const welcomeMessage = messagesContainer.querySelector('.ai-message');
+    messagesContainer.innerHTML = '';
+    messagesContainer.appendChild(welcomeMessage);
+    messageCount = 0;
+    showNotification('Chat history cleared', 'info');
+}
+
+function exportChatHistory() {
+    const messages = document.querySelectorAll('.message');
+    let history = 'Fantasy Football AI Chat History\n\n';
+    
+    messages.forEach(message => {
+        const sender = message.classList.contains('user-message') ? 'You' : 'AI';
+        const text = message.querySelector('.message-text').textContent;
+        const time = message.querySelector('.message-time').textContent;
+        history += `[${time}] ${sender}: ${text}\n\n`;
+    });
+    
+    const blob = new Blob([history], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'chat_history.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    showNotification('Chat history exported', 'success');
+}
+
+// Enter key to send message
+document.getElementById('chatInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+
+// Auto-focus chat input
+document.getElementById('chatInput').focus();
+</script>
+{% endblock %}

@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+
+{% block title %}Free Agents - Fantasy Football AI General Manager{% endblock %}
+
+{% block content %}
+<div class="free-agents-container">
+    <h2 class="card-title">🆓 Free Agents</h2>
+    <p class="mb-3">Browse available players and get AI-powered recommendations for roster improvements.</p>
+    
+    <!-- Search and Filters -->
+    <div class="search-filters mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🔍 Search & Filters</h3>
+            <div class="filter-controls">
+                <div class="search-row">
+                    <input type="text" id="playerSearch" class="search-input" placeholder="Search players by name...">
+                    <select id="positionFilter" class="filter-select">
+                        <option value="">All Positions</option>
+                        <option value="QB">Quarterback</option>
+                        <option value="RB">Running Back</option>
+                        <option value="WR">Wide Receiver</option>
+                        <option value="TE">Tight End</option>
+                        <option value="K">Kicker</option>
+                        <option value="DEF">Defense</option>
+                    </select>
+                    <select id="teamFilter" class="filter-select">
+                        <option value="">All Teams</option>
+                        <option value="KC">Kansas City Chiefs</option>
+                        <option value="SF">San Francisco 49ers</option>
+                        <option value="MIA">Miami Dolphins</option>
+                        <option value="BAL">Baltimore Ravens</option>
+                        <option value="SEA">Seattle Seahawks</option>
+                    </select>
+                </div>
+                <div class="filter-buttons">
+                    <button class="btn" onclick="clearFilters()">Clear Filters</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI Recommendations -->
+    <div class="ai-recommendations mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🤖 AI Recommendations</h3>
+            <div class="recommendation-content">
+                <p><em>AI recommendations will appear here once the system is fully operational.</em></p>
+                <p class="text-center mt-2">
+                    <small>Powered by OpenAI/Anthropic APIs - Coming Soon!</small>
+                </p>
+                <div class="mt-2">
+                    <a href="{{ url_for('chat') }}" class="btn btn-primary">Ask AI for Advice</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Free Agents Table -->
+    <div class="free-agents-table">
+        <div class="dashboard-card">
+            <h3 class="card-title">📋 Available Players</h3>
+            <div class="table-container">
+                <table class="data-table" id="freeAgentsTable">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Player Name</th>
+                            <th>Team</th>
+                            <th>Availability</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in data.free_agents %}
+                        <tr class="player-row" data-position="{{ player.position }}" data-team="{{ player.team }}" data-name="{{ player.name|lower }}">
+                            <td>
+                                <span class="position-badge position-{{ player.position|lower }}">
+                                    {{ player.position }}
+                                </span>
+                            </td>
+                            <td>
+                                <strong>{{ player.name }}</strong>
+                            </td>
+                            <td>{{ player.team }}</td>
+                            <td>
+                                <span class="availability-badge availability-{{ player.availability|lower }}">
+                                    {{ player.availability }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-small" onclick="viewPlayerDetails('{{ player.name }}')">
+                                        👁️ View
+                                    </button>
+                                    <button class="btn btn-small btn-primary" onclick="considerAdd('{{ player.name }}')">
+                                        ➕ Add
+                                    </button>
+                                    <button class="btn btn-small" onclick="compareWithRoster('{{ player.name }}')">
+                                        ⚖️ Compare
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add/Drop Suggestions -->
+    <div class="add-drop-suggestions mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">💡 Add/Drop Suggestions</h3>
+            <div class="suggestions-content">
+                <p><em>AI-powered add/drop suggestions will appear here once the system is fully operational.</em></p>
+                <p class="text-center mt-2">
+                    <small>These suggestions will analyze your current roster and recommend optimal moves</small>
+                </p>
+                <div class="mt-2">
+                    <button class="btn btn-primary" onclick="generateSuggestions()">Generate Suggestions</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">⚡ Quick Actions</h3>
+            <div class="action-grid">
+                <a href="{{ url_for('team') }}" class="btn">👥 View My Roster</a>
+                <a href="{{ url_for('analysis') }}" class="btn">📊 Run Analysis</a>
+                <a href="{{ url_for('matchup') }}" class="btn">⚔️ Check Matchup</a>
+                <a href="{{ url_for('chat') }}" class="btn">🤖 AI Chat</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.search-filters {
+    margin-bottom: 2rem;
+}
+
+.filter-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.search-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+    background: var(--black);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    padding: 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 4px;
+    min-height: 44px;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+.filter-select {
+    background: var(--black);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    padding: 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 4px;
+    min-height: 44px;
+    min-width: 120px;
+}
+
+.filter-select:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.availability-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.availability-available { background: rgba(0, 255, 0, 0.2); color: #2ECC71; }
+.availability-waiver { background: rgba(255, 165, 0, 0.2); color: #F39C12; }
+.availability-unavailable { background: rgba(255, 0, 0, 0.2); color: #E74C3C; }
+
+.recommendation-content,
+.suggestions-content {
+    text-align: center;
+    padding: 1rem;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 767px) {
+    .search-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-input,
+    .filter-select {
+        min-width: auto;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// Search and filter functionality
+function applyFilters() {
+    const searchTerm = document.getElementById('playerSearch').value.toLowerCase();
+    const positionFilter = document.getElementById('positionFilter').value;
+    const teamFilter = document.getElementById('teamFilter').value;
+    
+    document.querySelectorAll('.player-row').forEach(row => {
+        const name = row.dataset.name;
+        const position = row.dataset.position;
+        const team = row.dataset.team;
+        
+        const matchesSearch = !searchTerm || name.includes(searchTerm);
+        const matchesPosition = !positionFilter || position === positionFilter;
+        const matchesTeam = !teamFilter || team === teamFilter;
+        
+        if (matchesSearch && matchesPosition && matchesTeam) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    showNotification('Filters applied', 'info');
+}
+
+function clearFilters() {
+    document.getElementById('playerSearch').value = '';
+    document.getElementById('positionFilter').value = '';
+    document.getElementById('teamFilter').value = '';
+    
+    document.querySelectorAll('.player-row').forEach(row => {
+        row.style.display = '';
+    });
+    
+    showNotification('Filters cleared', 'info');
+}
+
+// Player actions
+function viewPlayerDetails(playerName) {
+    showNotification(`Viewing details for ${playerName}`, 'info');
+    // TODO: Implement player detail modal
+}
+
+function considerAdd(playerName) {
+    showNotification(`Added ${playerName} to consideration list`, 'info');
+    // TODO: Implement add consideration logic
+}
+
+function compareWithRoster(playerName) {
+    showNotification(`Comparing ${playerName} with your roster`, 'info');
+    // TODO: Implement roster comparison logic
+}
+
+function generateSuggestions() {
+    showNotification('Generating AI-powered suggestions...', 'info');
+    // TODO: Implement AI suggestion generation
+    setTimeout(() => {
+        showNotification('AI suggestions feature coming soon!', 'info');
+    }, 2000);
+}
+
+// Real-time search
+document.getElementById('playerSearch').addEventListener('input', function() {
+    if (this.value.length > 2) {
+        applyFilters();
+    } else if (this.value.length === 0) {
+        clearFilters();
+    }
+});
+
+// Filter change handlers
+document.getElementById('positionFilter').addEventListener('change', applyFilters);
+document.getElementById('teamFilter').addEventListener('change', applyFilters);
+</script>
+{% endblock %}

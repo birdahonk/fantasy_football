@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+
+{% block title %}Team Roster - Fantasy Football AI General Manager{% endblock %}
+
+{% block content %}
+<div class="team-container">
+    <h2 class="card-title">👥 Team Roster</h2>
+    <p class="mb-3">Your current fantasy football roster and player status.</p>
+    
+    <!-- Roster Summary -->
+    <div class="roster-summary-card mb-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">📊 Roster Summary</h3>
+            <div class="roster-stats">
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.roster|length }}</span>
+                        <span class="stat-label">Total Players</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.roster|selectattr('position', 'equalto', 'QB')|list|length }}</span>
+                        <span class="stat-label">Quarterbacks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.roster|selectattr('position', 'equalto', 'RB')|list|length }}</span>
+                        <span class="stat-label">Running Backs</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.roster|selectattr('position', 'equalto', 'WR')|list|length }}</span>
+                        <span class="stat-label">Wide Receivers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.roster|selectattr('position', 'equalto', 'TE')|list|length }}</span>
+                        <span class="stat-label">Tight Ends</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.roster|selectattr('position', 'equalto', 'K')|list|length }}</span>
+                        <span class="stat-label">Kickers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.roster|selectattr('position', 'equalto', 'DEF')|list|length }}</span>
+                        <span class="stat-label">Defenses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Full Roster Table -->
+    <div class="roster-table-card">
+        <div class="dashboard-card">
+            <h3 class="card-title">📋 Full Roster</h3>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Player Name</th>
+                            <th>Team</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in data.roster %}
+                        <tr class="player-row" data-position="{{ player.position }}">
+                            <td>
+                                <span class="position-badge position-{{ player.position|lower }}">
+                                    {{ player.position }}
+                                </span>
+                            </td>
+                            <td>
+                                <strong>{{ player.name }}</strong>
+                            </td>
+                            <td>{{ player.team }}</td>
+                            <td>
+                                <span class="status-badge status-{{ player.status|lower }}">
+                                    {{ player.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-small" onclick="viewPlayerDetails('{{ player.name }}')">
+                                        👁️ View
+                                    </button>
+                                    <button class="btn btn-small btn-warning" onclick="considerDrop('{{ player.name }}')">
+                                        🗑️ Drop
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Position Filters -->
+    <div class="position-filters mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">🔍 Filter by Position</h3>
+            <div class="filter-buttons">
+                <button class="btn filter-btn active" data-position="all">All Positions</button>
+                <button class="btn filter-btn" data-position="QB">QB</button>
+                <button class="btn filter-btn" data-position="RB">RB</button>
+                <button class="btn filter-btn" data-position="WR">WR</button>
+                <button class="btn filter-btn" data-position="TE">TE</button>
+                <button class="btn filter-btn" data-position="K">K</button>
+                <button class="btn filter-btn" data-position="DEF">DEF</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Roster Actions -->
+    <div class="roster-actions mt-3">
+        <div class="dashboard-card">
+            <h3 class="card-title">⚡ Roster Actions</h3>
+            <div class="action-grid">
+                <a href="{{ url_for('free_agents') }}" class="btn btn-primary">
+                    🆓 Browse Free Agents
+                </a>
+                <a href="{{ url_for('analysis') }}" class="btn">
+                    📊 Run Roster Analysis
+                </a>
+                <a href="{{ url_for('chat') }}" class="btn">
+                    🤖 Ask AI for Advice
+                </a>
+                <button class="btn" onclick="exportRoster()">
+                    📤 Export Roster
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.roster-stats {
+    margin: 1rem 0;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--secondary-green);
+}
+
+.position-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    min-width: 30px;
+    display: inline-block;
+}
+
+.position-qb { background: rgba(255, 0, 0, 0.2); color: #FF6B6B; }
+.position-rb { background: rgba(0, 255, 0, 0.2); color: #4ECDC4; }
+.position-wr { background: rgba(0, 0, 255, 0.2); color: #45B7D1; }
+.position-te { background: rgba(255, 165, 0, 0.2); color: #FFA500; }
+.position-k { background: rgba(128, 0, 128, 0.2); color: #9B59B6; }
+.position-def { background: rgba(255, 255, 0, 0.2); color: #F1C40F; }
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-active { background: rgba(0, 255, 0, 0.2); color: #2ECC71; }
+.status-injured { background: rgba(255, 0, 0, 0.2); color: #E74C3C; }
+.status-questionable { background: rgba(255, 165, 0, 0.2); color: #F39C12; }
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    min-width: auto;
+    min-height: auto;
+}
+
+.btn-warning {
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+.btn-warning:hover {
+    background: var(--yellow);
+    color: var(--black);
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.filter-btn {
+    min-width: 60px;
+}
+
+.filter-btn.active {
+    background: var(--primary-green);
+    color: var(--black);
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+@media (max-width: 767px) {
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+</style>
+
+<script>
+// Position filtering
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const position = this.dataset.position;
+        
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter rows
+        document.querySelectorAll('.player-row').forEach(row => {
+            if (position === 'all' || row.dataset.position === position) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Player actions
+function viewPlayerDetails(playerName) {
+    showNotification(`Viewing details for ${playerName}`, 'info');
+    // TODO: Implement player detail modal
+}
+
+function considerDrop(playerName) {
+    if (confirm(`Are you sure you want to consider dropping ${playerName}?`)) {
+        showNotification(`Added ${playerName} to drop consideration list`, 'info');
+        // TODO: Implement drop consideration logic
+    }
+}
+
+function exportRoster() {
+    const rosterData = {{ data.roster|tojson }};
+    const csvContent = "data:text/csv;charset=utf-8," 
+        + "Position,Player Name,Team,Status\n"
+        + rosterData.map(player => 
+            `${player.position},${player.name},${player.team},${player.status}`
+        ).join("\n");
+    
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "fantasy_roster.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    showNotification('Roster exported to CSV', 'success');
+}
+</script>
+{% endblock %}
