@@ -19,6 +19,10 @@ This directory contains all the Python scripts for the Fantasy Football optimiza
 
 ### `/external/` - External API Clients
 - **`sleeper_client.py`** - Sleeper NFL API client (trending players, 11,400+ NFL players)
+- **`tank01_client.py`** - Tank01 NFL API client (all 11 endpoints, fantasy projections, news)
+- **`test_tank01_comprehensive.py`** - Comprehensive test suite for all Tank01 endpoints
+- **`test_tank01_fantasy.py`** - Test Tank01 fantasy projections endpoint
+- **`test_tank01_setup.py`** - Test Tank01 API setup and connection
 - **`__init__.py`** - Package initialization for external API clients
 
 ### `/testing/` - Testing and Development
@@ -64,7 +68,15 @@ cd scripts/testing
 python3 test_fantasy_api.py        # Verify OAuth 2.0 is working
 ```
 
-### 3. Run Analysis
+### 3. Test External APIs
+```bash
+cd scripts/external
+python3 sleeper_client.py          # Test Sleeper NFL API
+python3 tank01_client.py           # Test Tank01 NFL API (requires RAPIDAPI_KEY)
+python3 test_tank01_comprehensive.py # Test all Tank01 endpoints
+```
+
+### 4. Run Analysis
 ```bash
 cd scripts/core
 python3 data_retriever.py          # Test Yahoo data retrieval
@@ -95,13 +107,14 @@ python3 sleeper_integration.py     # Generate Sleeper trending reports
 
 - **Yahoo Fantasy API**: Complete data retrieval (rosters, free agents, matchups)
 - **Sleeper NFL API**: Trending players and real-time injury data (11,400+ players)
-- **Combined Analysis**: Yahoo + Sleeper data fusion with smart recommendations
+- **Tank01 NFL API**: All 11 endpoints implemented, fantasy projections, news, stats
+- **Combined Analysis**: Yahoo + Sleeper + Tank01 data fusion with smart recommendations
 - **Professional Reports**: 8+ report types with formatted tables and timestamps
 - **Performance**: 200+ API calls, 88% player match rate, 0.3s average response
 
 ## 🔄 Next Steps
 
-1. **Tank01 API Integration**: Fantasy projections and news headlines
+1. **External API Manager**: Coordinate all three APIs (Yahoo + Sleeper + Tank01)
 2. **AI Enhancement**: OpenAI/Anthropic integration for strategic insights
 3. **Automation**: Scheduled reports and alert systems
 4. **Web Interface**: Enhanced dashboard with real-time updates

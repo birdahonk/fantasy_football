@@ -53,10 +53,10 @@ This application transforms the Cursor AI Agent into your Fantasy Football Gener
 ## 🏗️ Architecture
 
 - **Cursor AI Agent**: Your Fantasy Football GM/Coach interface
-- **Multi-API Integration**: Yahoo Fantasy + Sleeper NFL + Tank01 (planned)
+- **Multi-API Integration**: Yahoo Fantasy + Sleeper NFL + Tank01 NFL (complete)
 - **Yahoo Fantasy API**: Official league data, rosters, free agents, matchups
 - **Sleeper NFL API**: Trending players (11,400+ players), real-time injury status
-- **Tank01 NFL API**: Fantasy projections and news (in development)
+- **Tank01 NFL API**: All 11 endpoints, fantasy projections, news, stats (RapidAPI)
 - **Smart Analysis Engine**: Combined data processing with priority recommendations
 - **Professional Reporting**: Automated markdown reports with formatted tables
 - **Local File System**: Organized analysis reports by type and timestamp
@@ -76,6 +76,9 @@ YAHOO_CLIENT_ID=your_client_id_here
 YAHOO_CLIENT_SECRET=your_client_secret_here
 YAHOO_REDIRECT_URI=https://tools.birdahonk.com/fantasy/oauth/callback
 YAHOO_SCOPES=fspt-w
+
+# External APIs
+RAPIDAPI_KEY=your_rapidapi_key_here
 
 # AI APIs
 OPENAI_API_KEY=sk-your_openai_key_here
