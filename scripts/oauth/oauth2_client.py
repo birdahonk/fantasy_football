@@ -34,8 +34,9 @@ class YahooOAuth2Client:
         self.redirect_uri = os.getenv('YAHOO_REDIRECT_URI', 'https://tools.birdahonk.com/fantasy/oauth/callback')
         self.scopes = os.getenv('YAHOO_SCOPES', 'fspt-w')  # Fantasy Sports read/write - this worked!
         
-        # Token storage
-        self.tokens_file = "config/yahoo_oauth2_tokens.json"
+        # Token storage - use absolute path from scripts directory
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.tokens_file = os.path.join(script_dir, "..", "config", "yahoo_oauth2_tokens.json")
         self.access_token = None
         self.refresh_token = None
         self.token_type = None
@@ -178,7 +179,7 @@ class YahooOAuth2Client:
                 data['client_secret'] = self.client_secret
             
             headers = {
-                'Content-Type': 'application/xaml+xml, application/xml, text/xml, */*',
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'User-Agent': 'FantasyFootballApp/1.0'
             }
             
@@ -228,7 +229,7 @@ class YahooOAuth2Client:
                 data['client_secret'] = self.client_secret
             
             headers = {
-                'Content-Type': 'application/xaml+xml, application/xml, text/xml, */*',
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'User-Agent': 'FantasyFootballApp/1.0'
             }
             
