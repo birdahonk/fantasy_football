@@ -60,3 +60,7 @@ config/*.json
 *.temp
 .cache/
 scripts/core/debug_responses/
+
+# Debug files
+debug_*.json
+debug_*.txt
