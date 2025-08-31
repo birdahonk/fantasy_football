@@ -53,7 +53,9 @@ analysis/**/*.json
 
 # Configuration files with sensitive data
 config/*.json
+scripts/config/*.json
 !config/README.md
+!scripts/config/README.md
 
 # Temporary files
 *.tmp
