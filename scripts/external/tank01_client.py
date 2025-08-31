@@ -443,7 +443,7 @@ class Tank01Client:
             if season:
                 params["season"] = season
             
-            data = self._make_request("getNFLPlayerGameStats", params)
+            data = self._make_request("getNFLGamesForPlayer", params)
             
             self.logger.info(f"Game stats retrieved for player {player_id}")
             return data
