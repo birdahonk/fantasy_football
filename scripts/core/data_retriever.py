@@ -99,11 +99,11 @@ class YahooDataRetriever:
     
     def get_free_agents(self, position: Optional[str] = None, count: int = 25) -> List[Dict[str, Any]]:
         """
-        Get available free agents
+        Get available free agents with pagination support
         
         Args:
             position: Filter by position (QB, RB, WR, TE, K, DEF)
-            count: Number of players to retrieve
+            count: Number of players to retrieve (will paginate if > 25)
         """
         try:
             logger.info(f"Getting free agents (position: {position}, count: {count})...")
@@ -112,35 +112,59 @@ class YahooDataRetriever:
             if not league_key:
                 return []
             
-            # Build endpoint for free agents
-            endpoint = f"league/{league_key}/players"
+            all_players = []
+            start = 0
+            page_size = 25  # Yahoo API maximum per request
             
-            # Add filters
-            filters = []
-            if position:
-                filters.append(f"position={position}")
-            filters.append(f"status=A")  # Available players
-            filters.append(f"sort=OR")   # Sort by ownership percentage
-            filters.append(f"count={count}")
+            while len(all_players) < count:
+                # Calculate how many to request this page
+                remaining = count - len(all_players)
+                current_count = min(page_size, remaining)
+                
+                # Build endpoint for free agents
+                endpoint = f"league/{league_key}/players"
+                
+                # Add filters
+                filters = []
+                if position:
+                    filters.append(f"position={position}")
+                filters.append(f"status=A")  # Available players
+                filters.append(f"sort=OR")   # Sort by ownership percentage
+                filters.append(f"start={start}")
+                filters.append(f"count={current_count}")
+                
+                if filters:
+                    endpoint += ";" + ";".join(filters)
+                
+                logger.info(f"Free agents endpoint (page {start//page_size + 1}): {endpoint}")
+                
+                response = self.oauth_client.make_request(endpoint)
+                if not response or response.get('status') != 'success':
+                    logger.error(f"Failed to get free agents page starting at {start}")
+                    break
+                
+                # Save raw response for debugging
+                self._save_debug_response(response, f"free_agents_{position or 'all'}_page_{start}")
+                
+                parsed_data = response.get('parsed', {})
+                page_players = self._parse_players_response(parsed_data)
+                
+                if not page_players:
+                    logger.info(f"No more players found at start={start}")
+                    break
+                
+                all_players.extend(page_players)
+                logger.info(f"Retrieved {len(page_players)} players from page {start//page_size + 1} (total: {len(all_players)})")
+                
+                # If we got fewer players than requested, we've reached the end
+                if len(page_players) < current_count:
+                    logger.info(f"Reached end of available players (got {len(page_players)}, requested {current_count})")
+                    break
+                
+                start += page_size
             
-            if filters:
-                endpoint += ";" + ";".join(filters)
-            
-            logger.info(f"Free agents endpoint: {endpoint}")
-            
-            response = self.oauth_client.make_request(endpoint)
-            if not response or response.get('status') != 'success':
-                logger.error("Failed to get free agents")
-                return []
-            
-            # Save raw response for debugging
-            self._save_debug_response(response, f"free_agents_{position or 'all'}")
-            
-            parsed_data = response.get('parsed', {})
-            players = self._parse_players_response(parsed_data)
-            
-            logger.info(f"Retrieved {len(players)} free agents")
-            return players
+            logger.info(f"Retrieved {len(all_players)} total free agents")
+            return all_players[:count]  # Return exactly what was requested
             
         except Exception as e:
             logger.error(f"Error getting free agents: {e}")
@@ -340,7 +364,7 @@ class YahooDataRetriever:
             return {}
     
     def get_top_available_players(self, count: int = 50) -> List[Dict[str, Any]]:
-        """Get top available players by Yahoo rankings"""
+        """Get top available players by Yahoo rankings with pagination support"""
         try:
             logger.info(f"Getting top {count} available players...")
             
@@ -348,24 +372,47 @@ class YahooDataRetriever:
             if not league_key:
                 return []
             
-            # Get top available players sorted by Yahoo rank
-            endpoint = f"league/{league_key}/players;status=A;sort=AR;count={count}"
+            all_players = []
+            start = 0
+            page_size = 25  # Yahoo API maximum per request
             
-            logger.info(f"Top available players endpoint: {endpoint}")
+            while len(all_players) < count:
+                # Calculate how many to request this page
+                remaining = count - len(all_players)
+                current_count = min(page_size, remaining)
+                
+                # Get top available players sorted by Yahoo rank
+                endpoint = f"league/{league_key}/players;status=A;sort=AR;start={start};count={current_count}"
+                
+                logger.info(f"Top available players endpoint (page {start//page_size + 1}): {endpoint}")
+                
+                response = self.oauth_client.make_request(endpoint)
+                if not response or response.get('status') != 'success':
+                    logger.error(f"Failed to get top available players page starting at {start}")
+                    break
+                
+                # Save raw response for debugging
+                self._save_debug_response(response, f"top_available_players_page_{start}")
+                
+                parsed_data = response.get('parsed', {})
+                page_players = self._parse_players_response(parsed_data)
+                
+                if not page_players:
+                    logger.info(f"No more top players found at start={start}")
+                    break
+                
+                all_players.extend(page_players)
+                logger.info(f"Retrieved {len(page_players)} top players from page {start//page_size + 1} (total: {len(all_players)})")
+                
+                # If we got fewer players than requested, we've reached the end
+                if len(page_players) < current_count:
+                    logger.info(f"Reached end of top available players (got {len(page_players)}, requested {current_count})")
+                    break
+                
+                start += page_size
             
-            response = self.oauth_client.make_request(endpoint)
-            if not response or response.get('status') != 'success':
-                logger.error("Failed to get top available players")
-                return []
-            
-            # Save raw response for debugging
-            self._save_debug_response(response, "top_available_players")
-            
-            parsed_data = response.get('parsed', {})
-            players = self._parse_players_response(parsed_data)
-            
-            logger.info(f"Retrieved {len(players)} top available players")
-            return players
+            logger.info(f"Retrieved {len(all_players)} total top available players")
+            return all_players[:count]  # Return exactly what was requested
             
         except Exception as e:
             logger.error(f"Error getting top available players: {e}")
@@ -829,14 +876,18 @@ def main():
             print("❌ Failed to get league key")
             return
         
-        # Test free agents
-        print("\n🔍 Testing free agents retrieval...")
-        free_agents = retriever.get_free_agents(count=10)
+        # Test free agents with pagination
+        print("\n🔍 Testing free agents retrieval with pagination...")
+        free_agents = retriever.get_free_agents(count=50)
         print(f"✅ Retrieved {len(free_agents)} free agents")
         if free_agents:
-            print("Sample free agents:")
+            print("Sample free agents (first 3 and last 3):")
             for i, player in enumerate(free_agents[:3]):
                 print(f"  {i+1}. {player.get('name')} ({player.get('position')}) - {player.get('team')}")
+            if len(free_agents) > 3:
+                print("  ...")
+                for i, player in enumerate(free_agents[-3:], len(free_agents)-2):
+                    print(f"  {i}. {player.get('name')} ({player.get('position')}) - {player.get('team')}")
         
         # Test opponent rosters
         print("\n👥 Testing opponent rosters retrieval...")
@@ -845,14 +896,18 @@ def main():
         for team_name, roster in list(opponent_rosters.items())[:2]:
             print(f"  {team_name}: {len(roster)} players")
         
-        # Test top available players
-        print("\n⭐ Testing top available players...")
-        top_players = retriever.get_top_available_players(count=10)
+        # Test top available players with pagination
+        print("\n⭐ Testing top available players with pagination...")
+        top_players = retriever.get_top_available_players(count=40)
         print(f"✅ Retrieved {len(top_players)} top available players")
         if top_players:
-            print("Top available players:")
+            print("Top available players (first 3 and last 3):")
             for i, player in enumerate(top_players[:3]):
                 print(f"  {i+1}. {player.get('name')} ({player.get('position')}) - {player.get('team')}")
+            if len(top_players) > 3:
+                print("  ...")
+                for i, player in enumerate(top_players[-3:], len(top_players)-2):
+                    print(f"  {i}. {player.get('name')} ({player.get('position')}) - {player.get('team')}")
         
         # Test research data
         print("\n📊 Testing research data retrieval...")
