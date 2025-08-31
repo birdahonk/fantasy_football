@@ -522,12 +522,22 @@ class YahooDataRetriever:
                 if isinstance(team, list):
                     for team_item in team:
                         if isinstance(team_item, dict) and 'roster' in team_item:
-                            roster = team_item.get('roster', {})
-                            players = self._extract_players_from_roster(roster)
+                            roster_data = team_item.get('roster', {})
+                            # The roster structure is: roster -> '0' -> 'players' -> player data
+                            if '0' in roster_data and 'players' in roster_data['0']:
+                                players_data = roster_data['0']['players']
+                                players = self._extract_players_from_data(players_data)
+                            else:
+                                players = self._extract_players_from_roster(roster_data)
                             break
                 elif isinstance(team, dict) and 'roster' in team:
-                    roster = team.get('roster', {})
-                    players = self._extract_players_from_roster(roster)
+                    roster_data = team.get('roster', {})
+                    # The roster structure is: roster -> '0' -> 'players' -> player data
+                    if '0' in roster_data and 'players' in roster_data['0']:
+                        players_data = roster_data['0']['players']
+                        players = self._extract_players_from_data(players_data)
+                    else:
+                        players = self._extract_players_from_roster(roster_data)
             
             return players
             
@@ -547,24 +557,59 @@ class YahooDataRetriever:
             if player:
                 player_info = {}
                 if isinstance(player, list):
-                    for info_item in player:
-                        if isinstance(info_item, dict):
-                            if 'player_key' in info_item:
-                                player_info['player_key'] = info_item['player_key']
-                            elif 'name' in info_item:
-                                name_data = info_item['name']
+                    # Handle nested array structure: player is a list containing a list of dicts
+                    for player_item in player:
+                        if isinstance(player_item, list):
+                            # This is the nested array we need to process
+                            for info_item in player_item:
+                                if isinstance(info_item, dict):
+                                    if 'player_key' in info_item:
+                                        player_info['player_key'] = info_item['player_key']
+                                    elif 'name' in info_item:
+                                        name_data = info_item['name']
+                                        if isinstance(name_data, dict) and 'full' in name_data:
+                                            player_info['name'] = name_data['full']
+                                        elif isinstance(name_data, str):
+                                            player_info['name'] = name_data
+                                    elif 'display_position' in info_item:
+                                        player_info['position'] = info_item['display_position']
+                                    elif 'editorial_team_abbr' in info_item:
+                                        player_info['team'] = info_item['editorial_team_abbr']
+                                    elif 'status' in info_item:
+                                        player_info['status'] = info_item['status']
+                                    elif 'status_full' in info_item:
+                                        player_info['status_full'] = info_item['status_full']
+                                    elif 'injury_note' in info_item:
+                                        player_info['injury_note'] = info_item['injury_note']
+                                    elif 'selected_position' in info_item:
+                                        pos_data = info_item['selected_position']
+                                        if isinstance(pos_data, list):
+                                            for pos_item in pos_data:
+                                                if isinstance(pos_item, dict) and 'position' in pos_item:
+                                                    player_info['selected_position'] = pos_item['position']
+                                                    break
+                                        elif isinstance(pos_data, dict) and 'position' in pos_data:
+                                            player_info['selected_position'] = pos_data['position']
+                                        elif isinstance(pos_data, str):
+                                            player_info['selected_position'] = pos_data
+                        elif isinstance(player_item, dict):
+                            # Handle direct dict structure (fallback)
+                            if 'player_key' in player_item:
+                                player_info['player_key'] = player_item['player_key']
+                            elif 'name' in player_item:
+                                name_data = player_item['name']
                                 if isinstance(name_data, dict) and 'full' in name_data:
                                     player_info['name'] = name_data['full']
                                 elif isinstance(name_data, str):
                                     player_info['name'] = name_data
-                            elif 'display_position' in info_item:
-                                player_info['position'] = info_item['display_position']
-                            elif 'editorial_team_abbr' in info_item:
-                                player_info['team'] = info_item['editorial_team_abbr']
-                            elif 'status' in info_item:
-                                player_info['status'] = info_item['status']
-                            elif 'selected_position' in info_item:
-                                pos_data = info_item['selected_position']
+                            elif 'display_position' in player_item:
+                                player_info['position'] = player_item['display_position']
+                            elif 'editorial_team_abbr' in player_item:
+                                player_info['team'] = player_item['editorial_team_abbr']
+                            elif 'status' in player_item:
+                                player_info['status'] = player_item['status']
+                            elif 'selected_position' in player_item:
+                                pos_data = player_item['selected_position']
                                 if isinstance(pos_data, dict) and 'position' in pos_data:
                                     player_info['selected_position'] = pos_data['position']
                                 elif isinstance(pos_data, str):
