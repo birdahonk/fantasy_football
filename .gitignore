@@ -59,3 +59,4 @@ config/*.json
 *.tmp
 *.temp
 .cache/
+scripts/core/debug_responses/
