@@ -72,24 +72,32 @@
   - ❌ **Player News**: Yahoo news endpoint returns 400 error (need external source)
   - ✅ **All Other Data**: Complete and working (rosters, matchups, free agents, etc.)
 
-### **Priority 1: External API Integration**
-- [ ] **Research external APIs for projected points and news**
-  - [ ] Evaluate SportsDataIO for projections and stats
-  - [ ] Test FantasyData API capabilities
-  - [ ] Research ESPN unofficial APIs
-  - [ ] Explore NFL.com data sources
-  
-- [ ] **Integrate external projection sources**
-  - [ ] Create `external_projections.py` in `scripts/core/`
-  - [ ] Implement SportsDataIO integration
-  - [ ] Add fallback projection sources
-  - [ ] Merge with Yahoo roster data
+### **✅ Priority 1: External API Research & Selection COMPLETE**
+- [x] **Research external APIs for projected points and news**
+  - [x] **SELECTED:** Tank01 NFL API via RapidAPI (1000 calls/month free tier)
+  - [x] **SELECTED:** Sleeper NFL Trending Players API (completely free)
+  - [x] **Tank01 Capabilities:** Fantasy Point Projections, Top News, Player Stats, ADP, Depth Charts
+  - [x] **Sleeper Capabilities:** Trending players (add/drop), player metadata, basic stats
 
-- [ ] **Integrate external news sources**
-  - [ ] Create `external_news.py` in `scripts/core/`
-  - [ ] Implement ESPN news integration
-  - [ ] Add NFL.com injury reports
-  - [ ] Merge with Yahoo player data
+### **🔄 Priority 1B: External API Integration (IN PROGRESS)**
+- [ ] **Set up Tank01 API integration with RapidAPI account**
+  - [ ] Document Tank01 API endpoints and parameters from RapidAPI interface
+  - [ ] Create `tank01_client.py` in `scripts/external/`
+  - [ ] Test Fantasy Point Projections endpoint
+  - [ ] Test Top News and Headlines endpoint
+  - [ ] Implement rate limiting (1000 calls/month)
+
+- [ ] **Implement Sleeper NFL API integration**
+  - [ ] Create `sleeper_client.py` in `scripts/external/`
+  - [ ] Implement trending players retrieval (add/drop)
+  - [ ] Add player metadata enrichment
+  - [ ] Test free agent trending insights
+
+- [ ] **Create unified external API manager**
+  - [ ] Create `external_api_manager.py` in `scripts/core/`
+  - [ ] Coordinate Tank01 + Sleeper API calls
+  - [ ] Merge external data with Yahoo roster data
+  - [ ] Handle API failures gracefully
 
 ### **Priority 2: Analysis & Intelligence**
 - [ ] **Build core roster analysis (health, depth, performance)**
@@ -240,19 +248,20 @@
 - **Matchup Analysis**: Team vs team with projected scores (103-109 pts)
 - **Enhanced Reporting**: Timestamped markdown files with perfect table formatting
 
-### **⚠️ IDENTIFIED LIMITATIONS**
-- **Projected Points**: Yahoo API returns zeros - need external source (SportsDataIO)
-- **Player News**: Yahoo endpoint returns 400 error - need external source (ESPN/NFL.com)
-- **All Other Data**: Complete and fully functional
+### **✅ LIMITATIONS ADDRESSED WITH EXTERNAL APIS**
+- **Projected Points**: ✅ **Tank01 NFL API** - Fantasy Point Projections endpoint (1000 calls/month)
+- **Player News**: ✅ **Tank01 NFL API** - Top News and Headlines endpoint
+- **Trending Players**: ✅ **Sleeper API** - Most added/dropped players (completely free)
+- **All Other Data**: Complete and fully functional via Yahoo API
 
 ### **🎯 IMMEDIATE NEXT STEPS**
-Core Yahoo data retrieval is **100% complete**! Next priorities:
+Core Yahoo data retrieval is **100% complete**! External APIs selected! Next priorities:
 
-1. **External API Research** - SportsDataIO for projections, ESPN for news
-2. **Analysis Engine Development** - Roster health, free agent recommendations
-3. **AI Integration** - OpenAI/Anthropic for strategic insights
-4. **Production Reports** - Replace proof-of-concept with final report formats
-5. **Matchup Optimization** - Start/sit recommendations with projections
+1. **✅ External API Selection** - Tank01 NFL (projections/news) + Sleeper (trending) **COMPLETE**
+2. **🔄 External API Integration** - Tank01 + Sleeper client implementation **IN PROGRESS**
+3. **Analysis Engine Development** - Roster health, free agent recommendations
+4. **AI Integration** - OpenAI/Anthropic for strategic insights
+5. **Production Reports** - Enhanced reports with projections and news
 
 ### **🔍 Technical Achievements**
 - **Yahoo API Mastery**: Complex nested JSON parsing fully solved
