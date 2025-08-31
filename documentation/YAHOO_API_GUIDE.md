@@ -1,5 +1,8 @@
 # Yahoo Fantasy Sports API - Complete Implementation Guide
 
+**⚠️ NOTE: This document has been superseded by the comprehensive guide.**  
+**See: [YAHOO_API_COMPLETE_GUIDE.md](./YAHOO_API_COMPLETE_GUIDE.md) for complete documentation with all endpoints and capabilities.**
+
 ## 🎯 Overview
 
 This guide documents the complete implementation of Yahoo Fantasy Sports API integration, including authentication, data retrieval, and parsing strategies based on real-world testing and debugging.
