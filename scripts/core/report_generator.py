@@ -426,28 +426,53 @@ class FantasyReportGenerator:
                     team1_data = None
                     team2_data = None
                     
-                    # Parse team data (usually under keys '0' and '1')
+                    # Parse team data - Yahoo uses complex nested array structure
                     if '0' in teams_data:
                         team1_raw = teams_data['0'].get('team', [])
-                        if isinstance(team1_raw, list) and len(team1_raw) > 1:
-                            team1_data = team1_raw[1] if isinstance(team1_raw[1], dict) else team1_raw[0]
+                        if isinstance(team1_raw, list) and len(team1_raw) > 0:
+                            # Team data is in nested arrays - extract from the array elements
+                            team1_data = {}
+                            for item in team1_raw:
+                                if isinstance(item, list) and len(item) > 0:
+                                    for subitem in item:
+                                        if isinstance(subitem, dict):
+                                            team1_data.update(subitem)
+                                elif isinstance(item, dict):
+                                    team1_data.update(item)
                     
                     if '1' in teams_data:
                         team2_raw = teams_data['1'].get('team', [])
-                        if isinstance(team2_raw, list) and len(team2_raw) > 1:
-                            team2_data = team2_raw[1] if isinstance(team2_raw[1], dict) else team2_raw[0]
+                        if isinstance(team2_raw, list) and len(team2_raw) > 0:
+                            # Team data is in nested arrays - extract from the array elements
+                            team2_data = {}
+                            for item in team2_raw:
+                                if isinstance(item, list) and len(item) > 0:
+                                    for subitem in item:
+                                        if isinstance(subitem, dict):
+                                            team2_data.update(subitem)
+                                elif isinstance(item, dict):
+                                    team2_data.update(item)
                     
                     if team1_data and team2_data:
+                        # Extract manager info
+                        team1_manager = 'Unknown'
+                        if team1_data.get('managers') and len(team1_data['managers']) > 0:
+                            team1_manager = team1_data['managers'][0].get('manager', {}).get('nickname', 'Unknown')
+                        
+                        team2_manager = 'Unknown'
+                        if team2_data.get('managers') and len(team2_data['managers']) > 0:
+                            team2_manager = team2_data['managers'][0].get('manager', {}).get('nickname', 'Unknown')
+                        
                         matchup = {
                             'team1': {
                                 'name': team1_data.get('name', 'Unknown'),
-                                'manager': team1_data.get('managers', [{}])[0].get('manager', {}).get('nickname', 'Unknown') if team1_data.get('managers') else 'Unknown',
+                                'manager': team1_manager,
                                 'team_key': team1_data.get('team_key', 'N/A'),
                                 'projected_points': team1_data.get('team_projected_points', {}).get('total', 'TBD')
                             },
                             'team2': {
                                 'name': team2_data.get('name', 'Unknown'),
-                                'manager': team2_data.get('managers', [{}])[0].get('manager', {}).get('nickname', 'Unknown') if team2_data.get('managers') else 'Unknown',
+                                'manager': team2_manager,
                                 'team_key': team2_data.get('team_key', 'N/A'),
                                 'projected_points': team2_data.get('team_projected_points', {}).get('total', 'TBD')
                             },
@@ -458,6 +483,8 @@ class FantasyReportGenerator:
             
         except Exception as e:
             logger.error(f"Error parsing matchups data: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
         
         return matchups
     

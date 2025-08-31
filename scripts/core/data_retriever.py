@@ -852,6 +852,77 @@ class YahooDataRetriever:
         except Exception as e:
             logger.warning(f"Failed to save debug response: {e}")
 
+    def _parse_roster_response(self, parsed_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Parse roster response from Yahoo API"""
+        players = []
+        
+        try:
+            fantasy_content = parsed_data.get('fantasy_content', {})
+            team_data = fantasy_content.get('team', [])
+            
+            # Navigate the complex nested structure
+            roster_data = None
+            if isinstance(team_data, list):
+                for item in team_data:
+                    if isinstance(item, dict) and 'roster' in item:
+                        roster_data = item['roster']
+                        break
+            
+            if not roster_data:
+                logger.warning("No roster data found in response")
+                return players
+            
+            # Extract players from roster
+            roster_players = roster_data.get('0', {}).get('players', {})
+            
+            for player_key in roster_players:
+                if player_key.isdigit():  # Only process numeric keys
+                    player_info = roster_players[player_key].get('player', [])
+                    
+                    if isinstance(player_info, list) and len(player_info) > 1:
+                        # Player data is in nested arrays - extract from the array elements
+                        player_data = {}
+                        for item in player_info:
+                            if isinstance(item, list) and len(item) > 0:
+                                for subitem in item:
+                                    if isinstance(subitem, dict):
+                                        player_data.update(subitem)
+                            elif isinstance(item, dict):
+                                player_data.update(item)
+                        
+                        # Extract key player information
+                        player = {
+                            'player_key': player_data.get('player_key', ''),
+                            'name': player_data.get('name', {}).get('full', 'Unknown') if isinstance(player_data.get('name'), dict) else player_data.get('name', 'Unknown'),
+                            'position': player_data.get('display_position', 'N/A'),
+                            'team': player_data.get('editorial_team_abbr', 'N/A'),
+                            'status': player_data.get('status', ''),
+                            'status_full': player_data.get('status_full', ''),
+                            'injury_note': player_data.get('injury_note', ''),
+                        }
+                        
+                        # Extract selected position - this is the key fix!
+                        selected_pos = 'BN'  # Default to bench
+                        if 'selected_position' in player_data:
+                            sel_pos_data = player_data['selected_position']
+                            if isinstance(sel_pos_data, list) and len(sel_pos_data) > 0:
+                                for pos_item in sel_pos_data:
+                                    if isinstance(pos_item, dict) and 'position' in pos_item:
+                                        selected_pos = pos_item['position']
+                                        break
+                        
+                        player['selected_position'] = selected_pos
+                        players.append(player)
+            
+            logger.debug(f"Parsed {len(players)} players from roster")
+            return players
+            
+        except Exception as e:
+            logger.error(f"Error parsing roster response: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return players
+
 def main():
     """Test the data retriever"""
     try:
