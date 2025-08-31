@@ -1,13 +1,29 @@
-# Yahoo Fantasy Sports API - Complete Data Retrieval Guide
+# Fantasy Football API Integration Guide
 
 ## 📋 **Overview**
 
-This guide documents all successfully tested Yahoo Fantasy Sports API endpoints and data retrieval capabilities based on comprehensive testing with real league data.
+This guide documents the complete fantasy football data integration system, combining Yahoo Fantasy Sports API with external APIs for comprehensive analysis and insights.
 
-**Last Updated**: August 30, 2025  
-**API Version**: Yahoo Fantasy Sports API v2  
+**Last Updated**: August 31, 2025  
+**Primary API**: Yahoo Fantasy Sports API v2  
+**External APIs**: Sleeper NFL API, Tank01 NFL API (planned)  
 **Test League**: Greg Mulligan Memorial League (10 teams)  
-**Test Data**: 150+ successful API calls, 4 comprehensive reports generated
+**Test Data**: 200+ successful API calls, 8+ comprehensive reports generated
+
+---
+
+## 🌟 **MAJOR UPDATE: Multi-API Integration System**
+
+### **🎯 New Capabilities (August 31, 2025)**
+- **✅ Sleeper NFL API Integration**: Trending players, injury data, player metadata
+- **✅ Combined Analysis Reports**: Yahoo + Sleeper data fusion for enhanced insights
+- **✅ Smart Recommendations**: URGENT/HIGH/CAUTION/AVOID priority system
+- **🔄 Tank01 NFL API**: Projected points and news (in development)
+
+### **📊 Enhanced Data Sources**
+1. **Yahoo Fantasy Sports API** - Official league data, rosters, free agents
+2. **Sleeper NFL API** - Trending players (11,400+ players), real-time injury status
+3. **Tank01 NFL API** - Fantasy projections and news (planned)
 
 ---
 
@@ -166,6 +182,119 @@ def _parse_matchups_data(self, parsed_data):
 
 ---
 
+## 🏈 **Sleeper NFL API Integration**
+
+### **📊 Overview**
+- **Base URL**: `https://api.sleeper.app/v1/`
+- **Authentication**: None required (completely free)
+- **Rate Limits**: Reasonable usage (no strict limits)
+- **Data Coverage**: 11,400+ NFL players with comprehensive metadata
+
+### **✅ Working Endpoints**
+
+#### **Trending Players**
+```python
+# Most added players (last 24 hours)
+GET /players/nfl/trending/add?lookback_hours=24&limit=25
+
+# Most dropped players (last 24 hours)  
+GET /players/nfl/trending/drop?lookback_hours=24&limit=25
+```
+
+#### **Player Database**
+```python
+# All NFL players with metadata
+GET /players/nfl
+# Returns: 11,400+ players with injury status, age, experience, etc.
+```
+
+### **🔧 Implementation Classes**
+
+#### **SleeperClient** (`scripts/external/sleeper_client.py`)
+```python
+from external.sleeper_client import SleeperClient
+
+client = SleeperClient()
+
+# Get trending players with full details
+trending_added = client.get_trending_players_with_details("add", limit=25)
+trending_dropped = client.get_trending_players_with_details("drop", limit=25)
+
+# Search players
+josh_allens = client.search_players_by_name("Josh Allen", position="QB")
+
+# Get team players
+bills_players = client.get_players_by_team("BUF")
+```
+
+#### **SleeperIntegration** (`scripts/core/sleeper_integration.py`)
+```python
+from core.sleeper_integration import SleeperIntegration
+
+integration = SleeperIntegration()
+
+# Generate trending insights report
+report = integration.generate_trending_insights_report()
+# Output: analysis/api_reports/{timestamp}_sleeper_trending_insights.md
+```
+
+#### **CombinedAnalyzer** (`scripts/core/combined_analysis.py`)
+```python
+from core.combined_analysis import CombinedAnalyzer
+
+analyzer = CombinedAnalyzer()
+
+# Generate combined Yahoo + Sleeper analysis
+report = analyzer.generate_combined_report(limit=50)
+# Output: analysis/combined_reports/{timestamp}_yahoo_sleeper_free_agents.md
+```
+
+### **📈 Trending Analysis Categories**
+
+#### **🔥 Hot Adds**
+- Players being added rapidly (trending up)
+- Example: Dylan Sampson (+21,790 adds in 24h)
+- Recommendation: URGENT priority pickups
+
+#### **📉 Hot Drops**
+- Players being dropped rapidly (trending down)  
+- Example: Jonnu Smith (-24,626 drops, Questionable injury)
+- Recommendation: AVOID these players
+
+#### **⚖️ Mixed Signals**
+- Players being both added AND dropped
+- Example: Amari Cooper (+107K adds, -33K drops = +73K net)
+- Recommendation: RESEARCH before adding
+
+### **🎯 Smart Recommendations System**
+
+#### **Priority Levels**
+- **URGENT**: Hot trending players, immediate waiver claims
+- **HIGH**: Top-ranked stable players worth targeting
+- **MEDIUM**: Solid depth options for later
+- **CAUTION**: Players with injury concerns
+- **AVOID**: Players being dropped rapidly
+
+#### **Enhanced Data Integration**
+- **Match Rate**: 88% success rate matching Yahoo ↔ Sleeper players
+- **Injury Status**: Real-time injury data (more current than Yahoo)
+- **Player Metadata**: Age, experience, physical stats
+- **Market Intelligence**: What thousands of managers are doing
+
+### **📊 Report Outputs**
+
+#### **Sleeper Trending Reports**
+- Location: `analysis/api_reports/`
+- Format: `{timestamp}_sleeper_trending_insights.md`
+- Content: Hot adds, drops, mixed signals with professional tables
+
+#### **Combined Analysis Reports**  
+- Location: `analysis/combined_reports/`
+- Format: `{timestamp}_yahoo_sleeper_free_agents.md`
+- Content: Top 50 free agents with trending insights and recommendations
+
+---
+
 ## ❌ **IDENTIFIED LIMITATIONS**
 
 ### 1. **Projected Points**
@@ -297,12 +426,34 @@ class FantasyReportGenerator:
 
 ## 🎯 **Next Steps for Enhancement**
 
-1. **External API Integration**
-   - SportsDataIO for projected points
-   - ESPN for player news and injury updates
-   - FantasyData for additional statistics
+### **✅ Completed Integrations**
+1. **Sleeper NFL API** - Trending players, injury data, player metadata
+2. **Combined Analysis System** - Yahoo + Sleeper data fusion
+3. **Smart Recommendation Engine** - Priority-based waiver wire targeting
 
-2. **Analysis Engine Development**
+### **🔄 In Progress**
+1. **Tank01 NFL API Integration**
+   - Fantasy point projections
+   - Top news and headlines
+   - 1000 calls/month free tier via RapidAPI
+
+### **📋 Future Enhancements**
+1. **Advanced Analysis**
+   - Player performance trending with projections
+   - Matchup difficulty analysis with historical data
+   - AI-powered lineup optimization
+
+2. **Automation & Alerts**
+   - Scheduled data updates and report generation
+   - Alert system for trending player opportunities
+   - Automated waiver wire recommendations
+
+3. **Additional Data Sources**
+   - FantasyData API for advanced metrics
+   - ESPN unofficial endpoints for news
+   - NFL.com official injury reports
+
+4. **Analysis Engine Development**
    - Roster health analysis
    - Free agent recommendations
    - Matchup optimization
