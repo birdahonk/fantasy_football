@@ -146,21 +146,21 @@ class ExternalAPIManager:
         try:
             self.logger.info("🏈 Retrieving comprehensive league data from Yahoo")
             
-            # Get all core Yahoo data
-            league_info = {}  # Yahoo client method names need to be checked
-            teams = []
-            my_team = {}
-            all_rosters = []
+            # Get all core Yahoo data using correct method names
+            league_key = self.yahoo_client.get_league_key()
+            teams = self.yahoo_client.get_all_league_teams()
+            opponent_rosters = self.yahoo_client.get_opponent_rosters()
             free_agents = self.yahoo_client.get_free_agents()
-            matchups = []
+            top_available = self.yahoo_client.get_top_available_players()
+            research_data = self.yahoo_client.get_research_data()
             
             return {
-                'league_info': league_info,
+                'league_key': league_key,
                 'teams': teams,
-                'my_team': my_team,
-                'all_rosters': all_rosters,
+                'opponent_rosters': opponent_rosters,
                 'free_agents': free_agents,
-                'matchups': matchups,
+                'top_available': top_available,
+                'research_data': research_data,
                 'timestamp': datetime.now().isoformat(),
                 'source': 'yahoo_fantasy_api'
             }
@@ -426,16 +426,32 @@ class ExternalAPIManager:
             report.append("## 🏈 Yahoo Fantasy League Summary")
             report.append("")
             
-            if 'league_info' in yahoo_data:
-                league_info = yahoo_data['league_info']
-                report.append(f"- **League**: {league_info.get('name', 'Unknown')}")
-                report.append(f"- **Teams**: {league_info.get('num_teams', 'Unknown')}")
+            if 'league_key' in yahoo_data:
+                league_key = yahoo_data['league_key']
+                report.append(f"- **League Key**: {league_key}")
+                report.append("")
+            
+            if 'teams' in yahoo_data and isinstance(yahoo_data['teams'], list):
+                teams = yahoo_data['teams']
+                report.append(f"- **Teams in League**: {len(teams)}")
                 report.append("")
             
             if 'free_agents' in yahoo_data:
                 free_agents = yahoo_data['free_agents']
                 if isinstance(free_agents, list):
                     report.append(f"- **Available Free Agents**: {len(free_agents)}")
+                    report.append("")
+            
+            if 'top_available' in yahoo_data:
+                top_available = yahoo_data['top_available']
+                if isinstance(top_available, list):
+                    report.append(f"- **Top Available Players**: {len(top_available)}")
+                    report.append("")
+            
+            if 'opponent_rosters' in yahoo_data:
+                opponent_rosters = yahoo_data['opponent_rosters']
+                if isinstance(opponent_rosters, dict):
+                    report.append(f"- **Opponent Teams with Rosters**: {len(opponent_rosters)}")
                     report.append("")
         
         # Trending Insights Summary
@@ -494,11 +510,11 @@ class ExternalAPIManager:
         # Test Yahoo API
         if self.api_status['yahoo']:
             try:
-                league_info = self.yahoo_client.get_league_info()
+                league_key = self.yahoo_client.get_league_key()
                 results['tests']['yahoo'] = {
-                    'status': 'success' if league_info else 'failed',
-                    'message': 'League info retrieved' if league_info else 'No league data',
-                    'data_available': bool(league_info)
+                    'status': 'success' if league_key else 'failed',
+                    'message': 'League key retrieved' if league_key else 'No league data',
+                    'data_available': bool(league_key)
                 }
             except Exception as e:
                 results['tests']['yahoo'] = {
