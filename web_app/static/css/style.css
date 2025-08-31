@@ -8,6 +8,7 @@
     --black: #000000;
     --yellow: #FFFF00;
     --white: #FFFFFF;
+    --purple: #8A2BE2;
     --scan-line-opacity: 0.1;
     --crt-flicker-opacity: 0.05;
 }
@@ -83,8 +84,8 @@ body::after {
     font-family: 'Fira Code', monospace;
     font-size: 8px;
     line-height: 1;
-    color: var(--primary-green);
-    text-shadow: 0 0 10px var(--primary-green);
+    color: var(--purple);
+    text-shadow: 0 0 10px var(--purple);
     margin: 0 auto;
     white-space: pre;
     overflow-x: auto;
@@ -301,6 +302,12 @@ body::after {
     border-top: 2px solid var(--primary-green);
     color: var(--secondary-green);
     margin-top: 3rem;
+}
+
+.brand-text-footer {
+    color: var(--purple);
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--purple);
 }
 
 /* Responsive Design */
