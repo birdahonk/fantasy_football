@@ -35,9 +35,20 @@ class DataFileManager:
         if base_output_dir:
             self.base_output_dir = Path(base_output_dir)
         else:
-            # Default to data_collection/outputs relative to this script
-            script_dir = Path(__file__).parent
-            self.base_output_dir = script_dir.parent.parent / "outputs"
+            # Always use data_collection/outputs regardless of where script is run from
+            # Find the data_collection directory by looking for it in the path
+            current_path = Path(__file__).resolve()
+            
+            # Walk up the directory tree to find data_collection
+            for parent in current_path.parents:
+                if parent.name == "data_collection":
+                    self.base_output_dir = parent / "outputs"
+                    break
+            else:
+                # Fallback: assume we're inside data_collection somewhere
+                script_dir = Path(__file__).parent
+                data_collection_root = script_dir.parent.parent
+                self.base_output_dir = data_collection_root / "outputs"
         
         # Ensure base directory exists
         self.base_output_dir.mkdir(parents=True, exist_ok=True)
@@ -161,7 +172,10 @@ class DataFileManager:
         if not timestamp:
             timestamp = self.generate_timestamp()
         
-        debug_dir = self.base_output_dir.parent / "debug" / "api_responses"
+        # Use data_collection/debug directory structure
+        # self.base_output_dir is already data_collection/outputs, so parent is data_collection
+        data_collection_root = self.base_output_dir.parent
+        debug_dir = data_collection_root / "debug" / "api_responses"
         debug_dir.mkdir(parents=True, exist_ok=True)
         
         filename = f"{timestamp}_{api_name}_{script_name}_{debug_type}.json"
@@ -195,7 +209,10 @@ class DataFileManager:
         if not timestamp:
             timestamp = self.generate_timestamp()
         
-        log_dir = self.base_output_dir.parent / "debug" / "logs"
+        # Use data_collection/debug directory structure  
+        # self.base_output_dir is already data_collection/outputs, so parent is data_collection
+        data_collection_root = self.base_output_dir.parent
+        log_dir = data_collection_root / "debug" / "logs"
         log_dir.mkdir(parents=True, exist_ok=True)
         
         filename = f"{timestamp}_{api_name}_{script_name}_execution.json"

@@ -132,58 +132,103 @@ class MyRosterExtractor:
             # Navigate Yahoo's complex JSON structure
             users = parsed_data.get('fantasy_content', {}).get('users', {})
             if not users:
+                self.logger.error("No users section found")
                 return {}
             
+            # Get user data (this is a list, not a dict)
             user_data = users.get('0', {}).get('user', [])
-            if not user_data:
+            if not isinstance(user_data, list) or not user_data:
+                self.logger.error(f"Invalid user_data structure: {type(user_data)}")
                 return {}
             
-            # Find the games section
+            # Find the games section within the user data list
             games_section = None
             for section in user_data:
-                if 'games' in section:
+                if isinstance(section, dict) and 'games' in section:
                     games_section = section['games']
                     break
             
             if not games_section:
+                self.logger.error("No games section found")
                 return {}
             
-            # Find the NFL game
-            nfl_game = games_section.get('0', {}).get('game', [])
-            if not nfl_game:
+            # Find the NFL game data (this is also a list)
+            nfl_game_data = games_section.get('0', {}).get('game', [])
+            if not isinstance(nfl_game_data, list) or not nfl_game_data:
+                self.logger.error(f"Invalid game data structure: {type(nfl_game_data)}")
                 return {}
             
-            # Extract league and team info
+            # Extract league info and find teams section
             teams_section = None
             league_info = {}
             
-            for section in nfl_game:
-                if 'teams' in section:
-                    teams_section = section['teams']
-                elif isinstance(section, dict):
-                    # Look for league-level info
-                    for key in ['league_key', 'name', 'league_id']:
-                        if key in section:
-                            league_info[key] = section[key]
+            for game_section in nfl_game_data:
+                if isinstance(game_section, dict):
+                    # Check for teams section
+                    if 'teams' in game_section:
+                        teams_section = game_section['teams']
+                    
+                    # Collect league-level info
+                    for key in ['game_key', 'name', 'season']:
+                        if key in game_section:
+                            league_info[key] = game_section[key]
             
             if not teams_section:
+                self.logger.error("No teams section found")
                 return {}
             
-            # Find user's team (is_owned_by_current_login = 1)
-            user_team = teams_section.get('0', {}).get('team', {})
-            if user_team.get('is_owned_by_current_login') != 1:
+            # Extract team data (team is a list of property objects)
+            team_data = teams_section.get('0', {}).get('team', [])
+            if not isinstance(team_data, list) or not team_data:
+                self.logger.error(f"Invalid team data structure: {type(team_data)}")
                 return {}
             
-            return {
-                'team_key': user_team.get('team_key', ''),
-                'team_name': user_team.get('name', ''),
-                'team_id': user_team.get('team_id', ''),
-                'league_key': user_team.get('team_key', '').split('.t.')[0] if user_team.get('team_key') else '',
-                'league_name': league_info.get('name', 'Unknown League')
+            # Parse team properties from the list of lists structure
+            team_properties = {}
+            
+            # Handle nested list structure - team_data could be a list of lists
+            if team_data and isinstance(team_data[0], list):
+                # It's a list of lists, use the first inner list
+                property_list = team_data[0]
+            else:
+                # It's a list of property objects
+                property_list = team_data
+            
+            # Extract properties from the list
+            for prop in property_list:
+                if isinstance(prop, dict):
+                    for key, value in prop.items():
+                        team_properties[key] = value
+            
+            # Validate we found the user's team
+            if team_properties.get('is_owned_by_current_login') != 1:
+                self.logger.error("Team is not owned by current user")
+                return {}
+            
+            # Extract team key to determine league key
+            team_key = team_properties.get('team_key', '')
+            league_key = ''
+            if team_key:
+                # League key format: {game_id}.l.{league_id} (from team_key {game_id}.l.{league_id}.t.{team_id})
+                parts = team_key.split('.t.')
+                if len(parts) >= 1:
+                    league_key = parts[0]
+            
+            result = {
+                'team_key': team_key,
+                'team_name': team_properties.get('name', ''),
+                'team_id': team_properties.get('team_id', ''),
+                'league_key': league_key,
+                'league_name': f"Fantasy League ({league_info.get('season', '2025')})"
             }
+            
+            self.logger.info(f"Successfully extracted team info: {result}")
+            return result
             
         except Exception as e:
             self.logger.error(f"Error extracting team info: {e}")
+            import traceback
+            self.logger.error(f"Traceback: {traceback.format_exc()}")
             return {}
     
     def _extract_players(self, roster_data: Dict) -> List[Dict[str, Any]]:
@@ -243,12 +288,12 @@ class MyRosterExtractor:
         
         return players
     
-    def _extract_complete_player_data(self, player_data: List[Dict]) -> Dict[str, Any]:
+    def _extract_complete_player_data(self, player_data: List) -> Dict[str, Any]:
         """
         Extract ALL available data for a single player.
         
         Args:
-            player_data: Player data array from Yahoo API
+            player_data: Player data array from Yahoo API (list of lists)
             
         Returns:
             Dict with all available player information
@@ -256,19 +301,37 @@ class MyRosterExtractor:
         if not player_data:
             return {}
         
-        # Yahoo stores player data in array format
+        # Yahoo stores player data as list of lists: [properties_list, position_list]
         player_info = {}
         selected_position_info = {}
         
+        # Process each section in the player data
         for section in player_data:
-            if isinstance(section, dict):
-                # Main player data
+            if isinstance(section, list):
+                # This is a list of property objects or position objects
+                for item in section:
+                    if isinstance(item, dict):
+                        for key, value in item.items():
+                            if key == 'selected_position':
+                                # Handle selected position specially - it's an array with position info
+                                if isinstance(value, list) and value:
+                                    # Find the position object in the array
+                                    for pos_item in value:
+                                        if isinstance(pos_item, dict) and 'position' in pos_item:
+                                            selected_position_info = pos_item
+                                            break
+                            else:
+                                player_info[key] = value
+            elif isinstance(section, dict):
+                # Direct dict (fallback for other formats)
                 for key, value in section.items():
                     if key == 'selected_position':
-                        # Handle selected position specially
                         if isinstance(value, list) and value:
-                            pos_data = value[0] if isinstance(value[0], dict) else {}
-                            selected_position_info = pos_data
+                            # Find the position object in the array
+                            for pos_item in value:
+                                if isinstance(pos_item, dict) and 'position' in pos_item:
+                                    selected_position_info = pos_item
+                                    break
                     else:
                         player_info[key] = value
         
@@ -285,7 +348,7 @@ class MyRosterExtractor:
         
         # Add selected position info
         player_info.update({
-            'selected_position': selected_position_info.get('position', 'Unknown'),
+            'selected_position': selected_position_info.get('position', 'BN'),  # Default to bench if not set
             'selected_coverage_type': selected_position_info.get('coverage_type', ''),
             'selected_date': selected_position_info.get('date', '')
         })
@@ -296,6 +359,8 @@ class MyRosterExtractor:
             for pos in player_info['eligible_positions']:
                 if isinstance(pos, dict) and 'position' in pos:
                     positions.append(pos['position'])
+                elif isinstance(pos, str):  # Handle direct string positions
+                    positions.append(pos)
             player_info['eligible_positions_list'] = positions
         
         # Process bye weeks if present
@@ -305,6 +370,10 @@ class MyRosterExtractor:
         # Process headshot if present
         if 'headshot' in player_info and isinstance(player_info['headshot'], dict):
             player_info['headshot_url'] = player_info['headshot'].get('url', '')
+        
+        # Log successful parsing for debugging
+        player_name = player_info.get('full_name', 'Unknown Player')
+        self.logger.debug(f"Parsed player: {player_name}, Position: {player_info.get('selected_position', 'Unknown')}")
         
         return player_info
     
