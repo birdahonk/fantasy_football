@@ -4,6 +4,62 @@
 
 This document defines the expected response structures for Yahoo Fantasy Sports API endpoints used in our data collection system. Each schema ensures we extract **ALL** available data consistently.
 
+## ⚠️ **CRITICAL: Yahoo API Response Format**
+
+**Yahoo returns JSON that mimics XML structure** - this is crucial for parsing!
+
+### **Response Format Characteristics:**
+- ✅ **Format**: JSON (not XML)
+- ⚠️ **Structure**: Nested arrays that mimic XML hierarchy
+- 🔍 **Key Pattern**: Uses numbered keys (`"0"`, `"1"`, `"2"`) for array indexing
+- 📋 **Data Storage**: Properties stored as **arrays of objects** rather than simple objects
+- 🎯 **XML Artifacts**: Contains XML-style attributes like `"xml:lang"`, `"yahoo:uri"`
+
+### **Critical Parsing Patterns:**
+
+#### **1. List-of-Lists Structure:**
+```json
+"player": [
+  [ // First array: player properties
+    {"player_key": "461.p.32671"},
+    {"name": {"full": "Joe Burrow"}},
+    {"editorial_team_abbr": "Cin"}
+  ],
+  [ // Second array: position data
+    {"selected_position": [
+      {"coverage_type": "week", "week": "1"},
+      {"position": "QB"}  // ← Actual starting position!
+    ]}
+  ]
+]
+```
+
+#### **2. Numbered Key Navigation:**
+```json
+"users": {
+  "0": {
+    "user": [ // Array, not object!
+      {"guid": "..."},
+      {"games": {"0": {"game": [...]}}}
+    ]
+  }
+}
+```
+
+#### **3. Selected Position Parsing:**
+```json
+// WRONG: Taking first item
+"selected_position": [
+  {"coverage_type": "week", "week": "1"}, // ← Not the position!
+  {"position": "QB"} // ← This is the actual position!
+]
+
+// CORRECT: Search for object with 'position' key
+for pos_item in selected_position:
+    if 'position' in pos_item:
+        actual_position = pos_item['position']
+```
+
 ## Authentication
 
 - **Method**: OAuth 2.0 (Authorization Code Grant)
