@@ -58,6 +58,33 @@ The Tank01 API provides comprehensive NFL data including:
 - Physical attributes and experience
 - Team and position information
 
+**Team Defense Data Structure**:
+Team defense players have a different data structure than individual players:
+```json
+{
+  "playerID": "DEF_27",
+  "longName": "Phi Defense",
+  "team": "Phi",
+  "pos": "DEF",
+  "teamID": "27",
+  "isTeamDefense": true,
+  "espnID": null,
+  "sleeperBotID": null,
+  "height": null,
+  "weight": null,
+  "age": null,
+  "exp": null,
+  "school": null
+}
+```
+
+**Team Defense Key Differences**:
+- **Player ID**: Format is "DEF_{teamID}" (e.g., "DEF_27" for Philadelphia)
+- **Team Abbreviation**: May be lowercase in API response (e.g., "Phi" instead of "PHI")
+- **Individual Player Fields**: Most individual player fields (height, weight, age, etc.) are null
+- **Team-Specific Fields**: Focus on teamID, team abbreviation, and position
+- **News Strategy**: Use team abbreviation for news retrieval (must normalize case)
+
 ### 2. Weekly Projections (`getNFLProjections`)
 
 **Purpose**: Get fantasy projections for all players for a specific week.
@@ -426,9 +453,8 @@ The Tank01 API provides comprehensive NFL data including:
     {
       "title": "string",
       "link": "string",
-      "timePosted": "string",
-      "author": "string",
-      "impact": "string"
+      "image": "string",
+      "playerID": "string"
     }
   ]
 }
@@ -438,13 +464,26 @@ The Tank01 API provides comprehensive NFL data including:
 - **Player-Specific News**: When `playerID` is provided, returns news articles specifically about that player
 - **Team-Specific News**: When `teamID` or `teamAbv` is provided, returns news articles about that team
 - **Fantasy-Relevant News**: When `fantasyNews=true`, filters for fantasy-relevant content
-- **Article Metadata**: title, link, author, impact assessment
-- **Time Posted Information**: Recent news filtering available
+- **Article Metadata**: title, link, image (no publication dates available)
+- **Team Defense News Strategy**: For team defense players, use `teamAbv` parameter to get team news
+
+**Team Defense News Implementation**:
+- **Challenge**: No specific defense-only news filtering available
+- **Solution**: Use `teamAbv` parameter to get general team news (10 most recent articles)
+- **Team Abbreviation Normalization**: Must use uppercase abbreviations (e.g., "PHI" not "Phi")
+- **Case Sensitivity**: API requires exact case matching for team abbreviations
+- **News Content**: Team news includes general team updates, player news, and organizational news
 
 **Examples**:
 - `getNFLNews(playerID="3117251")` - News about Christian McCaffrey
+- `getNFLNews(teamAbv="PHI")` - News about Philadelphia Eagles (for team defense)
 - `getNFLNews(teamAbv="SF")` - News about San Francisco 49ers
 - `getNFLNews(fantasyNews=true, maxItems=50)` - General fantasy news
+
+**Important Notes**:
+- **No Publication Dates**: API does not provide timestamp information for news articles
+- **Team Abbreviation Case**: Must use uppercase (PHI, SF, BUF) not lowercase (phi, sf, buf)
+- **Defense News Limitation**: Cannot filter specifically for defense-related news, only general team news
 
 ### 10. Player Info (`getNFLPlayerInfo`)
 
