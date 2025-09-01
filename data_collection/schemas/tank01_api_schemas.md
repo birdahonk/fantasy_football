@@ -615,12 +615,42 @@ All endpoints return consistent error structures:
 }
 ```
 
-## Rate Limiting
+## Rate Limiting & Usage Tracking
 
-- **Current Plan**: 1000 calls/day
-- **Usage Tracking**: Built into all API calls
+- **Current Plan**: 1000 calls/day (upgraded plan)
+- **Usage Tracking**: RapidAPI header-based tracking (authoritative source)
 - **Optimization**: Batch calls where possible to minimize usage
-- **Monitoring**: Real-time usage tracking and warnings
+- **Monitoring**: Real-time usage tracking with Pacific Time Zone display
+
+### RapidAPI Usage Headers
+
+The Tank01 API via RapidAPI provides real-time usage data in response headers:
+
+**Headers**:
+- `X-RateLimit-Requests-Limit`: Total daily limit (e.g., 1000)
+- `X-RateLimit-Requests-Remaining`: Remaining calls today (e.g., 604)
+- `X-RateLimit-Requests-Reset`: Seconds until limit resets (countdown format)
+
+**Usage Data Structure**:
+```json
+{
+  "calls_made_this_session": 396,
+  "daily_limit": 1000,
+  "remaining_calls": 604,
+  "percentage_used": 39.6,
+  "reset_timestamp": 77345,
+  "reset_timestamp_pacific": "2025-09-02 11:17:46 PDT",
+  "data_source": "rapidapi_headers",
+  "last_updated": 1756759691.154975
+}
+```
+
+**Key Features**:
+- **Authoritative Source**: Uses RapidAPI response headers, not client-side tracking
+- **Real-time Updates**: Updated with every API call
+- **Timezone Support**: Displays reset times in Pacific Time Zone
+- **Countdown Format**: Reset timestamp is seconds until reset, not Unix timestamp
+- **Current Time Display**: Shows current time in Pacific Time Zone for context
 
 ## Implementation Notes
 
