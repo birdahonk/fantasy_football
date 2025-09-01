@@ -45,6 +45,21 @@ def format_timestamp_pacific(timestamp):
     except (ValueError, OSError) as e:
         return f"Invalid timestamp: {timestamp}"
 
+def normalize_team_abbreviation(team_abv):
+    """Normalize team abbreviation to uppercase for API consistency."""
+    if not team_abv:
+        return team_abv
+    
+    # Team abbreviation mapping for case normalization
+    team_mapping = {
+        'phi': 'PHI', 'pit': 'PIT', 'sf': 'SF', 'sea': 'SEA', 'tb': 'TB', 'ten': 'TEN', 'wsh': 'WSH',
+        'ari': 'ARI', 'atl': 'ATL', 'bal': 'BAL', 'buf': 'BUF', 'car': 'CAR', 'chi': 'CHI', 'cin': 'CIN', 'cle': 'CLE',
+        'dal': 'DAL', 'den': 'DEN', 'det': 'DET', 'gb': 'GB', 'hou': 'HOU', 'ind': 'IND', 'jax': 'JAX', 'kc': 'KC',
+        'lv': 'LV', 'lac': 'LAC', 'lar': 'LAR', 'mia': 'MIA', 'min': 'MIN', 'ne': 'NE', 'no': 'NO', 'nyg': 'NYG', 'nyj': 'NYJ'
+    }
+    
+    return team_mapping.get(team_abv.lower(), team_abv.upper())
+
 class Tank01MyRosterExtractor:
     """
     Extract comprehensive Tank01 data for my Yahoo Fantasy roster players.
@@ -455,7 +470,7 @@ class Tank01MyRosterExtractor:
     def _get_player_specific_news(self, tank01_player: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Get player-specific news, with special handling for team defense."""
         player_id = tank01_player.get('playerID')
-        team_abv = tank01_player.get('team')
+        team_abv = normalize_team_abbreviation(tank01_player.get('team'))
         position = tank01_player.get('pos')
         
         news_articles = []
@@ -463,31 +478,25 @@ class Tank01MyRosterExtractor:
         try:
             # Special handling for team defense
             if position == 'DEF' or tank01_player.get('isTeamDefense'):
-                # For team defense, get news specific to the team's defense
-                # Try to get news that mentions "defense" or "defensive" for this team
+                # For team defense, get 10 most recent team news articles
+                # Use normalized team abbreviation (e.g., 'PHI' not 'Phi')
                 team_news = self.tank01.get_news(fantasy_news=True, max_items=10, team_abv=team_abv)
                 if team_news and 'body' in team_news:
-                    # Filter for defense-related news
-                    for article in team_news['body']:
-                        title = article.get('title', '').lower()
-                        if any(keyword in title for keyword in ['defense', 'defensive', 'def', 'sack', 'interception', 'turnover']):
-                            news_articles.append(article)
-                            if len(news_articles) >= 3:
-                                break
-                
-                # If no defense-specific news, get general team news as fallback
-                if not news_articles and team_news and 'body' in team_news:
-                    news_articles = team_news['body'][:3]
+                    # Get all 10 team news articles (no filtering needed since we can't distinguish defense-specific news)
+                    news_articles = team_news['body'][:10]
+                    self.logger.debug(f"Retrieved {len(news_articles)} team news articles for {team_abv} defense")
+                else:
+                    self.logger.warning(f"No team news found for {team_abv} defense")
             else:
                 # For regular players, get player-specific news
                 player_news = self.tank01.get_news(fantasy_news=True, max_items=5, player_id=player_id)
                 if player_news and 'body' in player_news:
-                    news_articles = player_news['body'][:3]
+                    news_articles = player_news['body'][:5]
                 else:
                     # Fallback to team news if no player-specific news
                     team_news = self.tank01.get_news(fantasy_news=True, max_items=5, team_abv=team_abv)
                     if team_news and 'body' in team_news:
-                        news_articles = team_news['body'][:3]
+                        news_articles = team_news['body'][:5]
             
             # API call is tracked by the Tank01 client, not here
             self.logger.debug(f"Retrieved {len(news_articles)} news articles for {tank01_player.get('longName', 'Unknown')}")
@@ -553,7 +562,7 @@ class Tank01MyRosterExtractor:
     def _get_depth_chart_position(self, tank01_player: Dict[str, Any]) -> Dict[str, Any]:
         """Get player's depth chart position for opportunity analysis."""
         player_id = tank01_player.get('playerID')
-        team_abv = tank01_player.get('team')
+        team_abv = normalize_team_abbreviation(tank01_player.get('team'))
         position = tank01_player.get('pos')
         
         try:
@@ -594,6 +603,9 @@ class Tank01MyRosterExtractor:
     def _get_team_context(self, team_abv: str) -> Dict[str, Any]:
         """Get team performance context for fantasy outlook."""
         try:
+            # Normalize team abbreviation for consistent matching
+            normalized_team_abv = normalize_team_abbreviation(team_abv)
+            
             # Get teams data (cached globally)
             if not hasattr(self, '_teams_cache'):
                 self._teams_cache = self.tank01.get_nfl_teams(team_stats=True, top_performers=True)
@@ -601,7 +613,7 @@ class Tank01MyRosterExtractor:
             
             if self._teams_cache and 'body' in self._teams_cache:
                 for team in self._teams_cache['body']:
-                    if team.get('teamAbv') == team_abv:
+                    if team.get('teamAbv') == normalized_team_abv:
                         wins = int(team.get('wins', '0'))
                         losses = int(team.get('loss', '0'))
                         
@@ -732,21 +744,31 @@ class Tank01MyRosterExtractor:
             report.append(f"- **Long Name**: {tank01_player.get('longName', 'N/A')}")
             report.append(f"- **Team**: {tank01_player.get('team', 'N/A')}")
             
-            # Cross-platform IDs
-            report.append("#### Cross-Platform IDs")
-            report.append(f"- **ESPN ID**: {tank01_player.get('espnID', 'N/A')}")
-            report.append(f"- **Sleeper ID**: {tank01_player.get('sleeperBotID', 'N/A')}")
-            report.append(f"- **CBS ID**: {tank01_player.get('cbsPlayerID', 'N/A')}")
-            report.append(f"- **RotoWire ID**: {tank01_player.get('rotoWirePlayerID', 'N/A')}")
-            report.append(f"- **FRef ID**: {tank01_player.get('fRefID', 'N/A')}")
-            report.append(f"- **Position**: {tank01_player.get('pos', 'N/A')}")
-            report.append(f"- **Jersey Number**: {tank01_player.get('jerseyNum', 'N/A')}")
-            report.append(f"- **Height**: {tank01_player.get('height', 'N/A')}")
-            report.append(f"- **Weight**: {tank01_player.get('weight', 'N/A')}")
-            report.append(f"- **Age**: {tank01_player.get('age', 'N/A')}")
-            report.append(f"- **Experience**: {tank01_player.get('exp', 'N/A')}")
-            report.append(f"- **School**: {tank01_player.get('school', 'N/A')}")
-            report.append("")
+            # Cross-platform IDs (different for team defense vs individual players)
+            if tank01_player.get('isTeamDefense') or tank01_player.get('pos') == 'DEF':
+                # Team defense specific information
+                report.append("#### Team Defense Information")
+                report.append(f"- **Team ID**: {tank01_player.get('teamID', 'N/A')}")
+                report.append(f"- **Team Abbreviation**: {normalize_team_abbreviation(tank01_player.get('team', 'N/A'))}")
+                report.append(f"- **Position**: {tank01_player.get('pos', 'N/A')}")
+                report.append(f"- **Is Team Defense**: {tank01_player.get('isTeamDefense', 'N/A')}")
+                report.append("")
+            else:
+                # Individual player information
+                report.append("#### Cross-Platform IDs")
+                report.append(f"- **ESPN ID**: {tank01_player.get('espnID', 'N/A')}")
+                report.append(f"- **Sleeper ID**: {tank01_player.get('sleeperBotID', 'N/A')}")
+                report.append(f"- **CBS ID**: {tank01_player.get('cbsPlayerID', 'N/A')}")
+                report.append(f"- **RotoWire ID**: {tank01_player.get('rotoWirePlayerID', 'N/A')}")
+                report.append(f"- **FRef ID**: {tank01_player.get('fRefID', 'N/A')}")
+                report.append(f"- **Position**: {tank01_player.get('pos', 'N/A')}")
+                report.append(f"- **Jersey Number**: {tank01_player.get('jerseyNum', 'N/A')}")
+                report.append(f"- **Height**: {tank01_player.get('height', 'N/A')}")
+                report.append(f"- **Weight**: {tank01_player.get('weight', 'N/A')}")
+                report.append(f"- **Age**: {tank01_player.get('age', 'N/A')}")
+                report.append(f"- **Experience**: {tank01_player.get('exp', 'N/A')}")
+                report.append(f"- **School**: {tank01_player.get('school', 'N/A')}")
+                report.append("")
             
             # Status and outlook (NO MORE N/A VALUES!)
             report.append("#### Status and Outlook")
@@ -765,24 +787,33 @@ class Tank01MyRosterExtractor:
             report.append(f"- **Last Game Played**: {last_game_played}")
             report.append("")
             
-            # Depth chart position
-            depth_chart = tank01_player.get('depth_chart', {})
-            if depth_chart.get('depth_position') != 'Unknown':
-                report.append("#### Depth Chart Position")
-                report.append(f"- **Position**: {depth_chart.get('depth_position', 'Unknown')}")
-                report.append(f"- **Rank**: {depth_chart.get('depth_rank', 'N/A')}")
-                report.append(f"- **Opportunity**: {depth_chart.get('opportunity', 'Unknown')}")
-                report.append("")
+            # Depth chart position (not applicable for team defense)
+            if not (tank01_player.get('isTeamDefense') or tank01_player.get('pos') == 'DEF'):
+                depth_chart = tank01_player.get('depth_chart', {})
+                if depth_chart.get('depth_position') != 'Unknown':
+                    report.append("#### Depth Chart Position")
+                    report.append(f"- **Position**: {depth_chart.get('depth_position', 'Unknown')}")
+                    report.append(f"- **Rank**: {depth_chart.get('depth_rank', 'N/A')}")
+                    report.append(f"- **Opportunity**: {depth_chart.get('opportunity', 'Unknown')}")
+                    report.append("")
             
-            # Recent performance
+            # Recent performance (different for team defense vs individual players)
             if game_stats.get('recent_games'):
-                report.append("#### Recent Performance")
-                for i, game in enumerate(game_stats['recent_games'][:3], 1):
-                    game_id = game.get('gameID', 'Unknown')
-                    snap_counts = game.get('snapCounts', {})
-                    off_snap_pct = float(snap_counts.get('offSnapPct', '0'))
-                    report.append(f"- **Game {i}**: {game_id} - {off_snap_pct*100:.1f}% offensive snaps")
-                report.append("")
+                if tank01_player.get('isTeamDefense') or tank01_player.get('pos') == 'DEF':
+                    report.append("#### Recent Team Performance")
+                    for i, game in enumerate(game_stats['recent_games'][:3], 1):
+                        game_id = game.get('gameID', 'Unknown')
+                        # For team defense, show different stats if available
+                        report.append(f"- **Game {i}**: {game_id}")
+                    report.append("")
+                else:
+                    report.append("#### Recent Performance")
+                    for i, game in enumerate(game_stats['recent_games'][:3], 1):
+                        game_id = game.get('gameID', 'Unknown')
+                        snap_counts = game.get('snapCounts', {})
+                        off_snap_pct = float(snap_counts.get('offSnapPct', '0'))
+                        report.append(f"- **Game {i}**: {game_id} - {off_snap_pct*100:.1f}% offensive snaps")
+                    report.append("")
             
             # Fantasy projections
             if 'fantasy_projections' in tank01_player:
@@ -843,16 +874,30 @@ class Tank01MyRosterExtractor:
             if 'recent_news' in tank01_player:
                 news = tank01_player['recent_news']
                 if news:
-                    report.append("#### Recent Fantasy News")
+                    # Determine if this is a defense player to show more articles
+                    is_defense = tank01_player.get('pos') == 'DEF' or tank01_player.get('isTeamDefense', False)
+                    max_articles = 10 if is_defense else 5
+                    news_type = "Team News" if is_defense else "Fantasy News"
+                    
+                    report.append(f"#### Recent {news_type}")
+                    if is_defense:
+                        report.append("*Note: For team defense, showing most recent team news (publication dates not available from API)*")
+                    else:
+                        report.append("*Note: Publication dates not available from Tank01 API*")
+                    report.append("")
+                    
                     if isinstance(news, list):
-                        for i, article in enumerate(news[:5], 1):  # Show last 5 articles
+                        for i, article in enumerate(news[:max_articles], 1):
                             if isinstance(article, dict):
                                 title = article.get('title', 'No title')
                                 link = article.get('link', '')
+                                image = article.get('image', '')
                                 
                                 report.append(f"{i}. **{title}**")
                                 if link:
                                     report.append(f"   - [Read More]({link})")
+                                if image:
+                                    report.append(f"   - [Image]({image})")
                                 report.append("")
                     else:
                         report.append(f"- **News Data**: {news}")
