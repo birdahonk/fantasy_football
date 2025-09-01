@@ -302,10 +302,10 @@
 - **Foundation**: Prepare reliable data for analysis scripts to consume
 
 ### **📋 CLEAN DATA COLLECTION PROGRESS**
-- **Yahoo API Scripts**: 2/5 complete (`my_roster.py` ✅ **WORKING PERFECTLY**, `opponent_rosters.py` ✅ **WORKING PERFECTLY**)
+- **Yahoo API Scripts**: 3/5 complete (`my_roster.py` ✅ **WORKING PERFECTLY**, `opponent_rosters.py` ✅ **WORKING PERFECTLY**, `team_matchups.py` ✅ **WORKING PERFECTLY**)
   - [x] **My Team Roster** - ✅ **COMPLETE & TESTED** Extract team + all 15 players with positions/status  
   - [x] **Opponent Rosters** - ✅ **COMPLETE & TESTED** All 10 league team rosters with 152 total players
-  - [ ] Team Matchups - Weekly matchups (current + previous week)
+  - [x] **Team Matchups** - ✅ **COMPLETE & TESTED** Weekly matchups with both teams per matchup
   - [ ] Player List - Complete available players with all sections
   - [ ] Transaction Trends - All transaction/trend data
 - **Sleeper API Scripts**: 0/2 complete
@@ -335,11 +335,20 @@
 - ✅ **Performance**: 12 API calls, 0 errors, comprehensive data extraction
 - ✅ **Data Quality**: 100% successful extraction with all player details
 
+#### **TEAM_MATCHUPS.PY ACHIEVEMENTS** ✅ **COMPLETE**
+- ✅ **Current Week Detection**: Auto-detects current week from league settings
+- ✅ **Matchup Extraction**: All 5 matchups with both teams per matchup (10 teams total)
+- ✅ **Team Data**: Complete team names, managers, points, projected points
+- ✅ **Matchup Status**: Correctly identifies preevent, live, and completed matchups
+- ✅ **File Management**: Outputs to correct `data_collection/outputs/yahoo/team_matchups/`
+- ✅ **Performance**: 3 API calls, 0.74s execution, 0 errors
+- ✅ **Data Quality**: 100% successful extraction with perfect matchup formatting
+
 ### **🎯 NEXT PRIORITIES**  
 1. ✅ **Test First Script**: COMPLETE - `my_roster.py` working perfectly
 2. ✅ **Build Opponent Rosters Script**: COMPLETE - `opponent_rosters.py` working perfectly
-3. **Build Team Matchups Script**: Weekly matchup data extraction (NEXT PRIORITY)
-4. **Build Player List Script**: Complete available players (Available/Injured/Hot/Top)
+3. ✅ **Build Team Matchups Script**: COMPLETE - `team_matchups.py` working perfectly
+4. **Build Player List Script**: Complete available players (Available/Injured/Hot/Top) (NEXT PRIORITY)
 5. **Build Transaction Trends Script**: All transaction/trend data
 
 ---
