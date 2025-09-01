@@ -1,0 +1,15 @@
+{
+  "script": "team_matchups.py",
+  "timestamp": "20250831_234018",
+  "execution_stats": {
+    "start_time": "2025-08-31 23:40:18.244744",
+    "api_calls": 3,
+    "errors": 0,
+    "weeks_processed": 1,
+    "total_matchups": 5
+  },
+  "files_created": [
+    "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/team_matchups/20250831_234018_team_matchups_raw_data.json",
+    "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/team_matchups/20250831_234018_team_matchups_clean.md"
+  ]
+}
