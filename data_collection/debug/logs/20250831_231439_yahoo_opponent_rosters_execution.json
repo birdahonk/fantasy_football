@@ -1,0 +1,15 @@
+{
+  "script": "opponent_rosters.py",
+  "timestamp": "20250831_231439",
+  "execution_stats": {
+    "start_time": "2025-08-31 23:14:37.335131",
+    "api_calls": 12,
+    "errors": 0,
+    "teams_processed": 10,
+    "total_players": 152
+  },
+  "files_created": [
+    "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/opponent_rosters/20250831_231439_opponent_rosters_raw_data.json",
+    "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/opponent_rosters/20250831_231439_opponent_rosters_clean.md"
+  ]
+}

@@ -1,0 +1,845 @@
+{
+  "league_info": {
+    "league_key": "461.l.595012",
+    "league_name": "Football",
+    "team_key": "461.l.595012.t.3"
+  },
+  "teams": [
+    {
+      "team_key": "461.l.595012.t.1",
+      "team_id": "1",
+      "name": "Sinker Conkers",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/1",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/29780716059_3472ee.jpg"
+          }
+        }
+      ],
+      "previous_season_team_rank": 10,
+      "number_of_moves": 1,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 1,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "1",
+            "nickname": "Stacie B.",
+            "guid": "FUIP4MWT4Z6532Z5E4UF3J76D4",
+            "is_commissioner": "1",
+            "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+            "felo_score": "572",
+            "felo_tier": "bronze"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.2",
+      "team_id": "2",
+      "name": "Foghorn Leghorns",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/2",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/01c0cd0337e48b9d13a36649151ffd8b23b8a5070141d068d8d3397059cdc612.jpg"
+          }
+        }
+      ],
+      "previous_season_team_rank": 8,
+      "number_of_moves": 0,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 2,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "2",
+            "nickname": "Kay",
+            "guid": "5EKGJBIQVJSFU6UQT2VTOP7UMQ",
+            "image_url": "https://s.yimg.com/ag/images/05d45df8-05d1-4da4-8c54-2f24db406b1f_64sq.jpg",
+            "felo_score": "675",
+            "felo_tier": "silver"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.3",
+      "team_id": "3",
+      "name": "birdahonkers",
+      "is_owned_by_current_login": 1,
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/3",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/25038587180_cc79d580f2.png"
+          }
+        }
+      ],
+      "previous_season_team_rank": 9,
+      "number_of_moves": 10,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 9,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "3",
+            "nickname": "Brian",
+            "guid": "T3DTF73F4OZSGAC2JIWWXSCQ6Q",
+            "is_current_login": "1",
+            "image_url": "https://s.yimg.com/ag/images/4637/38309505904_581f4a_64sq.jpg",
+            "felo_score": "531",
+            "felo_tier": "bronze"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.4",
+      "team_id": "4",
+      "name": "Cheeto Bandito",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/4",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/25168352142_40ed201570.jpg"
+          }
+        }
+      ],
+      "previous_season_team_rank": 6,
+      "number_of_moves": 2,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 8,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "4",
+            "nickname": "Scott",
+            "guid": "M3ZLDFHJHI7AW7MUH72W3PIIQY",
+            "image_url": "https://s.yimg.com/ag/images/4600/38216040400_4bc0c1_64sq.jpg",
+            "felo_score": "597",
+            "felo_tier": "bronze"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.5",
+      "team_id": "5",
+      "name": "Kissyface",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/5",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/b09f20667468e1999a58907e8371a7fd8c326faebf256e4e83725ce6b4fe10d1.jpg"
+          }
+        }
+      ],
+      "previous_season_team_rank": 3,
+      "number_of_moves": 3,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 3,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "5",
+            "nickname": "Donna",
+            "guid": "IPCW4GRNGS2J5MEZSAHCYPSI4E",
+            "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+            "felo_score": "719",
+            "felo_tier": "gold"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.6",
+      "team_id": "6",
+      "name": "Marlin\u2019s Buckaroos",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/6",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/b7cfdaeef1c28e9d942969eaa7ca23eb0d8032db90767c5a67822effdb9370f3.jpg"
+          }
+        }
+      ],
+      "previous_season_team_rank": 4,
+      "number_of_moves": 1,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 7,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "6",
+            "nickname": "-- hidden --",
+            "guid": "NGD2QDFVVMW45Z6QKDVHJVNAYA",
+            "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+            "felo_score": "706",
+            "felo_tier": "gold"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.7",
+      "team_id": "7",
+      "name": "tim's Quality Team",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/7",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_8.png"
+          }
+        }
+      ],
+      "previous_season_team_rank": 1,
+      "number_of_moves": 0,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 5,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "7",
+            "nickname": "tim",
+            "guid": "WBPZ474VMP5LKPRBYGIH36NX3I",
+            "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+            "felo_score": "825",
+            "felo_tier": "platinum"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.8",
+      "team_id": "8",
+      "name": "The Hurts Locker",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/8",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/a9e567ddea7fec6b63711a7ae2a6deb13a29de4c61e96055fc687367fb0d331d.png"
+          }
+        }
+      ],
+      "previous_season_team_rank": 5,
+      "number_of_moves": 1,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 10,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "8",
+            "nickname": "Brandon",
+            "guid": "XFRTAEEK5TX5J54I6EMOOJ6F4Y",
+            "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+            "felo_score": "891",
+            "felo_tier": "platinum"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.9",
+      "team_id": "9",
+      "name": "Mary's Aliens",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/9",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/c29355f952619e323dc0e6bc02c910c188fb283f0f0f5f9ed0f3a237598c1893.jpg"
+          }
+        }
+      ],
+      "previous_season_team_rank": 2,
+      "number_of_moves": 5,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 4,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "9",
+            "nickname": "Mary",
+            "guid": "OZRJ6AULUXLZU4J3PDPSRVGL7U",
+            "image_url": "https://s.yimg.com/ag/images/d1afda2e-679a-46df-9c37-cd39e8933c7c_64sq.jpg",
+            "felo_score": "795",
+            "felo_tier": "gold"
+          }
+        }
+      ]
+    },
+    {
+      "team_key": "461.l.595012.t.10",
+      "team_id": "10",
+      "name": "Not Kittle'ing Around",
+      "url": "https://football.fantasysports.yahoo.com/f1/595012/10",
+      "team_logos": [
+        {
+          "team_logo": {
+            "size": "large",
+            "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/92f5999abcf88c7bb1048f2bb82995ce4dc6b1415d9bc2c85d742ca81bfe0b71.jpg"
+          }
+        }
+      ],
+      "previous_season_team_rank": 7,
+      "number_of_moves": 3,
+      "number_of_trades": 0,
+      "roster_adds": {
+        "coverage_type": "week",
+        "coverage_value": 1,
+        "value": "0"
+      },
+      "league_scoring_type": "head",
+      "draft_position": 6,
+      "has_draft_grade": 0,
+      "managers": [
+        {
+          "manager": {
+            "manager_id": "10",
+            "nickname": "John",
+            "guid": "5DTCIJYKSZP75DZ3NZ65LVR7KU",
+            "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+            "felo_score": "571",
+            "felo_tier": "bronze"
+          }
+        }
+      ]
+    }
+  ],
+  "rosters": {
+    "461.l.595012.t.1": {
+      "team_info": {
+        "team_key": "461.l.595012.t.1",
+        "team_id": "1",
+        "name": "Sinker Conkers",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/1",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/29780716059_3472ee.jpg"
+            }
+          }
+        ],
+        "previous_season_team_rank": 10,
+        "number_of_moves": 1,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 1,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "1",
+              "nickname": "Stacie B.",
+              "guid": "FUIP4MWT4Z6532Z5E4UF3J76D4",
+              "is_commissioner": "1",
+              "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+              "felo_score": "572",
+              "felo_tier": "bronze"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.2": {
+      "team_info": {
+        "team_key": "461.l.595012.t.2",
+        "team_id": "2",
+        "name": "Foghorn Leghorns",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/2",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/01c0cd0337e48b9d13a36649151ffd8b23b8a5070141d068d8d3397059cdc612.jpg"
+            }
+          }
+        ],
+        "previous_season_team_rank": 8,
+        "number_of_moves": 0,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 2,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "2",
+              "nickname": "Kay",
+              "guid": "5EKGJBIQVJSFU6UQT2VTOP7UMQ",
+              "image_url": "https://s.yimg.com/ag/images/05d45df8-05d1-4da4-8c54-2f24db406b1f_64sq.jpg",
+              "felo_score": "675",
+              "felo_tier": "silver"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.3": {
+      "team_info": {
+        "team_key": "461.l.595012.t.3",
+        "team_id": "3",
+        "name": "birdahonkers",
+        "is_owned_by_current_login": 1,
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/3",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/25038587180_cc79d580f2.png"
+            }
+          }
+        ],
+        "previous_season_team_rank": 9,
+        "number_of_moves": 10,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 9,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "3",
+              "nickname": "Brian",
+              "guid": "T3DTF73F4OZSGAC2JIWWXSCQ6Q",
+              "is_current_login": "1",
+              "image_url": "https://s.yimg.com/ag/images/4637/38309505904_581f4a_64sq.jpg",
+              "felo_score": "531",
+              "felo_tier": "bronze"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.4": {
+      "team_info": {
+        "team_key": "461.l.595012.t.4",
+        "team_id": "4",
+        "name": "Cheeto Bandito",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/4",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/25168352142_40ed201570.jpg"
+            }
+          }
+        ],
+        "previous_season_team_rank": 6,
+        "number_of_moves": 2,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 8,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "4",
+              "nickname": "Scott",
+              "guid": "M3ZLDFHJHI7AW7MUH72W3PIIQY",
+              "image_url": "https://s.yimg.com/ag/images/4600/38216040400_4bc0c1_64sq.jpg",
+              "felo_score": "597",
+              "felo_tier": "bronze"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.5": {
+      "team_info": {
+        "team_key": "461.l.595012.t.5",
+        "team_id": "5",
+        "name": "Kissyface",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/5",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/b09f20667468e1999a58907e8371a7fd8c326faebf256e4e83725ce6b4fe10d1.jpg"
+            }
+          }
+        ],
+        "previous_season_team_rank": 3,
+        "number_of_moves": 3,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 3,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "5",
+              "nickname": "Donna",
+              "guid": "IPCW4GRNGS2J5MEZSAHCYPSI4E",
+              "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+              "felo_score": "719",
+              "felo_tier": "gold"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.6": {
+      "team_info": {
+        "team_key": "461.l.595012.t.6",
+        "team_id": "6",
+        "name": "Marlin\u2019s Buckaroos",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/6",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/b7cfdaeef1c28e9d942969eaa7ca23eb0d8032db90767c5a67822effdb9370f3.jpg"
+            }
+          }
+        ],
+        "previous_season_team_rank": 4,
+        "number_of_moves": 1,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 7,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "6",
+              "nickname": "-- hidden --",
+              "guid": "NGD2QDFVVMW45Z6QKDVHJVNAYA",
+              "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+              "felo_score": "706",
+              "felo_tier": "gold"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.7": {
+      "team_info": {
+        "team_key": "461.l.595012.t.7",
+        "team_id": "7",
+        "name": "tim's Quality Team",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/7",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_8.png"
+            }
+          }
+        ],
+        "previous_season_team_rank": 1,
+        "number_of_moves": 0,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 5,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "7",
+              "nickname": "tim",
+              "guid": "WBPZ474VMP5LKPRBYGIH36NX3I",
+              "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+              "felo_score": "825",
+              "felo_tier": "platinum"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.8": {
+      "team_info": {
+        "team_key": "461.l.595012.t.8",
+        "team_id": "8",
+        "name": "The Hurts Locker",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/8",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/a9e567ddea7fec6b63711a7ae2a6deb13a29de4c61e96055fc687367fb0d331d.png"
+            }
+          }
+        ],
+        "previous_season_team_rank": 5,
+        "number_of_moves": 1,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 10,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "8",
+              "nickname": "Brandon",
+              "guid": "XFRTAEEK5TX5J54I6EMOOJ6F4Y",
+              "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+              "felo_score": "891",
+              "felo_tier": "platinum"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.9": {
+      "team_info": {
+        "team_key": "461.l.595012.t.9",
+        "team_id": "9",
+        "name": "Mary's Aliens",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/9",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/c29355f952619e323dc0e6bc02c910c188fb283f0f0f5f9ed0f3a237598c1893.jpg"
+            }
+          }
+        ],
+        "previous_season_team_rank": 2,
+        "number_of_moves": 5,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 4,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "9",
+              "nickname": "Mary",
+              "guid": "OZRJ6AULUXLZU4J3PDPSRVGL7U",
+              "image_url": "https://s.yimg.com/ag/images/d1afda2e-679a-46df-9c37-cd39e8933c7c_64sq.jpg",
+              "felo_score": "795",
+              "felo_tier": "gold"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    },
+    "461.l.595012.t.10": {
+      "team_info": {
+        "team_key": "461.l.595012.t.10",
+        "team_id": "10",
+        "name": "Not Kittle'ing Around",
+        "url": "https://football.fantasysports.yahoo.com/f1/595012/10",
+        "team_logos": [
+          {
+            "team_logo": {
+              "size": "large",
+              "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/92f5999abcf88c7bb1048f2bb82995ce4dc6b1415d9bc2c85d742ca81bfe0b71.jpg"
+            }
+          }
+        ],
+        "previous_season_team_rank": 7,
+        "number_of_moves": 3,
+        "number_of_trades": 0,
+        "roster_adds": {
+          "coverage_type": "week",
+          "coverage_value": 1,
+          "value": "0"
+        },
+        "league_scoring_type": "head",
+        "draft_position": 6,
+        "has_draft_grade": 0,
+        "managers": [
+          {
+            "manager": {
+              "manager_id": "10",
+              "nickname": "John",
+              "guid": "5DTCIJYKSZP75DZ3NZ65LVR7KU",
+              "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+              "felo_score": "571",
+              "felo_tier": "bronze"
+            }
+          }
+        ]
+      },
+      "players": [],
+      "roster_summary": {
+        "total_players": 0,
+        "starters": 0,
+        "bench_players": 0
+      }
+    }
+  },
+  "extraction_metadata": {
+    "timestamp": "2025-08-31T23:09:31.593824",
+    "total_teams": 10,
+    "teams_processed": 10,
+    "total_players": 0,
+    "api_calls": 12,
+    "errors": 0
+  }
+}
