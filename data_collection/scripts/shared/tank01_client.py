@@ -183,13 +183,21 @@ class SimpleTank01Client:
             self.logger.error(f"Failed to get weekly projections for week {week}: {e}")
             return {}
     
-    def get_news(self, fantasy_news: bool = True, max_items: int = 20) -> Dict[str, Any]:
+    def get_news(self, fantasy_news: bool = True, max_items: int = 20, 
+                 player_id: Optional[str] = None, team_id: Optional[str] = None, 
+                 team_abv: Optional[str] = None, top_news: bool = True, 
+                 recent_news: bool = True) -> Dict[str, Any]:
         """
-        Get NFL news, optionally filtered for fantasy relevance.
+        Get NFL news, optionally filtered for fantasy relevance and specific players/teams.
         
         Args:
             fantasy_news: Filter for fantasy-relevant news
             max_items: Maximum number of news items
+            player_id: Get news specific to a player
+            team_id: Get news specific to a team (numeric)
+            team_abv: Get news for team by abbreviation
+            top_news: Include top news
+            recent_news: Include recent news
             
         Returns:
             Dict containing news articles
@@ -199,11 +207,25 @@ class SimpleTank01Client:
         
         try:
             if self.use_existing:
-                return self.tank01_client.get_news(fantasy_news, max_items)
+                return self.tank01_client.get_news(fantasy_news, max_items, player_id, team_id, team_abv, top_news, recent_news)
             else:
-                params = {"maxItems": max_items}
+                params = {
+                    "maxItems": max_items,
+                    "topNews": "true" if top_news else "false",
+                    "recentNews": "true" if recent_news else "false"
+                }
+                
                 if fantasy_news:
                     params["fantasyNews"] = "true"
+                
+                # Add optional parameters for targeted news
+                if player_id:
+                    params["playerID"] = player_id
+                if team_id:
+                    params["teamID"] = team_id
+                if team_abv:
+                    params["teamAbv"] = team_abv
+                
                 return self._make_request("getNFLNews", params)
         except Exception as e:
             self.logger.error(f"Failed to get NFL news: {e}")
@@ -309,22 +331,318 @@ class SimpleTank01Client:
     
     def get_api_usage(self) -> Dict[str, Any]:
         """
-        Get current API usage information.
+        Get current API usage information from RapidAPI headers (authoritative source).
         
         Returns:
             Dict with usage statistics
         """
-        usage = {
-            "calls_made_this_session": self.api_calls_made if not self.use_existing else "Unknown",
-            "monthly_limit": self.monthly_limit,
-            "available": self.is_available(),
-            "using_existing_client": self.use_existing
-        }
+        if self.use_existing and hasattr(self.tank01_client, 'get_usage_info'):
+            # Use the external client's RapidAPI-based usage info
+            usage = self.tank01_client.get_usage_info()
+            usage.update({
+                "available": self.is_available(),
+                "using_existing_client": self.use_existing
+            })
+            return usage
+        else:
+            # Fallback for standalone client
+            return {
+                "calls_made_this_session": self.api_calls_made,
+                "daily_limit": getattr(self, 'monthly_limit', 1000),
+                "remaining_calls": getattr(self, 'monthly_limit', 1000) - self.api_calls_made,
+                "percentage_used": (self.api_calls_made / getattr(self, 'monthly_limit', 1000)) * 100,
+                "available": self.is_available(),
+                "using_existing_client": self.use_existing,
+                "data_source": "client_side_tracking"
+            }
+    
+    def get_weekly_projections(self, week: int, archive_season: int = 2025, scoring_settings: Optional[Dict[str, float]] = None) -> Dict[str, Any]:
+        """
+        Get weekly fantasy projections for all players.
         
-        if self.use_existing and hasattr(self.tank01_client, 'api_calls_made'):
-            usage["calls_made_this_session"] = self.tank01_client.api_calls_made
+        Args:
+            week: Week number (1-18)
+            archive_season: Season year (default: 2025)
+            scoring_settings: Optional custom scoring settings
+            
+        Returns:
+            Dict containing weekly projections for all players
+        """
+        if not self.is_available():
+            return {}
         
-        return usage
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_weekly_projections(week, archive_season, scoring_settings)
+            else:
+                # Build parameters for the API call
+                params = {
+                    "week": week,
+                    "archiveSeason": archive_season,
+                    "twoPointConversions": 2,
+                    "passYards": 0.04,
+                    "passTD": 4,
+                    "passInterceptions": -2,
+                    "pointsPerReception": 1,
+                    "carries": 0.2,
+                    "rushYards": 0.1,
+                    "rushTD": 6,
+                    "fumbles": -2,
+                    "receivingYards": 0.1,
+                    "receivingTD": 6,
+                    "targets": 0,
+                    "defTD": 6,
+                    "xpMade": 1,
+                    "xpMissed": -1,
+                    "fgMade": 3,
+                    "fgMissed": -3
+                }
+                
+                # Override with custom scoring if provided
+                if scoring_settings:
+                    params.update(scoring_settings)
+                
+                return self._make_request("getNFLProjections", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get weekly projections: {e}")
+            return {}
+    
+    def get_player_info(self, player_name: str, get_stats: bool = True) -> Dict[str, Any]:
+        """
+        Get player information by name.
+        
+        Args:
+            player_name: Player name to search for
+            get_stats: Include player statistics
+            
+        Returns:
+            Dict containing player information
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_player_info(player_name, get_stats)
+            else:
+                params = {
+                    "playerName": player_name,
+                    "getStats": "true" if get_stats else "false"
+                }
+                return self._make_request("getNFLPlayerInfo", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get player info for {player_name}: {e}")
+            return {}
+    
+    def get_player_game_stats(self, player_id: str, season: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Get NFL games and stats for a single player.
+        
+        Args:
+            player_id: Tank01 player ID
+            season: Optional season (default: current)
+            
+        Returns:
+            Dict containing player game stats and fantasy points
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_player_game_stats(player_id, season)
+            else:
+                params = {
+                    "playerID": player_id,
+                    "fantasyPoints": "true",
+                    "twoPointConversions": 2,
+                    "passYards": 0.04,
+                    "passTD": 4,
+                    "passInterceptions": -2,
+                    "pointsPerReception": 1,
+                    "carries": 0.2,
+                    "rushYards": 0.1,
+                    "rushTD": 6,
+                    "fumbles": -2,
+                    "receivingYards": 0.1,
+                    "receivingTD": 6,
+                    "targets": 0,
+                    "defTD": 6,
+                    "xpMade": 1,
+                    "xpMissed": -1,
+                    "fgMade": 3,
+                    "fgMissed": -3,
+                    "idpTotalTackles": 1,
+                    "idpSoloTackles": 1,
+                    "idpTFL": 1,
+                    "idpQbHits": 1,
+                    "idpInt": 1,
+                    "idpSacks": 1,
+                    "idpPassDeflections": 1,
+                    "idpFumblesRecovered": 1
+                }
+                if season:
+                    params["season"] = season
+                return self._make_request("getNFLGamesForPlayer", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get player game stats for {player_id}: {e}")
+            return {}
+    
+    def get_team_roster(self, team: str, get_stats: bool = True) -> Dict[str, Any]:
+        """
+        Get NFL team roster with stats.
+        
+        Args:
+            team: Team ID or abbreviation
+            get_stats: Include player statistics
+            
+        Returns:
+            Dict containing team roster and player stats
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_team_roster(team, get_stats)
+            else:
+                params = {
+                    "teamID": team,
+                    "getStats": "true" if get_stats else "false",
+                    "fantasyPoints": "true"
+                }
+                return self._make_request("getNFLTeamRoster", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get team roster for {team}: {e}")
+            return {}
+    
+    def get_depth_charts(self) -> Dict[str, Any]:
+        """
+        Get NFL depth charts for all teams.
+        
+        Returns:
+            Dict containing depth chart information
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_depth_charts()
+            else:
+                return self._make_request("getNFLDepthCharts", {})
+        except Exception as e:
+            self.logger.error(f"Failed to get depth charts: {e}")
+            return {}
+    
+    def get_nfl_teams(self, sort_by: str = "standings", rosters: bool = False, schedules: bool = False, 
+                      top_performers: bool = True, team_stats: bool = True, team_stats_season: int = 2024) -> Dict[str, Any]:
+        """
+        Get NFL teams information.
+        
+        Args:
+            sort_by: Sort teams by (standings, etc.)
+            rosters: Include team rosters
+            schedules: Include team schedules
+            top_performers: Include top performers
+            team_stats: Include team statistics
+            team_stats_season: Season for team stats
+            
+        Returns:
+            Dict containing teams information
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_nfl_teams(sort_by, rosters, schedules, top_performers, team_stats, team_stats_season)
+            else:
+                params = {
+                    "sortBy": sort_by,
+                    "rosters": "true" if rosters else "false",
+                    "schedules": "true" if schedules else "false",
+                    "topPerformers": "true" if top_performers else "false",
+                    "teamStats": "true" if team_stats else "false",
+                    "teamStatsSeason": team_stats_season
+                }
+                return self._make_request("getNFLTeams", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get teams: {e}")
+            return {}
+    
+    def get_game_info(self, game_id: str) -> Dict[str, Any]:
+        """
+        Get general game information.
+        
+        Args:
+            game_id: Game ID (e.g., "20260104_DET@CHI")
+            
+        Returns:
+            Dict containing game information
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_game_info(game_id)
+            else:
+                params = {"gameID": game_id}
+                return self._make_request("getNFLGameInfo", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get game info for {game_id}: {e}")
+            return {}
+    
+    def get_daily_scoreboard(self, game_date: str = "20250907", top_performers: bool = True) -> Dict[str, Any]:
+        """
+        Get daily scoreboard - live real time.
+        
+        Args:
+            game_date: Game date (YYYYMMDD format)
+            top_performers: Include top performers
+            
+        Returns:
+            Dict containing scores and game data
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_daily_scoreboard(game_date, top_performers)
+            else:
+                params = {
+                    "gameDate": game_date,
+                    "topPerformers": "true" if top_performers else "false"
+                }
+                return self._make_request("getNFLScoresOnly", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get scores for {game_date}: {e}")
+            return {}
+    
+    def get_changelog(self, max_days: int = 30) -> Dict[str, Any]:
+        """
+        Get changelog information.
+        
+        Args:
+            max_days: Maximum days to look back
+            
+        Returns:
+            Dict containing changelog data
+        """
+        if not self.is_available():
+            return {}
+        
+        try:
+            if self.use_existing:
+                return self.tank01_client.get_changelog(max_days)
+            else:
+                params = {"maxDays": max_days}
+                return self._make_request("getNFLChangelog", params)
+        except Exception as e:
+            self.logger.error(f"Failed to get changelog: {e}")
+            return {}
 
 def main():
     """Test the simplified Tank01 client."""

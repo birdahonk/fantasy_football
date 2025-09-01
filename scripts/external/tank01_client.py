@@ -76,6 +76,14 @@ class Tank01Client:
         # Track API usage for rate limiting
         self.api_calls_made = 0
         self.monthly_limit = 1000  # Free tier limit
+        
+        # RapidAPI usage data from headers (authoritative source)
+        self.rapidapi_usage = {
+            'limit': 1000,
+            'remaining': 1000,
+            'reset_timestamp': None,
+            'last_updated': None
+        }
     
     def _make_request(self, endpoint: str, params: Optional[Dict] = None) -> Dict[str, Any]:
         """
@@ -105,12 +113,16 @@ class Tank01Client:
             response = self.session.get(url, params=params)
             response.raise_for_status()
             
-            # Increment usage counter
+            # Extract RapidAPI usage data from response headers (authoritative source)
+            self._extract_rapidapi_usage(response.headers)
+            
+            # Increment usage counter (for backward compatibility)
             self.api_calls_made += 1
             
             data = response.json()
             self.logger.info(f"Tank01 API request successful. Response size: {len(str(data))} characters")
             self.logger.info(f"API calls made this session: {self.api_calls_made}/{self.monthly_limit}")
+            self.logger.info(f"RapidAPI remaining calls: {self.rapidapi_usage['remaining']}/{self.rapidapi_usage['limit']}")
             
             return data
             
@@ -124,6 +136,30 @@ class Tank01Client:
         except json.JSONDecodeError as e:
             self.logger.error(f"Failed to decode JSON response: {e}")
             raise
+    
+    def _extract_rapidapi_usage(self, headers: Dict[str, str]) -> None:
+        """
+        Extract RapidAPI usage data from response headers.
+        
+        Args:
+            headers: HTTP response headers from RapidAPI
+        """
+        import time
+        
+        # Extract usage data from RapidAPI headers
+        if 'X-RateLimit-Requests-Limit' in headers:
+            self.rapidapi_usage['limit'] = int(headers['X-RateLimit-Requests-Limit'])
+        
+        if 'X-RateLimit-Requests-Remaining' in headers:
+            self.rapidapi_usage['remaining'] = int(headers['X-RateLimit-Requests-Remaining'])
+        
+        if 'X-RateLimit-Requests-Reset' in headers:
+            self.rapidapi_usage['reset_timestamp'] = int(headers['X-RateLimit-Requests-Reset'])
+        
+        self.rapidapi_usage['last_updated'] = time.time()
+        
+        # Update monthly_limit to match RapidAPI limit (in case it changed)
+        self.monthly_limit = self.rapidapi_usage['limit']
     
     def get_player_list(self) -> Dict[str, Any]:
         """
@@ -285,24 +321,42 @@ class Tank01Client:
             self.logger.error(f"Failed to get depth charts: {e}")
             return {}
     
-    def get_news(self, fantasy_news: bool = True, max_items: int = 20) -> Dict[str, Any]:
+    def get_news(self, fantasy_news: bool = True, max_items: int = 20, 
+                 player_id: Optional[str] = None, team_id: Optional[str] = None, 
+                 team_abv: Optional[str] = None, top_news: bool = True, 
+                 recent_news: bool = True) -> Dict[str, Any]:
         """
         Get NFL news and headlines.
         
         Args:
             fantasy_news: Whether to focus on fantasy-relevant news
             max_items: Maximum number of news items to return
+            player_id: Get news specific to a player
+            team_id: Get news specific to a team (numeric)
+            team_abv: Get news for team by abbreviation
+            top_news: Include top news
+            recent_news: Include recent news
             
         Returns:
             Dict containing news data
         """
         try:
-            self.logger.info(f"Fetching NFL news (fantasy_news={fantasy_news}, max_items={max_items})")
+            self.logger.info(f"Fetching NFL news (fantasy_news={fantasy_news}, max_items={max_items}, player_id={player_id}, team_id={team_id}, team_abv={team_abv})")
             
             params = {
                 "fantasyNews": str(fantasy_news).lower(),
-                "maxItems": max_items
+                "maxItems": max_items,
+                "topNews": str(top_news).lower(),
+                "recentNews": str(recent_news).lower()
             }
+            
+            # Add optional parameters for targeted news
+            if player_id:
+                params["playerID"] = player_id
+            if team_id:
+                params["teamID"] = team_id
+            if team_abv:
+                params["teamAbv"] = team_abv
             
             data = self._make_request("getNFLNews", params)
             
@@ -559,17 +613,38 @@ class Tank01Client:
     
     def get_usage_info(self) -> Dict[str, Any]:
         """
-        Get current API usage information.
+        Get current API usage information from RapidAPI headers (authoritative source).
         
         Returns:
             Dict with usage statistics
         """
-        return {
-            "calls_made_this_session": self.api_calls_made,
-            "monthly_limit": self.monthly_limit,
-            "remaining_calls": self.monthly_limit - self.api_calls_made,
-            "percentage_used": (self.api_calls_made / self.monthly_limit) * 100
-        }
+        import time
+        
+        # Use RapidAPI data as primary source, fallback to client-side tracking
+        if self.rapidapi_usage['last_updated']:
+            # Calculate calls made from RapidAPI data
+            calls_made = self.rapidapi_usage['limit'] - self.rapidapi_usage['remaining']
+            
+            return {
+                "calls_made_this_session": calls_made,
+                "daily_limit": self.rapidapi_usage['limit'],
+                "remaining_calls": self.rapidapi_usage['remaining'],
+                "percentage_used": (calls_made / self.rapidapi_usage['limit']) * 100,
+                "reset_timestamp": self.rapidapi_usage['reset_timestamp'],
+                "last_updated": self.rapidapi_usage['last_updated'],
+                "data_source": "rapidapi_headers"
+            }
+        else:
+            # Fallback to client-side tracking if no RapidAPI data available
+            return {
+                "calls_made_this_session": self.api_calls_made,
+                "daily_limit": self.monthly_limit,
+                "remaining_calls": self.monthly_limit - self.api_calls_made,
+                "percentage_used": (self.api_calls_made / self.monthly_limit) * 100,
+                "reset_timestamp": None,
+                "last_updated": None,
+                "data_source": "client_side_tracking"
+            }
 
 
 def main():
