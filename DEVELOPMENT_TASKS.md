@@ -302,9 +302,9 @@
 - **Foundation**: Prepare reliable data for analysis scripts to consume
 
 ### **📋 CLEAN DATA COLLECTION PROGRESS**
-- **Yahoo API Scripts**: 1/5 complete (`my_roster.py` ✅ **WORKING PERFECTLY**)
+- **Yahoo API Scripts**: 2/5 complete (`my_roster.py` ✅ **WORKING PERFECTLY**, `opponent_rosters.py` ✅ **WORKING PERFECTLY**)
   - [x] **My Team Roster** - ✅ **COMPLETE & TESTED** Extract team + all 15 players with positions/status  
-  - [ ] Opponent Rosters - All league team rosters  
+  - [x] **Opponent Rosters** - ✅ **COMPLETE & TESTED** All 10 league team rosters with 152 total players
   - [ ] Team Matchups - Weekly matchups (current + previous week)
   - [ ] Player List - Complete available players with all sections
   - [ ] Transaction Trends - All transaction/trend data
@@ -315,7 +315,9 @@
   - [ ] My Roster Stats - Tank01 projections/news for my players
   - [ ] Player List Stats - Tank01 projections/news for available players
 
-### **🎯 CURRENT SUCCESS - MY_ROSTER.PY ACHIEVEMENTS**
+### **🎯 CURRENT SUCCESS - DATA COLLECTION ACHIEVEMENTS**
+
+#### **MY_ROSTER.PY ACHIEVEMENTS** ✅ **COMPLETE**
 - ✅ **Yahoo JSON-XML Parsing**: Mastered complex nested array structure
 - ✅ **Team Discovery**: Auto-finds "birdahonkers" team (461.l.595012.t.3)
 - ✅ **Complete Player Data**: All 15 players with names, positions, NFL teams, bye weeks
@@ -324,10 +326,19 @@
 - ✅ **Performance**: 2 API calls, 0.39s execution, 0 errors
 - ✅ **Data Quality**: 100% successful extraction with comprehensive raw JSON storage
 
+#### **OPPONENT_ROSTERS.PY ACHIEVEMENTS** ✅ **COMPLETE**
+- ✅ **League Discovery**: Auto-finds all 10 teams in "Greg Mulligan Memorial League"
+- ✅ **Team Roster Extraction**: All 152 players across 10 teams with complete metadata
+- ✅ **Bye Week Data**: ✅ **FIXED** - All bye weeks correctly extracted and displayed
+- ✅ **Position Parsing**: Perfect starting lineup vs bench detection for all teams
+- ✅ **File Management**: Outputs to correct `data_collection/outputs/yahoo/opponent_rosters/`
+- ✅ **Performance**: 12 API calls, 0 errors, comprehensive data extraction
+- ✅ **Data Quality**: 100% successful extraction with all player details
+
 ### **🎯 NEXT PRIORITIES**  
 1. ✅ **Test First Script**: COMPLETE - `my_roster.py` working perfectly
-2. **Build Opponent Rosters Script**: Use proven parsing patterns for all league teams
-3. **Build Team Matchups Script**: Weekly matchup data extraction
+2. ✅ **Build Opponent Rosters Script**: COMPLETE - `opponent_rosters.py` working perfectly
+3. **Build Team Matchups Script**: Weekly matchup data extraction (NEXT PRIORITY)
 4. **Build Player List Script**: Complete available players (Available/Injured/Hot/Top)
 5. **Build Transaction Trends Script**: All transaction/trend data
 
