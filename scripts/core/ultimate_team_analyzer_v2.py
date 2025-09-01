@@ -806,12 +806,11 @@ class UltimateTeamAnalyzerV2:
                 enhanced_player = self.enhance_player_with_all_apis_v2(player)
                 enhanced_roster.append(enhanced_player)
             
-            # Get free agents and top players
-            free_agent_data = self.get_free_agents_and_top_players()
+                    # Free agents removed from team analysis - will be handled by separate comprehensive free agent report
             
             # Generate report
             timestamp = datetime.now()
-            report_content = self._generate_ultimate_report_content_v2(enhanced_roster, free_agent_data, timestamp)
+            report_content = self._generate_ultimate_report_content_v2(enhanced_roster, {}, timestamp)
             
             # Save report
             output_dir = Path("analysis/team_analysis")
@@ -957,35 +956,7 @@ class UltimateTeamAnalyzerV2:
             percentage = (count / total_players) * 100
             report += f"| {position:<8} | {count:<5} | {percentage:>6.1f}%    |\n"
         
-        # Add free agents section
-        if free_agent_data:
-            report += f"""
-## 🎯 Strategic Free Agent Targets
-
-**Top Available Players by Position**
-"""
-            
-            positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DEF']
-            for pos in positions:
-                report += f"""
-### {pos} Position Targets
-
-| Player         | Team   | Rank   | Trend  | Action     | Priority |
-| -------------- | ------ | ------ | ------ | ---------- | -------- |
-"""
-                # Get top 2 players for this position from free agents
-                pos_players = [p for p in free_agent_data.get('combined_recommendations', []) 
-                              if p.get('position', '').upper() == pos][:2]
-                
-                for player in pos_players:
-                    name = player.get('name', 'Unknown')[:14]
-                    team = player.get('team', 'N/A')[:6]
-                    rank = player.get('rank', 'N/A')[:6]
-                    trend = '🔥' if player.get('trending', False) else '📊'
-                    action = 'Strong Add' if player.get('trending', False) else 'Consider'
-                    priority = 'HIGH' if player.get('trending', False) else 'MEDIUM'
-                    
-                    report += f"| {name:<14} | {team:<6} | {rank:<6} | {trend:<6} | {action:<10} | {priority:<8} |\n"
+        # Free agent section removed - handled by separate comprehensive free agent report
         
         report += f"""
 ## 📋 ULTIMATE Player Analysis v2.0
