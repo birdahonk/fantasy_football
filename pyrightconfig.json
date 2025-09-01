@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/pyright/main/packages/pyright/schema/pyrightconfig.schema.json",
+  "typeCheckingMode": "off",
+  "include": [
+    "**/*.py"
+  ],
+  "extraPaths": [
+    "data_collection/scripts/shared",
+    "data_collection/scripts",
+    "data_collection/scripts/yahoo",
+    "scripts",
+    "scripts/external",
+    "scripts/oauth"
+  ],
+  "reportMissingImports": "none",
+  "reportMissingTypeStubs": "none",
+  "reportMissingModuleSource": "none"
+}
+
+
