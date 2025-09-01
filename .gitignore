@@ -66,3 +66,6 @@ scripts/core/debug_responses/
 # Debug files
 debug_*.json
 debug_*.txt
+
+# Data collection debug logs
+data_collection/debug/logs/
