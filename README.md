@@ -121,6 +121,43 @@ print(result['analysis'])
 "
 ```
 
+### 5. AI Agent Prompt Management
+The system uses external, human-readable markdown files for AI agent system prompts, making them easy to review and modify.
+
+**Quick Start:**
+```bash
+# Edit the analyst agent prompt directly
+code ai_agents/prompts/analyst_agent_system_prompt.md
+
+# Or use the management utility
+cd ai_agents
+python manage_prompts.py edit analyst_agent
+```
+
+**Available Commands:**
+```bash
+# List all available prompts
+python manage_prompts.py list
+
+# Validate a prompt for errors
+python manage_prompts.py validate analyst_agent
+
+# Show prompt content
+python manage_prompts.py show analyst_agent
+
+# Create a new agent prompt from template
+python manage_prompts.py create coach_agent
+```
+
+**Key Features:**
+- ✅ **Human-readable prompts** - Edit in markdown format
+- ✅ **Dynamic placeholders** - Automatic date/time/week insertion
+- ✅ **Hot-reload capability** - Update prompts without restarting agents
+- ✅ **Validation system** - Catch errors before they cause issues
+- ✅ **Template system** - Easy creation of new agent prompts
+
+**For detailed prompt management instructions, see:** `ai_agents/prompts/README.md`
+
 ## 📋 Command Cheatsheet for Cursor AI Agent
 
 ### 🏈 Roster Analysis Commands
