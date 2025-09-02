@@ -1,0 +1,307 @@
+{
+  "yahoo": {
+    "status": "authenticated",
+    "endpoints": {
+      "User Games": {
+        "status": "failed",
+        "status_code": "no_response",
+        "error": "Non-200 status code"
+      },
+      "My Team": {
+        "status": "failed",
+        "status_code": "no_response",
+        "error": "Non-200 status code"
+      },
+      "League Info": {
+        "status": "failed",
+        "status_code": "no_response",
+        "error": "Non-200 status code"
+      },
+      "Current Week": {
+        "status": "failed",
+        "status_code": "no_response",
+        "error": "Non-200 status code"
+      },
+      "Available Players": {
+        "status": "failed",
+        "status_code": "no_response",
+        "error": "Non-200 status code"
+      },
+      "Transactions": {
+        "status": "failed",
+        "status_code": "no_response",
+        "error": "Non-200 status code"
+      }
+    },
+    "errors": []
+  },
+  "sleeper": {
+    "status": "success",
+    "endpoints": {
+      "NFL State": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 230,
+        "response_preview": {
+          "week": "1",
+          "leg": "1",
+          "season": "2025",
+          "...": "(7 more keys)"
+        }
+      },
+      "Players": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 14235913,
+        "response_preview": {
+          "6462": {
+            "practice_description": "None",
+            "hashtag": "#ellisrichardson-NFL-FA-45",
+            "sportradar_id": "efd6f3c3-b752-4bc2-a4f2-b776c15c3ec0",
+            "...": "(48 more keys)"
+          },
+          "11255": {
+            "practice_description": "None",
+            "hashtag": "#nickamoah-NFL-FA-0",
+            "sportradar_id": "55510c00-ead2-11ed-999e-03b49558b5db",
+            "...": "(48 more keys)"
+          },
+          "8842": {
+            "practice_description": "None",
+            "hashtag": "#malkelmmorrison-NFL-FA-0",
+            "sportradar_id": "3c804b10-d3a8-11ec-96a0-c3471a31202c",
+            "...": "(48 more keys)"
+          },
+          "...": "(11397 more keys)"
+        }
+      },
+      "Trending Adds": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 981,
+        "response_preview": [
+          {
+            "count": "223848",
+            "player_id": "ARI"
+          },
+          {
+            "count": "169974",
+            "player_id": "10219"
+          },
+          {
+            "count": "131175",
+            "player_id": "2309"
+          },
+          "... (22 more items)"
+        ]
+      },
+      "Trending Drops": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 984,
+        "response_preview": [
+          {
+            "count": "60579",
+            "player_id": "2309"
+          },
+          {
+            "count": "44648",
+            "player_id": "12519"
+          },
+          {
+            "count": "37377",
+            "player_id": "DET"
+          },
+          "... (22 more items)"
+        ]
+      },
+      "News": {
+        "status": "failed",
+        "status_code": 404,
+        "error": "Non-200 status code"
+      }
+    },
+    "errors": []
+  },
+  "tank01": {
+    "status": "success",
+    "endpoints": {
+      "NFL Teams": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 17261,
+        "response_preview": {
+          "statusCode": "200",
+          "body": [
+            {
+              "teamAbv": "...",
+              "teamCity": "...",
+              "currentStreak": "...",
+              "...": "(13 more keys)"
+            },
+            {
+              "teamAbv": "...",
+              "teamCity": "...",
+              "currentStreak": "...",
+              "...": "(13 more keys)"
+            },
+            {
+              "teamAbv": "...",
+              "teamCity": "...",
+              "currentStreak": "...",
+              "...": "(13 more keys)"
+            },
+            "... (29 more items)"
+          ]
+        },
+        "usage_headers": {
+          "X-RateLimit-Requests-Limit": "1000",
+          "X-RateLimit-Requests-Remaining": "257",
+          "X-RateLimit-Requests-Reset": "5403"
+        }
+      },
+      "NFL Players": {
+        "status": "failed",
+        "status_code": 404,
+        "error": "Non-200 status code",
+        "usage_headers": {}
+      },
+      "Weekly Projections": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 302844,
+        "response_preview": {
+          "statusCode": "200",
+          "body": {
+            "teamDefenseProjections": {
+              "22": "...",
+              "23": "...",
+              "24": "...",
+              "...": "(29 more keys)"
+            },
+            "playerProjections": {
+              "4036335": "...",
+              "4035004": "...",
+              "4040715": "...",
+              "...": "(618 more keys)"
+            },
+            "week": "season",
+            "...": "(1 more keys)"
+          }
+        },
+        "usage_headers": {
+          "X-RateLimit-Requests-Limit": "1000",
+          "X-RateLimit-Requests-Remaining": "256",
+          "X-RateLimit-Requests-Reset": "5402"
+        }
+      },
+      "Depth Charts": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 86346,
+        "response_preview": {
+          "statusCode": "200",
+          "body": [
+            {
+              "depthChart": "...",
+              "teamAbv": "...",
+              "teamID": "..."
+            },
+            {
+              "depthChart": "...",
+              "teamAbv": "...",
+              "teamID": "..."
+            },
+            {
+              "depthChart": "...",
+              "teamAbv": "...",
+              "teamID": "..."
+            },
+            "... (29 more items)"
+          ]
+        },
+        "usage_headers": {
+          "X-RateLimit-Requests-Limit": "1000",
+          "X-RateLimit-Requests-Remaining": "255",
+          "X-RateLimit-Requests-Reset": "5400"
+        }
+      },
+      "NFL News": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 75,
+        "response_preview": {
+          "statusCode": "200",
+          "body": [],
+          "error": "Your query returned no results."
+        },
+        "usage_headers": {
+          "X-RateLimit-Requests-Limit": "1000",
+          "X-RateLimit-Requests-Remaining": "254",
+          "X-RateLimit-Requests-Reset": "5400"
+        }
+      },
+      "Player Stats": {
+        "status": "success",
+        "status_code": 200,
+        "response_size": 31,
+        "response_preview": {
+          "statusCode": "200",
+          "body": {}
+        },
+        "usage_headers": {
+          "X-RateLimit-Requests-Limit": "1000",
+          "X-RateLimit-Requests-Remaining": "253",
+          "X-RateLimit-Requests-Reset": "5399"
+        }
+      },
+      "Team Stats": {
+        "status": "failed",
+        "status_code": 404,
+        "error": "Non-200 status code",
+        "usage_headers": {}
+      }
+    },
+    "usage_data": {
+      "NFL Teams": {
+        "X-RateLimit-Requests-Limit": "1000",
+        "X-RateLimit-Requests-Remaining": "257",
+        "X-RateLimit-Requests-Reset": "5403"
+      },
+      "Weekly Projections": {
+        "X-RateLimit-Requests-Limit": "1000",
+        "X-RateLimit-Requests-Remaining": "256",
+        "X-RateLimit-Requests-Reset": "5402"
+      },
+      "Depth Charts": {
+        "X-RateLimit-Requests-Limit": "1000",
+        "X-RateLimit-Requests-Remaining": "255",
+        "X-RateLimit-Requests-Reset": "5400"
+      },
+      "NFL News": {
+        "X-RateLimit-Requests-Limit": "1000",
+        "X-RateLimit-Requests-Remaining": "254",
+        "X-RateLimit-Requests-Reset": "5400"
+      },
+      "Player Stats": {
+        "X-RateLimit-Requests-Limit": "1000",
+        "X-RateLimit-Requests-Remaining": "253",
+        "X-RateLimit-Requests-Reset": "5399"
+      }
+    },
+    "errors": [],
+    "formatted_usage": {
+      "current_time_pacific": "2025-09-02 09:47:47 PDT",
+      "daily_limit": 1000,
+      "remaining_calls": 253,
+      "used_calls": 0,
+      "percentage_used": 0.0,
+      "reset_time_pacific": "1969-12-31 17:29:59 PST",
+      "raw_headers": {
+        "X-RateLimit-Requests-Limit": "1000",
+        "X-RateLimit-Requests-Remaining": "253",
+        "X-RateLimit-Requests-Reset": "5399"
+      }
+    }
+  }
+}
