@@ -108,6 +108,13 @@
 - [ ] **AI Integration** - OpenAI/Anthropic integration for strategic insights
 - [ ] **Report Generation** - Advanced reporting using collected data
 
+### **Roster Management Research** 🔬 **COMPLETE**
+- [x] **Yahoo API Roster Management Research** - Comprehensive documentation of position changes and add/drop transactions
+- [x] **API Endpoint Analysis** - Documented PUT methods for roster and transaction operations
+- [x] **XML Format Documentation** - Complete request/response format specifications
+- [x] **Error Handling Research** - Identified critical safety requirements and validation needs
+- [x] **Implementation Planning** - Created roadmap for safe implementation with testing framework
+
 ### **Future Enhancements**
 - [ ] **Web Application** - Flask web UI integration
 - [ ] **Real-time Updates** - Automated data refresh system

@@ -543,3 +543,37 @@ player.get('bye_weeks', {}).get('bye_week', 'N/A')  // ❌ This will fail!
 - ✅ **Team Matchups**: COMPLETE - `team_matchups.py` working perfectly
 - ✅ **Available Players**: COMPLETE - `available_players.py` working perfectly
 - ✅ **Transaction Trends**: COMPLETE - `transaction_trends.py` working perfectly
+
+---
+
+## 6. Roster Management Operations - **RESEARCH PHASE**
+
+### **⚠️ CRITICAL: Research Only - No Implementation Yet**
+
+**Status**: 🔬 **RESEARCH COMPLETE** - Comprehensive documentation available
+**Documentation**: See `yahoo_roster_management_research.md` for complete details
+
+### **Roster Position Changes**
+- **Endpoint**: `PUT /team/{team_key}/roster`
+- **Purpose**: Move players between starting positions and bench
+- **Format**: XML with coverage_type (week/date) and player position changes
+- **Validation**: API validates against league rules and player eligibility
+
+### **Add/Drop Transactions**
+- **Endpoint**: `PUT /transaction`
+- **Purpose**: Add free agents and drop players (atomic transaction when roster full)
+- **Format**: XML with transaction type and player movement data
+- **Response**: Complete transaction details with success/failure status
+
+### **⚠️ Implementation Requirements**
+- **Authentication**: OAuth 2.0 with `fspt-w` scope
+- **Error Handling**: Comprehensive validation and error recovery
+- **Testing**: Extensive testing in controlled environment
+- **Logging**: Complete audit trail of all operations
+- **Safety**: Pre-transaction validation and rollback planning
+
+### **Next Steps**
+1. **Implementation Planning**: Create safe implementation strategy
+2. **Testing Framework**: Build comprehensive testing system
+3. **Error Handling**: Implement robust error handling and recovery
+4. **Safety Measures**: Add validation and logging systems
