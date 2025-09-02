@@ -148,7 +148,7 @@ class APIHealthChecker:
                 ("Players", "players/nfl"),
                 ("Trending Adds", "players/nfl/trending/add"),
                 ("Trending Drops", "players/nfl/trending/drop"),
-                ("News", "players/nfl/news")
+                ("Trending Waivers", "players/nfl/trending/waiver")
             ]
             
             for name, endpoint in endpoints:
@@ -221,12 +221,12 @@ class APIHealthChecker:
             # Test key endpoints
             endpoints = [
                 ("NFL Teams", "getNFLTeams"),
-                ("NFL Players", "getNFLPlayers"),
+                ("NFL Players", "getNFLPlayerList"),
                 ("Weekly Projections", "getNFLProjections"),
                 ("Depth Charts", "getNFLDepthCharts"),
                 ("NFL News", "getNFLNews"),
                 ("Player Stats", "getNFLGamesForPlayer?playerID=5981"),
-                ("Team Stats", "getNFLTeamStats?teamAbv=PHI")
+                ("Team Roster", "getNFLTeamRoster?teamAbv=PHI")
             ]
             
             for name, endpoint in endpoints:
