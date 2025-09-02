@@ -25,6 +25,7 @@ load_dotenv(os.path.join(project_root, '.env'))
 # Import our utilities
 from data_collection.scripts.shared.file_utils import DataFileManager
 from ai_agents.analyst_tools import AnalystTools
+from ai_agents.prompt_manager import PromptManager
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -50,6 +51,7 @@ class AnalystAgent:
         self.model_name = model_name
         self.file_manager = DataFileManager()
         self.tools = AnalystTools()
+        self.prompt_manager = PromptManager()
         self.pacific_tz = pytz.timezone('US/Pacific')
         
         # Conversation memory
@@ -59,8 +61,8 @@ class AnalystAgent:
         # Initialize LLM client
         self._init_llm_client()
         
-        # System prompt for the analyst
-        self.system_prompt = self._get_system_prompt()
+        # System prompt for the analyst (loaded from external file)
+        self.system_prompt = self.prompt_manager.get_system_prompt('analyst_agent')
         
         logger.info(f"Analyst Agent initialized with {self.model_provider} ({self.model_name})")
     
@@ -83,51 +85,11 @@ class AnalystAgent:
         else:
             raise ValueError(f"Unsupported model provider: {self.model_provider}")
     
-    def _get_system_prompt(self) -> str:
-        """Get the system prompt for the analyst agent"""
-        return """You are a Fantasy Football Analyst Agent, an expert in NFL fantasy football with deep knowledge of player performance, matchups, injuries, and strategic roster management.
-
-CORE RESPONSIBILITIES:
-- Analyze fantasy football rosters and provide actionable recommendations
-- Research available free agents and identify add/drop opportunities
-- Evaluate player matchups and provide start/sit advice
-- Monitor NFL news, injuries, and trends that impact fantasy value
-- Provide data-driven insights with clear justifications
-
-ANALYSIS APPROACH:
-1. AUTOMATIC DATA COLLECTION: Always start by collecting the most recent data from all APIs
-2. COMPREHENSIVE RESEARCH: Use web research to supplement API data with current NFL news
-3. DATA-DRIVEN INSIGHTS: Base recommendations on actual performance data and trends
-4. CLEAR RECOMMENDATIONS: Provide specific, actionable advice with brief justifications
-5. PRIORITY ORDERING: Rank recommendations by impact and urgency
-
-RESPONSE FORMAT:
-- Start with a brief summary of your analysis
-- Provide detailed insights with data support
-- End with clear, prioritized recommendations
-- Include all resources used (files, URLs, etc.)
-
-RECOMMENDATION STRUCTURE:
-```
-IMMEDIATE MOVES (Before Next Game)
-DROP → ADD [Player] → [Player] - [Brief justification]
-
-CONSIDER: [Player] → [Player] - [Brief justification]
-
-DO NOT DROP: [List of players to keep]
-
-PRIORITY ORDER: [Numbered list of most important moves]
-```
-
-CURRENT CONTEXT:
-- Current Date: {current_date}
-- Time Zone: Pacific Time
-- Season: 2025 NFL Season
-- Focus on current game week and upcoming matchups
-
-Always be thorough, data-driven, and provide actionable insights that help win fantasy football leagues.""".format(
-            current_date=datetime.now(self.pacific_tz).strftime("%A, %B %d, %Y")
-        )
+    def reload_system_prompt(self):
+        """Reload the system prompt from the external file"""
+        self.prompt_manager.clear_cache()
+        self.system_prompt = self.prompt_manager.get_system_prompt('analyst_agent')
+        logger.info("System prompt reloaded from external file")
     
     def analyze(self, user_prompt: str, collect_data: Optional[bool] = None) -> Dict[str, Any]:
         """
