@@ -15,10 +15,14 @@ from typing import Dict, List, Optional, Any
 import pytz
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
 # Add project root to path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(project_root, '.env'))
 
 # Import our utilities
 from data_collection.scripts.shared.file_utils import DataFileManager
@@ -40,9 +44,12 @@ class AnalystTools:
         
         logger.info("Analyst Tools initialized")
     
-    def collect_all_data(self) -> Dict[str, Any]:
+    def collect_all_data(self, tank01_players_limit: int = 5) -> Dict[str, Any]:
         """
         Trigger all 9 data collection scripts and return results
+        
+        Args:
+            tank01_players_limit: Number of players to process for Tank01 scripts (default: 5)
         
         Returns:
             Dictionary with collection results and status
@@ -91,9 +98,14 @@ class AnalystTools:
                 continue
             
             try:
+                # Prepare command with parameters for Tank01 scripts
+                cmd = [sys.executable, script_path]
+                if "tank01" in script_name and "available_players" in script_name:
+                    cmd.extend(["--players", str(tank01_players_limit)])
+                
                 # Run the script
                 result = subprocess.run(
-                    [sys.executable, script_path],
+                    cmd,
                     cwd=os.path.dirname(script_path),
                     capture_output=True,
                     text=True,
@@ -403,6 +415,65 @@ class AnalystTools:
         
         logger.info(f"Research completed: {len(research['news_items'])} news items found")
         return research
+    
+    def check_data_freshness(self) -> Dict[str, Any]:
+        """
+        Check if existing data is current for the current game week
+        
+        Returns:
+            Dictionary with freshness information
+        """
+        logger.info("Checking data freshness...")
+        
+        recent_files = self._find_most_recent_files()
+        current_week = self.get_current_game_week()
+        
+        if not recent_files:
+            return {
+                "is_current": False,
+                "age_hours": float('inf'),
+                "most_recent_file": None,
+                "current_week": current_week,
+                "message": "No data files found"
+            }
+        
+        # Find the most recent file across all data types
+        most_recent_file = None
+        most_recent_time = 0
+        
+        for data_type, filepath in recent_files.items():
+            try:
+                file_time = os.path.getmtime(filepath)
+                if file_time > most_recent_time:
+                    most_recent_time = file_time
+                    most_recent_file = filepath
+            except Exception as e:
+                logger.warning(f"Could not get mtime for {filepath}: {e}")
+        
+        if not most_recent_file:
+            return {
+                "is_current": False,
+                "age_hours": float('inf'),
+                "most_recent_file": None,
+                "current_week": current_week,
+                "message": "Could not determine file ages"
+            }
+        
+        # Calculate age in hours
+        current_time = datetime.now(self.pacific_tz).timestamp()
+        age_seconds = current_time - most_recent_time
+        age_hours = age_seconds / 3600
+        
+        # Consider data current if it's less than 6 hours old
+        is_current = age_hours < 6
+        
+        return {
+            "is_current": is_current,
+            "age_hours": age_hours,
+            "most_recent_file": os.path.basename(most_recent_file),
+            "current_week": current_week,
+            "message": f"Data is {'current' if is_current else 'outdated'}"
+        }
     
     def get_current_game_week(self) -> Optional[int]:
         """

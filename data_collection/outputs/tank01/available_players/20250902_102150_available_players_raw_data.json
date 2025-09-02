@@ -1,0 +1,1787 @@
+{
+  "extraction_metadata": {
+    "script": "tank01_available_players.py",
+    "development_mode": true,
+    "configuration": {
+      "available_players_limit": 3,
+      "injury_reports_limit": 0,
+      "top_available_limit": 0
+    },
+    "yahoo_source": {
+      "league_info": {
+        "team_key": "461.l.595012.t.3",
+        "team_name": "birdahonkers",
+        "team_id": "3",
+        "league_key": "461.l.595012",
+        "league_name": "Fantasy League (2025)"
+      },
+      "extraction_timestamp": "2025-09-01T00:08:48.463208",
+      "total_players": 1095,
+      "execution_stats": {
+        "start_time": "2025-09-01 00:08:37.668139",
+        "api_calls": 45,
+        "errors": 0,
+        "players_extracted": 1095,
+        "pages_processed": 44,
+        "execution_time": 10.795086
+      }
+    },
+    "extraction_timestamp": "2025-09-02T10:21:50.499700",
+    "processing_stats": {
+      "start_time": "2025-09-02 10:21:33.059246",
+      "api_calls": 0,
+      "players_processed": 3,
+      "players_matched": 3,
+      "players_unmatched": 0,
+      "errors": 0
+    },
+    "api_usage": {
+      "calls_made_this_session": 789,
+      "daily_limit": 1000,
+      "remaining_calls": 211,
+      "percentage_used": 78.9,
+      "reset_timestamp": 3356,
+      "last_updated": 1756833710.48158,
+      "data_source": "rapidapi_headers",
+      "available": true,
+      "using_existing_client": true
+    }
+  },
+  "processed_data": {
+    "available_players": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.41808",
+          "player_id": "41808",
+          "name": {
+            "full": "Matthew Golden",
+            "first": "Matthew",
+            "last": "Golden",
+            "ascii_first": "Matthew",
+            "ascii_last": "Golden"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/41808",
+          "editorial_player_key": "nfl.p.41808",
+          "editorial_team_key": "nfl.t.9",
+          "editorial_team_full_name": "Green Bay Packers",
+          "editorial_team_abbr": "GB",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/green-bay/",
+          "bye_weeks": {
+            "week": "5"
+          },
+          "is_keeper": {
+            "status": false,
+            "cost": false,
+            "kept": false
+          },
+          "uniform_number": "0",
+          "display_position": "WR",
+          "headshot": {
+            "url": "https://s.yimg.com/iu/api/res/1.2/aClPrFjL0foXiNoM2lQe_w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07292025/41808.png",
+            "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/aClPrFjL0foXiNoM2lQe_w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07292025/41808.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "WR",
+          "eligible_positions": [
+            {
+              "position": "WR"
+            },
+            {
+              "position": "W/R/T"
+            }
+          ],
+          "eligible_positions_to_add": [],
+          "has_player_notes": 1,
+          "player_notes_last_timestamp": 1756513122,
+          "bye_week": "5",
+          "headshot_url": "https://s.yimg.com/iu/api/res/1.2/aClPrFjL0foXiNoM2lQe_w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07292025/41808.png",
+          "percent_owned_value": "0"
+        },
+        "tank01_data": {
+          "espnID": "4701936",
+          "espnName": "Matthew Golden",
+          "sleeperBotID": "12501",
+          "fantasyProsPlayerID": "26024",
+          "espnIDFull": "4701936/matthew-golden",
+          "weight": "191",
+          "jerseyNum": "0",
+          "cbsShortName": "M. Golden",
+          "team": "GB",
+          "yahooPlayerID": "41808",
+          "age": "22",
+          "espnLink": "https://www.espn.com/nfl/player/_/id/4701936/matthew-golden",
+          "yahooLink": "https://sports.yahoo.com/nfl/players/41808",
+          "bDay": "8/1/2003",
+          "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4701936.png",
+          "isFreeAgent": "False",
+          "rotoWirePlayerIDFull": "matthew-golden-18500",
+          "cbsLongName": "Matthew Golden",
+          "injury": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "teamID": "12",
+          "pos": "WR",
+          "school": "Texas",
+          "cbsPlayerID": "28874927",
+          "longName": "Matthew Golden",
+          "rotoWirePlayerID": "18500",
+          "height": "5'11\"",
+          "cbsPlayerIDFull": "28874927/matthew-golden",
+          "lastGamePlayed": "20250823_SEA@GB",
+          "playerID": "4701936",
+          "exp": "R",
+          "fantasyProsLink": "https://www.fantasypros.com/nfl/players/matthew-golden.php"
+        },
+        "projection": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "0.5",
+            "carries": "0.1",
+            "rushTD": "0.0"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "4.6",
+            "recTD": "0.3",
+            "targets": "9.4",
+            "recYds": "47.3"
+          },
+          "fumblesLost": "0.0",
+          "pos": "WR",
+          "teamID": "12",
+          "team": "GB",
+          "longName": "Matthew Golden",
+          "playerID": "4701936",
+          "fantasyPoints": "12.14",
+          "fantasyPointsDefault": {
+            "standard": "6.58",
+            "PPR": "11.18",
+            "halfPPR": "8.88"
+          }
+        },
+        "news": [
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/46098223",
+            "image": "https://a.espncdn.com/photo/2025/0828/r1538124_1296x518_5-2.jpg",
+            "title": "A new look in Green Bay: Trading for Micah Parsons continues Packers' aggressive offseason"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/46039591",
+            "image": "https://a.espncdn.com/photo/2025/0822/fan_schefter's_fantasy_football_cheat_sheet_5x2_new.jpg",
+            "title": "Schefter's cheat sheet: Value picks and sleepers to target"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.nflgsis.com/2025/PRE/03/60139/Gamebook.pdf",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4701936.png",
+            "title": "Golden didn't play in Saturday's 23-19 preseason win over the Colts."
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.packers.com/news/29-packers-not-playing-vs-colts-aug-16-2025",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4701936.png",
+            "title": "Golden will play in Saturday's preseason game against the Colts, Mike Spofford of the Packers' official site reports."
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/45959542",
+            "image": "https://a.espncdn.com/photo/2025/0812/r1530992_1296x518_5-2.jpg",
+            "title": "Fantasy football: Answering one key preseason question for 20 NFL teams"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/45704237",
+            "image": "https://a.espncdn.com/photo/2025/0731/r1526272_1296x518_5-2.jpg",
+            "title": "What we're hearing at Packers training camp: Another day, another TD catch for Doubs"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/45853810",
+            "image": "https://a.espncdn.com/photo/2025/0729/r1525391_1296x518_5-2.jpg",
+            "title": "Coach Matt LaFleur has a plan to keep Packers' crowded WR room happy"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://x.com/mattschneidman/status/1949871735358079156",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4701936.png",
+            "title": "Golden caught a deep sideline pass with the first-team offense Monday, Matt Schneidman of The Athletic reports."
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/45443119",
+            "image": "https://a.espncdn.com/photo/2025/0604/r1502222_2_1296x518_5-2.jpg",
+            "title": "Jeanty tops among 20 rookies who should be selected in fantasy drafts"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/45364592",
+            "image": "https://a.espncdn.com/photo/2024/1209/r1425959_1296x518_5-2.jpg",
+            "title": "Reed: Meeting with agent, Pack 'misinterpreted'"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/45007606",
+            "image": "https://a.espncdn.com/photo/2025/0505/r1488349_1296x518_5-2.jpg",
+            "title": "Rookie WRs Matthew Golden, Savion Mitchell open new possibilities for Packers offense"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/44888786",
+            "image": "https://a.espncdn.com/photo/2025/0416/r1479553_1296x518_5-2.jpg",
+            "title": "After playoff loss to Eagles, Packers' drafted to turn Jordan Love, offense loose"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/44872141",
+            "image": "https://a.espncdn.com/photo/2025/0426/r1484353_1296x518_5-2.jpg",
+            "title": "2025 NFL draft: Matthew McConaughey hypes up Texas Longhorns picks"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/44810038",
+            "image": "https://a.espncdn.com/photo/2025/0425/r1483605_1296x518_5-2.jpg",
+            "title": "Miller, Reid and Yates answer the biggest Round 1 questions: Perfect picks, reaches and shocking moves"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/44521939",
+            "image": "https://a.espncdn.com/photo/2025/0416/r1479555_1296x518_5-2.jpg",
+            "title": "Green Bay Packers 2025 NFL draft picks: WR Golden, OT Belton highlight early picks"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/44838836",
+            "image": "https://a.espncdn.com/photo/2025/0424/r1483154_2_1296x518_5-2.jpg",
+            "title": "2025 NFL draft superlatives: Biggest personalities, boldest moments and more"
+          },
+          {
+            "playerID": "4701936",
+            "link": "https://www.espn.com/nfl/story/_/id/44843701",
+            "image": "https://a.espncdn.com/photo/2025/0425/r1483645_1296x518_5-2.jpg",
+            "title": "Packers end 1st-round WR drought, pick Golden"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "N/A",
+          "recent_games": [],
+          "total_games": 0
+        },
+        "depth_chart": {
+          "depth_position": "WR1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 10
+        },
+        "team_context": {
+          "team_performance": "0-0",
+          "division": "North",
+          "conference": "NFC",
+          "fantasy_outlook": "Neutral",
+          "top_performers": {
+            "Rushing": {
+              "rushYds": {
+                "total": "1329.0",
+                "playerID": [
+                  "4047365"
+                ]
+              },
+              "rushingTwoPointConversion": {
+                "total": "0",
+                "playerID": [
+                  "4429023"
+                ]
+              },
+              "carries": {
+                "total": "301.0",
+                "playerID": [
+                  "4047365"
+                ]
+              },
+              "rushTD": {
+                "total": "15.0",
+                "playerID": [
+                  "4047365"
+                ]
+              }
+            },
+            "Kicking": {
+              "fgAttempts": {
+                "total": "21.0",
+                "playerID": [
+                  "16339"
+                ]
+              },
+              "fgMade": {
+                "total": "20.0",
+                "playerID": [
+                  "16339"
+                ]
+              },
+              "xpMade": {
+                "total": "30.0",
+                "playerID": [
+                  "16339"
+                ]
+              },
+              "fgYds": {
+                "total": "0",
+                "playerID": []
+              },
+              "kickYards": {
+                "total": "0",
+                "playerID": []
+              },
+              "xpAttempts": {
+                "total": "30.0",
+                "playerID": [
+                  "16339"
+                ]
+              }
+            },
+            "Passing": {
+              "passAttempts": {
+                "total": "425.0",
+                "playerID": [
+                  "4036378"
+                ]
+              },
+              "passTD": {
+                "total": "25.0",
+                "playerID": [
+                  "4036378"
+                ]
+              },
+              "passYds": {
+                "total": "3389.0",
+                "playerID": [
+                  "4036378"
+                ]
+              },
+              "int": {
+                "total": "11.0",
+                "playerID": [
+                  "4036378"
+                ]
+              },
+              "passingTwoPointConversion": {
+                "total": "3.0",
+                "playerID": [
+                  "4036378"
+                ]
+              },
+              "passCompletions": {
+                "total": "268.0",
+                "playerID": [
+                  "4036378"
+                ]
+              }
+            },
+            "Punting": {
+              "puntYds": {
+                "total": "2582.0",
+                "playerID": [
+                  "4248789"
+                ]
+              },
+              "punts": {
+                "total": "56.0",
+                "playerID": [
+                  "4248789"
+                ]
+              },
+              "puntsin20": {
+                "total": "22.0",
+                "playerID": [
+                  "4248789"
+                ]
+              },
+              "puntTouchBacks": {
+                "total": "5.0",
+                "playerID": [
+                  "4248789"
+                ]
+              }
+            },
+            "Receiving": {
+              "receivingTwoPointConversion": {
+                "total": "1.0",
+                "playerID": [
+                  "4361432",
+                  "4572680",
+                  "4248528"
+                ]
+              },
+              "receptions": {
+                "total": "55.0",
+                "playerID": [
+                  "4362249"
+                ]
+              },
+              "recTD": {
+                "total": "7.0",
+                "playerID": [
+                  "4572680"
+                ]
+              },
+              "targets": {
+                "total": "76.0",
+                "playerID": [
+                  "4428850"
+                ]
+              },
+              "recYds": {
+                "total": "857.0",
+                "playerID": [
+                  "4362249"
+                ]
+              }
+            },
+            "Defense": {
+              "totalTackles": {
+                "total": "102.0",
+                "playerID": [
+                  "4379416"
+                ]
+              },
+              "fumblesLost": {
+                "total": "3.0",
+                "playerID": [
+                  "4047365"
+                ]
+              },
+              "defTD": {
+                "total": "0",
+                "playerID": []
+              },
+              "fumbles": {
+                "total": "4.0",
+                "playerID": [
+                  "4036378",
+                  "4047365"
+                ]
+              },
+              "fumblesRecovered": {
+                "total": "3.0",
+                "playerID": [
+                  "4373423"
+                ]
+              },
+              "twoPointConversionReturn": {
+                "total": "0",
+                "playerID": []
+              },
+              "soloTackles": {
+                "total": "72.0",
+                "playerID": [
+                  "4379416"
+                ]
+              },
+              "defensiveInterceptions": {
+                "total": "8.0",
+                "playerID": [
+                  "4241470"
+                ]
+              },
+              "qbHits": {
+                "total": "15.0",
+                "playerID": [
+                  "4046523"
+                ]
+              },
+              "tfl": {
+                "total": "13.0",
+                "playerID": [
+                  "4430438"
+                ]
+              },
+              "passDeflections": {
+                "total": "11.0",
+                "playerID": [
+                  "4241470"
+                ]
+              },
+              "sacks": {
+                "total": "7.5",
+                "playerID": [
+                  "4046523"
+                ]
+              }
+            }
+          },
+          "current_streak": {
+            "result": "",
+            "length": "0"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.30136",
+          "player_id": "30136",
+          "name": {
+            "full": "Evan Engram",
+            "first": "Evan",
+            "last": "Engram",
+            "ascii_first": "Evan",
+            "ascii_last": "Engram"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/30136",
+          "editorial_player_key": "nfl.p.30136",
+          "editorial_team_key": "nfl.t.7",
+          "editorial_team_full_name": "Denver Broncos",
+          "editorial_team_abbr": "Den",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/denver/",
+          "bye_weeks": {
+            "week": "12"
+          },
+          "is_keeper": {
+            "status": false,
+            "cost": false,
+            "kept": false
+          },
+          "uniform_number": "1",
+          "display_position": "TE",
+          "headshot": {
+            "url": "https://s.yimg.com/iu/api/res/1.2/ufPJwa9t8RG3mcA0ItfdOw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08122025/30136.png",
+            "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/ufPJwa9t8RG3mcA0ItfdOw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08122025/30136.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "TE",
+          "eligible_positions": [
+            {
+              "position": "TE"
+            },
+            {
+              "position": "W/R/T"
+            }
+          ],
+          "eligible_positions_to_add": [],
+          "has_player_notes": 1,
+          "player_notes_last_timestamp": 1755988523,
+          "bye_week": "12",
+          "headshot_url": "https://s.yimg.com/iu/api/res/1.2/ufPJwa9t8RG3mcA0ItfdOw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08122025/30136.png",
+          "percent_owned_value": "0"
+        },
+        "tank01_data": {
+          "espnID": "3051876",
+          "espnName": "Evan Engram",
+          "sleeperBotID": "4066",
+          "fantasyProsPlayerID": "16411",
+          "espnIDFull": "3051876/evan-engram",
+          "fRefID": "EngrEv00",
+          "weight": "240",
+          "jerseyNum": "1",
+          "cbsShortName": "E. Engram",
+          "team": "DEN",
+          "yahooPlayerID": "30136",
+          "age": "31",
+          "espnLink": "https://www.espn.com/nfl/player/_/id/3051876/evan-engram",
+          "yahooLink": "https://sports.yahoo.com/nfl/players/30136",
+          "bDay": "9/2/1994",
+          "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/3051876.png",
+          "isFreeAgent": "False",
+          "rotoWirePlayerIDFull": "evan-engram-11805",
+          "cbsLongName": "Evan Engram",
+          "injury": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "20240501",
+            "designation": ""
+          },
+          "teamID": "10",
+          "pos": "TE",
+          "school": "Ole Miss",
+          "cbsPlayerID": "2079887",
+          "longName": "Evan Engram",
+          "rotoWirePlayerID": "11805",
+          "height": "6'3\"",
+          "cbsPlayerIDFull": "2079887/evan-engram",
+          "lastGamePlayed": "20250823_DEN@NO",
+          "playerID": "3051876",
+          "exp": "9",
+          "fantasyProsLink": "https://www.fantasypros.com/nfl/players/evan-engram.php"
+        },
+        "projection": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "0",
+            "carries": "0",
+            "rushTD": "0"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "4.4",
+            "recTD": "0.2",
+            "targets": "6.2",
+            "recYds": "38.2"
+          },
+          "fumblesLost": "0.0",
+          "pos": "TE",
+          "teamID": "10",
+          "team": "DEN",
+          "longName": "Evan Engram",
+          "playerID": "3051876",
+          "fantasyPoints": "10.04",
+          "fantasyPointsDefault": {
+            "standard": "5.02",
+            "PPR": "9.42",
+            "halfPPR": "7.22"
+          }
+        },
+        "news": [
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/46068455",
+            "image": "https://a.espncdn.com/photo/2025/0826/r1536390_2_1296x518_5-2.jpg",
+            "title": "Bo Nix, Calvin Ridley among Eric Moody's top draft targets"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45921194",
+            "image": "https://a.espncdn.com/photo/2025/0807/250801_nfl_do-draft-list_5x2.jpg",
+            "title": "Do Draft list: Henry, Purdy, Kelce among players being undervalued"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/46039591",
+            "image": "https://a.espncdn.com/photo/2025/0822/fan_schefter's_fantasy_football_cheat_sheet_5x2_new.jpg",
+            "title": "Schefter's cheat sheet: Value picks and sleepers to target"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/46038530",
+            "image": "https://a.espncdn.com/photo/2025/0821/r1534787_1296x518_5-2.jpg",
+            "title": "Engram, Dobbins, Harvey or TBD: Who will take over 'joker' role in the Broncos' offense?"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/46010305",
+            "image": "https://a.espncdn.com/photo/2025/0819/r1533793_1296x518_5-2.jpg",
+            "title": "Burrow, McConkey among Matt Bowen's top 10 draft targets, Warren among late fliers"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45921194",
+            "image": "https://a.espncdn.com/photo/2025/0807/250801_nfl_do-draft-list_5x2.jpg",
+            "title": "Do Draft list: Henry, Purdy, Kelce among players being undervalued"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://x.com/ZacStevensDNVR/status/1952870688844566983",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/3051876.png",
+            "title": "Broncos offensive coordinator Joe Lombardi said Tuesday that Engram has \"met or exceeded\" expectations in camp so far, Zac Stevens of TheDNVR.com reports."
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45709923",
+            "image": "https://a.espncdn.com/photo/2025/0802/r1527017_1296x518_5-2.jpg",
+            "title": "What we're hearing from Broncos training camp: Big plays hard to come by Saturday, save for Pat Surtain's INT"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45709923",
+            "image": "https://a.espncdn.com/photo/2025/0725/r1523655_1296x518_5-2.jpg",
+            "title": "What we're hearing and seeing at Broncos training camp: Bo Nix building chemistry with TE Evan Engram"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45776637",
+            "image": "https://a.espncdn.com/photo/2025/0719/r1521047_1296x518_5-2.jpg",
+            "title": "Barnwell's everything-on-the-line team: 15 players and coaches with the most to gain -- or lose"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45570516",
+            "image": "https://a.espncdn.com/photo/2025/0630/r1512984_1296x518_5-2.jpg",
+            "title": "Fantasy football: Expect a return to form from these bounceback candidates"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45570673",
+            "image": "https://a.espncdn.com/photo/2025/0624/r1510785_1296x518_5-2.jpg",
+            "title": "10 undervalued pass catchers with intriguing upside or safer floors"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45478615",
+            "image": "https://a.espncdn.com/photo/2025/0611/r1505290_1296x518_5-2.jpg",
+            "title": "16 players to trade for or trade away in dynasty leagues"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.denverbroncos.com/photos/photos-broncos-finish-first-week-of-2025-ota-practices#82e57456-3b3c-4c50-ba67-610d6f8d7242",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/3051876.png",
+            "title": "Broncos head coach Sean Payton said Thursday that Engram (shoulder), who has been an active participant at OTAs, has shown \"real good instincts\" at practice, Aric DiLalla of the team's official site reports."
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45376301",
+            "image": "https://a.espncdn.com/photo/2025/0529/r1499959_1296x518_5-2.jpg",
+            "title": "Fantasy injury outlook: McCaffrey, Godwin and Olave among players to monitor"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/45406539",
+            "image": "https://a.espncdn.com/photo/2025/0602/r1501543_1296x518_5-2.jpg",
+            "title": "15 offseason NFL additions who could thrive -- or flop: Who could be the next Sam Darnold?"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/43957885",
+            "image": "https://a.espncdn.com/photo/2025/0403/r1473208_1296x518_5-2.jpg",
+            "title": "Let's grade NFL signings and trades: Did Dallas or New England win the Joe Milton move?"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/44433098",
+            "image": "https://a.espncdn.com/photo/2025/0327/r1470213_2_1296x518_5-2.jpg",
+            "title": "Did Broncos find their 'mismatch guy' in tight end Evan Engram? How he can boost Denver's offense"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/44029981",
+            "image": "https://a.espncdn.com/photo/2025/0309/nfl_fancy_football_2025_offseason_1296x518.png",
+            "title": "Fantasy impact of offseason NFL movement: Kupp to Seahawks"
+          },
+          {
+            "playerID": "3051876",
+            "link": "https://www.espn.com/nfl/story/_/id/44362586",
+            "image": "https://a.espncdn.com/photo/2025/0322/r1467929_1296x518_5-2.jpg",
+            "title": "Best offseason moves that impact fantasy football: Davante a perfect fit for Rams"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20241208_JAX@TEN",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "4",
+                "recTD": "0",
+                "longRec": "11",
+                "targets": "6",
+                "recYds": "33",
+                "recAvg": "8.3"
+              },
+              "longName": "Evan Engram",
+              "playerID": "3051876",
+              "snapCounts": {
+                "offSnapPct": "0.71",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "42",
+                "defSnapPct": "0.00"
+              },
+              "team": "JAX",
+              "teamAbv": "JAX",
+              "teamID": "15",
+              "gameID": "20241208_JAX@TEN"
+            },
+            {
+              "Receiving": {
+                "receptions": "7",
+                "recTD": "0",
+                "longRec": "16",
+                "targets": "9",
+                "recYds": "41",
+                "recAvg": "5.9"
+              },
+              "longName": "Evan Engram",
+              "playerID": "3051876",
+              "snapCounts": {
+                "offSnapPct": "0.71",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "50",
+                "defSnapPct": "0.00"
+              },
+              "team": "JAX",
+              "teamAbv": "JAX",
+              "teamID": "15",
+              "gameID": "20241201_HOU@JAX"
+            },
+            {
+              "Receiving": {
+                "receptions": "5",
+                "recTD": "0",
+                "longRec": "9",
+                "targets": "7",
+                "recYds": "28",
+                "recAvg": "5.6"
+              },
+              "longName": "Evan Engram",
+              "playerID": "3051876",
+              "snapCounts": {
+                "offSnapPct": "0.75",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "36",
+                "defSnapPct": "0.00"
+              },
+              "team": "JAX",
+              "teamAbv": "JAX",
+              "teamID": "15",
+              "gameID": "20241117_JAX@DET"
+            }
+          ],
+          "total_games": 10
+        },
+        "depth_chart": {
+          "depth_position": "TE1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 5
+        },
+        "team_context": {
+          "team_performance": "0-0",
+          "division": "West",
+          "conference": "AFC",
+          "fantasy_outlook": "Neutral",
+          "top_performers": {
+            "Rushing": {
+              "rushYds": {
+                "total": "905.0",
+                "playerID": [
+                  "4241985"
+                ]
+              },
+              "rushingTwoPointConversion": {
+                "total": "0",
+                "playerID": []
+              },
+              "carries": {
+                "total": "195.0",
+                "playerID": [
+                  "4241985"
+                ]
+              },
+              "rushTD": {
+                "total": "9.0",
+                "playerID": [
+                  "4241985"
+                ]
+              }
+            },
+            "Kicking": {
+              "fgAttempts": {
+                "total": "34.0",
+                "playerID": [
+                  "2985659"
+                ]
+              },
+              "fgMade": {
+                "total": "31.0",
+                "playerID": [
+                  "2985659"
+                ]
+              },
+              "xpMade": {
+                "total": "46.0",
+                "playerID": [
+                  "2985659"
+                ]
+              },
+              "fgYds": {
+                "total": "0",
+                "playerID": []
+              },
+              "kickYards": {
+                "total": "0",
+                "playerID": []
+              },
+              "xpAttempts": {
+                "total": "46.0",
+                "playerID": [
+                  "2985659"
+                ]
+              }
+            },
+            "Passing": {
+              "passAttempts": {
+                "total": "567.0",
+                "playerID": [
+                  "4426338"
+                ]
+              },
+              "passTD": {
+                "total": "29.0",
+                "playerID": [
+                  "4426338"
+                ]
+              },
+              "passYds": {
+                "total": "3775.0",
+                "playerID": [
+                  "4426338"
+                ]
+              },
+              "int": {
+                "total": "12.0",
+                "playerID": [
+                  "4426338"
+                ]
+              },
+              "passingTwoPointConversion": {
+                "total": "0",
+                "playerID": []
+              },
+              "passCompletions": {
+                "total": "376.0",
+                "playerID": [
+                  "4426338"
+                ]
+              }
+            },
+            "Punting": {
+              "puntYds": {
+                "total": "988.0",
+                "playerID": [
+                  "3043237"
+                ]
+              },
+              "punts": {
+                "total": "21.0",
+                "playerID": [
+                  "3043237"
+                ]
+              },
+              "puntsin20": {
+                "total": "9.0",
+                "playerID": [
+                  "3043237"
+                ]
+              },
+              "puntTouchBacks": {
+                "total": "1.0",
+                "playerID": [
+                  "3043237"
+                ]
+              }
+            },
+            "Receiving": {
+              "receivingTwoPointConversion": {
+                "total": "1.0",
+                "playerID": [
+                  "3051876"
+                ]
+              },
+              "receptions": {
+                "total": "81.0",
+                "playerID": [
+                  "3128429"
+                ]
+              },
+              "recTD": {
+                "total": "8.0",
+                "playerID": [
+                  "3128429"
+                ]
+              },
+              "targets": {
+                "total": "135.0",
+                "playerID": [
+                  "3128429"
+                ]
+              },
+              "recYds": {
+                "total": "1081.0",
+                "playerID": [
+                  "3128429"
+                ]
+              }
+            },
+            "Defense": {
+              "totalTackles": {
+                "total": "115.0",
+                "playerID": [
+                  "4039059"
+                ]
+              },
+              "fumblesLost": {
+                "total": "1.0",
+                "playerID": [
+                  "3128429",
+                  "4722893",
+                  "4569682",
+                  "3051876",
+                  "4362748"
+                ]
+              },
+              "defTD": {
+                "total": "2.0",
+                "playerID": [
+                  "4360259"
+                ]
+              },
+              "fumbles": {
+                "total": "3.0",
+                "playerID": [
+                  "4426338"
+                ]
+              },
+              "fumblesRecovered": {
+                "total": "2.0",
+                "playerID": [
+                  "4426338"
+                ]
+              },
+              "twoPointConversionReturn": {
+                "total": "0",
+                "playerID": []
+              },
+              "soloTackles": {
+                "total": "79.0",
+                "playerID": [
+                  "4039059"
+                ]
+              },
+              "defensiveInterceptions": {
+                "total": "4.0",
+                "playerID": [
+                  "4372012"
+                ]
+              },
+              "qbHits": {
+                "total": "40.0",
+                "playerID": [
+                  "3915282"
+                ]
+              },
+              "tfl": {
+                "total": "16.0",
+                "playerID": [
+                  "4360259"
+                ]
+              },
+              "passDeflections": {
+                "total": "11.0",
+                "playerID": [
+                  "4372012"
+                ]
+              },
+              "sacks": {
+                "total": "13.5",
+                "playerID": [
+                  "4360259"
+                ]
+              }
+            }
+          },
+          "current_streak": {
+            "result": "",
+            "length": "0"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.40900",
+          "player_id": "40900",
+          "name": {
+            "full": "Caleb Williams",
+            "first": "Caleb",
+            "last": "Williams",
+            "ascii_first": "Caleb",
+            "ascii_last": "Williams"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/40900",
+          "editorial_player_key": "nfl.p.40900",
+          "editorial_team_key": "nfl.t.3",
+          "editorial_team_full_name": "Chicago Bears",
+          "editorial_team_abbr": "Chi",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/chicago/",
+          "bye_weeks": {
+            "week": "5"
+          },
+          "is_keeper": {
+            "status": false,
+            "cost": false,
+            "kept": false
+          },
+          "uniform_number": "18",
+          "display_position": "QB",
+          "headshot": {
+            "url": "https://s.yimg.com/iu/api/res/1.2/bfYvPX2QyI.HTH.3UabvKg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/40900.png",
+            "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/bfYvPX2QyI.HTH.3UabvKg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/40900.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "QB",
+          "eligible_positions": [
+            {
+              "position": "QB"
+            }
+          ],
+          "eligible_positions_to_add": [],
+          "has_player_notes": 1,
+          "player_notes_last_timestamp": 1755922201,
+          "bye_week": "5",
+          "headshot_url": "https://s.yimg.com/iu/api/res/1.2/bfYvPX2QyI.HTH.3UabvKg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/40900.png",
+          "percent_owned_value": "0"
+        },
+        "tank01_data": {
+          "espnID": "4431611",
+          "espnName": "Caleb Williams",
+          "sleeperBotID": "11560",
+          "fantasyProsPlayerID": "23084",
+          "espnIDFull": "4431611/caleb-williams",
+          "fRefID": "WillCa03",
+          "weight": "226",
+          "jerseyNum": "18",
+          "team": "CHI",
+          "yahooPlayerID": "40900",
+          "age": "23",
+          "espnLink": "https://www.espn.com/nfl/player/_/id/4431611/caleb-williams",
+          "yahooLink": "https://sports.yahoo.com/nfl/players/40900",
+          "bDay": "11/18/2001",
+          "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4431611.png",
+          "isFreeAgent": "False",
+          "rotoWirePlayerIDFull": "caleb-williams-17695",
+          "cbsLongName": "Caleb Williams",
+          "injury": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "20240501",
+            "designation": ""
+          },
+          "teamID": "6",
+          "pos": "QB",
+          "school": "USC",
+          "cbsPlayerID": "26695775",
+          "longName": "Caleb Williams",
+          "rotoWirePlayerID": "17695",
+          "height": "6'1\"",
+          "cbsPlayerIDFull": "26695775/caleb-williams/",
+          "lastGamePlayed": "20250822_CHI@KC",
+          "playerID": "4431611",
+          "exp": "2",
+          "fantasyProsLink": "https://www.fantasypros.com/nfl/players/caleb-williams.php"
+        },
+        "projection": {
+          "twoPointConversion": "0.1",
+          "Rushing": {
+            "rushYds": "22.5",
+            "carries": "4.5",
+            "rushTD": "0.1"
+          },
+          "Passing": {
+            "passAttempts": "33.5",
+            "passTD": "1.2",
+            "passYds": "215",
+            "int": "0.7",
+            "passCompletions": "20.7"
+          },
+          "Receiving": {
+            "receptions": "0",
+            "recTD": "0",
+            "targets": "0",
+            "recYds": "0"
+          },
+          "fumblesLost": "0.1",
+          "pos": "QB",
+          "teamID": "6",
+          "team": "CHI",
+          "longName": "Caleb Williams",
+          "playerID": "4431611",
+          "fantasyPoints": "19.7",
+          "fantasyPointsDefault": {
+            "standard": "15.55",
+            "PPR": "15.55",
+            "halfPPR": "15.55"
+          }
+        },
+        "news": [
+          {
+            "image": "https://a.espncdn.com/photo/2025/0828/r1537903_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46081297",
+            "playerID": "4431611",
+            "title": "Liz Loza's draft rules (there are none!), five players to pick and two to fade"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0826/r1537033_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46073097",
+            "playerID": "4431611",
+            "title": "Inside Caleb Williams' 'unapologetic' approach to Year 2 as Bears QB"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0826/r1537062_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46078639",
+            "playerID": "4431611",
+            "title": "Finding the overs: Why the prop lines offer value on Evans, Hunter, Harrison and more"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0807/250801_nfl_do-draft-list_5x2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45921194",
+            "playerID": "4431611",
+            "title": "Do Draft list: Henry, Purdy, Kelce among players being undervalued"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0823/r1535518_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46054803",
+            "playerID": "4431611",
+            "title": "Johnson slams Bears' offense: 'Not good enough'"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0701/r1513361_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45429092",
+            "playerID": "4431611",
+            "title": "Fantasy football: Sleepers, busts and breakouts for 2025"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0818/r1533239_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46005924",
+            "playerID": "4431611",
+            "title": "Johnson praises Williams: Bears QB 'locked in'"
+          },
+          {
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4431611.png",
+            "link": "https://x.com/JasonLieser/status/1955678623844929961",
+            "playerID": "4431611",
+            "title": "Bears head coach Ben Johnson said Wednesday that Williams and the first-team unites will suit up for Sunday's preseason game against the Bills, Jason Lieser of the Chicago Sun-Times reports."
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0805/r1528073_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45967170",
+            "playerID": "4431611",
+            "title": "QB Williams, Bears starters to play against Bills"
+          },
+          {
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4431611.png",
+            "link": "https://x.com/CHGO_Bears/status/1953806765855809801",
+            "playerID": "4431611",
+            "title": "Williams isn't scheduled to play in Sunday's preseason game against the Dolphins, per CHGO Sports."
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0807/250801_nfl_do-draft-list_5x2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45921194",
+            "playerID": "4431611",
+            "title": "Do Draft list: Henry, Purdy, Kelce among players being undervalued"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0806/r1528600_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45921862",
+            "playerID": "4431611",
+            "title": "Bears' Williams: Viral fan video was off target"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0806/r1528600_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45913397",
+            "playerID": "4431611",
+            "title": "Is it time to worry about Caleb Williams and the Bears?"
+          },
+          {
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4431611.png",
+            "link": "https://x.com/JasonLieser/status/1952778927182672033",
+            "playerID": "4431611",
+            "title": "Bears coach Ben Johnson said Tuesday it's still \"to be determined\" whether Williams and the rest of the starting unit will suit up for Sunday's preseason opener against the Dolphins, Jason Lieser of the Chicago Sun-Times reports."
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0701/r1513361_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45429092",
+            "playerID": "4431611",
+            "title": "Fantasy football: Sleepers, busts and breakouts for 2025"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0803/r1527445_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45704191",
+            "playerID": "4431611",
+            "title": "What we're hearing and seeing at Bears training camp: Bears offense was 'sloppier' than usual at Soldier Field practice"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0730/r1525790_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45874363",
+            "playerID": "4431611",
+            "title": "Bears' Williams: Pressure not in '25 game plan"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0724/r1523241_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45704191",
+            "playerID": "4431611",
+            "title": "What we're hearing and seeing at Bears training camp: Offense continues to struggle while defense improves"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0616/r1507239_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45823534",
+            "playerID": "4431611",
+            "title": "Bears' OC unconcerned with struggles 'right now'"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0721/r1521882_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45790243",
+            "playerID": "4431611",
+            "title": "Odunze, McCarthy among favorite breakouts for 2025"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20250105_CHI@GB",
+          "recent_games": [
+            {
+              "Defense": {
+                "fumblesLost": "0",
+                "defensiveInterceptions": "0",
+                "forcedFumbles": "0",
+                "fumbles": "1",
+                "fumblesRecovered": "1"
+              },
+              "Passing": {
+                "qbr": "60.5",
+                "rtg": "95.2",
+                "sacked": "1-7",
+                "passAttempts": "29",
+                "passAvg": "5.1",
+                "passTD": "1",
+                "passYds": "148",
+                "int": "0",
+                "passCompletions": "21"
+              },
+              "Rushing": {
+                "rushAvg": "3.3",
+                "rushYds": "10",
+                "carries": "3",
+                "longRush": "4",
+                "rushTD": "0"
+              },
+              "longName": "Caleb Williams",
+              "playerID": "4431611",
+              "scoringPlays": [
+                {
+                  "score": "DJ Moore 32 Yd pass from Caleb Williams (Cairo Santos Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "13",
+                  "awayScore": "21",
+                  "teamID": "6",
+                  "scoreDetails": "8 plays, 61 yards, 4:53",
+                  "scoreType": "TD",
+                  "scoreTime": "10:02",
+                  "team": "CHI",
+                  "playerIDs": [
+                    "4431611",
+                    "3915416",
+                    "17427"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "1.00",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "62",
+                "defSnapPct": "0.00"
+              },
+              "team": "CHI",
+              "teamAbv": "CHI",
+              "teamID": "6",
+              "gameID": "20250105_CHI@GB"
+            },
+            {
+              "Defense": {
+                "fumblesLost": "0",
+                "defensiveInterceptions": "0",
+                "forcedFumbles": "0",
+                "fumbles": "1",
+                "fumblesRecovered": "2"
+              },
+              "Passing": {
+                "qbr": "24.7",
+                "rtg": "53.0",
+                "sacked": "7-46",
+                "passAttempts": "28",
+                "passAvg": "4.4",
+                "passTD": "0",
+                "passYds": "122",
+                "int": "1",
+                "passCompletions": "16"
+              },
+              "Rushing": {
+                "rushAvg": "7.4",
+                "rushYds": "37",
+                "carries": "5",
+                "longRush": "16",
+                "rushTD": "0"
+              },
+              "longName": "Caleb Williams",
+              "playerID": "4431611",
+              "snapCounts": {
+                "offSnapPct": "1.00",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "61",
+                "defSnapPct": "0.00"
+              },
+              "team": "CHI",
+              "teamAbv": "CHI",
+              "teamID": "6",
+              "gameID": "20241226_SEA@CHI"
+            },
+            {
+              "Defense": {
+                "fumblesLost": "1",
+                "defensiveInterceptions": "0",
+                "forcedFumbles": "0",
+                "fumbles": "2",
+                "fumblesRecovered": "0"
+              },
+              "Passing": {
+                "qbr": "38.1",
+                "rtg": "107.7",
+                "sacked": "2-11",
+                "passAttempts": "40",
+                "passAvg": "8.4",
+                "passTD": "2",
+                "passYds": "334",
+                "int": "0",
+                "passCompletions": "26"
+              },
+              "Rushing": {
+                "rushAvg": "5.7",
+                "rushYds": "34",
+                "carries": "6",
+                "longRush": "13",
+                "rushTD": "0"
+              },
+              "longName": "Caleb Williams",
+              "playerID": "4431611",
+              "scoringPlays": [
+                {
+                  "score": "Cole Kmet 1 Yd pass from Caleb Williams (Cairo Santos Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "7",
+                  "awayScore": "20",
+                  "teamID": "6",
+                  "scoreDetails": "14 plays, 70 yards, 6:18",
+                  "scoreType": "TD",
+                  "scoreTime": "6:31",
+                  "team": "CHI",
+                  "playerIDs": [
+                    "4431611",
+                    "4258595",
+                    "17427"
+                  ]
+                },
+                {
+                  "score": "Keenan Allen 45 Yd pass from Caleb Williams (Cairo Santos Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "14",
+                  "awayScore": "27",
+                  "teamID": "6",
+                  "scoreDetails": "3 plays, 70 yards, 0:19",
+                  "scoreType": "TD",
+                  "scoreTime": "0:39",
+                  "team": "CHI",
+                  "playerIDs": [
+                    "4431611",
+                    "15818",
+                    "17427"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "1.00",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "64",
+                "defSnapPct": "0.00"
+              },
+              "team": "CHI",
+              "teamAbv": "CHI",
+              "teamID": "6",
+              "gameID": "20241222_DET@CHI"
+            }
+          ],
+          "total_games": 19
+        },
+        "depth_chart": {
+          "depth_position": "QB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 3
+        },
+        "team_context": {
+          "team_performance": "0-0",
+          "division": "North",
+          "conference": "NFC",
+          "fantasy_outlook": "Neutral",
+          "top_performers": {
+            "Rushing": {
+              "rushYds": {
+                "total": "959.0",
+                "playerID": [
+                  "4259545"
+                ]
+              },
+              "rushingTwoPointConversion": {
+                "total": "0",
+                "playerID": []
+              },
+              "carries": {
+                "total": "253.0",
+                "playerID": [
+                  "4259545"
+                ]
+              },
+              "rushTD": {
+                "total": "6.0",
+                "playerID": [
+                  "4259545",
+                  "4426386"
+                ]
+              }
+            },
+            "Kicking": {
+              "fgAttempts": {
+                "total": "25.0",
+                "playerID": [
+                  "17427"
+                ]
+              },
+              "fgMade": {
+                "total": "21.0",
+                "playerID": [
+                  "17427"
+                ]
+              },
+              "xpMade": {
+                "total": "25.0",
+                "playerID": [
+                  "17427"
+                ]
+              },
+              "fgYds": {
+                "total": "0",
+                "playerID": []
+              },
+              "kickYards": {
+                "total": "0",
+                "playerID": []
+              },
+              "xpAttempts": {
+                "total": "26.0",
+                "playerID": [
+                  "17427"
+                ]
+              }
+            },
+            "Passing": {
+              "passAttempts": {
+                "total": "562.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "passTD": {
+                "total": "20.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "passYds": {
+                "total": "3541.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "int": {
+                "total": "6.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "passingTwoPointConversion": {
+                "total": "3.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "passCompletions": {
+                "total": "351.0",
+                "playerID": [
+                  "4431611"
+                ]
+              }
+            },
+            "Punting": {
+              "puntYds": {
+                "total": "3911.0",
+                "playerID": [
+                  "4686889"
+                ]
+              },
+              "punts": {
+                "total": "82.0",
+                "playerID": [
+                  "4686889"
+                ]
+              },
+              "puntsin20": {
+                "total": "34.0",
+                "playerID": [
+                  "4686889"
+                ]
+              },
+              "puntTouchBacks": {
+                "total": "4.0",
+                "playerID": [
+                  "4686889"
+                ]
+              }
+            },
+            "Receiving": {
+              "receivingTwoPointConversion": {
+                "total": "1.0",
+                "playerID": [
+                  "4259545",
+                  "4258595",
+                  "3915416"
+                ]
+              },
+              "receptions": {
+                "total": "98.0",
+                "playerID": [
+                  "3915416"
+                ]
+              },
+              "recTD": {
+                "total": "7.0",
+                "playerID": [
+                  "15818"
+                ]
+              },
+              "targets": {
+                "total": "140.0",
+                "playerID": [
+                  "3915416"
+                ]
+              },
+              "recYds": {
+                "total": "966.0",
+                "playerID": [
+                  "3915416"
+                ]
+              }
+            },
+            "Defense": {
+              "totalTackles": {
+                "total": "130.0",
+                "playerID": [
+                  "2574056"
+                ]
+              },
+              "fumblesLost": {
+                "total": "5.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "defTD": {
+                "total": "1.0",
+                "playerID": [
+                  "4240459",
+                  "4331768",
+                  "4426374"
+                ]
+              },
+              "fumbles": {
+                "total": "10.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "fumblesRecovered": {
+                "total": "4.0",
+                "playerID": [
+                  "4431611"
+                ]
+              },
+              "twoPointConversionReturn": {
+                "total": "0",
+                "playerID": []
+              },
+              "soloTackles": {
+                "total": "80.0",
+                "playerID": [
+                  "2574056"
+                ]
+              },
+              "defensiveInterceptions": {
+                "total": "2.0",
+                "playerID": [
+                  "4243253",
+                  "4426374"
+                ]
+              },
+              "qbHits": {
+                "total": "19.0",
+                "playerID": [
+                  "4429014"
+                ]
+              },
+              "tfl": {
+                "total": "12.0",
+                "playerID": [
+                  "3121544"
+                ]
+              },
+              "passDeflections": {
+                "total": "12.0",
+                "playerID": [
+                  "4426374"
+                ]
+              },
+              "sacks": {
+                "total": "5.5",
+                "playerID": [
+                  "3134690"
+                ]
+              }
+            }
+          },
+          "current_streak": {
+            "result": "",
+            "length": "0"
+          }
+        }
+      }
+    ],
+    "injury_reports": [],
+    "top_available": []
+  },
+  "efficiency_metrics": {
+    "players_processed": 3,
+    "players_matched": 3,
+    "match_rate": 100.0,
+    "api_calls_made": 0,
+    "execution_time_seconds": 17.440462,
+    "report_generated_pacific": "2025-09-02T10:21:50.499711-07:00",
+    "reset_timestamp_pacific": "2025-09-02 11:17:46 PDT"
+  }
+}

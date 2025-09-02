@@ -24,6 +24,7 @@ import json
 import logging
 import os
 import sys
+import argparse
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any
@@ -904,7 +905,45 @@ class Tank01AvailablePlayersCollector:
             raise
 
 def main():
-    """Main entry point"""
+    """Main entry point with command line argument support"""
+    # Declare globals first
+    global AVAILABLE_PLAYERS_LIMIT, INJURY_REPORTS_LIMIT, TOP_AVAILABLE_LIMIT
+    
+    parser = argparse.ArgumentParser(description="Tank01 Available Players Data Collection")
+    parser.add_argument(
+        "--players", 
+        type=int, 
+        default=AVAILABLE_PLAYERS_LIMIT,
+        help=f"Number of available players to process (default: {AVAILABLE_PLAYERS_LIMIT})"
+    )
+    parser.add_argument(
+        "--injury-reports",
+        type=int,
+        default=INJURY_REPORTS_LIMIT,
+        help=f"Number of injury report players to process (default: {INJURY_REPORTS_LIMIT})"
+    )
+    parser.add_argument(
+        "--top-available",
+        type=int,
+        default=TOP_AVAILABLE_LIMIT,
+        help=f"Number of top available players to process (default: {TOP_AVAILABLE_LIMIT})"
+    )
+    
+    args = parser.parse_args()
+    
+    # Update global configuration based on arguments
+    AVAILABLE_PLAYERS_LIMIT = args.players
+    INJURY_REPORTS_LIMIT = args.injury_reports
+    TOP_AVAILABLE_LIMIT = args.top_available
+    
+    print(f"🏈 Tank01 Available Players Collection")
+    print(f"📊 Processing {AVAILABLE_PLAYERS_LIMIT} available players")
+    if INJURY_REPORTS_LIMIT > 0:
+        print(f"🏥 Processing {INJURY_REPORTS_LIMIT} injury report players")
+    if TOP_AVAILABLE_LIMIT > 0:
+        print(f"⭐ Processing {TOP_AVAILABLE_LIMIT} top available players")
+    print("=" * 50)
+    
     collector = Tank01AvailablePlayersCollector()
     collector.run()
 

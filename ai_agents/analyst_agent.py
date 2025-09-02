@@ -13,10 +13,14 @@ import logging
 from datetime import datetime
 from typing import Dict, List, Optional, Any, Tuple
 import pytz
+from dotenv import load_dotenv
 
 # Add project root to path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(project_root, '.env'))
 
 # Import our utilities
 from data_collection.scripts.shared.file_utils import DataFileManager
@@ -125,26 +129,45 @@ Always be thorough, data-driven, and provide actionable insights that help win f
             current_date=datetime.now(self.pacific_tz).strftime("%A, %B %d, %Y")
         )
     
-    def analyze(self, user_prompt: str, collect_data: bool = True) -> Dict[str, Any]:
+    def analyze(self, user_prompt: str, collect_data: Optional[bool] = None) -> Dict[str, Any]:
         """
         Perform comprehensive fantasy football analysis
         
         Args:
             user_prompt: User's question or request
-            collect_data: Whether to automatically collect fresh data first
+            collect_data: Whether to collect fresh data (None=ask user, True=collect, False=use existing)
             
         Returns:
             Dictionary with analysis results, recommendations, and metadata
         """
         logger.info(f"Starting analysis for prompt: {user_prompt[:100]}...")
         
-        # Step 1: Collect fresh data if requested
+        # Step 1: Determine data collection strategy
         data_collection_results = {}
+        if collect_data is None:
+            # Check if existing data is current and ask user
+            data_freshness = self.tools.check_data_freshness()
+            if data_freshness["is_current"]:
+                print(f"📊 Found current data from {data_freshness['most_recent_file']}")
+                print("Would you like to:")
+                print("1. Use existing data (faster)")
+                print("2. Collect fresh data (slower, but most current)")
+                choice = input("Enter choice (1 or 2): ").strip()
+                collect_data = choice == "2"
+            else:
+                print(f"⚠️  Existing data is {data_freshness['age_hours']:.1f} hours old")
+                print("Would you like to:")
+                print("1. Collect fresh data (recommended)")
+                print("2. Use existing data anyway")
+                choice = input("Enter choice (1 or 2): ").strip()
+                collect_data = choice == "1"
+        
+        # Step 2: Collect fresh data if requested
         if collect_data:
             logger.info("Collecting fresh data from all APIs...")
-            data_collection_results = self.tools.collect_all_data()
+            data_collection_results = self.tools.collect_all_data(tank01_players_limit=5)  # Default to 5 for now
         
-        # Step 2: Analyze the most recent data
+        # Step 3: Analyze the most recent data
         logger.info("Analyzing most recent data...")
         analysis_data = self.tools.analyze_recent_data()
         
