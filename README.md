@@ -43,11 +43,13 @@ Your personal AI-powered Fantasy Football assistant built with Python scripts an
 ## 🎯 What This Does
 
 This application transforms the Cursor AI Agent into your Fantasy Football General Manager and Coach, providing:
+- 🤖 **AI-Powered Analysis**: Multi-model LLM integration (OpenAI GPT-4, Anthropic Claude) for intelligent recommendations
 - 📊 **Multi-API Data Integration**: Yahoo Fantasy + Sleeper NFL + Tank01 NFL (complete ecosystem)
 - 🔥 **Smart Free Agent Recommendations**: URGENT/HIGH/CAUTION/AVOID priorities with market intelligence
 - 🏈 **Ultimate Team Analysis**: Roster health, depth charts, projections with 87-93% API matching success
 - 📈 **Market Intelligence**: Real-time trending data from thousands of fantasy leagues
 - 🎯 **Fantasy Analysis Engine**: Weekly projections, injury tracking, news aggregation, depth chart intelligence
+- 🧠 **Intelligent Data Collection**: Automatic freshness checking and user-controlled data gathering
 - 📋 **Professional Reports**: Automated markdown reports with comprehensive multi-API insights
 - 🧠 **AI-Enhanced Analysis**: Strategic insights combining multiple data sources
 
@@ -78,12 +80,12 @@ YAHOO_CLIENT_SECRET=your_client_secret_here
 YAHOO_REDIRECT_URI=https://tools.birdahonk.com/fantasy/oauth/callback
 YAHOO_SCOPES=fspt-w
 
+# AI API Keys
+OPENAI_API_KEY=your_openai_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
 # External APIs
 RAPIDAPI_KEY=your_rapidapi_key_here
-
-# AI APIs
-OPENAI_API_KEY=sk-your_openai_key_here
-ANTHROPIC_API_KEY=sk-ant-your_anthropic_key_here
 
 # App Configuration
 LOG_LEVEL=INFO
@@ -101,6 +103,23 @@ Follow the detailed setup instructions in `documentation/pre-mvp-fantasy-footbal
 - No rate limiting issues
 - Fast API response times (0.15s average)
 
+### 4. AI Agent Usage
+```bash
+# Test the AI Agent framework
+cd ai_agents
+python test_analyst_agent.py
+
+# Run the Analyst Agent interactively
+python analyst_agent.py
+
+# Use the Analyst Agent programmatically
+python -c "
+from analyst_agent import AnalystAgent
+agent = AnalystAgent(model_provider='openai', model_name='gpt-4')
+result = agent.analyze('Analyze my roster and recommend add/drop moves')
+print(result['analysis'])
+"
+```
 
 ## 📋 Command Cheatsheet for Cursor AI Agent
 
