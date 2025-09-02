@@ -18,6 +18,25 @@ The Tank01 API provides comprehensive NFL data including:
 - **Rate Limits**: 1000 calls/day (upgraded plan)
 - **Base URL**: `https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com`
 
+## ⚠️ CRITICAL: Correct Endpoint Names
+
+**DO NOT USE THESE INCORRECT ENDPOINTS** (they will return 404 errors):
+- ❌ `getNFLPlayers` → ✅ Use `getNFLPlayerList`
+- ❌ `getNFLTeamStats` → ✅ Use `getNFLTeamRoster`
+
+**All Valid Endpoints:**
+- ✅ `getNFLPlayerList` - Complete player database
+- ✅ `getNFLProjections` - Weekly fantasy projections
+- ✅ `getNFLGamesForPlayer` - Individual player game stats
+- ✅ `getNFLTeamRoster` - Team roster information
+- ✅ `getNFLDepthCharts` - Team depth charts
+- ✅ `getNFLTeams` - Team information and stats
+- ✅ `getNFLGameInfo` - Game details and scores
+- ✅ `getNFLScoresOnly` - Daily scoreboard
+- ✅ `getNFLNews` - Player and team news
+- ✅ `getNFLPlayerInfo` - Individual player details
+- ✅ `getNFLChangelog` - API updates and changes
+
 ## Complete Endpoint Analysis
 
 ### 1. Player List (`getNFLPlayerList`)

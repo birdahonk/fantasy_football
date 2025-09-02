@@ -11,6 +11,23 @@ This document defines the expected response structures for Sleeper NFL API endpo
 - **Rate Limits**: Reasonable usage (no strict limits documented)
 - **Data Coverage**: 11,400+ NFL players with comprehensive metadata
 
+## ⚠️ CRITICAL: Correct Endpoint Names
+
+**DO NOT USE THESE INCORRECT ENDPOINTS** (they will return 404 errors):
+- ❌ `players/nfl/news` → ✅ News data comes from player objects (`news_updated` field)
+
+**All Valid Endpoints:**
+- ✅ `state/nfl` - NFL season state and current week
+- ✅ `players/nfl` - Complete player database
+- ✅ `players/nfl/trending/add` - Trending adds
+- ✅ `players/nfl/trending/drop` - Trending drops  
+- ✅ `players/nfl/trending/waiver` - Trending waivers
+
+**News Data Access:**
+- News information is embedded in player objects via the `news_updated` field
+- No separate news endpoint exists
+- Use `players/nfl` and extract `news_updated` timestamp for each player
+
 ---
 
 ## 1. NFL Players Database - `players/nfl`
