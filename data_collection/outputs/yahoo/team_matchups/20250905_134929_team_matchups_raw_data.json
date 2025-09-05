@@ -1,0 +1,385 @@
+{
+  "league_info": {
+    "league_key": "461.l.595012",
+    "league_name": "Football",
+    "team_key": "461.l.595012.t.3"
+  },
+  "season_context": {
+    "nfl_season": "2025",
+    "current_date": "2025-09-05",
+    "season_phase": "Early Regular Season",
+    "data_source": "Yahoo Fantasy API",
+    "verification_notes": [
+      "Yahoo league key code 461 indicates year: 2025",
+      "Current week 1 extracted from Yahoo team matchups API"
+    ],
+    "yahoo_league_info": {
+      "league_key": "461.l.595012",
+      "league_name": "Football"
+    },
+    "current_week": 1,
+    "week_info": {
+      "week": 1,
+      "week_start": "2025-09-04",
+      "week_end": "2025-09-08",
+      "status": "midevent",
+      "coverage_type": "week",
+      "source": "yahoo_team_matchups_api"
+    }
+  },
+  "matchups": {
+    "week_1": {
+      "week": 1,
+      "matchups": [
+        {
+          "week": 1,
+          "week_start": "2025-09-04",
+          "week_end": "2025-09-08",
+          "status": "midevent",
+          "is_playoffs": "0",
+          "is_consolation": "0",
+          "is_tied": 0,
+          "winner_team_key": "",
+          "teams": [
+            {
+              "team_key": "461.l.595012.t.1",
+              "team_id": "1",
+              "name": "Sinker Conkers",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "1",
+                    "nickname": "Stacie B.",
+                    "guid": "FUIP4MWT4Z6532Z5E4UF3J76D4",
+                    "is_commissioner": "1",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "felo_score": "572",
+                    "felo_tier": "bronze"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "1.30"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "111.68"
+              }
+            },
+            {
+              "team_key": "461.l.595012.t.8",
+              "team_id": "8",
+              "name": "The Hurts Locker",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "8",
+                    "nickname": "Brandon",
+                    "guid": "XFRTAEEK5TX5J54I6EMOOJ6F4Y",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "felo_score": "891",
+                    "felo_tier": "platinum"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "0.00"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "117.01"
+              }
+            }
+          ]
+        },
+        {
+          "week": 1,
+          "week_start": "2025-09-04",
+          "week_end": "2025-09-08",
+          "status": "midevent",
+          "is_playoffs": "0",
+          "is_consolation": "0",
+          "is_tied": 0,
+          "winner_team_key": "",
+          "teams": [
+            {
+              "team_key": "461.l.595012.t.2",
+              "team_id": "2",
+              "name": "Foghorn Leghorns",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "2",
+                    "nickname": "Kay",
+                    "guid": "5EKGJBIQVJSFU6UQT2VTOP7UMQ",
+                    "image_url": "https://s.yimg.com/ag/images/05d45df8-05d1-4da4-8c54-2f24db406b1f_64sq.jpg",
+                    "felo_score": "675",
+                    "felo_tier": "silver"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "0.00"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "113.87"
+              }
+            },
+            {
+              "team_key": "461.l.595012.t.9",
+              "team_id": "9",
+              "name": "Mary's Aliens",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "9",
+                    "nickname": "Mary",
+                    "guid": "OZRJ6AULUXLZU4J3PDPSRVGL7U",
+                    "image_url": "https://s.yimg.com/ag/images/d1afda2e-679a-46df-9c37-cd39e8933c7c_64sq.jpg",
+                    "felo_score": "795",
+                    "felo_tier": "gold"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "18.82"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "112.10"
+              }
+            }
+          ]
+        },
+        {
+          "week": 1,
+          "week_start": "2025-09-04",
+          "week_end": "2025-09-08",
+          "status": "midevent",
+          "is_playoffs": "0",
+          "is_consolation": "0",
+          "is_tied": 0,
+          "winner_team_key": "",
+          "teams": [
+            {
+              "team_key": "461.l.595012.t.3",
+              "team_id": "3",
+              "name": "birdahonkers",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "3",
+                    "nickname": "Brian",
+                    "guid": "T3DTF73F4OZSGAC2JIWWXSCQ6Q",
+                    "is_current_login": "1",
+                    "image_url": "https://s.yimg.com/ag/images/4637/38309505904_581f4a_64sq.jpg",
+                    "felo_score": "531",
+                    "felo_tier": "bronze"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "3.00"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "104.36"
+              }
+            },
+            {
+              "team_key": "461.l.595012.t.5",
+              "team_id": "5",
+              "name": "Kissyface",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "5",
+                    "nickname": "Donna",
+                    "guid": "IPCW4GRNGS2J5MEZSAHCYPSI4E",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "felo_score": "719",
+                    "felo_tier": "gold"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "16.40"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "116.07"
+              }
+            }
+          ]
+        },
+        {
+          "week": 1,
+          "week_start": "2025-09-04",
+          "week_end": "2025-09-08",
+          "status": "midevent",
+          "is_playoffs": "0",
+          "is_consolation": "0",
+          "is_tied": 0,
+          "winner_team_key": "",
+          "teams": [
+            {
+              "team_key": "461.l.595012.t.4",
+              "team_id": "4",
+              "name": "Cheeto Bandito",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "4",
+                    "nickname": "Scott",
+                    "guid": "M3ZLDFHJHI7AW7MUH72W3PIIQY",
+                    "image_url": "https://s.yimg.com/ag/images/4600/38216040400_4bc0c1_64sq.jpg",
+                    "felo_score": "597",
+                    "felo_tier": "bronze"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "0.00"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "113.20"
+              }
+            },
+            {
+              "team_key": "461.l.595012.t.7",
+              "team_id": "7",
+              "name": "tim's Quality Team",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "7",
+                    "nickname": "tim",
+                    "guid": "WBPZ474VMP5LKPRBYGIH36NX3I",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "felo_score": "825",
+                    "felo_tier": "platinum"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "27.38"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "107.89"
+              }
+            }
+          ]
+        },
+        {
+          "week": 1,
+          "week_start": "2025-09-04",
+          "week_end": "2025-09-08",
+          "status": "midevent",
+          "is_playoffs": "0",
+          "is_consolation": "0",
+          "is_tied": 0,
+          "winner_team_key": "",
+          "teams": [
+            {
+              "team_key": "461.l.595012.t.6",
+              "team_id": "6",
+              "name": "Marlin\u2019s Buckaroos",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "6",
+                    "nickname": "-- hidden --",
+                    "guid": "NGD2QDFVVMW45Z6QKDVHJVNAYA",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "felo_score": "706",
+                    "felo_tier": "gold"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "0.00"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "110.32"
+              }
+            },
+            {
+              "team_key": "461.l.595012.t.10",
+              "team_id": "10",
+              "name": "Not Kittle'ing Around",
+              "managers": [
+                {
+                  "manager": {
+                    "manager_id": "10",
+                    "nickname": "John",
+                    "guid": "5DTCIJYKSZP75DZ3NZ65LVR7KU",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "felo_score": "571",
+                    "felo_tier": "bronze"
+                  }
+                }
+              ],
+              "team_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "22.50"
+              },
+              "team_projected_points": {
+                "coverage_type": "week",
+                "week": "1",
+                "total": "114.63"
+              }
+            }
+          ]
+        }
+      ],
+      "week_summary": {
+        "total_matchups": 5,
+        "completed_matchups": 0,
+        "live_matchups": 5,
+        "upcoming_matchups": 0
+      }
+    }
+  },
+  "extraction_metadata": {
+    "timestamp": "2025-09-05T13:49:29.061520",
+    "weeks_requested": [
+      1
+    ],
+    "weeks_processed": 1,
+    "total_matchups": 5,
+    "api_calls": 3,
+    "errors": 0
+  }
+}
