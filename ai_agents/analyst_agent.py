@@ -234,31 +234,95 @@ Please provide a comprehensive analysis following the format specified in your s
         
         return resources
     
-    def save_analysis_report(self, analysis_result: Dict[str, Any], filename_prefix: str = "analysis") -> str:
+    def save_analysis_report(self, analysis_result: Dict[str, Any], filename_prefix: str = "analysis") -> Dict[str, str]:
         """
-        Save analysis results to disk
+        Save analysis results to disk in both JSON and Markdown formats
         
         Args:
             analysis_result: Result from analyze() method
             filename_prefix: Prefix for the filename
             
         Returns:
-            Path to saved file
+            Dictionary with paths to saved files
         """
         timestamp = datetime.now(self.pacific_tz).strftime("%Y%m%d_%H%M%S")
-        filename = f"{filename_prefix}_{timestamp}_{self.model_provider}_{self.model_name.replace('-', '_')}.json"
+        model_suffix = f"{self.model_provider}_{self.model_name.replace('-', '_')}"
         
         # Save to outputs directory
         output_dir = os.path.join(project_root, "data_collection", "outputs", "analyst_reports")
         os.makedirs(output_dir, exist_ok=True)
         
-        filepath = os.path.join(output_dir, filename)
+        # Save JSON version
+        json_filename = f"{filename_prefix}_{timestamp}_{model_suffix}.json"
+        json_filepath = os.path.join(output_dir, json_filename)
         
-        with open(filepath, 'w') as f:
+        with open(json_filepath, 'w') as f:
             json.dump(analysis_result, f, indent=2)
         
-        logger.info(f"Analysis report saved to: {filepath}")
-        return filepath
+        # Save Markdown version
+        markdown_filename = f"{filename_prefix}_{timestamp}_{model_suffix}.md"
+        markdown_filepath = os.path.join(output_dir, markdown_filename)
+        
+        # Extract the analysis content for markdown
+        analysis_content = analysis_result.get('analysis', 'No analysis content available')
+        
+        # Create markdown report
+        season_context = analysis_result.get('season_context', {})
+        nfl_season = season_context.get('nfl_season', 'Unknown')
+        current_week = season_context.get('current_week', 'Unknown')
+        season_phase = season_context.get('season_phase', 'Unknown')
+        
+        markdown_content = f"""# Fantasy Football Analysis Report
+
+**Generated:** {datetime.now(self.pacific_tz).strftime('%Y-%m-%d %H:%M:%S %Z')}
+**Model:** {self.model_provider} - {self.model_name}
+**Season Context:** {nfl_season} - Week {current_week} ({season_phase})
+
+## Analysis
+
+{analysis_content}
+
+## Data Sources
+
+{self._format_data_sources(analysis_result)}
+
+## Resources Used
+
+{self._format_resources_used(analysis_result)}
+"""
+        
+        with open(markdown_filepath, 'w') as f:
+            f.write(markdown_content)
+        
+        logger.info(f"Analysis report saved to: {json_filepath}")
+        logger.info(f"Markdown report saved to: {markdown_filepath}")
+        
+        return {
+            "json": json_filepath,
+            "markdown": markdown_filepath
+        }
+    
+    def _format_data_sources(self, analysis_result: Dict[str, Any]) -> str:
+        """Format data sources for markdown report"""
+        data_files = analysis_result.get('data_files', {})
+        if not data_files:
+            return "No data sources available"
+        
+        sources = []
+        for data_type, filepath in data_files.items():
+            if filepath:
+                filename = os.path.basename(filepath)
+                sources.append(f"- **{data_type.replace('_', ' ').title()}:** {filename}")
+        
+        return "\n".join(sources) if sources else "No data sources available"
+    
+    def _format_resources_used(self, analysis_result: Dict[str, Any]) -> str:
+        """Format resources used for markdown report"""
+        resources = analysis_result.get('resources_used', [])
+        if not resources:
+            return "No additional resources used"
+        
+        return "\n".join(f"- {resource}" for resource in resources)
     
     def get_conversation_history(self) -> List[Dict[str, Any]]:
         """Get the current conversation history"""

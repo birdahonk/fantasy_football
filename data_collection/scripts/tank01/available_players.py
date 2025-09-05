@@ -39,7 +39,7 @@ from data_collection.scripts.shared.tank01_client import SimpleTank01Client
 from data_collection.scripts.shared.file_utils import DataFileManager
 
 # Configuration
-DEVELOPMENT_MODE = True  # Set to False for production
+DEVELOPMENT_MODE = False  # Set to False for production
 AVAILABLE_PLAYERS_LIMIT = 5 if DEVELOPMENT_MODE else 25
 INJURY_REPORTS_LIMIT = 25  # Process 25 injury report players
 TOP_AVAILABLE_LIMIT = 15   # Process 15 top available players

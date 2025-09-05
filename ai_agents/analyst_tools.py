@@ -163,7 +163,7 @@ class AnalystTools:
         """
         logger.info("Analyzing most recent data...")
         
-        # Find the most recent files for each data type
+        # Find the most recent files for each data type (prioritize JSON files)
         recent_files = self._find_most_recent_files()
         
         analysis = {
