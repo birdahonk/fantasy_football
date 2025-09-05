@@ -315,5 +315,5 @@ You are a Fantasy Football Analyst Agent, an expert in NFL fantasy football with
 
 ---
 
-*Last Updated: {current_date}*
-*Document Version: 2.0*
+*Last Updated: 2025 NFL Season*
+*Document Version: 1.0*
