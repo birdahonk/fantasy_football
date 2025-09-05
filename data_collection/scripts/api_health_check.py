@@ -19,7 +19,7 @@ import sys
 import json
 import time
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 from typing import Dict, Any, List, Optional
 
@@ -313,14 +313,17 @@ class APIHealthChecker:
             daily_limit = int(latest_usage.get('X-RateLimit-Requests-Limit', 0))
             remaining_calls = int(latest_usage.get('X-RateLimit-Requests-Remaining', 0))
             used_calls = int(latest_usage.get('X-RateLimit-Requests-Used', 0))
-            reset_timestamp = int(latest_usage.get('X-RateLimit-Requests-Reset', 0))
+            reset_seconds = int(latest_usage.get('X-RateLimit-Requests-Reset', 0))
             
             # Calculate usage percentage
             percentage_used = (used_calls / daily_limit * 100) if daily_limit > 0 else 0
             
-            # Convert reset timestamp to Pacific Time
-            if reset_timestamp > 0:
-                reset_datetime = datetime.fromtimestamp(reset_timestamp, tz=self.pacific_tz)
+            # Convert reset seconds to Pacific Time
+            # X-RateLimit-Requests-Reset contains seconds remaining until reset, not a timestamp
+            if reset_seconds > 0:
+                # Add the seconds to current time to get reset time
+                current_time = datetime.now(self.pacific_tz)
+                reset_datetime = current_time + timedelta(seconds=reset_seconds)
                 reset_formatted = reset_datetime.strftime("%Y-%m-%d %H:%M:%S %Z")
             else:
                 reset_formatted = "Unknown"
@@ -335,6 +338,7 @@ class APIHealthChecker:
                 "used_calls": used_calls,
                 "percentage_used": round(percentage_used, 1),
                 "reset_time_pacific": reset_formatted,
+                "seconds_until_reset": reset_seconds,
                 "raw_headers": latest_usage
             }
             
@@ -399,6 +403,11 @@ class APIHealthChecker:
                 print(f"   Used Calls: {usage.get('used_calls', 'Unknown')}")
                 print(f"   Usage Percentage: {usage.get('percentage_used', 'Unknown')}%")
                 print(f"   Reset Time: {usage.get('reset_time_pacific', 'Unknown')}")
+                if 'seconds_until_reset' in usage:
+                    hours = usage['seconds_until_reset'] // 3600
+                    minutes = (usage['seconds_until_reset'] % 3600) // 60
+                    seconds = usage['seconds_until_reset'] % 60
+                    print(f"   Time Until Reset: {hours:02d}:{minutes:02d}:{seconds:02d}")
     
     def save_results(self, filename: Optional[str] = None):
         """Save health check results to file"""
