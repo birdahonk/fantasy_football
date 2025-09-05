@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-09-05T01:01:19.338648-07:00",
+  "scripts_run": [
+    {
+      "script": "data_collection/scripts/yahoo/my_roster.py",
+      "description": "Yahoo My Roster",
+      "status": "failed",
+      "error": ".0/bin/python: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/yahoo/data_collection/scripts/yahoo/my_roster.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/available_players.py",
+      "description": "Yahoo Available Players",
+      "status": "failed",
+      "error": "ython: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/yahoo/data_collection/scripts/yahoo/available_players.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/opponent_rosters.py",
+      "description": "Yahoo Opponent Rosters",
+      "status": "failed",
+      "error": "python: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/yahoo/data_collection/scripts/yahoo/opponent_rosters.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/team_matchups.py",
+      "description": "Yahoo Team Matchups",
+      "status": "failed",
+      "error": "in/python: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/yahoo/data_collection/scripts/yahoo/team_matchups.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/transaction_trends.py",
+      "description": "Yahoo Transaction Trends",
+      "status": "failed",
+      "error": "thon: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/yahoo/data_collection/scripts/yahoo/transaction_trends.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/sleeper/my_roster.py",
+      "description": "Sleeper My Roster",
+      "status": "failed",
+      "error": "in/python: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/sleeper/data_collection/scripts/sleeper/my_roster.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/sleeper/available_players.py",
+      "description": "Sleeper Available Players",
+      "status": "failed",
+      "error": "n: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/sleeper/data_collection/scripts/sleeper/available_players.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/sleeper/trending.py",
+      "description": "Sleeper Trending",
+      "status": "failed",
+      "error": "bin/python: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/sleeper/data_collection/scripts/sleeper/trending.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/tank01/my_roster.py",
+      "description": "Tank01 My Roster",
+      "status": "failed",
+      "error": "/bin/python: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/tank01/data_collection/scripts/tank01/my_roster.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "script": "data_collection/scripts/tank01/available_players.py",
+      "description": "Tank01 Available Players",
+      "status": "failed",
+      "error": "hon: can't open file '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/scripts/tank01/data_collection/scripts/tank01/available_players.py': [Errno 2] No such file or directory\n"
+    }
+  ],
+  "successful": 0,
+  "failed": 10,
+  "total_scripts": 10
+}

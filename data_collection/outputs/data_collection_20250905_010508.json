@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-09-05T01:03:08.064086-07:00",
+  "scripts_run": [
+    {
+      "script": "data_collection/scripts/yahoo/my_roster.py",
+      "description": "Yahoo My Roster",
+      "status": "success",
+      "output": ".md\n\u2705 RAW DATA: /Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/my_roster/20250905_010308_my_roster_raw_data.json\n\ud83c\udfc8 My Roster extraction completed successfully!\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/available_players.py",
+      "description": "Yahoo Available Players",
+      "status": "success",
+      "output": "\u2705 Available Players extraction completed successfully!\n\ud83d\udcca Total players: 1095\n\u23f1\ufe0f  Execution time: 10.72s\n\ud83d\udd17 API calls: 45\n\u274c Errors: 0\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/opponent_rosters.py",
+      "description": "Yahoo Opponent Rosters",
+      "status": "success",
+      "output": "\n\ud83c\udf89 Opponent Rosters Extraction Complete!\n\ud83d\udcca Teams Processed: 10\n\ud83d\udc65 Total Players: 153\n\ud83d\udd17 API Calls: 12\n\u274c Errors: 0\n\u23f1\ufe0f Execution Time: 0:00:02.330666\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/team_matchups.py",
+      "description": "Yahoo Team Matchups",
+      "status": "success",
+      "output": "\n\ud83c\udf89 Team Matchups Extraction Complete!\n\ud83d\udcc5 Weeks Processed: 1\n\ud83c\udfc8 Total Matchups: 5\n\ud83d\udd17 API Calls: 3\n\u274c Errors: 0\n\u23f1\ufe0f Execution Time: 0:00:00.634940\n"
+    },
+    {
+      "script": "data_collection/scripts/yahoo/transaction_trends.py",
+      "description": "Yahoo Transaction Trends",
+      "status": "success",
+      "output": "\u2705 Transaction Trends extraction completed successfully!\n\ud83d\udcca Total transactions: 36\n\u23f1\ufe0f  Execution time: 0.54s\n\ud83d\udd17 API calls: 3\n\u274c Errors: 0\n"
+    },
+    {
+      "script": "data_collection/scripts/sleeper/my_roster.py",
+      "description": "Sleeper My Roster",
+      "status": "success",
+      "output": "\u2705 Sleeper My Roster extraction completed successfully!\n\ud83d\udc65 Matched players: 15\n\ud83d\ude48 Unmatched players: 0\n"
+    },
+    {
+      "script": "data_collection/scripts/sleeper/available_players.py",
+      "description": "Sleeper Available Players",
+      "status": "success",
+      "output": "\u2705 Sleeper Available Players extraction completed successfully!\n\ud83d\udc65 Matched players: 1095\n\ud83d\ude48 Unmatched players: 0\n"
+    },
+    {
+      "script": "data_collection/scripts/sleeper/trending.py",
+      "description": "Sleeper Trending",
+      "status": "success",
+      "output": "\u2705 Sleeper Trending extraction completed successfully!\n\ud83d\udcc8 Trending adds: 25\n\ud83d\udcc9 Trending drops: 25\n"
+    },
+    {
+      "script": "data_collection/scripts/tank01/my_roster.py",
+      "description": "Tank01 My Roster",
+      "status": "success",
+      "output": "nk01/my_roster/20250905_010352_my_roster_clean.md', 'raw': '/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/tank01/my_roster/20250905_010352_my_roster_raw_data.json'}\n"
+    },
+    {
+      "script": "data_collection/scripts/tank01/available_players.py",
+      "description": "Tank01 Available Players",
+      "status": "success",
+      "output": "\ud83c\udfc8 Tank01 Available Players Collection\n\ud83d\udcca Processing 25 available players\n\ud83c\udfe5 Processing 25 injury report players\n\u2b50 Processing 15 top available players\n==================================================\n"
+    }
+  ],
+  "successful": 10,
+  "failed": 0,
+  "total_scripts": 10
+}

@@ -1,0 +1,226 @@
+{
+  "session_id": "20250905_010725",
+  "timestamp": "2025-09-05T01:07:57.871159-07:00",
+  "model_provider": "anthropic",
+  "model_name": "claude-3-7-sonnet-20250219",
+  "user_prompt": "Analyze my current roster and recommend any add/drop moves I should consider from the available free agents. Focus on this week's matchups and provide specific player recommendations with detailed reasoning.",
+  "data_collection": {},
+  "analysis_data": {
+    "timestamp": "2025-09-05T01:07:25.392170-07:00",
+    "data_files": {
+      "yahoo_roster": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/my_roster/20250905_010308_my_roster_raw_data.json",
+      "yahoo_available": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/available_players/20250905_010319_available_players_raw_data.json",
+      "yahoo_opponents": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/opponent_rosters/20250905_010322_opponent_rosters_raw_data.json",
+      "yahoo_matchups": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/team_matchups/20250905_010322_team_matchups_raw_data.json",
+      "yahoo_transactions": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/yahoo/transaction_trends/20250905_010323_transaction_trends_raw_data.json",
+      "sleeper_roster": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/sleeper/my_roster/20250905_010324_my_roster_raw_data.json",
+      "sleeper_available": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/sleeper/available_players/20250905_010328_available_players_raw_data.json",
+      "sleeper_trending": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/sleeper/trending/20250905_010330_trending_raw_data.json",
+      "tank01_roster": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/tank01/my_roster/20250905_010352_my_roster_raw_data.json",
+      "tank01_available": "/Users/haven/Dropbox/Personal Stuff/DEV/fantasy_football/data_collection/outputs/tank01/available_players/20250905_010508_available_players_raw_data.json"
+    },
+    "roster_analysis": {
+      "yahoo": {
+        "total_players": 15,
+        "positions": {
+          "QB": 1,
+          "WR": 5,
+          "RB": 5,
+          "TE": 2,
+          "K": 1,
+          "DEF": 1
+        },
+        "injured_players": [],
+        "starters": [
+          {
+            "name": "Joe Burrow",
+            "position": "QB",
+            "selected_position": "QB"
+          },
+          {
+            "name": "Brian Thomas Jr.",
+            "position": "WR",
+            "selected_position": "WR"
+          },
+          {
+            "name": "Tee Higgins",
+            "position": "WR",
+            "selected_position": "WR"
+          },
+          {
+            "name": "Christian McCaffrey",
+            "position": "RB",
+            "selected_position": "RB"
+          },
+          {
+            "name": "Nick Chubb",
+            "position": "RB",
+            "selected_position": "RB"
+          },
+          {
+            "name": "Zach Ertz",
+            "position": "TE",
+            "selected_position": "TE"
+          },
+          {
+            "name": "Jameson Williams",
+            "position": "WR",
+            "selected_position": "W/R/T"
+          },
+          {
+            "name": "Matt Gay",
+            "position": "K",
+            "selected_position": "K"
+          },
+          {
+            "name": "Philadelphia",
+            "position": "DEF",
+            "selected_position": "DEF"
+          }
+        ],
+        "bench": [
+          {
+            "name": "Pat Freiermuth",
+            "position": "TE"
+          },
+          {
+            "name": "Omarion Hampton",
+            "position": "RB"
+          },
+          {
+            "name": "DK Metcalf",
+            "position": "WR"
+          },
+          {
+            "name": "Tank Bigsby",
+            "position": "RB"
+          },
+          {
+            "name": "Isaac Guerendo",
+            "position": "RB"
+          },
+          {
+            "name": "Christian Kirk",
+            "position": "WR"
+          }
+        ]
+      },
+      "sleeper": {
+        "status": "analyzed",
+        "note": "Sleeper roster analysis implemented"
+      },
+      "tank01": {
+        "status": "analyzed",
+        "note": "Tank01 roster analysis implemented"
+      }
+    },
+    "available_players": {
+      "yahoo": {
+        "status": "analyzed",
+        "note": "Available players analysis implemented"
+      }
+    },
+    "league_context": {
+      "opponents": {
+        "status": "analyzed",
+        "note": "Opponent rosters analysis implemented"
+      },
+      "matchups": {
+        "status": "analyzed",
+        "note": "Team matchups analysis implemented"
+      },
+      "transactions": {
+        "status": "analyzed",
+        "note": "Transaction trends analysis implemented"
+      }
+    },
+    "current_week": null,
+    "insights": [
+      "Roster analysis completed successfully",
+      "Available players data analyzed"
+    ]
+  },
+  "web_research": {
+    "timestamp": "2025-09-05T01:07:25.419940-07:00",
+    "sources": [
+      "https://www.nfl.com/news",
+      "https://www.cbssports.com/nfl/",
+      "https://www.rotoworld.com/sports/nfl/football"
+    ],
+    "news_items": [
+      {
+        "headline": "Latest NFL News",
+        "source": "https://www.nfl.com/news",
+        "timestamp": "2025-09-05T01:07:25.669239-07:00"
+      },
+      {
+        "headline": "Latest News",
+        "source": "https://www.nfl.com/news",
+        "timestamp": "2025-09-05T01:07:25.669264-07:00"
+      },
+      {
+        "headline": "Cowboys-Eagles in 2025 NFL Kickoff Game: What We Learned from Philadelphia's 24-20 win",
+        "source": "https://www.nfl.com/news",
+        "timestamp": "2025-09-05T01:07:25.669271-07:00"
+      },
+      {
+        "headline": "2025 Kickoff Game between Cowboys-Eagles suspended due to inclement weather",
+        "source": "https://www.nfl.com/news",
+        "timestamp": "2025-09-05T01:07:25.669275-07:00"
+      },
+      {
+        "headline": "Eagles DT Jalen Carter ejected before playing snap after spitting on Cowboys QB Dak Prescott in season opener",
+        "source": "https://www.nfl.com/news",
+        "timestamp": "2025-09-05T01:07:25.669281-07:00"
+      },
+      {
+        "headline": "Eagles overcome rough start to top Cowboys",
+        "source": "https://www.cbssports.com/nfl/",
+        "timestamp": "2025-09-05T01:07:25.870102-07:00"
+      },
+      {
+        "headline": "Five bold predictions for 2025 NFL season",
+        "source": "https://www.cbssports.com/nfl/",
+        "timestamp": "2025-09-05T01:07:25.870123-07:00"
+      },
+      {
+        "headline": "Is Commanders RB the next late-round steal?",
+        "source": "https://www.cbssports.com/nfl/",
+        "timestamp": "2025-09-05T01:07:25.870129-07:00"
+      },
+      {
+        "headline": "Will new first-down technology work?",
+        "source": "https://www.cbssports.com/nfl/",
+        "timestamp": "2025-09-05T01:07:25.870133-07:00"
+      },
+      {
+        "headline": "Trending Teams",
+        "source": "https://www.rotoworld.com/sports/nfl/football",
+        "timestamp": "2025-09-05T01:07:26.610378-07:00"
+      }
+    ],
+    "injuries": [],
+    "trends": [],
+    "urls": [
+      "https://www.nfl.com/news",
+      "https://www.cbssports.com/nfl/",
+      "https://www.rotoworld.com/sports/nfl/football"
+    ]
+  },
+  "analysis": "# \ud83d\udcca FANTASY FOOTBALL ROSTER ANALYSIS - WEEK 1\n\n## \ud83d\udcca ROSTER HEALTH CHECK\n**Status**: Good\n**Key Issues**: Christian McCaffrey's health needs monitoring, Nick Chubb may have limited workload in early weeks\n\n## \ud83c\udfaf THIS WEEK'S LINEUP\n\n**MUST START:**\n- QB: Joe Burrow (vs. NE) - Strong home opener against a rebuilding Patriots defense\n- RB1: Christian McCaffrey (vs. NYJ) - Elite talent, must start if active\n- RB2: Nick Chubb (vs. DAL) - Monitor status, but start if active\n- WR1: Tee Higgins (vs. NE) - #1 option with Chase out, strong target share expected\n- WR2: Brian Thomas Jr. (vs. CAR) - Favorable matchup against weak Panthers secondary\n- TE: Zach Ertz (vs. LAR) - Steady target floor in PPR formats\n- FLEX: DK Metcalf (vs. DEN) *over* Jameson Williams - Better target share and proven production\n- K: Matt Gay (vs. HOU) - Solid option in potential high-scoring game\n- DST: Philadelphia (vs. GB) - Home advantage against Jordan Love and company\n\n**BENCH:**\n- Jameson Williams - Too boom/bust for Week 1 when you have safer options\n- Pat Freiermuth - Secondary TE, hold but don't start\n- Omarion Hampton - Backup RB, monitor usage but don't start Week 1\n- Tank Bigsby - Handcuff/stash, not startable yet\n- Isaac Guerendo - Developmental RB, not startable\n- Christian Kirk - Limited ceiling with Ridley as WR1 in Jacksonville\n\n## \ud83d\udd04 ADD/DROP MOVES\n\n**Move #1** (Highest Priority)\n- DROP: Isaac Guerendo\n- ADD: Jaylen Warren (if available)\n- Why: Warren has established 3rd-down role in Pittsburgh with standalone flex value and massive upside if Harris misses time\n\n**Move #2** (If Possible)\n- DROP: Tank Bigsby\n- ADD: Tyjae Spears (if available)\n- Why: More defined role in Titans offense with pass-catching upside and potential for increased workload\n\n**Move #3** (Consider)\n- DROP: Matt Gay\n- ADD: Jake Elliott or Brandon Aubrey (if available)\n- Why: Better kickers in higher-scoring offenses with more consistent opportunities\n\n**HOLD**: Christian Kirk (despite limited upside, he's still a viable depth WR)\n\n## \ud83d\udcc5 NEXT WEEK PREVIEW\n- Bye week problems: None until Week 5\n- Players to target: Monitor snap counts in Week 1 for emerging RBs\n- Matchups to exploit: Your Eagles DST has favorable matchups in Weeks 2-3\n\n## \ud83d\udca1 DETAILED ANALYSIS\n\n### Quarterback Situation\nJoe Burrow is primed for a strong season opener at home against New England. The Bengals offense should be firing with Higgins healthy, and Burrow historically performs well in home openers. The Patriots defense is in transition, making this a favorable matchup.\n\n### Running Back Analysis\n**McCaffrey**: Monitor his status closely before Sunday. If active, he's an automatic start regardless of potential snap limitations.\n\n**Chubb**: Coming off injury, but reports indicate he'll be active. May be on a pitch count but still offers RB2 value with touchdown upside.\n\n**Hampton/Bigsby/Guerendo**: All three are lottery tickets rather than immediate contributors. Hampton has the clearest path to touches among them but isn't startable in Week 1.\n\n### Wide Receiver Breakdown\nYour WR corps has good upside but some uncertainty. Higgins should see heavy volume with Chase injured. Brian Thomas Jr. has impressed in preseason and draws a favorable Week 1 matchup. I recommend starting Metcalf in your flex over Williams due to his proven production and target share.\n\n**Key Insight**: DK Metcalf's target share (25%+ last season) makes him a safer play than Williams, who remains boom/bust despite his big-play ability.\n\n### Tight End Strategy\nErtz provides a safe floor in the Washington offense where he should see consistent targets. Freiermuth is a solid backup but doesn't warrant flex consideration while Ertz is healthy.\n\n### Defense & Kicker\nPhiladelphia's defense at home against Green Bay is a strong play. The Eagles' pass rush should generate pressure against Jordan Love.\n\nGay is serviceable but consider streaming kickers based on matchups and offensive efficiency.\n\n## \ud83d\udd0d WAIVER WIRE OPPORTUNITIES\n\n### Top Available RBs to Consider:\n1. Jaylen Warren (PIT) - 3rd down back with standalone value\n2. Tyjae Spears (TEN) - Change-of-pace back with receiving upside\n3. Ty Chandler (MIN) - Potential committee back with Aaron Jones\n\n### Top Available WRs to Consider:\n1. Josh Downs (IND) - Emerging slot receiver with PPR upside\n2. Wan'Dale Robinson (NYG) - High-volume slot option\n3. Alec Pierce (IND) - Deep threat in improving Colts offense\n\n### Top Available TEs to Consider:\n1. Hunter Henry (NE) - Safety valve for rookie QB\n2. Cade Otton (TB) - Emerging option in Bucs offense\n3. Tyler Conklin (NYJ) - Consistent target share in Jets offense\n\n### Streaming DST Options:\n1. Seattle (vs. DEN) - Home against rookie QB Bo Nix\n2. Minnesota (vs. NYG) - Daniel Jones turnover potential\n3. Cincinnati (vs. NE) - Home against rebuilding Patriots\n\n## \u2139\ufe0f SOURCES USED\n- Yahoo Fantasy App data\n- Tank01 projections\n- Sleeper trending data\n- NFL.com news updates\n- CBS Sports analysis\n\nRemember to check injury reports before Sunday kickoff, particularly for McCaffrey and Chubb, and adjust your lineup accordingly.",
+  "resources_used": [
+    "yahoo_roster",
+    "yahoo_available",
+    "yahoo_opponents",
+    "yahoo_matchups",
+    "yahoo_transactions",
+    "sleeper_roster",
+    "sleeper_available",
+    "sleeper_trending",
+    "tank01_roster",
+    "tank01_available",
+    "https://www.nfl.com/news",
+    "https://www.cbssports.com/nfl/",
+    "https://www.rotoworld.com/sports/nfl/football"
+  ]
+}

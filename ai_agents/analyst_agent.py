@@ -167,13 +167,17 @@ class AnalystAgent:
         """Build the complete prompt for LLM analysis"""
         prompt = f"""USER REQUEST: {user_prompt}
 
-CURRENT DATA ANALYSIS:
+CRITICAL CONTEXT: This is the 2025 NFL season. Use ONLY the data provided below and current 2025 season information. Do NOT use training data from 2024 or earlier seasons.
+
+CURRENT DATA ANALYSIS (2025 SEASON):
 {json.dumps(analysis_data, indent=2)}
 
-WEB RESEARCH FINDINGS:
+WEB RESEARCH FINDINGS (2025 SEASON):
 {json.dumps(web_research, indent=2)}
 
-Please provide a comprehensive analysis following the format specified in your system prompt. Focus on actionable recommendations with clear justifications."""
+IMPORTANT: Before making any recommendations, verify all player-team relationships and current situations against the provided data. Do not assume player situations from your training data.
+
+Please provide a comprehensive analysis following the format specified in your system prompt. Focus on actionable recommendations with clear justifications based on 2025 season data only."""
         
         return prompt
     
