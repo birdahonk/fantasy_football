@@ -45,21 +45,30 @@ def test_analyst_agent_initialization():
     try:
         from ai_agents.analyst_agent import AnalystAgent
         
-        # Test with OpenAI (if available)
+        # Test with Anthropic (if available) - using latest model (DEFAULT)
+        try:
+            agent = AnalystAgent()  # Uses default: Anthropic Claude Sonnet 3.7
+            print("✅ Anthropic Claude Sonnet 3.7 Analyst Agent initialized successfully")
+            return True
+        except ImportError:
+            print("⚠️  Anthropic package not available, skipping Anthropic test")
+        except Exception as e:
+            print(f"⚠️  Anthropic model not available: {e}")
+            # Try fallback to Sonnet 3.5
+            try:
+                agent = AnalystAgent(model_provider="anthropic", model_name="claude-3-5-sonnet-20241022")
+                print("✅ Anthropic Claude Sonnet 3.5 Analyst Agent initialized successfully")
+                return True
+            except Exception as e2:
+                print(f"⚠️  Fallback model also failed: {e2}")
+        
+        # Test with OpenAI (if available) - fallback option
         try:
             agent = AnalystAgent(model_provider="openai", model_name="gpt-4")
             print("✅ OpenAI Analyst Agent initialized successfully")
             return True
         except ImportError:
             print("⚠️  OpenAI package not available, skipping OpenAI test")
-        
-        # Test with Anthropic (if available)
-        try:
-            agent = AnalystAgent(model_provider="anthropic", model_name="claude-3-5-sonnet-20241022")
-            print("✅ Anthropic Analyst Agent initialized successfully")
-            return True
-        except ImportError:
-            print("⚠️  Anthropic package not available, skipping Anthropic test")
         
         print("⚠️  No LLM providers available for testing (packages not installed)")
         print("   To test with LLMs, install: pip install openai anthropic")

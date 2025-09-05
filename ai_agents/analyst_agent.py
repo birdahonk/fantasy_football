@@ -39,13 +39,13 @@ class AnalystAgent:
     Supports multiple LLM providers with conversation memory and data collection orchestration.
     """
     
-    def __init__(self, model_provider: str = "openai", model_name: str = "gpt-4"):
+    def __init__(self, model_provider: str = "anthropic", model_name: str = "claude-3-7-sonnet-20250219"):
         """
         Initialize the Analyst Agent
         
         Args:
-            model_provider: "openai" or "anthropic"
-            model_name: Specific model name (e.g., "gpt-4", "claude-3-5-sonnet-20241022")
+            model_provider: "openai" or "anthropic" (default: "anthropic")
+            model_name: Specific model name (default: "claude-3-7-sonnet-20250219")
         """
         self.model_provider = model_provider.lower()
         self.model_name = model_name
@@ -260,7 +260,7 @@ def main():
     print("=" * 50)
     
     # Initialize agent
-    agent = AnalystAgent(model_provider="openai", model_name="gpt-4")
+    agent = AnalystAgent()  # Uses default: Anthropic Claude Sonnet 3.7
     
     # Example analysis
     user_prompt = "Analyze my current roster and recommend any add/drop moves I should consider from the available free agents."
