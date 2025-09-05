@@ -191,12 +191,12 @@ class Tank01MyRosterExtractor:
         else:
             return "Unknown"
     
-    def _load_latest_yahoo_roster_players(self) -> List[Dict[str, Any]]:
+    def _load_latest_yahoo_roster_players(self) -> tuple[List[Dict[str, Any]], Dict[str, Any]]:
         """
         Load the latest Yahoo my roster players from the most recent output file.
         
         Returns:
-            List of Yahoo roster players with their data
+            Tuple of (List of Yahoo roster players with their data, Raw Yahoo data)
         """
         try:
             # Find the most recent Yahoo my roster output
@@ -287,12 +287,12 @@ class Tank01MyRosterExtractor:
             
             self.stats["yahoo_players_loaded"] = len(players)
             self.logger.info(f"Loaded {len(players)} Yahoo roster players")
-            return players
+            return players, raw_data
             
         except Exception as e:
             self.logger.error(f"Failed to load Yahoo roster players: {e}")
             self.stats["errors"] += 1
-            return []
+            return [], {}
     
     def _parse_yahoo_roster_alternative(self, raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
@@ -333,7 +333,7 @@ class Tank01MyRosterExtractor:
         except Exception as e:
             self.logger.error(f"Alternative parsing also failed: {e}")
         
-        return players
+        return players, raw_data
     
     def _get_tank01_player_database(self) -> List[Dict[str, Any]]:
         """
@@ -1075,7 +1075,7 @@ class Tank01MyRosterExtractor:
         self.logger.info("Starting Tank01 my roster data extraction")
         
         # Load Yahoo roster players
-        yahoo_players = self._load_latest_yahoo_roster_players()
+        yahoo_players, yahoo_data = self._load_latest_yahoo_roster_players()
         if not yahoo_players:
             self.logger.error("No Yahoo roster players loaded")
             return {"error": "No Yahoo roster players loaded"}
