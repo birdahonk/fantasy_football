@@ -148,6 +148,9 @@ class SleeperAvailablePlayersExtractor:
                 datetime.now() - self.execution_stats['start_time']
             ).total_seconds()
 
+            # Extract season context
+            season_context = self._extract_season_context()
+            
             result: Dict[str, Any] = {
                 'extraction_metadata': {
                     'source': 'Sleeper API - Available Players',
@@ -155,6 +158,7 @@ class SleeperAvailablePlayersExtractor:
                     'yahoo_source': 'Latest available_players.py output',
                     'execution_stats': self.execution_stats
                 },
+                'season_context': season_context,
                 'matched_players': matched_players,
                 'unmatched_players': unmatched_players
             }
@@ -172,7 +176,86 @@ class SleeperAvailablePlayersExtractor:
             self.logger.error(traceback.format_exc())
             self.execution_stats['errors'] += 1
             return {}
-
+    
+    def _extract_season_context(self) -> Dict[str, Any]:
+        """Extract season and week context from Yahoo data."""
+        try:
+            current_date = datetime.now()
+            season_context = {
+                'nfl_season': str(current_date.year),
+                'current_date': current_date.strftime('%Y-%m-%d'),
+                'season_phase': self._determine_season_phase(current_date),
+                'data_source': 'Sleeper API',
+                'verification_notes': []
+            }
+            
+            # Try to load Yahoo data for more accurate season/week info
+            try:
+                yahoo_data = self._load_latest_yahoo_available_data()
+                if yahoo_data and 'season_context' in yahoo_data:
+                    yahoo_season_context = yahoo_data['season_context']
+                    season_context.update(yahoo_season_context)
+                    season_context['data_source'] = 'Sleeper API (with Yahoo context)'
+                    season_context['verification_notes'].append("Season context extracted from Yahoo data")
+                else:
+                    season_context['verification_notes'].append("No Yahoo season context available, using date estimation")
+            except Exception as e:
+                self.logger.warning(f"Could not load Yahoo season context: {e}")
+                season_context['verification_notes'].append(f"Could not load Yahoo data: {e}")
+            
+            return season_context
+            
+        except Exception as e:
+            self.logger.error(f"Error extracting season context: {e}")
+            return {
+                'nfl_season': str(current_date.year),
+                'current_date': current_date.strftime('%Y-%m-%d'),
+                'season_phase': 'Unknown',
+                'data_source': 'Sleeper API',
+                'verification_notes': [f"Error extracting season context: {e}"]
+            }
+    
+    def _determine_season_phase(self, current_date: datetime) -> str:
+        """Determine the current phase of the NFL season based on date."""
+        month = current_date.month
+        day = current_date.day
+        
+        if month == 9 and day < 15:
+            return "Early Regular Season"
+        elif month == 9 or month == 10:
+            return "Regular Season"
+        elif month == 11 or month == 12:
+            return "Late Regular Season"
+        elif month == 1 and day < 15:
+            return "Playoffs"
+        elif month == 1 and day >= 15:
+            return "Super Bowl"
+        elif month == 2:
+            return "Offseason"
+        elif month >= 3 and month <= 8:
+            return "Offseason"
+        else:
+            return "Unknown"
+    
+    def _load_latest_yahoo_available_data(self) -> Optional[Dict[str, Any]]:
+        """Load the latest Yahoo available players raw data for season context."""
+        try:
+            base_dir = os.path.join(
+                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'available_players'
+            )
+            base_dir = os.path.abspath(base_dir)
+            pattern = os.path.join(base_dir, '*_available_players_raw_data.json')
+            files = sorted(glob.glob(pattern))
+            if not files:
+                return None
+            
+            latest_file = files[-1]
+            with open(latest_file, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            self.logger.warning(f"Could not load Yahoo available players data: {e}")
+            return None
+    
     def _load_latest_yahoo_available_players(self) -> List[Dict[str, Any]]:
         """Load the latest Yahoo available players raw JSON and return extracted players list."""
         try:
@@ -279,6 +362,31 @@ class SleeperAvailablePlayersExtractor:
             report.append(f"**Execution Time:** {stats.get('execution_time', 0):.2f}s")
             report.append(f"**Errors:** {stats.get('errors', 0)}")
             report.append("")
+            
+            # Add season and week context
+            season_context = data.get('season_context', {})
+            if season_context:
+                report.append("## Season & Week Context")
+                report.append(f"- **NFL Season:** {season_context.get('nfl_season', 'Unknown')}")
+                report.append(f"- **Current Week:** {season_context.get('current_week', 'Unknown')}")
+                report.append(f"- **Season Phase:** {season_context.get('season_phase', 'Unknown')}")
+                report.append(f"- **Data Source:** {season_context.get('data_source', 'Unknown')}")
+                
+                week_info = season_context.get('week_info', {})
+                if week_info:
+                    report.append(f"- **Week Start:** {week_info.get('week_start', 'Unknown')}")
+                    report.append(f"- **Week End:** {week_info.get('week_end', 'Unknown')}")
+                    report.append(f"- **Week Status:** {week_info.get('status', 'Unknown')}")
+                    report.append(f"- **Week Source:** {week_info.get('source', 'Unknown')}")
+                
+                verification_notes = season_context.get('verification_notes', [])
+                if verification_notes:
+                    report.append("")
+                    report.append("### Verification Notes")
+                    for note in verification_notes:
+                        report.append(f"- {note}")
+                
+                report.append("")
 
             # Matched players summary table (limit 100)
             if matched:
