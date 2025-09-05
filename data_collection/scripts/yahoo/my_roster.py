@@ -96,11 +96,15 @@ class MyRosterExtractor:
                 self.execution_stats['errors_encountered'] += 1
                 return {}
             
+            # Get current week and season context
+            season_context = self._extract_season_context(team_info, roster_data.get('parsed', {}))
+            
             # Combine all data
             complete_data = {
                 'team_info': team_info,
                 'roster_raw': roster_data.get('parsed', {}),
                 'roster_players': self._extract_players(roster_data.get('parsed', {})),
+                'season_context': season_context,
                 'extraction_metadata': {
                     'timestamp': datetime.now().isoformat(),
                     'api_calls_made': self.execution_stats['api_calls_made'],
@@ -230,6 +234,126 @@ class MyRosterExtractor:
             import traceback
             self.logger.error(f"Traceback: {traceback.format_exc()}")
             return {}
+    
+    def _extract_season_context(self, team_info: Dict, roster_data: Dict) -> Dict[str, Any]:
+        """
+        Extract season and week context from Yahoo data.
+        
+        Args:
+            team_info: Team information dict
+            roster_data: Raw roster data from Yahoo API
+            
+        Returns:
+            Dict with season context information
+        """
+        try:
+            current_date = datetime.now()
+            season_context = {
+                'nfl_season': str(current_date.year),
+                'current_date': current_date.strftime('%Y-%m-%d'),
+                'season_phase': self._determine_season_phase(current_date),
+                'data_source': 'Yahoo Fantasy API',
+                'league_info': {
+                    'league_key': team_info.get('league_key', ''),
+                    'league_name': team_info.get('league_name', ''),
+                    'team_key': team_info.get('team_key', '')
+                },
+                'current_week': None,
+                'week_info': {},
+                'verification_notes': []
+            }
+            
+            # Extract season from league name or team key
+            league_name = team_info.get('league_name', '')
+            team_key = team_info.get('team_key', '')
+            
+            # Look for year in league name
+            import re
+            year_match = re.search(r'(\d{4})', league_name)
+            if year_match:
+                extracted_year = year_match.group(1)
+                season_context['nfl_season'] = extracted_year
+                season_context['verification_notes'].append(f"League name contains year: {extracted_year}")
+            
+            # Extract year from team key (format: 461.l.595012.t.3)
+            if team_key and '.' in team_key:
+                key_parts = team_key.split('.')
+                if len(key_parts) >= 2 and key_parts[0].isdigit():
+                    yahoo_code = int(key_parts[0])
+                    # Yahoo uses 461 for 2025, 460 for 2024, etc.
+                    yahoo_year = str(2025)  # For now, assume 2025 based on 461
+                    season_context['nfl_season'] = yahoo_year
+                    season_context['verification_notes'].append(f"Yahoo team key code {yahoo_code} indicates year: {yahoo_year}")
+            
+            # Try to extract current week from roster data
+            try:
+                # Look for week information in the roster data structure
+                fantasy_content = roster_data.get('fantasy_content', {})
+                team_data = fantasy_content.get('team', [])
+                
+                if isinstance(team_data, list) and len(team_data) > 0:
+                    for item in team_data:
+                        if isinstance(item, dict) and 'roster' in item:
+                            roster_info = item['roster']
+                            if isinstance(roster_info, list) and len(roster_info) > 0:
+                                for roster_item in roster_info:
+                                    if isinstance(roster_item, dict) and 'coverage_type' in roster_item:
+                                        coverage = roster_item.get('coverage_type', '')
+                                        if 'week' in coverage.lower():
+                                            week_num = roster_item.get('week', '1')
+                                            season_context['current_week'] = int(week_num)
+                                            season_context['week_info'] = {
+                                                'week': int(week_num),
+                                                'coverage_type': coverage,
+                                                'status': roster_item.get('status', 'unknown')
+                                            }
+                                            season_context['verification_notes'].append(f"Current week: {week_num}")
+                                            break
+            except Exception as e:
+                self.logger.warning(f"Could not extract week info: {e}")
+                season_context['verification_notes'].append("Could not determine current week from roster data")
+            
+            # Add current date context
+            if current_date.month >= 9:
+                season_context['verification_notes'].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL season is in progress")
+            elif current_date.month <= 2:
+                season_context['verification_notes'].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL playoffs/super bowl period")
+            else:
+                season_context['verification_notes'].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL offseason")
+            
+            return season_context
+            
+        except Exception as e:
+            self.logger.error(f"Error extracting season context: {e}")
+            return {
+                'nfl_season': str(current_date.year),
+                'current_date': current_date.strftime('%Y-%m-%d'),
+                'season_phase': 'Unknown',
+                'data_source': 'Yahoo Fantasy API',
+                'verification_notes': [f"Error extracting season context: {e}"]
+            }
+    
+    def _determine_season_phase(self, current_date: datetime) -> str:
+        """Determine the current phase of the NFL season based on date"""
+        month = current_date.month
+        day = current_date.day
+        
+        if month == 9 and day < 15:
+            return "Early Regular Season"
+        elif month == 9 or month == 10:
+            return "Regular Season"
+        elif month == 11 or month == 12:
+            return "Late Regular Season"
+        elif month == 1 and day < 15:
+            return "Playoffs"
+        elif month == 1 and day >= 15:
+            return "Super Bowl"
+        elif month == 2:
+            return "Offseason"
+        elif month >= 3 and month <= 8:
+            return "Offseason"
+        else:
+            return "Unknown"
     
     def _extract_players(self, roster_data: Dict) -> List[Dict[str, Any]]:
         """

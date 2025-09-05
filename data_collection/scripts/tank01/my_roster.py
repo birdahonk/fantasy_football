@@ -99,6 +99,98 @@ class Tank01MyRosterExtractor:
         
         self.logger.info("Tank01 My Roster Extractor initialized")
     
+    def _extract_season_context(self, yahoo_data: Dict) -> Dict[str, Any]:
+        """
+        Extract season and week context from Yahoo data.
+        
+        Args:
+            yahoo_data: Yahoo roster data
+            
+        Returns:
+            Dict with season context information
+        """
+        try:
+            current_date = get_current_time_pacific()
+            season_context = {
+                'nfl_season': str(current_date.year),
+                'current_date': current_date.strftime('%Y-%m-%d'),
+                'season_phase': self._determine_season_phase(current_date),
+                'data_source': 'Tank01 API',
+                'verification_notes': []
+            }
+            
+            # Extract season from Yahoo data if available
+            if yahoo_data and 'team_info' in yahoo_data:
+                team_info = yahoo_data['team_info']
+                league_name = team_info.get('league_name', '')
+                team_key = team_info.get('team_key', '')
+                
+                # Look for year in league name
+                import re
+                year_match = re.search(r'(\d{4})', league_name)
+                if year_match:
+                    extracted_year = year_match.group(1)
+                    season_context['nfl_season'] = extracted_year
+                    season_context['verification_notes'].append(f"Yahoo league name contains year: {extracted_year}")
+                
+                # Extract year from team key (format: 461.l.595012.t.3)
+                if team_key and '.' in team_key:
+                    key_parts = team_key.split('.')
+                    if len(key_parts) >= 2 and key_parts[0].isdigit():
+                        yahoo_code = int(key_parts[0])
+                        # Yahoo uses 461 for 2025, 460 for 2024, etc.
+                        yahoo_year = str(2025)  # For now, assume 2025 based on 461
+                        season_context['nfl_season'] = yahoo_year
+                        season_context['verification_notes'].append(f"Yahoo team key code {yahoo_code} indicates year: {yahoo_year}")
+                
+                season_context['yahoo_league_info'] = {
+                    'league_key': team_info.get('league_key', ''),
+                    'league_name': team_info.get('league_name', ''),
+                    'team_key': team_info.get('team_key', '')
+                }
+            
+            # Add current date context
+            if current_date.month >= 9:
+                season_context['verification_notes'].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL season is in progress")
+            elif current_date.month <= 2:
+                season_context['verification_notes'].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL playoffs/super bowl period")
+            else:
+                season_context['verification_notes'].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL offseason")
+            
+            return season_context
+            
+        except Exception as e:
+            self.logger.error(f"Error extracting season context: {e}")
+            return {
+                'nfl_season': str(current_date.year),
+                'current_date': current_date.strftime('%Y-%m-%d'),
+                'season_phase': 'Unknown',
+                'data_source': 'Tank01 API',
+                'verification_notes': [f"Error extracting season context: {e}"]
+            }
+    
+    def _determine_season_phase(self, current_date: datetime) -> str:
+        """Determine the current phase of the NFL season based on date"""
+        month = current_date.month
+        day = current_date.day
+        
+        if month == 9 and day < 15:
+            return "Early Regular Season"
+        elif month == 9 or month == 10:
+            return "Regular Season"
+        elif month == 11 or month == 12:
+            return "Late Regular Season"
+        elif month == 1 and day < 15:
+            return "Playoffs"
+        elif month == 1 and day >= 15:
+            return "Super Bowl"
+        elif month == 2:
+            return "Offseason"
+        elif month >= 3 and month <= 8:
+            return "Offseason"
+        else:
+            return "Unknown"
+    
     def _load_latest_yahoo_roster_players(self) -> List[Dict[str, Any]]:
         """
         Load the latest Yahoo my roster players from the most recent output file.
@@ -1043,6 +1135,7 @@ class Tank01MyRosterExtractor:
         
         # Prepare raw data with comprehensive API usage tracking
         final_usage = self.tank01.get_api_usage()
+        season_context = self._extract_season_context(yahoo_data)
         raw_data = {
             "extraction_metadata": {
                 "source": "Tank01 API - My Roster",
@@ -1050,6 +1143,7 @@ class Tank01MyRosterExtractor:
                 "yahoo_source": "Latest my_roster.py output",
                 "execution_stats": self.stats
             },
+            "season_context": season_context,
             "matched_players": matched_players,
             "unmatched_players": unmatched_players,
             "tank01_api_usage": {
