@@ -37,12 +37,12 @@ def format_timestamp_pacific(timestamp):
         return "Unknown"
     
     try:
-        # RapidAPI reset timestamp appears to be seconds until reset, not Unix timestamp
+        # RapidAPI reset timestamp contains seconds remaining until reset, not Unix timestamp
         # Calculate when the reset will occur by adding to current time
         current_time = get_current_time_pacific()
         reset_time = current_time + timedelta(seconds=timestamp)
         return reset_time.strftime('%Y-%m-%d %H:%M:%S %Z')
-    except (ValueError, OSError) as e:
+    except (ValueError, TypeError) as e:
         return f"Invalid timestamp: {timestamp}"
 
 def normalize_team_abbreviation(team_abv):

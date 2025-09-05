@@ -68,12 +68,14 @@ def format_timestamp_pacific(timestamp):
     if not timestamp:
         return "N/A"
     
-    pacific = pytz.timezone('US/Pacific')
-    current_time = get_current_time_pacific()
-    
-    # Add the reset countdown (in seconds) to current time
-    reset_time = current_time + timedelta(seconds=timestamp)
-    return reset_time.strftime("%Y-%m-%d %H:%M:%S %Z")
+    try:
+        # RapidAPI reset timestamp contains seconds remaining until reset, not Unix timestamp
+        # Calculate when the reset will occur by adding to current time
+        current_time = get_current_time_pacific()
+        reset_time = current_time + timedelta(seconds=timestamp)
+        return reset_time.strftime("%Y-%m-%d %H:%M:%S %Z")
+    except (ValueError, TypeError) as e:
+        return f"Invalid timestamp: {timestamp}"
 
 def normalize_team_abbreviation(team_abv):
     """Normalize team abbreviation to uppercase for API consistency"""
