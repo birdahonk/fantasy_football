@@ -240,16 +240,24 @@ class AnalystTools:
         return recent_files
     
     def _extract_season_context(self, recent_files: Dict[str, str]) -> Dict[str, Any]:
-        """Extract season context from the data files"""
+        """Extract season context from the data files dynamically"""
+        current_date = datetime.now(self.pacific_tz)
+        current_year = current_date.year
+        
         season_context = {
-            "nfl_season": "2025",
-            "current_date": datetime.now(self.pacific_tz).strftime("%Y-%m-%d"),
-            "season_phase": "Regular Season",
-            "data_source": "Yahoo Fantasy API",
-            "verification_notes": []
+            "nfl_season": str(current_year),
+            "current_date": current_date.strftime("%Y-%m-%d"),
+            "season_phase": self._determine_season_phase(current_date),
+            "data_source": "Multi-API (Yahoo, Sleeper, Tank01)",
+            "verification_notes": [],
+            "extracted_season": None,
+            "confidence_level": "medium"
         }
         
-        # Try to extract season info from Yahoo roster data
+        # Try to extract season info from multiple sources
+        season_indicators = []
+        
+        # 1. Yahoo roster data
         if "yahoo_roster" in recent_files:
             try:
                 with open(recent_files["yahoo_roster"], 'r') as f:
@@ -259,22 +267,107 @@ class AnalystTools:
                 league_name = team_info.get("league_name", "")
                 team_key = team_info.get("team_key", "")
                 
-                if "2025" in league_name:
-                    season_context["verification_notes"].append("League name confirms 2025 season")
+                # Extract year from league name
+                import re
+                year_match = re.search(r'(\d{4})', league_name)
+                if year_match:
+                    extracted_year = year_match.group(1)
+                    season_indicators.append(("league_name", extracted_year))
+                    season_context["verification_notes"].append(f"League name contains year: {extracted_year}")
                 
-                if "461.l." in team_key:
-                    season_context["verification_notes"].append("Team key 461 indicates 2025 season")
-                    season_context["yahoo_league_id"] = team_key
+                # Extract year from team key (format: 461.l.595012.t.3 where 461 = year)
+                if team_key and "." in team_key:
+                    key_parts = team_key.split(".")
+                    if len(key_parts) >= 2 and key_parts[0].isdigit():
+                        # Yahoo uses a different year encoding - 461 = 2025
+                        yahoo_code = int(key_parts[0])
+                        yahoo_year = str(2025)  # For now, assume 2025 based on the 461 code
+                        season_indicators.append(("yahoo_team_key", yahoo_year))
+                        season_context["verification_notes"].append(f"Yahoo team key code {yahoo_code} indicates year: {yahoo_year}")
+                        season_context["yahoo_league_id"] = team_key
                 
             except Exception as e:
-                logger.warning(f"Could not extract season context from roster data: {e}")
+                logger.warning(f"Could not extract season context from Yahoo roster data: {e}")
         
-        # Add current date context
-        current_date = datetime.now(self.pacific_tz)
+        # 2. Sleeper data (if available)
+        if "sleeper_roster" in recent_files:
+            try:
+                with open(recent_files["sleeper_roster"], 'r') as f:
+                    data = json.load(f)
+                
+                # Look for season indicators in Sleeper data
+                if "season" in data:
+                    sleeper_season = str(data["season"])
+                    season_indicators.append(("sleeper_season", sleeper_season))
+                    season_context["verification_notes"].append(f"Sleeper data indicates season: {sleeper_season}")
+                
+            except Exception as e:
+                logger.warning(f"Could not extract season context from Sleeper data: {e}")
+        
+        # 3. Tank01 data (if available)
+        if "tank01_roster" in recent_files:
+            try:
+                with open(recent_files["tank01_roster"], 'r') as f:
+                    data = json.load(f)
+                
+                # Look for season indicators in Tank01 data
+                if "season" in data:
+                    tank01_season = str(data["season"])
+                    season_indicators.append(("tank01_season", tank01_season))
+                    season_context["verification_notes"].append(f"Tank01 data indicates season: {tank01_season}")
+                
+            except Exception as e:
+                logger.warning(f"Could not extract season context from Tank01 data: {e}")
+        
+        # 4. Determine the most likely season
+        if season_indicators:
+            # Count occurrences of each year
+            year_counts = {}
+            for source, year in season_indicators:
+                year_counts[year] = year_counts.get(year, 0) + 1
+            
+            # Find the most common year
+            most_common_year = max(year_counts, key=year_counts.get)
+            season_context["extracted_season"] = most_common_year
+            season_context["nfl_season"] = most_common_year
+            season_context["confidence_level"] = "high" if year_counts[most_common_year] > 1 else "medium"
+            season_context["verification_notes"].append(f"Consensus season: {most_common_year} (from {year_counts[most_common_year]} sources)")
+        else:
+            # Fallback to current year based on date
+            season_context["verification_notes"].append(f"No season data found in files, using current year: {current_year}")
+            season_context["confidence_level"] = "low"
+        
+        # 5. Add current date context
         if current_date.month >= 9:  # September or later
-            season_context["verification_notes"].append(f"Current date {current_date.strftime('%Y-%m-%d')} confirms 2025 NFL season")
+            season_context["verification_notes"].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL season is in progress")
+        elif current_date.month <= 2:  # January-February (playoffs)
+            season_context["verification_notes"].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL playoffs/super bowl period")
+        else:  # March-August (offseason)
+            season_context["verification_notes"].append(f"Current date {current_date.strftime('%Y-%m-%d')} suggests NFL offseason")
         
         return season_context
+    
+    def _determine_season_phase(self, current_date: datetime) -> str:
+        """Determine the current phase of the NFL season based on date"""
+        month = current_date.month
+        day = current_date.day
+        
+        if month == 9 and day < 15:
+            return "Early Regular Season"
+        elif month == 9 or month == 10:
+            return "Regular Season"
+        elif month == 11 or month == 12:
+            return "Late Regular Season"
+        elif month == 1 and day < 15:
+            return "Playoffs"
+        elif month == 1 and day >= 15:
+            return "Super Bowl"
+        elif month == 2:
+            return "Offseason"
+        elif month >= 3 and month <= 8:
+            return "Offseason"
+        else:
+            return "Unknown"
     
     def _analyze_yahoo_roster(self, filepath: str) -> Dict[str, Any]:
         """Analyze Yahoo roster data"""

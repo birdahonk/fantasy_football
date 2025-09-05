@@ -165,19 +165,31 @@ class AnalystAgent:
     
     def _build_analysis_prompt(self, user_prompt: str, analysis_data: Dict, web_research: Dict) -> str:
         """Build the complete prompt for LLM analysis"""
+        # Extract season context from analysis data
+        season_context = analysis_data.get("season_context", {})
+        nfl_season = season_context.get("nfl_season", "current")
+        season_phase = season_context.get("season_phase", "Regular Season")
+        confidence = season_context.get("confidence_level", "medium")
+        
         prompt = f"""USER REQUEST: {user_prompt}
 
-CRITICAL CONTEXT: This is the 2025 NFL season. Use ONLY the data provided below and current 2025 season information. Do NOT use training data from 2024 or earlier seasons.
+CRITICAL CONTEXT: This is the {nfl_season} NFL season ({season_phase}). Use ONLY the data provided below and current {nfl_season} season information. Do NOT use training data from previous seasons.
 
-CURRENT DATA ANALYSIS (2025 SEASON):
+SEASON CONTEXT VERIFICATION:
+- NFL Season: {nfl_season}
+- Season Phase: {season_phase}
+- Confidence Level: {confidence}
+- Verification Notes: {season_context.get('verification_notes', [])}
+
+CURRENT DATA ANALYSIS ({nfl_season} SEASON):
 {json.dumps(analysis_data, indent=2)}
 
-WEB RESEARCH FINDINGS (2025 SEASON):
+WEB RESEARCH FINDINGS ({nfl_season} SEASON):
 {json.dumps(web_research, indent=2)}
 
-IMPORTANT: Before making any recommendations, verify all player-team relationships and current situations against the provided data. Do not assume player situations from your training data.
+IMPORTANT: Before making any recommendations, verify all player-team relationships and current situations against the provided data. Do not assume player situations from your training data. Use only the {nfl_season} season information provided above.
 
-Please provide a comprehensive analysis following the format specified in your system prompt. Focus on actionable recommendations with clear justifications based on 2025 season data only."""
+Please provide a comprehensive analysis following the format specified in your system prompt. Focus on actionable recommendations with clear justifications based on {nfl_season} season data only."""
         
         return prompt
     
