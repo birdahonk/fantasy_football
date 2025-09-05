@@ -1,0 +1,1859 @@
+{
+  "extraction_metadata": {
+    "source": "Sleeper API",
+    "extraction_timestamp": "2025-09-05T13:04:25.826312",
+    "execution_stats": {
+      "start_time": "2025-09-05 13:04:25.096821",
+      "api_calls": 0,
+      "errors": 0,
+      "players_processed": 15,
+      "players_matched": 15,
+      "players_unmatched": 0,
+      "execution_time": 0.728708
+    }
+  },
+  "season_context": {
+    "nfl_season": "2025",
+    "current_date": "2025-09-05",
+    "season_phase": "Early Regular Season",
+    "data_source": "Sleeper API (with Yahoo context)",
+    "verification_notes": [
+      "League name contains year: 2025",
+      "Yahoo team key code 461 indicates year: 2025",
+      "Current week 1 extracted from Yahoo team matchups API",
+      "Current date 2025-09-05 suggests NFL season is in progress",
+      "Season context extracted from Yahoo data"
+    ],
+    "league_info": {
+      "league_key": "461.l.595012",
+      "league_name": "Fantasy League (2025)",
+      "team_key": "461.l.595012.t.3"
+    },
+    "current_week": 1,
+    "week_info": {
+      "week": 1,
+      "week_start": "2025-09-04",
+      "week_end": "2025-09-08",
+      "status": "midevent",
+      "coverage_type": "week",
+      "source": "yahoo_team_matchups_api"
+    }
+  },
+  "matched_players": [
+    {
+      "yahoo_player": {
+        "player_key": "461.p.32671",
+        "player_id": "32671",
+        "name": {
+          "full": "Joe Burrow",
+          "first": "Joe",
+          "last": "Burrow",
+          "ascii_first": "Joe",
+          "ascii_last": "Burrow"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/32671",
+        "editorial_player_key": "nfl.p.32671",
+        "editorial_team_key": "nfl.t.4",
+        "editorial_team_full_name": "Cincinnati Bengals",
+        "editorial_team_abbr": "Cin",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/cincinnati/",
+        "bye_weeks": {
+          "week": "10"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "9",
+        "display_position": "QB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/Wp86PwXx9UwZi0pIREFvbQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08052025/32671.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/Wp86PwXx9UwZi0pIREFvbQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08052025/32671.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "QB",
+        "eligible_positions": [
+          {
+            "position": "QB"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "player_notes_last_timestamp": 1756519242,
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "QB"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "joeburrow",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 14,
+        "swish_id": 878785,
+        "birth_date": "1996-12-10",
+        "depth_chart_position": "QB",
+        "pandascore_id": null,
+        "news_updated": 1756518029692,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Joe",
+        "height": "76",
+        "weight": "215",
+        "years_exp": 5,
+        "team_abbr": null,
+        "yahoo_id": 32671,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "3023ac10-4e7f-425f-9fc5-2b8e6332c92e",
+        "college": "LSU",
+        "rotowire_id": 14442,
+        "full_name": "Joe Burrow",
+        "status": "Active",
+        "team": "CIN",
+        "injury_start_date": null,
+        "fantasy_data_id": 21693,
+        "espn_id": 3915511,
+        "fantasy_positions": [
+          "QB"
+        ],
+        "rotoworld_id": 14863,
+        "metadata": {
+          "channel_id": "1113708804110839808",
+          "rookie_year": "2020"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "26DF8843FD11",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "burrow",
+        "number": 9,
+        "last_name": "Burrow",
+        "high_school": "Athens (OH)",
+        "hashtag": "#joeburrow-NFL-CIN-9",
+        "age": 28,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "QB",
+        "competitions": [],
+        "search_first_name": "joe",
+        "player_id": "6770",
+        "gsis_id": null,
+        "kalshi_id": "f0410f05-05ab-4a8d-bc7a-3b7fa686d1ad"
+      },
+      "mapping": {
+        "yahoo_player_id": "32671",
+        "sleeper_player_id": "6770",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.40883",
+        "player_id": "40883",
+        "name": {
+          "full": "Brian Thomas Jr.",
+          "first": "Brian",
+          "last": "Thomas Jr.",
+          "ascii_first": "Brian",
+          "ascii_last": "Thomas Jr."
+        },
+        "url": "https://sports.yahoo.com/nfl/players/40883",
+        "editorial_player_key": "nfl.p.40883",
+        "editorial_team_key": "nfl.t.30",
+        "editorial_team_full_name": "Jacksonville Jaguars",
+        "editorial_team_abbr": "Jax",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/jacksonville/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "7",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/DlPTVpS2tEMQGLfyE70LRw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/40883.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/DlPTVpS2tEMQGLfyE70LRw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/40883.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "player_notes_last_timestamp": 1756827852,
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "WR"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "brianthomas",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 16,
+        "swish_id": 1286064,
+        "birth_date": "2002-10-08",
+        "depth_chart_position": "LWR",
+        "pandascore_id": null,
+        "news_updated": 1755462624288,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Brian",
+        "height": "74",
+        "weight": "209",
+        "years_exp": 1,
+        "team_abbr": null,
+        "yahoo_id": null,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "271a233e-68b3-4261-a3aa-7667eaf9d3cc",
+        "college": "LSU",
+        "rotowire_id": 17716,
+        "full_name": "Brian Thomas",
+        "status": "Active",
+        "team": "JAX",
+        "injury_start_date": null,
+        "fantasy_data_id": null,
+        "espn_id": null,
+        "fantasy_positions": [
+          "WR"
+        ],
+        "rotoworld_id": null,
+        "metadata": {
+          "channel_id": "1113708888835780608",
+          "rookie_year": "2024"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "8542FBE776C7",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "thomas",
+        "number": 7,
+        "last_name": "Thomas",
+        "high_school": "Walker (LA)",
+        "hashtag": "#brianthomas-NFL-JAX-7",
+        "age": 22,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "WR",
+        "competitions": [],
+        "search_first_name": "brian",
+        "player_id": "11631",
+        "gsis_id": null,
+        "kalshi_id": "01b862cc-4d5b-45ac-9ec0-c1fc161bfa55"
+      },
+      "mapping": {
+        "yahoo_player_id": "40883",
+        "sleeper_player_id": "11631",
+        "matched_via": "name_team_fallback"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.32703",
+        "player_id": "32703",
+        "name": {
+          "full": "Tee Higgins",
+          "first": "Tee",
+          "last": "Higgins",
+          "ascii_first": "Tee",
+          "ascii_last": "Higgins"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/32703",
+        "editorial_player_key": "nfl.p.32703",
+        "editorial_team_key": "nfl.t.4",
+        "editorial_team_full_name": "Cincinnati Bengals",
+        "editorial_team_abbr": "Cin",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/cincinnati/",
+        "bye_weeks": {
+          "week": "10"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "5",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/YUWtCRPt3PMeQ5E.xIhXJQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08052025/32703.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/YUWtCRPt3PMeQ5E.xIhXJQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08052025/32703.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "WR"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "teehiggins",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 31,
+        "swish_id": 978579,
+        "birth_date": "1999-01-18",
+        "depth_chart_position": "RWR",
+        "pandascore_id": null,
+        "news_updated": 1755804324165,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Tee",
+        "height": "76",
+        "weight": "220",
+        "years_exp": 5,
+        "team_abbr": null,
+        "yahoo_id": 32703,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "7963b029-5de4-4541-b00a-44eefe4349af",
+        "college": "Clemson",
+        "rotowire_id": 14506,
+        "full_name": "Tee Higgins",
+        "status": "Active",
+        "team": "CIN",
+        "injury_start_date": null,
+        "fantasy_data_id": 21690,
+        "espn_id": 4239993,
+        "fantasy_positions": [
+          "WR"
+        ],
+        "rotoworld_id": null,
+        "metadata": {
+          "channel_id": "1113708806262517760",
+          "rookie_year": "2020"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "ADB581D238AD",
+        "depth_chart_order": 2,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "higgins",
+        "number": 5,
+        "last_name": "Higgins",
+        "high_school": "Oak Ridge (TN)",
+        "hashtag": "#teehiggins-NFL-CIN-5",
+        "age": 26,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "WR",
+        "competitions": [],
+        "search_first_name": "tee",
+        "player_id": "6801",
+        "gsis_id": null,
+        "kalshi_id": "0c220ad3-4d99-497a-bd31-2f026f40db66"
+      },
+      "mapping": {
+        "yahoo_player_id": "32703",
+        "sleeper_player_id": "6801",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.30121",
+        "player_id": "30121",
+        "name": {
+          "full": "Christian McCaffrey",
+          "first": "Christian",
+          "last": "McCaffrey",
+          "ascii_first": "Christian",
+          "ascii_last": "McCaffrey"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/30121",
+        "status": "Q",
+        "status_full": "Questionable",
+        "injury_note": "Calf",
+        "editorial_player_key": "nfl.p.30121",
+        "editorial_team_key": "nfl.t.25",
+        "editorial_team_full_name": "San Francisco 49ers",
+        "editorial_team_abbr": "SF",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/san-francisco/",
+        "bye_weeks": {
+          "week": "14"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "23",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/NUKES.XtDlZ9FmhqEOqBXQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/30121.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/NUKES.XtDlZ9FmhqEOqBXQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/30121.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "has_recent_player_notes": 1,
+        "player_notes_last_timestamp": 1757101733,
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "RB"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "christianmccaffrey",
+        "injury_notes": null,
+        "stats_id": 830517,
+        "search_rank": 7,
+        "swish_id": 830517,
+        "birth_date": "1996-06-07",
+        "depth_chart_position": "RB",
+        "pandascore_id": null,
+        "news_updated": 1757101536769,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Christian",
+        "height": "71",
+        "weight": "210",
+        "years_exp": 8,
+        "team_abbr": null,
+        "yahoo_id": 30121,
+        "practice_description": null,
+        "injury_status": "Questionable",
+        "birth_state": null,
+        "sportradar_id": "f96db0af-5e25-42d1-a07a-49b4e065b364",
+        "college": "Stanford",
+        "rotowire_id": 11690,
+        "full_name": "Christian McCaffrey",
+        "status": "Active",
+        "team": "SF",
+        "injury_start_date": null,
+        "fantasy_data_id": 18877,
+        "espn_id": 3117251,
+        "fantasy_positions": [
+          "RB"
+        ],
+        "rotoworld_id": 12198,
+        "metadata": {
+          "channel_id": "1113708880413618176",
+          "injury_override_regular_2024_14": "IR",
+          "rookie_year": "2017"
+        },
+        "injury_body_part": "Calf",
+        "oddsjam_id": "431D7E287938",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "mccaffrey",
+        "number": 23,
+        "last_name": "McCaffrey",
+        "high_school": "Valor Christian (CO)",
+        "hashtag": "#christianmccaffrey-NFL-SF-23",
+        "age": 29,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "RB",
+        "competitions": [],
+        "search_first_name": "christian",
+        "player_id": "4034",
+        "gsis_id": "00-0033280",
+        "kalshi_id": "31bc8538-1e34-4465-b1f7-47271cc7194b"
+      },
+      "mapping": {
+        "yahoo_player_id": "30121",
+        "sleeper_player_id": "4034",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.31005",
+        "player_id": "31005",
+        "name": {
+          "full": "Nick Chubb",
+          "first": "Nick",
+          "last": "Chubb",
+          "ascii_first": "Nick",
+          "ascii_last": "Chubb"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/31005",
+        "editorial_player_key": "nfl.p.31005",
+        "editorial_team_key": "nfl.t.34",
+        "editorial_team_full_name": "Houston Texans",
+        "editorial_team_abbr": "Hou",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/houston/",
+        "bye_weeks": {
+          "week": "6"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "21",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/0RSbaYRKkr2T4w4lNyunHg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/31005.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/0RSbaYRKkr2T4w4lNyunHg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/31005.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "RB"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "nickchubb",
+        "injury_notes": null,
+        "stats_id": 822857,
+        "search_rank": 116,
+        "swish_id": 822857,
+        "birth_date": "1995-12-27",
+        "depth_chart_position": "RB",
+        "pandascore_id": null,
+        "news_updated": 1756153504800,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Nick",
+        "height": "71",
+        "weight": "227",
+        "years_exp": 7,
+        "team_abbr": null,
+        "yahoo_id": 31005,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "4bd60b33-9fbf-4156-ba2b-8264ac37b418",
+        "college": "Georgia",
+        "rotowire_id": 12886,
+        "full_name": "Nick Chubb",
+        "status": "Active",
+        "team": "HOU",
+        "injury_start_date": null,
+        "fantasy_data_id": 19798,
+        "espn_id": 3128720,
+        "fantasy_positions": [
+          "RB"
+        ],
+        "rotoworld_id": 13161,
+        "metadata": {
+          "channel_id": "1113708838910980096",
+          "rookie_year": "2018"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "5AC0197B4048",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "chubb",
+        "number": 21,
+        "last_name": "Chubb",
+        "high_school": "Cedartown (GA)",
+        "hashtag": "#nickchubb-NFL-HOU-21",
+        "age": 29,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "RB",
+        "competitions": [],
+        "search_first_name": "nick",
+        "player_id": "4988",
+        "gsis_id": "00-0034791",
+        "kalshi_id": "5c51cbcc-90dd-4a59-9571-0df63a1c46a4"
+      },
+      "mapping": {
+        "yahoo_player_id": "31005",
+        "sleeper_player_id": "4988",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.26658",
+        "player_id": "26658",
+        "name": {
+          "full": "Zach Ertz",
+          "first": "Zach",
+          "last": "Ertz",
+          "ascii_first": "Zach",
+          "ascii_last": "Ertz"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/26658",
+        "editorial_player_key": "nfl.p.26658",
+        "editorial_team_key": "nfl.t.28",
+        "editorial_team_full_name": "Washington Commanders",
+        "editorial_team_abbr": "Was",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/washington/",
+        "bye_weeks": {
+          "week": "12"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "86",
+        "display_position": "TE",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/.9o6aC.Nkx0260CtbrSu7w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/26658.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/.9o6aC.Nkx0260CtbrSu7w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/26658.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "TE",
+        "eligible_positions": [
+          {
+            "position": "TE"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "TE"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "zachertz",
+        "injury_notes": null,
+        "stats_id": 503177,
+        "search_rank": 154,
+        "swish_id": 503177,
+        "birth_date": "1990-11-10",
+        "depth_chart_position": "TE",
+        "pandascore_id": null,
+        "news_updated": 1756929961388,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Zach",
+        "height": "77",
+        "weight": "250",
+        "years_exp": 12,
+        "team_abbr": null,
+        "yahoo_id": 26658,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "de3421f7-2147-4835-89a5-724e87bad463",
+        "college": "Stanford",
+        "rotowire_id": 8781,
+        "full_name": "Zach Ertz",
+        "status": "Active",
+        "team": "WAS",
+        "injury_start_date": null,
+        "fantasy_data_id": 14856,
+        "espn_id": 15835,
+        "fantasy_positions": [
+          "TE"
+        ],
+        "rotoworld_id": 8409,
+        "metadata": {
+          "channel_id": "1113708700247289856",
+          "rookie_year": "2013"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "F0CCDCCFD735",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "ertz",
+        "number": 86,
+        "last_name": "Ertz",
+        "high_school": "Monte Vista (CA)",
+        "hashtag": "#zachertz-NFL-WAS-86",
+        "age": 34,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "TE",
+        "competitions": [],
+        "search_first_name": "zach",
+        "player_id": "1339",
+        "gsis_id": "00-0030061",
+        "kalshi_id": "6f6744a1-ad7a-42c2-9e99-660a386f62ac"
+      },
+      "mapping": {
+        "yahoo_player_id": "26658",
+        "sleeper_player_id": "1339",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.33967",
+        "player_id": "33967",
+        "name": {
+          "full": "Jameson Williams",
+          "first": "Jameson",
+          "last": "Williams",
+          "ascii_first": "Jameson",
+          "ascii_last": "Williams"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/33967",
+        "editorial_player_key": "nfl.p.33967",
+        "editorial_team_key": "nfl.t.8",
+        "editorial_team_full_name": "Detroit Lions",
+        "editorial_team_abbr": "Det",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/detroit/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "1",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/3q.ZpkRB9NKEJ.1fIHMADw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07312025/33967.1.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/3q.ZpkRB9NKEJ.1fIHMADw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07312025/33967.1.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "W/R/T"
+          },
+          {
+            "is_flex": 1
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "jamesonwilliams",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 60,
+        "swish_id": 1175184,
+        "birth_date": "2001-03-26",
+        "depth_chart_position": "RWR",
+        "pandascore_id": null,
+        "news_updated": 1748128235842,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Jameson",
+        "height": "73",
+        "weight": "182",
+        "years_exp": 3,
+        "team_abbr": null,
+        "yahoo_id": null,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "590adb00-5598-47ad-b6d4-16a6c5519847",
+        "college": "Alabama",
+        "rotowire_id": 15849,
+        "full_name": "Jameson Williams",
+        "status": "Active",
+        "team": "DET",
+        "injury_start_date": null,
+        "fantasy_data_id": null,
+        "espn_id": null,
+        "fantasy_positions": [
+          "WR"
+        ],
+        "rotoworld_id": null,
+        "metadata": {
+          "channel_id": "1113708811916439552",
+          "rookie_year": "2022"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "CD981F59AB0B",
+        "depth_chart_order": 2,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "williams",
+        "number": 1,
+        "last_name": "Williams",
+        "high_school": "Cardinal Ritter (MO)",
+        "hashtag": "#jamesonwilliams-NFL-DET-1",
+        "age": 24,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "WR",
+        "competitions": [],
+        "search_first_name": "jameson",
+        "player_id": "8148",
+        "gsis_id": null,
+        "kalshi_id": "eb937f22-3545-4a22-a6ce-b310b00e675d"
+      },
+      "mapping": {
+        "yahoo_player_id": "33967",
+        "sleeper_player_id": "8148",
+        "matched_via": "name_team_fallback"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.33443",
+        "player_id": "33443",
+        "name": {
+          "full": "Pat Freiermuth",
+          "first": "Pat",
+          "last": "Freiermuth",
+          "ascii_first": "Pat",
+          "ascii_last": "Freiermuth"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/33443",
+        "editorial_player_key": "nfl.p.33443",
+        "editorial_team_key": "nfl.t.23",
+        "editorial_team_full_name": "Pittsburgh Steelers",
+        "editorial_team_abbr": "Pit",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/pittsburgh/",
+        "bye_weeks": {
+          "week": "5"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "88",
+        "display_position": "TE",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/kNOQr0Rbu5O6__OENxtEkg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/33443.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/kNOQr0Rbu5O6__OENxtEkg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/33443.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "TE",
+        "eligible_positions": [
+          {
+            "position": "TE"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "BN"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "patfreiermuth",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 213,
+        "swish_id": 1116662,
+        "birth_date": "1998-10-25",
+        "depth_chart_position": "TE",
+        "pandascore_id": null,
+        "news_updated": 1755834626278,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Pat",
+        "height": "77",
+        "weight": "258",
+        "years_exp": 4,
+        "team_abbr": null,
+        "yahoo_id": null,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "04f0fefe-9d9d-44f5-94ea-6df2a42df3c6",
+        "college": "Penn State",
+        "rotowire_id": 15267,
+        "full_name": "Pat Freiermuth",
+        "status": "Active",
+        "team": "PIT",
+        "injury_start_date": null,
+        "fantasy_data_id": null,
+        "espn_id": null,
+        "fantasy_positions": [
+          "TE"
+        ],
+        "rotoworld_id": null,
+        "metadata": {
+          "channel_id": "1113708816169463808",
+          "rookie_year": "2021"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "81427E8B8D7A",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "freiermuth",
+        "number": 88,
+        "last_name": "Freiermuth",
+        "high_school": "Brooks School (MA)",
+        "hashtag": "#patfreiermuth-NFL-PIT-88",
+        "age": 26,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "TE",
+        "competitions": [],
+        "search_first_name": "pat",
+        "player_id": "7600",
+        "gsis_id": null,
+        "kalshi_id": "ae9dfc4d-a5f7-4147-ac72-ce7a52c277b4"
+      },
+      "mapping": {
+        "yahoo_player_id": "33443",
+        "sleeper_player_id": "7600",
+        "matched_via": "name_team_fallback"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.41807",
+        "player_id": "41807",
+        "name": {
+          "full": "Omarion Hampton",
+          "first": "Omarion",
+          "last": "Hampton",
+          "ascii_first": "Omarion",
+          "ascii_last": "Hampton"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/41807",
+        "editorial_player_key": "nfl.p.41807",
+        "editorial_team_key": "nfl.t.24",
+        "editorial_team_full_name": "Los Angeles Chargers",
+        "editorial_team_abbr": "LAC",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/la-chargers/",
+        "bye_weeks": {
+          "week": "12"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "8",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/kDjxveZsLOmf9KDCIKwBVw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07292025/41807.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/kDjxveZsLOmf9KDCIKwBVw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07292025/41807.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "has_recent_player_notes": 1,
+        "player_notes_last_timestamp": 1757020863,
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "BN"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "omarionhampton",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 31,
+        "swish_id": null,
+        "birth_date": "2003-03-16",
+        "depth_chart_position": "RB",
+        "pandascore_id": null,
+        "news_updated": 1757021148320,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Omarion",
+        "height": "72",
+        "weight": "220",
+        "years_exp": 0,
+        "team_abbr": null,
+        "yahoo_id": null,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "3e1b7908-79ee-4a23-97b9-5190725a2e5e",
+        "college": "North Carolina",
+        "rotowire_id": 18445,
+        "full_name": "Omarion Hampton",
+        "status": "Active",
+        "team": "LAC",
+        "injury_start_date": null,
+        "fantasy_data_id": null,
+        "espn_id": null,
+        "fantasy_positions": [
+          "RB"
+        ],
+        "rotoworld_id": null,
+        "metadata": {
+          "channel_id": "1221352943668699136",
+          "rookie_year": "2025",
+          "source_id": "655f27c0-91f6-11ec-9587-0f8fa2cff168"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "E3451FFC31D3D886",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "hampton",
+        "number": 8,
+        "last_name": "Hampton",
+        "high_school": "Cleveland (NC)",
+        "hashtag": "#omarionhampton-NFL-LAC-8",
+        "age": 22,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "RB",
+        "competitions": [],
+        "search_first_name": "omarion",
+        "player_id": "12507",
+        "gsis_id": null,
+        "kalshi_id": "deb92659-6d96-423f-bee2-a531186b1271"
+      },
+      "mapping": {
+        "yahoo_player_id": "41807",
+        "sleeper_player_id": "12507",
+        "matched_via": "name_team_fallback"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.31896",
+        "player_id": "31896",
+        "name": {
+          "full": "DK Metcalf",
+          "first": "DK",
+          "last": "Metcalf",
+          "ascii_first": "DK",
+          "ascii_last": "Metcalf"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/31896",
+        "editorial_player_key": "nfl.p.31896",
+        "editorial_team_key": "nfl.t.23",
+        "editorial_team_full_name": "Pittsburgh Steelers",
+        "editorial_team_abbr": "Pit",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/pittsburgh/",
+        "bye_weeks": {
+          "week": "5"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "4",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/JwXvD9.hqF_q7aB8gNFplA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/31896.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/JwXvD9.hqF_q7aB8gNFplA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/31896.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "BN"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "dkmetcalf",
+        "injury_notes": null,
+        "stats_id": 945633,
+        "search_rank": 45,
+        "swish_id": 945633,
+        "birth_date": "1997-12-14",
+        "depth_chart_position": "LWR",
+        "pandascore_id": null,
+        "news_updated": 1756596037101,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "DK",
+        "height": "76",
+        "weight": "229",
+        "years_exp": 6,
+        "team_abbr": null,
+        "yahoo_id": 31896,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "754faf0f-40f7-45f0-b23b-6ce990ecaf26",
+        "college": "Ole Miss",
+        "rotowire_id": 13424,
+        "full_name": "DK Metcalf",
+        "status": "Active",
+        "team": "PIT",
+        "injury_start_date": null,
+        "fantasy_data_id": 20875,
+        "espn_id": 4047650,
+        "fantasy_positions": [
+          "WR"
+        ],
+        "rotoworld_id": 13940,
+        "metadata": {
+          "channel_id": "1113708722909114368",
+          "rookie_year": "2019"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "08359C9C433B",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "metcalf",
+        "number": 4,
+        "last_name": "Metcalf",
+        "high_school": "Oxford (MS)",
+        "hashtag": "#dkmetcalf-NFL-PIT-4",
+        "age": 27,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "WR",
+        "competitions": [],
+        "search_first_name": "dk",
+        "player_id": "5846",
+        "gsis_id": " 00-0035640",
+        "kalshi_id": "b7ce0d2b-ad08-4335-896f-242ff44d6204"
+      },
+      "mapping": {
+        "yahoo_player_id": "31896",
+        "sleeper_player_id": "5846",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.40095",
+        "player_id": "40095",
+        "name": {
+          "full": "Tank Bigsby",
+          "first": "Tank",
+          "last": "Bigsby",
+          "ascii_first": "Tank",
+          "ascii_last": "Bigsby"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/40095",
+        "editorial_player_key": "nfl.p.40095",
+        "editorial_team_key": "nfl.t.30",
+        "editorial_team_full_name": "Jacksonville Jaguars",
+        "editorial_team_abbr": "Jax",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/jacksonville/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "4",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/G1SG5QSlh.mDc1kG60BmEA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/40095.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/G1SG5QSlh.mDc1kG60BmEA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202025/40095.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "BN"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "tankbigsby",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 118,
+        "swish_id": 1215035,
+        "birth_date": "2002-08-30",
+        "depth_chart_position": "RB",
+        "pandascore_id": null,
+        "news_updated": 1755464425490,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Tank",
+        "height": "71",
+        "weight": "215",
+        "years_exp": 2,
+        "team_abbr": null,
+        "yahoo_id": null,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "2034916c-8062-46e3-8d0c-d0dec694e2d1",
+        "college": "Auburn",
+        "rotowire_id": 16705,
+        "full_name": "Tank Bigsby",
+        "status": "Active",
+        "team": "JAX",
+        "injury_start_date": null,
+        "fantasy_data_id": null,
+        "espn_id": null,
+        "fantasy_positions": [
+          "RB"
+        ],
+        "rotoworld_id": null,
+        "metadata": {
+          "channel_id": "1113708888558956544",
+          "rookie_year": "2023"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "89BECF1D28D6",
+        "depth_chart_order": 2,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "bigsby",
+        "number": 4,
+        "last_name": "Bigsby",
+        "high_school": "Callaway (GA)",
+        "hashtag": "#tankbigsby-NFL-JAX-4",
+        "age": 23,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "RB",
+        "competitions": [],
+        "search_first_name": "tank",
+        "player_id": "9225",
+        "gsis_id": null,
+        "kalshi_id": "acef4625-90ce-4d9a-ab1b-8939240a7356"
+      },
+      "mapping": {
+        "yahoo_player_id": "40095",
+        "sleeper_player_id": "9225",
+        "matched_via": "name_team_fallback"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.40998",
+        "player_id": "40998",
+        "name": {
+          "full": "Isaac Guerendo",
+          "first": "Isaac",
+          "last": "Guerendo",
+          "ascii_first": "Isaac",
+          "ascii_last": "Guerendo"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/40998",
+        "editorial_player_key": "nfl.p.40998",
+        "editorial_team_key": "nfl.t.25",
+        "editorial_team_full_name": "San Francisco 49ers",
+        "editorial_team_abbr": "SF",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/san-francisco/",
+        "bye_weeks": {
+          "week": "14"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "31",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/_PkrIFVy7dMJQP2ysvW3OQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/40998.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/_PkrIFVy7dMJQP2ysvW3OQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/40998.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "player_notes_last_timestamp": 1756940648,
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "BN"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "isaacguerendo",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 195,
+        "swish_id": 1126338,
+        "birth_date": "2000-06-28",
+        "depth_chart_position": "RB",
+        "pandascore_id": null,
+        "news_updated": 1756952103593,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Isaac",
+        "height": "72",
+        "weight": "221",
+        "years_exp": 1,
+        "team_abbr": null,
+        "yahoo_id": null,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "eac64b21-6e9e-447a-bf18-8a00b5c12871",
+        "college": "Louisville",
+        "rotowire_id": 17947,
+        "full_name": "Isaac Guerendo",
+        "status": "Active",
+        "team": "SF",
+        "injury_start_date": null,
+        "fantasy_data_id": null,
+        "espn_id": null,
+        "fantasy_positions": [
+          "RB"
+        ],
+        "rotoworld_id": null,
+        "metadata": {
+          "channel_id": "1113708880111628288",
+          "rookie_year": "2024"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "976403A17844",
+        "depth_chart_order": 3,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "guerendo",
+        "number": 31,
+        "last_name": "Guerendo",
+        "high_school": "Avon (IN)",
+        "hashtag": "#isaacguerendo-NFL-SF-31",
+        "age": 25,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "RB",
+        "competitions": [],
+        "search_first_name": "isaac",
+        "player_id": "11651",
+        "gsis_id": null,
+        "kalshi_id": "f51cd09e-a8ab-4b20-a974-30e199c08e26"
+      },
+      "mapping": {
+        "yahoo_player_id": "40998",
+        "sleeper_player_id": "11651",
+        "matched_via": "name_team_fallback"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.31017",
+        "player_id": "31017",
+        "name": {
+          "full": "Christian Kirk",
+          "first": "Christian",
+          "last": "Kirk",
+          "ascii_first": "Christian",
+          "ascii_last": "Kirk"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/31017",
+        "status": "Q",
+        "status_full": "Questionable",
+        "injury_note": "Hamstring",
+        "editorial_player_key": "nfl.p.31017",
+        "editorial_team_key": "nfl.t.34",
+        "editorial_team_full_name": "Houston Texans",
+        "editorial_team_abbr": "Hou",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/houston/",
+        "bye_weeks": {
+          "week": "6"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "13",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/Ipp83JxWCUcg3qKK0HLXOg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/31017.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/Ipp83JxWCUcg3qKK0HLXOg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/31017.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "has_recent_player_notes": 1,
+        "player_notes_last_timestamp": 1757017574,
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "BN"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "christiankirk",
+        "injury_notes": null,
+        "stats_id": 865801,
+        "search_rank": 149,
+        "swish_id": 865801,
+        "birth_date": "1996-11-18",
+        "depth_chart_position": "SWR",
+        "pandascore_id": null,
+        "news_updated": 1757019348936,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Christian",
+        "height": "71",
+        "weight": "200",
+        "years_exp": 7,
+        "team_abbr": null,
+        "yahoo_id": 31017,
+        "practice_description": null,
+        "injury_status": "Questionable",
+        "birth_state": null,
+        "sportradar_id": "ebcd87ce-218c-4144-810b-921c2f59d6e8",
+        "college": "Texas A&M",
+        "rotowire_id": 12508,
+        "full_name": "Christian Kirk",
+        "status": "Active",
+        "team": "HOU",
+        "injury_start_date": null,
+        "fantasy_data_id": 19815,
+        "espn_id": 3895856,
+        "fantasy_positions": [
+          "WR"
+        ],
+        "rotoworld_id": 13095,
+        "metadata": {
+          "channel_id": "1113708894410010624",
+          "injury_override_regular_2024_9": "IR",
+          "rookie_year": "2018"
+        },
+        "injury_body_part": "Hamstring",
+        "oddsjam_id": "6535555F647D",
+        "depth_chart_order": 3,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "kirk",
+        "number": 13,
+        "last_name": "Kirk",
+        "high_school": "Saguaro (AZ)",
+        "hashtag": "#christiankirk-NFL-HOU-13",
+        "age": 28,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "WR",
+        "competitions": [],
+        "search_first_name": "christian",
+        "player_id": "4950",
+        "gsis_id": "00-0034775",
+        "kalshi_id": "93f94d31-d675-4a2d-81fc-b7d099c6fb7b"
+      },
+      "mapping": {
+        "yahoo_player_id": "31017",
+        "sleeper_player_id": "4950",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.31977",
+        "player_id": "31977",
+        "name": {
+          "full": "Matt Gay",
+          "first": "Matt",
+          "last": "Gay",
+          "ascii_first": "Matt",
+          "ascii_last": "Gay"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/31977",
+        "editorial_player_key": "nfl.p.31977",
+        "editorial_team_key": "nfl.t.28",
+        "editorial_team_full_name": "Washington Commanders",
+        "editorial_team_abbr": "Was",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/washington/",
+        "bye_weeks": {
+          "week": "12"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "16",
+        "display_position": "K",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/8uU0ghP5gCzUiLl6VbVv3w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/31977.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/8uU0ghP5gCzUiLl6VbVv3w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/31977.png",
+        "is_undroppable": "0",
+        "position_type": "K",
+        "primary_position": "K",
+        "eligible_positions": [
+          {
+            "position": "K"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "K"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 1
+      },
+      "sleeper_player": {
+        "search_full_name": "mattgay",
+        "injury_notes": null,
+        "stats_id": null,
+        "search_rank": 221,
+        "swish_id": 1068998,
+        "birth_date": "1994-03-15",
+        "depth_chart_position": "K",
+        "pandascore_id": null,
+        "news_updated": 1757016948485,
+        "team_changed_at": null,
+        "active": true,
+        "practice_participation": null,
+        "first_name": "Matt",
+        "height": "72",
+        "weight": "232",
+        "years_exp": 6,
+        "team_abbr": null,
+        "yahoo_id": 31977,
+        "practice_description": null,
+        "injury_status": null,
+        "birth_state": null,
+        "sportradar_id": "2b90e091-ef78-4753-93eb-0acf3632c206",
+        "college": "Utah",
+        "rotowire_id": 13673,
+        "full_name": "Matt Gay",
+        "status": "Active",
+        "team": "WAS",
+        "injury_start_date": null,
+        "fantasy_data_id": 20769,
+        "espn_id": 4249087,
+        "fantasy_positions": [
+          "K"
+        ],
+        "rotoworld_id": 14248,
+        "metadata": {
+          "channel_id": "1113708776302604288",
+          "rookie_year": "2019"
+        },
+        "injury_body_part": null,
+        "oddsjam_id": "0B60B7F466E8",
+        "depth_chart_order": 1,
+        "birth_country": null,
+        "opta_id": null,
+        "search_last_name": "gay",
+        "number": 16,
+        "last_name": "Gay",
+        "high_school": "Orem (UT)",
+        "hashtag": "#mattgay-NFL-WAS-16",
+        "age": 31,
+        "birth_city": null,
+        "sport": "nfl",
+        "position": "K",
+        "competitions": [],
+        "search_first_name": "matt",
+        "player_id": "6083",
+        "gsis_id": " 00-0035269",
+        "kalshi_id": "bcd4ef0c-d5f6-4c2c-8e21-22c811d78dbc"
+      },
+      "mapping": {
+        "yahoo_player_id": "31977",
+        "sleeper_player_id": "6083",
+        "matched_via": "yahoo_id"
+      }
+    },
+    {
+      "yahoo_player": {
+        "player_key": "461.p.100021",
+        "player_id": "100021",
+        "name": {
+          "full": "Philadelphia",
+          "first": "Philadelphia",
+          "last": "",
+          "ascii_first": "Philadelphia",
+          "ascii_last": ""
+        },
+        "url": "https://sports.yahoo.com/nfl/teams/philadelphia/",
+        "editorial_player_key": "nfl.p.100021",
+        "editorial_team_key": "nfl.t.21",
+        "editorial_team_full_name": "Philadelphia Eagles",
+        "editorial_team_abbr": "Phi",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/philadelphia/",
+        "bye_weeks": {
+          "week": "9"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": false,
+        "display_position": "DEF",
+        "headshot": {
+          "url": "https://s.yimg.com/lq/i/us/sp/v/nfl/teams/1/50x50w/phi.gif",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/lq/i/us/sp/v/nfl/teams/1/50x50w/phi.gif",
+        "is_undroppable": "0",
+        "position_type": "DT",
+        "primary_position": "DEF",
+        "eligible_positions": [
+          {
+            "position": "DEF"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "selected_position": [
+          {
+            "coverage_type": "week",
+            "week": "1"
+          },
+          {
+            "position": "DEF"
+          },
+          {
+            "is_flex": 0
+          }
+        ],
+        "is_editable": 0
+      },
+      "sleeper_player": {
+        "active": true,
+        "position": "DEF",
+        "first_name": "Philadelphia",
+        "last_name": "Eagles",
+        "sport": "nfl",
+        "team": "PHI",
+        "player_id": "PHI",
+        "fantasy_positions": [
+          "DEF"
+        ],
+        "injury_status": null
+      },
+      "mapping": {
+        "yahoo_player_id": "100021",
+        "sleeper_player_id": "PHI",
+        "matched_via": "name_team_fallback"
+      }
+    }
+  ],
+  "unmatched_players": []
+}

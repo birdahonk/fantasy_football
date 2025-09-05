@@ -285,33 +285,75 @@ class MyRosterExtractor:
                     season_context['nfl_season'] = yahoo_year
                     season_context['verification_notes'].append(f"Yahoo team key code {yahoo_code} indicates year: {yahoo_year}")
             
-            # Try to extract current week from roster data
+            # Extract current week from Yahoo API data
             try:
-                # Look for week information in the roster data structure
-                fantasy_content = roster_data.get('fantasy_content', {})
-                team_data = fantasy_content.get('team', [])
+                # First, try to get week from team matchups data (most reliable)
+                current_week = self._extract_current_week_from_yahoo_data(team_info.get('league_key', ''))
                 
-                if isinstance(team_data, list) and len(team_data) > 0:
-                    for item in team_data:
-                        if isinstance(item, dict) and 'roster' in item:
-                            roster_info = item['roster']
-                            if isinstance(roster_info, list) and len(roster_info) > 0:
-                                for roster_item in roster_info:
-                                    if isinstance(roster_item, dict) and 'coverage_type' in roster_item:
-                                        coverage = roster_item.get('coverage_type', '')
-                                        if 'week' in coverage.lower():
-                                            week_num = roster_item.get('week', '1')
-                                            season_context['current_week'] = int(week_num)
-                                            season_context['week_info'] = {
-                                                'week': int(week_num),
-                                                'coverage_type': coverage,
-                                                'status': roster_item.get('status', 'unknown')
-                                            }
-                                            season_context['verification_notes'].append(f"Current week: {week_num}")
-                                            break
+                if current_week:
+                    season_context['current_week'] = current_week['week']
+                    season_context['week_info'] = current_week
+                    season_context['verification_notes'].append(f"Current week {current_week['week']} extracted from Yahoo team matchups API")
+                else:
+                    # Fallback: try to extract from roster data
+                    fantasy_content = roster_data.get('fantasy_content', {})
+                    team_data = fantasy_content.get('team', [])
+                    
+                    if isinstance(team_data, list) and len(team_data) > 0:
+                        for item in team_data:
+                            if isinstance(item, dict) and 'roster' in item:
+                                roster_info = item['roster']
+                                if isinstance(roster_info, list) and len(roster_info) > 0:
+                                    for roster_item in roster_info:
+                                        if isinstance(roster_item, dict) and 'coverage_type' in roster_item:
+                                            coverage = roster_item.get('coverage_type', '')
+                                            if 'week' in coverage.lower():
+                                                week_num = roster_item.get('week', '1')
+                                                season_context['current_week'] = int(week_num)
+                                                season_context['week_info'] = {
+                                                    'week': int(week_num),
+                                                    'coverage_type': coverage,
+                                                    'status': roster_item.get('status', 'unknown'),
+                                                    'source': 'roster_data'
+                                                }
+                                                season_context['verification_notes'].append(f"Current week {week_num} extracted from roster data")
+                                                break
+                    
+                    # Final fallback: estimate from date
+                    if season_context['current_week'] is None:
+                        current_date = datetime.now()
+                        season_start = datetime(current_date.year, 9, 1)
+                        if current_date >= season_start:
+                            days_since_start = (current_date - season_start).days
+                            estimated_week = min((days_since_start // 7) + 1, 18)
+                            season_context['current_week'] = estimated_week
+                            season_context['week_info'] = {
+                                'week': estimated_week,
+                                'coverage_type': 'estimated',
+                                'status': 'estimated_from_date',
+                                'source': 'date_estimation'
+                            }
+                            season_context['verification_notes'].append(f"Estimated week {estimated_week} from current date")
+                        else:
+                            season_context['current_week'] = 1
+                            season_context['week_info'] = {
+                                'week': 1,
+                                'coverage_type': 'preseason',
+                                'status': 'preseason',
+                                'source': 'preseason_assumption'
+                            }
+                            season_context['verification_notes'].append("Preseason - using week 1")
+                        
             except Exception as e:
                 self.logger.warning(f"Could not extract week info: {e}")
-                season_context['verification_notes'].append("Could not determine current week from roster data")
+                season_context['current_week'] = 1
+                season_context['week_info'] = {
+                    'week': 1,
+                    'coverage_type': 'fallback',
+                    'status': 'fallback',
+                    'source': 'error_fallback'
+                }
+                season_context['verification_notes'].append("Could not determine current week - using fallback week 1")
             
             # Add current date context
             if current_date.month >= 9:
@@ -354,6 +396,114 @@ class MyRosterExtractor:
             return "Offseason"
         else:
             return "Unknown"
+    
+    def _extract_current_week_from_yahoo_data(self, league_key: str) -> Optional[Dict[str, Any]]:
+        """
+        Extract current week information from Yahoo team matchups data.
+        
+        Args:
+            league_key: Yahoo league key (e.g., "461.l.595012")
+            
+        Returns:
+            Dict with week information or None if not found
+        """
+        try:
+            if not league_key:
+                return None
+                
+            # Look for the most recent team matchups file
+            from pathlib import Path
+            current_path = Path(__file__).resolve()
+            for parent in current_path.parents:
+                if parent.name == "data_collection":
+                    matchups_dir = parent / "outputs" / "yahoo" / "team_matchups"
+                    break
+            else:
+                matchups_dir = Path("data_collection/outputs/yahoo/team_matchups")
+            
+            if not matchups_dir.exists():
+                self.logger.warning("Team matchups directory not found")
+                return None
+            
+            # Get the most recent matchups file
+            matchup_files = list(matchups_dir.glob("*_team_matchups_raw_data.json"))
+            if not matchup_files:
+                self.logger.warning("No team matchups files found")
+                return None
+            
+            latest_file = max(matchup_files, key=lambda f: f.stat().st_mtime)
+            self.logger.info(f"Loading team matchups from: {latest_file}")
+            
+            with open(latest_file, 'r') as f:
+                matchups_data = json.load(f)
+            
+            # Extract week information from matchups
+            matchups = matchups_data.get('matchups', {})
+            if not matchups:
+                return None
+            
+            # Find the current week (look for week_1, week_2, etc.)
+            current_week_data = None
+            for week_key, week_data in matchups.items():
+                if week_key.startswith('week_'):
+                    week_num = week_data.get('week', 1)
+                    week_matchups = week_data.get('matchups', [])
+                    
+                    # Look for status in the matchups array
+                    week_start = ''
+                    week_end = ''
+                    status = 'unknown'
+                    
+                    if week_matchups:
+                        # Get status from first matchup
+                        first_matchup = week_matchups[0]
+                        week_start = first_matchup.get('week_start', '')
+                        week_end = first_matchup.get('week_end', '')
+                        status = first_matchup.get('status', 'unknown')
+                    
+                    # Check if this is the current week based on status
+                    if status in ['midevent', 'postevent', 'preevent']:
+                        current_week_data = {
+                            'week': week_num,
+                            'week_start': week_start,
+                            'week_end': week_end,
+                            'status': status,
+                            'coverage_type': 'week',
+                            'source': 'yahoo_team_matchups_api'
+                        }
+                        break
+            
+            # If no current week found, use the first available week
+            if not current_week_data and matchups:
+                first_week_key = sorted(matchups.keys())[0]
+                first_week_data = matchups[first_week_key]
+                week_num = first_week_data.get('week', 1)
+                week_matchups = first_week_data.get('matchups', [])
+                
+                week_start = ''
+                week_end = ''
+                status = 'unknown'
+                
+                if week_matchups:
+                    first_matchup = week_matchups[0]
+                    week_start = first_matchup.get('week_start', '')
+                    week_end = first_matchup.get('week_end', '')
+                    status = first_matchup.get('status', 'unknown')
+                
+                current_week_data = {
+                    'week': week_num,
+                    'week_start': week_start,
+                    'week_end': week_end,
+                    'status': status,
+                    'coverage_type': 'week',
+                    'source': 'yahoo_team_matchups_api'
+                }
+            
+            return current_week_data
+            
+        except Exception as e:
+            self.logger.warning(f"Could not extract current week from Yahoo data: {e}")
+            return None
     
     def _extract_players(self, roster_data: Dict) -> List[Dict[str, Any]]:
         """
@@ -521,6 +671,10 @@ class MyRosterExtractor:
             datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         )
         
+        # Season and week context section
+        season_context = roster_data.get('season_context', {})
+        markdown += self._format_season_context(season_context)
+        
         # Team information section
         team_info = roster_data.get('team_info', {})
         markdown += self.formatter.format_team_info(team_info, "Team Information")
@@ -554,6 +708,33 @@ class MyRosterExtractor:
         
         markdown += self.formatter.create_summary_footer(stats)
         
+        return markdown
+    
+    def _format_season_context(self, season_context: Dict[str, Any]) -> str:
+        """Format season and week context as markdown."""
+        if not season_context:
+            return ""
+        
+        markdown = "## Season & Week Context\n\n"
+        markdown += f"- **NFL Season:** {season_context.get('nfl_season', 'Unknown')}\n"
+        markdown += f"- **Current Week:** {season_context.get('current_week', 'Unknown')}\n"
+        markdown += f"- **Season Phase:** {season_context.get('season_phase', 'Unknown')}\n"
+        markdown += f"- **Data Source:** {season_context.get('data_source', 'Unknown')}\n"
+        
+        week_info = season_context.get('week_info', {})
+        if week_info:
+            markdown += f"- **Week Start:** {week_info.get('week_start', 'Unknown')}\n"
+            markdown += f"- **Week End:** {week_info.get('week_end', 'Unknown')}\n"
+            markdown += f"- **Week Status:** {week_info.get('status', 'Unknown')}\n"
+            markdown += f"- **Week Source:** {week_info.get('source', 'Unknown')}\n"
+        
+        verification_notes = season_context.get('verification_notes', [])
+        if verification_notes:
+            markdown += "\n### Verification Notes\n"
+            for note in verification_notes:
+                markdown += f"- {note}\n"
+        
+        markdown += "\n---\n\n"
         return markdown
     
     def _format_player_table(self, players: List[Dict], title: str) -> str:
