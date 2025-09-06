@@ -265,13 +265,17 @@ class AnalystAgent:
             "roster_analysis": roster_analysis,
             "web_research": web_research,
             "analysis": llm_response,  # Use 'analysis' key for consistency
-            "analysis_type": "optimized_profiles"
+            "analysis_type": "optimized_profiles",
+            "data_summary": self._create_data_summary(optimized_data, roster_analysis, web_research)
         }
         
         # Step 10: Save the analysis report
         logger.info("Saving analysis report...")
         saved_files = self.save_analysis_report(result, "optimized_analysis")
         result["saved_files"] = saved_files
+        
+        # Step 11: Save optimized player data as separate markdown
+        self._save_optimized_player_data_markdown(optimized_data, saved_files)
         
         return result
     
@@ -288,11 +292,23 @@ class AnalystAgent:
         # Extract only essential web research to reduce tokens
         web_summary = self._extract_web_summary(web_research)
         
+        # Create detailed data summary for the agent
+        data_summary = self._create_data_summary(optimized_data, roster_analysis, web_research)
+        
         prompt = f"""USER REQUEST: {user_prompt}
 
 CRITICAL CONTEXT: This is the {nfl_season} NFL season ({season_phase}). Use ONLY the data provided below and current {nfl_season} season information. Do NOT use training data from previous seasons.
 
-## MY CURRENT ROSTER (15 PLAYERS)
+## DATA AVAILABILITY SUMMARY
+- **My Roster Players**: {data_summary['my_roster_count']} players
+- **Available Players**: {data_summary['available_players_count']} players
+- **Web Research Items**: {data_summary['web_research_items']} news articles
+- **Data Sources**: {', '.join(data_summary['data_sources'])}
+
+## PLAYER DATA BREAKDOWN BY POSITION
+{json.dumps(data_summary['player_data_breakdown'], indent=2)}
+
+## MY CURRENT ROSTER ({data_summary['my_roster_count']} PLAYERS)
 The user has a complete roster with the following players:
 {json.dumps(my_roster_summary, indent=2)}
 
@@ -303,15 +319,66 @@ The user has a complete roster with the following players:
 ## CURRENT NFL NEWS & CONTEXT
 {json.dumps(web_summary, indent=2)}
 
-## ANALYSIS INSTRUCTIONS
-1. **CRITICAL**: The user has a FULL ROSTER of 15 players - do NOT suggest building from scratch
-2. Focus on analyzing their current roster players and identifying potential improvements
-3. Use the available players data to suggest specific add/drop recommendations
-4. Cross-reference player IDs across Yahoo, Sleeper, and Tank01 data
-5. Follow news links provided in player data for additional context
-6. Provide specific add/drop recommendations based on projected points and depth charts
-7. Consider bye weeks, injury status, and transaction trends in recommendations
-8. Prioritize players with the best projected points and favorable matchups
+## DETAILED ANALYSIS INSTRUCTIONS
+
+### 1. DATA UTILIZATION REQUIREMENTS
+- **MUST** analyze each player's projected points from Tank01 data
+- **MUST** follow and summarize news links provided in player data
+- **MUST** consider depth chart positions from Sleeper data
+- **MUST** cross-reference player IDs across all 3 APIs
+- **MUST** use web research findings in your analysis
+
+### 2. PLAYER ANALYSIS FRAMEWORK
+For each roster player, analyze:
+- **Projected Points**: Use tank01_data.projection.week_1.fantasy_points (primary projection)
+- **Alternative Projections**: Also check tank01_data.projection.week_1.projected_points if available
+- **News Context**: Follow news links in tank01_data.news for latest updates
+- **Depth Chart**: Check sleeper_data.depth_chart_position for role clarity
+- **Injury Status**: Review injury_status across all APIs
+- **Transaction Trends**: Consider tank01_data.transaction_trends for ownership changes
+
+**IMPORTANT**: Tank01 provides multiple projection calculations. Use the fantasy_points value as the primary projection for analysis.
+
+### 3. AVAILABLE PLAYERS EVALUATION
+For each recommended add/drop:
+- **Compare projected points** with current roster players
+- **Analyze news links** for injury updates and role changes
+- **Check depth chart position** for playing time expectations
+- **Review transaction trends** for league-wide interest
+
+### 4. WEB RESEARCH INTEGRATION
+- **Summarize key findings** from the {data_summary['web_research_items']} news items
+- **Connect news to specific players** in your recommendations
+- **Use current NFL context** to inform lineup decisions
+
+### 5. OPPONENT ANALYSIS (REQUIRED)
+- **Identify current week opponent** from matchup data in league_context
+- **Analyze opponent's key players** and their projected performance
+- **Consider defensive matchups** for your players
+- **Compare your projected points vs opponent's projected points**
+- **Identify key matchup advantages/disadvantages**
+
+### 6. ACTUAL POINTS INTEGRATION
+- **Check if any games have been played** (Thursday games, etc.)
+- **If actual points are available**, factor them into lineup decisions
+- **Recommend lineup changes** based on actual performance vs projections
+
+## REQUIRED OUTPUT FORMAT
+1. **Data Visibility Confirmation**: Show what data you can see
+2. **Web Research Summary**: Key findings from news articles and URLs accessed
+3. **Resources Used**: List all news articles, URLs, and data sources you utilized
+4. **Roster Analysis**: Detailed analysis of each position group
+5. **Specific Recommendations**: Exact add/drop suggestions with reasoning
+6. **News Integration**: How news links influenced your recommendations
+7. **Projected Points Analysis**: Detailed comparison of fantasy projections from Tank01 data
+8. **Matchup Analysis**: Analysis of your current week opponent and defensive matchups
+
+## CRITICAL INSTRUCTIONS
+- **MUST** use Tank01 projected points data (tank01_data.projection.week_1.fantasy_points)
+- **MUST** follow and summarize news links from player data
+- **MUST** identify and analyze your current week opponent
+- **MUST** report all resources and data sources you used
+- **MUST** show specific projected points comparisons
 
 Please provide a comprehensive analysis with specific recommendations for improving their existing roster."""
         
@@ -393,6 +460,133 @@ Please provide a comprehensive analysis with specific recommendations for improv
                 })
         
         return summary
+    
+    def _create_data_summary(self, optimized_data: Dict[str, Any], roster_analysis: Dict[str, Any], web_research: Dict[str, Any]) -> Dict[str, Any]:
+        """Create a summary of all data available to the agent"""
+        summary = {
+            "my_roster_count": 0,
+            "opponent_roster_count": 0,
+            "available_players_count": optimized_data.get("total_players", 0),
+            "web_research_items": len(web_research.get("news_items", [])),
+            "data_sources": [],
+            "player_data_breakdown": {},
+            "current_week_opponent": "Unknown"
+        }
+        
+        # Count my roster players
+        if "roster_analysis" in roster_analysis:
+            for api, data in roster_analysis["roster_analysis"].items():
+                if isinstance(data, dict) and "total_players" in data:
+                    summary["my_roster_count"] += data["total_players"]
+                    summary["data_sources"].append(f"{api}_roster")
+        
+        # Count available players by position
+        if "players_by_position" in optimized_data:
+            for position, players in optimized_data["players_by_position"].items():
+                summary["player_data_breakdown"][position] = len(players)
+        
+        # Add web research sources
+        if "urls" in web_research:
+            summary["data_sources"].extend(web_research["urls"])
+        
+        # Try to extract current week opponent
+        if "league_context" in roster_analysis:
+            league_context = roster_analysis["league_context"]
+            if "matchups" in league_context:
+                # Look for current week matchup
+                for matchup in league_context["matchups"]:
+                    if isinstance(matchup, dict) and matchup.get("week") == 1:
+                        # This is a simplified extraction - would need more logic for actual opponent
+                        summary["current_week_opponent"] = "Week 1 Matchup Available"
+                        break
+        
+        return summary
+    
+    def _save_optimized_player_data_markdown(self, optimized_data: Dict[str, Any], saved_files: Dict[str, str]) -> None:
+        """Save the optimized player data as a separate markdown file"""
+        timestamp = datetime.now(self.pacific_tz).strftime("%Y%m%d_%H%M%S")
+        output_dir = os.path.join(project_root, "data_collection", "outputs", "analyst_reports")
+        
+        # Create markdown content
+        markdown_content = f"""# Optimized Player Data - Raw Input to Agent
+
+**Generated:** {datetime.now(self.pacific_tz).strftime('%Y-%m-%d %H:%M:%S %Z')}
+**Total Players:** {optimized_data.get('total_players', 0)}
+**Total Tokens:** {optimized_data.get('total_tokens', 0):,}
+
+## Season Context
+```json
+{json.dumps(optimized_data.get('season_context', {}), indent=2)}
+```
+
+## Player Limits
+```json
+{json.dumps(optimized_data.get('player_limits', {}), indent=2)}
+```
+
+## Players by Position
+
+"""
+        
+        # Add players by position - show ALL players
+        for position, players in optimized_data.get("players_by_position", {}).items():
+            markdown_content += f"### {position} ({len(players)} players)\n\n"
+            for i, player in enumerate(players):  # Show ALL players per position
+                markdown_content += f"#### Player {i+1}\n"
+                markdown_content += f"```json\n{json.dumps(player, indent=2)}\n```\n\n"
+        
+        # Save the file
+        filename = f"{timestamp}_optimized_player_data.md"
+        filepath = os.path.join(output_dir, filename)
+        
+        with open(filepath, 'w') as f:
+            f.write(markdown_content)
+        
+        logger.info(f"Optimized player data saved to: {filepath}")
+    
+    def _format_data_sources(self, analysis_result: Dict[str, Any]) -> str:
+        """Format data sources for markdown report"""
+        sources = []
+        
+        # Add data files
+        if 'roster_analysis' in analysis_result and 'data_files' in analysis_result['roster_analysis']:
+            for file_type, file_path in analysis_result['roster_analysis']['data_files'].items():
+                if file_path:
+                    filename = os.path.basename(file_path)
+                    sources.append(f"- **{file_type}**: {filename}")
+        
+        # Add web research sources
+        if 'web_research' in analysis_result and 'urls' in analysis_result['web_research']:
+            for url in analysis_result['web_research']['urls']:
+                sources.append(f"- **Web Research**: {url}")
+        
+        # Add optimized player data info
+        if 'optimized_data' in analysis_result:
+            optimized_data = analysis_result['optimized_data']
+            sources.append(f"- **Optimized Player Data**: {optimized_data.get('total_players', 0)} players, {optimized_data.get('total_tokens', 0):,} tokens")
+        
+        # Add data summary info
+        if 'data_summary' in analysis_result:
+            data_summary = analysis_result['data_summary']
+            sources.append(f"- **Data Summary**: {data_summary.get('my_roster_count', 0)} roster players, {data_summary.get('available_players_count', 0)} available players")
+        
+        return "\n".join(sources) if sources else "No data sources available"
+    
+    def _format_resources_used(self, analysis_result: Dict[str, Any]) -> str:
+        """Format resources used for markdown report"""
+        resources = []
+        
+        # Add data summary
+        if 'data_summary' in analysis_result:
+            data_summary = analysis_result['data_summary']
+            resources.append(f"- **My Roster Players**: {data_summary.get('my_roster_count', 0)}")
+            resources.append(f"- **Available Players**: {data_summary.get('available_players_count', 0)}")
+            resources.append(f"- **Web Research Items**: {data_summary.get('web_research_items', 0)}")
+        
+        # Add model info
+        resources.append(f"- **Model**: {analysis_result.get('model_provider', 'Unknown')} - {analysis_result.get('model_name', 'Unknown')}")
+        
+        return "\n".join(resources) if resources else "No resources used"
     
     def _build_analysis_prompt(self, user_prompt: str, analysis_data: Dict, web_research: Dict) -> str:
         """Build the complete prompt for LLM analysis"""
@@ -513,6 +707,11 @@ Please provide a comprehensive analysis following the format specified in your s
                 if file_path:
                     filename = os.path.basename(file_path)
                     source_files.append(f"- {file_type}: {filename}")
+        
+        # Add web research sources
+        if 'web_research' in analysis_result and 'urls' in analysis_result['web_research']:
+            for url in analysis_result['web_research']['urls']:
+                source_files.append(f"- Web Research: {url}")
         
         source_files_text = "\n".join(source_files) if source_files else "No source files identified"
         
