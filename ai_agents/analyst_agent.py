@@ -264,9 +264,14 @@ class AnalystAgent:
             "optimized_data": optimized_data,
             "roster_analysis": roster_analysis,
             "web_research": web_research,
-            "llm_response": llm_response,
+            "analysis": llm_response,  # Use 'analysis' key for consistency
             "analysis_type": "optimized_profiles"
         }
+        
+        # Step 10: Save the analysis report
+        logger.info("Saving analysis report...")
+        saved_files = self.save_analysis_report(result, "optimized_analysis")
+        result["saved_files"] = saved_files
         
         return result
     
@@ -277,31 +282,117 @@ class AnalystAgent:
         nfl_season = season_context.get("nfl_season", "current")
         season_phase = season_context.get("season_phase", "Regular Season")
         
+        # Extract only essential roster data to reduce tokens
+        my_roster_summary = self._extract_roster_summary(roster_analysis)
+        
+        # Extract only essential web research to reduce tokens
+        web_summary = self._extract_web_summary(web_research)
+        
         prompt = f"""USER REQUEST: {user_prompt}
 
 CRITICAL CONTEXT: This is the {nfl_season} NFL season ({season_phase}). Use ONLY the data provided below and current {nfl_season} season information. Do NOT use training data from previous seasons.
 
-OPTIMIZED PLAYER DATA ({optimized_data.get('total_players', 0)} players, {optimized_data.get('total_tokens', 0):,} tokens):
+## MY CURRENT ROSTER (15 PLAYERS)
+The user has a complete roster with the following players:
+{json.dumps(my_roster_summary, indent=2)}
+
+## AVAILABLE PLAYERS FOR ADD/DROP ANALYSIS
+{optimized_data.get('total_players', 0)} top available players by position:
 {json.dumps(optimized_data, indent=2)}
 
-MY ROSTER ANALYSIS:
-{json.dumps(roster_analysis, indent=2)}
+## CURRENT NFL NEWS & CONTEXT
+{json.dumps(web_summary, indent=2)}
 
-CURRENT NFL NEWS & CONTEXT:
-{json.dumps(web_research, indent=2)}
+## ANALYSIS INSTRUCTIONS
+1. **CRITICAL**: The user has a FULL ROSTER of 15 players - do NOT suggest building from scratch
+2. Focus on analyzing their current roster players and identifying potential improvements
+3. Use the available players data to suggest specific add/drop recommendations
+4. Cross-reference player IDs across Yahoo, Sleeper, and Tank01 data
+5. Follow news links provided in player data for additional context
+6. Provide specific add/drop recommendations based on projected points and depth charts
+7. Consider bye weeks, injury status, and transaction trends in recommendations
+8. Prioritize players with the best projected points and favorable matchups
 
-INSTRUCTIONS:
-1. Focus heavily on MY ROSTER players for detailed analysis and recommendations
-2. Use the optimized player profiles for available players analysis
-3. Cross-reference player IDs across Yahoo, Sleeper, and Tank01 data
-4. Follow news links provided in player data for additional context
-5. Provide specific add/drop recommendations based on projected points and depth charts
-6. Consider bye weeks, injury status, and transaction trends in recommendations
-7. Prioritize players with the best projected points and favorable matchups
-
-Please provide a comprehensive analysis with specific recommendations."""
+Please provide a comprehensive analysis with specific recommendations for improving their existing roster."""
         
         return prompt
+    
+    def _extract_roster_summary(self, roster_analysis: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract only essential roster data to reduce token usage"""
+        summary = {
+            "season_context": roster_analysis.get("season_context", {}),
+            "my_roster": {},
+            "current_week": roster_analysis.get("current_week")
+        }
+        
+        # Extract only essential roster data
+        if "roster_analysis" in roster_analysis:
+            for api, roster_data in roster_analysis["roster_analysis"].items():
+                if isinstance(roster_data, dict):
+                    # Check for different player data structures
+                    players = []
+                    
+                    # Try to find players in different possible keys
+                    player_lists = []
+                    if "players" in roster_data:
+                        player_lists.extend(roster_data["players"])
+                    if "starters" in roster_data:
+                        player_lists.extend(roster_data["starters"])
+                    if "bench" in roster_data:
+                        player_lists.extend(roster_data["bench"])
+                    
+                    # Process all found players
+                    for player in player_lists[:15]:  # Limit to 15 players
+                        if isinstance(player, dict):
+                            # Handle different player data structures
+                            name = "Unknown"
+                            if "name" in player:
+                                if isinstance(player["name"], dict):
+                                    name = player["name"].get("full", "Unknown")
+                                else:
+                                    name = str(player["name"])
+                            
+                            position = player.get("display_position", player.get("position", "Unknown"))
+                            team = "Unknown"
+                            if "team" in player:
+                                if isinstance(player["team"], dict):
+                                    team = player["team"].get("abbr", "Unknown")
+                                else:
+                                    team = str(player["team"])
+                            
+                            players.append({
+                                "name": name,
+                                "position": position,
+                                "team": team,
+                                "projected_points": player.get("projected_points", 0),
+                                "injury_status": player.get("injury_status", "Healthy")
+                            })
+                    
+                    if players:  # Only add if we found players
+                        summary["my_roster"][api] = {
+                            "total_players": len(players),
+                            "players": players
+                        }
+        
+        return summary
+    
+    def _extract_web_summary(self, web_research: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract only essential web research to reduce token usage"""
+        summary = {
+            "total_news_items": len(web_research.get("news_items", [])),
+            "key_headlines": []
+        }
+        
+        # Include only first 5 news items with headlines
+        for item in web_research.get("news_items", [])[:5]:
+            if isinstance(item, dict):
+                summary["key_headlines"].append({
+                    "title": item.get("title", "No title"),
+                    "url": item.get("url", ""),
+                    "published": item.get("published", "")
+                })
+        
+        return summary
     
     def _build_analysis_prompt(self, user_prompt: str, analysis_data: Dict, web_research: Dict) -> str:
         """Build the complete prompt for LLM analysis"""
@@ -386,38 +477,53 @@ Please provide a comprehensive analysis following the format specified in your s
             Dictionary with paths to saved files
         """
         timestamp = datetime.now(self.pacific_tz).strftime("%Y%m%d_%H%M%S")
-        model_suffix = f"{self.model_provider}_{self.model_name.replace('-', '_')}"
         
         # Save to outputs directory
         output_dir = os.path.join(project_root, "data_collection", "outputs", "analyst_reports")
         os.makedirs(output_dir, exist_ok=True)
         
-        # Save JSON version
-        json_filename = f"{filename_prefix}_{timestamp}_{model_suffix}.json"
+        # Save JSON version with timestamp as prefix only
+        json_filename = f"{timestamp}_{filename_prefix}.json"
         json_filepath = os.path.join(output_dir, json_filename)
         
         with open(json_filepath, 'w') as f:
             json.dump(analysis_result, f, indent=2)
         
-        # Save Markdown version
-        markdown_filename = f"{filename_prefix}_{timestamp}_{model_suffix}.md"
+        # Save Markdown version with timestamp as prefix only
+        markdown_filename = f"{timestamp}_{filename_prefix}.md"
         markdown_filepath = os.path.join(output_dir, markdown_filename)
         
         # Extract the analysis content for markdown
         analysis_content = analysis_result.get('analysis', 'No analysis content available')
         
-        # Create markdown report
+        # Create markdown report - get season context from optimized data or analysis data
+        optimized_data = analysis_result.get('optimized_data', {})
         analysis_data = analysis_result.get('analysis_data', {})
-        season_context = analysis_data.get('season_context', {})
+        
+        # Try to get season context from optimized data first, then analysis data
+        season_context = optimized_data.get('season_context', analysis_data.get('season_context', {}))
         nfl_season = season_context.get('nfl_season', 'Unknown')
         current_week = season_context.get('current_week', 'Unknown')
         season_phase = season_context.get('season_phase', 'Unknown')
+        
+        # Extract source files information
+        source_files = []
+        if 'roster_analysis' in analysis_result and 'data_files' in analysis_result['roster_analysis']:
+            for file_type, file_path in analysis_result['roster_analysis']['data_files'].items():
+                if file_path:
+                    filename = os.path.basename(file_path)
+                    source_files.append(f"- {file_type}: {filename}")
+        
+        source_files_text = "\n".join(source_files) if source_files else "No source files identified"
         
         markdown_content = f"""# Fantasy Football Analysis Report
 
 **Generated:** {datetime.now(self.pacific_tz).strftime('%Y-%m-%d %H:%M:%S %Z')}
 **Model:** {self.model_provider} - {self.model_name}
 **Season Context:** {nfl_season} - Week {current_week} ({season_phase})
+
+## Source Files Used
+{source_files_text}
 
 ## Analysis
 

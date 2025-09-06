@@ -229,7 +229,8 @@ class OptimizedPlayerProfiles:
             "player_limits": self.player_limits,
             "total_players": sum(len(players) for players in limited_players.values()),
             "total_tokens": total_tokens,
-            "players_by_position": limited_players
+            "players_by_position": limited_players,
+            "source_files": self._extract_source_files(raw_data)
         }
     
     def _find_matching_player(self, yahoo_player: Dict[str, Any], 
@@ -272,6 +273,17 @@ class OptimizedPlayerProfiles:
             "current_week": 1,
             "season_phase": "Early Regular Season"
         }
+    
+    def _extract_source_files(self, raw_data: Dict[str, Any]) -> List[str]:
+        """Extract source file information"""
+        source_files = []
+        for api, data in raw_data.items():
+            if isinstance(data, list) and data:
+                # This is player data, not file info
+                continue
+            elif isinstance(data, dict) and "source_file" in data:
+                source_files.append(f"{api}: {data['source_file']}")
+        return source_files
     
     def _calculate_token_usage(self, players_by_position: Dict[str, List[Dict[str, Any]]]) -> int:
         """Calculate total token usage for all players"""
