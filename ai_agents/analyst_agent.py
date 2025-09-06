@@ -267,7 +267,8 @@ Please provide a comprehensive analysis following the format specified in your s
         analysis_content = analysis_result.get('analysis', 'No analysis content available')
         
         # Create markdown report
-        season_context = analysis_result.get('season_context', {})
+        analysis_data = analysis_result.get('analysis_data', {})
+        season_context = analysis_data.get('season_context', {})
         nfl_season = season_context.get('nfl_season', 'Unknown')
         current_week = season_context.get('current_week', 'Unknown')
         season_phase = season_context.get('season_phase', 'Unknown')

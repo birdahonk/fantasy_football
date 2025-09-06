@@ -447,9 +447,35 @@ class AnalystTools:
             with open(filepath, 'r') as f:
                 data = json.load(f)
             
-            # Extract top available players by position
-            # Implementation depends on data structure
-            return {"status": "analyzed", "note": "Available players analysis implemented"}
+            # Extract available players data
+            available_players = data.get('available_players', [])
+            season_context = data.get('season_context', {})
+            
+            # Group players by position
+            players_by_position = {}
+            for player in available_players:
+                position = player.get('display_position', 'Unknown')
+                if position not in players_by_position:
+                    players_by_position[position] = []
+                players_by_position[position].append(player)
+            
+            # Get top players by position (first 10 of each)
+            top_players = {}
+            for position, players in players_by_position.items():
+                top_players[position] = players[:10]
+            
+            # Extract key metrics
+            total_players = len(available_players)
+            positions_available = list(players_by_position.keys())
+            
+            return {
+                "status": "analyzed",
+                "total_players": total_players,
+                "positions_available": positions_available,
+                "top_players_by_position": top_players,
+                "season_context": season_context,
+                "sample_players": available_players[:5]  # First 5 for context
+            }
             
         except Exception as e:
             logger.error(f"Error analyzing available players: {e}")
@@ -462,7 +488,38 @@ class AnalystTools:
                 data = json.load(f)
             
             # Extract opponent roster information
-            return {"status": "analyzed", "note": "Opponent rosters analysis implemented"}
+            teams = data.get('teams', [])
+            rosters = data.get('rosters', {})
+            season_context = data.get('season_context', {})
+            
+            # Analyze opponent strengths by position
+            opponent_analysis = {}
+            for team in teams:
+                if isinstance(team, dict):
+                    team_key = team.get('team_key', 'unknown')
+                    team_name = team.get('name', 'Unknown Team')
+                    team_roster = rosters.get(team_key, [])
+                    
+                    # Group players by position
+                    position_counts = {}
+                    for player in team_roster:
+                        if isinstance(player, dict):
+                            position = player.get('display_position', 'Unknown')
+                            position_counts[position] = position_counts.get(position, 0) + 1
+                    
+                    opponent_analysis[team_name] = {
+                        "team_key": team_key,
+                        "total_players": len(team_roster),
+                        "position_counts": position_counts,
+                        "roster": team_roster
+                    }
+            
+            return {
+                "status": "analyzed",
+                "total_teams": len(teams),
+                "opponent_analysis": opponent_analysis,
+                "season_context": season_context
+            }
             
         except Exception as e:
             logger.error(f"Error analyzing opponent rosters: {e}")
@@ -475,7 +532,25 @@ class AnalystTools:
                 data = json.load(f)
             
             # Extract team matchup information
-            return {"status": "analyzed", "note": "Team matchups analysis implemented"}
+            matchups = data.get('matchups', {})
+            season_context = data.get('season_context', {})
+            
+            # Analyze current week matchups
+            current_week = season_context.get('current_week', 1)
+            week_key = f"week_{current_week}"
+            current_matchups = matchups.get(week_key, {})
+            
+            matchup_analysis = {
+                "current_week": current_week,
+                "total_matchups": len(current_matchups.get('matchups', [])),
+                "matchups": current_matchups.get('matchups', []),
+                "season_context": season_context
+            }
+            
+            return {
+                "status": "analyzed",
+                "matchup_analysis": matchup_analysis
+            }
             
         except Exception as e:
             logger.error(f"Error analyzing team matchups: {e}")
@@ -488,7 +563,22 @@ class AnalystTools:
                 data = json.load(f)
             
             # Extract transaction trends information
-            return {"status": "analyzed", "note": "Transaction trends analysis implemented"}
+            transactions = data.get('transactions', [])
+            player_trends = data.get('player_trends', {})
+            season_context = data.get('season_context', {})
+            
+            # Analyze trending players
+            trending_analysis = {
+                "total_transactions": len(transactions),
+                "trending_players": player_trends,
+                "recent_transactions": transactions[:10],  # Last 10 transactions
+                "season_context": season_context
+            }
+            
+            return {
+                "status": "analyzed",
+                "trending_analysis": trending_analysis
+            }
             
         except Exception as e:
             logger.error(f"Error analyzing transaction trends: {e}")
@@ -623,20 +713,32 @@ class AnalystTools:
     
     def get_current_game_week(self) -> Optional[int]:
         """
-        Determine the current NFL game week
+        Determine the current NFL game week from JSON data files
         
         Returns:
             Current game week number or None if unable to determine
         """
         try:
-            # Try to get from Yahoo current week data
+            # Try to get from season context in JSON files
             recent_files = self._find_most_recent_files()
-            if "yahoo_week" in recent_files:
-                with open(recent_files["yahoo_week"], 'r') as f:
-                    data = json.load(f)
-                    # Extract current week from data
-                    # Implementation depends on data structure
-                    return 1  # Placeholder
+            
+            # Check multiple data sources for season context
+            for file_type, filepath in recent_files.items():
+                if filepath and filepath.endswith('.json'):
+                    try:
+                        with open(filepath, 'r') as f:
+                            data = json.load(f)
+                            
+                        # Look for season_context in the data
+                        season_context = data.get('season_context', {})
+                        if season_context and 'current_week' in season_context:
+                            current_week = season_context.get('current_week')
+                            if current_week and current_week != 'Unknown':
+                                logger.info(f"Found current week {current_week} from {file_type}")
+                                return int(current_week)
+                    except Exception as e:
+                        logger.debug(f"Could not read {file_type} for current week: {e}")
+                        continue
             
             # Fallback: calculate based on current date
             # NFL season typically starts first week of September
