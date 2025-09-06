@@ -90,24 +90,33 @@ class OptimizedPlayerProfiles:
     
     def extract_tank01_data(self, tank01_player: Dict[str, Any]) -> Dict[str, Any]:
         """Extract essential Tank01 data only"""
+        # Handle the new Tank01 structure where data is at root level
+        tank01_data = tank01_player.get("tank01_data", {})
+        
         return {
-            "player_id": tank01_player.get("player_id"),
+            "player_id": tank01_data.get("playerID"),
             "name": {
-                "full": tank01_player.get("name", {}).get("full"),
-                "first": tank01_player.get("name", {}).get("first"),
-                "last": tank01_player.get("name", {}).get("last")
+                "full": tank01_data.get("longName"),
+                "first": tank01_data.get("longName", "").split()[0] if tank01_data.get("longName") else "",
+                "last": tank01_data.get("longName", "").split()[-1] if tank01_data.get("longName") else ""
             },
-            "display_position": tank01_player.get("display_position"),
-            "primary_position": tank01_player.get("primary_position"),
-            "eligible_positions": tank01_player.get("eligible_positions", []),
-            "bye_week": tank01_player.get("bye_week"),
-            "team": tank01_player.get("team"),
-            "injury_status": tank01_player.get("injury_status"),
+            "display_position": tank01_data.get("pos"),
+            "primary_position": tank01_data.get("pos"),
+            "eligible_positions": [tank01_data.get("pos")] if tank01_data.get("pos") else [],
+            "bye_week": None,  # Not available in this structure
+            "team": tank01_data.get("team"),
+            "injury_status": tank01_data.get("injury", "Healthy"),
             "depth_chart": tank01_player.get("depth_chart", {}),
             "projection": tank01_player.get("projection", {}),
             "news": tank01_player.get("news", []),
             "game_stats": tank01_player.get("game_stats", {}),
-            "transaction_trends": tank01_player.get("transaction_trends", {})
+            "transaction_trends": tank01_player.get("transaction_trends", {}),
+            "player_ids": {
+                "espn_id": tank01_data.get("espnID"),
+                "sleeper_id": tank01_data.get("sleeperBotID"),
+                "fantasypros_id": tank01_data.get("fantasyProsPlayerID"),
+                "yahoo_id": tank01_data.get("yahooPlayerID")
+            }
         }
     
     def _extract_injury_status(self, yahoo_player: Dict[str, Any]) -> str:
@@ -180,13 +189,17 @@ class OptimizedPlayerProfiles:
         except Exception as e:
             logger.warning(f"Could not load Sleeper available players: {e}")
         
-        # Load Tank01 available players
+        # Load Tank01 available players (separate from Yahoo)
         try:
             tank01_file = self._find_latest_file(f"{data_dir}/tank01/available_players", "*_raw_data.json")
             if tank01_file:
                 with open(tank01_file, 'r') as f:
                     tank01_data = json.load(f)
-                    available_players["tank01"] = tank01_data.get("available_players", [])
+                    # Tank01 data is in processed_data.available_players
+                    if "processed_data" in tank01_data and "available_players" in tank01_data["processed_data"]:
+                        available_players["tank01"] = tank01_data["processed_data"]["available_players"]
+                    else:
+                        available_players["tank01"] = tank01_data.get("available_players", [])
         except Exception as e:
             logger.warning(f"Could not load Tank01 available players: {e}")
         
@@ -209,7 +222,7 @@ class OptimizedPlayerProfiles:
             
             # Find matching Sleeper and Tank01 data
             sleeper_match = self._find_matching_player(player, raw_data["sleeper"])
-            tank01_match = self._find_matching_player(player, raw_data["tank01"])
+            tank01_match = self._find_matching_tank01_player(player, raw_data["tank01"])
             
             # Create optimized profile
             profile = self.create_player_profile(player, sleeper_match, tank01_match)
@@ -246,6 +259,24 @@ class OptimizedPlayerProfiles:
             # Simple name and team matching
             if yahoo_name == other_name and yahoo_team == other_team:
                 return player
+        
+        return None
+    
+    def _find_matching_tank01_player(self, yahoo_player: Dict[str, Any], tank01_players: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        """Find matching Tank01 player by matching Yahoo data within Tank01 structure"""
+        yahoo_name = yahoo_player.get("name", {}).get("full", "").lower()
+        yahoo_team = yahoo_player.get("editorial_team_abbr", "").upper()
+        
+        for tank01_player in tank01_players:
+            if "yahoo_data" in tank01_player:
+                yahoo_data = tank01_player["yahoo_data"]
+                tank01_yahoo_name = yahoo_data.get("name", {}).get("full", "").lower()
+                tank01_yahoo_team = yahoo_data.get("editorial_team_abbr", "").upper()
+                
+                # Match by name and team
+                if yahoo_name == tank01_yahoo_name and yahoo_team == tank01_yahoo_team:
+                    # Return the entire Tank01 player data (includes tank01_data, projection, news, etc.)
+                    return tank01_player
         
         return None
     

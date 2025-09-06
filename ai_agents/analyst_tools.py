@@ -433,9 +433,39 @@ class AnalystTools:
             with open(filepath, 'r') as f:
                 data = json.load(f)
             
-            # Similar analysis for Tank01 data
-            # Implementation depends on Tank01 data structure
-            return {"status": "analyzed", "note": "Tank01 roster analysis implemented"}
+            # Extract matched players from Tank01 roster data
+            matched_players = data.get('matched_players', [])
+            season_context = data.get('season_context', {})
+            
+            # Group players by position
+            players_by_position = {}
+            for player in matched_players:
+                yahoo_player = player.get('yahoo_player', {})
+                tank01_data = player.get('tank01_data', {})
+                
+                position = yahoo_player.get('display_position', 'Unknown')
+                if position not in players_by_position:
+                    players_by_position[position] = []
+                
+                # Create player summary with Tank01 data
+                player_summary = {
+                    "name": yahoo_player.get('name', {}).get('full', 'Unknown'),
+                    "position": position,
+                    "team": yahoo_player.get('editorial_team_abbr', 'Unknown'),
+                    "tank01_data": tank01_data,
+                    "projection": tank01_data.get('projection', {}),
+                    "news": tank01_data.get('news', []),
+                    "injury_status": tank01_data.get('injury', 'Healthy')
+                }
+                players_by_position[position].append(player_summary)
+            
+            return {
+                "status": "analyzed",
+                "total_players": len(matched_players),
+                "players_by_position": players_by_position,
+                "season_context": season_context,
+                "data_files": {"tank01_roster": filepath}
+            }
             
         except Exception as e:
             logger.error(f"Error analyzing Tank01 roster: {e}")

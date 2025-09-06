@@ -330,14 +330,14 @@ The user has a complete roster with the following players:
 
 ### 2. PLAYER ANALYSIS FRAMEWORK
 For each roster player, analyze:
-- **Projected Points**: Use tank01_data.projection.week_1.fantasy_points (primary projection)
-- **Alternative Projections**: Also check tank01_data.projection.week_1.projected_points if available
+- **Projected Points**: Use tank01_data.projection.fantasyPoints (primary projection)
+- **Alternative Projections**: Also check tank01_data.projection.fantasyPointsDefault for PPR/half-PPR
 - **News Context**: Follow news links in tank01_data.news for latest updates
 - **Depth Chart**: Check sleeper_data.depth_chart_position for role clarity
 - **Injury Status**: Review injury_status across all APIs
 - **Transaction Trends**: Consider tank01_data.transaction_trends for ownership changes
 
-**IMPORTANT**: Tank01 provides multiple projection calculations. Use the fantasy_points value as the primary projection for analysis.
+**IMPORTANT**: Tank01 provides fantasyPoints (standard) and fantasyPointsDefault (PPR variants). Use fantasyPoints as primary projection for analysis.
 
 ### 3. AVAILABLE PLAYERS EVALUATION
 For each recommended add/drop:
@@ -367,18 +367,25 @@ For each recommended add/drop:
 1. **Data Visibility Confirmation**: Show what data you can see
 2. **Web Research Summary**: Key findings from news articles and URLs accessed
 3. **Resources Used**: List all news articles, URLs, and data sources you utilized
-4. **Roster Analysis**: Detailed analysis of each position group
-5. **Specific Recommendations**: Exact add/drop suggestions with reasoning
-6. **News Integration**: How news links influenced your recommendations
-7. **Projected Points Analysis**: Detailed comparison of fantasy projections from Tank01 data
-8. **Matchup Analysis**: Analysis of your current week opponent and defensive matchups
+4. **Individual Player Summaries**: For EACH player on your roster, provide a summary paragraph based on:
+   - Web research findings about that specific player
+   - News links provided in their Tank01 data
+   - Current injury status and role clarity
+   - Recent performance trends and expectations
+5. **Roster Analysis**: Detailed analysis of each position group
+6. **Specific Recommendations**: Exact add/drop suggestions with reasoning
+7. **News Integration**: How news links influenced your recommendations
+8. **Projected Points Analysis**: Detailed comparison of fantasy projections from Tank01 data
+9. **Matchup Analysis**: Analysis of your current week opponent and defensive matchups
 
 ## CRITICAL INSTRUCTIONS
-- **MUST** use Tank01 projected points data (tank01_data.projection.week_1.fantasy_points)
-- **MUST** follow and summarize news links from player data
+- **MUST** use Tank01 projected points data (tank01_data.projection.fantasyPoints)
+- **MUST** follow and summarize news links from player data (tank01_data.news)
 - **MUST** identify and analyze your current week opponent
 - **MUST** report all resources and data sources you used
 - **MUST** show specific projected points comparisons
+- **MUST** provide individual summary for each roster player based on web research and news
+- **MUST** use Tank01 fantasy points for all projections (not Yahoo's 0 values)
 
 Please provide a comprehensive analysis with specific recommendations for improving their existing roster."""
         
@@ -427,12 +434,27 @@ Please provide a comprehensive analysis with specific recommendations for improv
                                 else:
                                     team = str(player["team"])
                             
+                            # Extract Tank01 projected points if available
+                            projected_points = player.get("projected_points", 0)
+                            if "tank01_data" in player and "projection" in player["tank01_data"]:
+                                projection = player["tank01_data"]["projection"]
+                                tank01_points = projection.get("fantasyPoints", 0)
+                                if isinstance(tank01_points, str):
+                                    try:
+                                        projected_points = float(tank01_points)
+                                    except:
+                                        projected_points = 0
+                                else:
+                                    projected_points = tank01_points
+                            
                             players.append({
                                 "name": name,
                                 "position": position,
                                 "team": team,
-                                "projected_points": player.get("projected_points", 0),
-                                "injury_status": player.get("injury_status", "Healthy")
+                                "projected_points": projected_points,
+                                "injury_status": player.get("injury_status", "Healthy"),
+                                "tank01_data": player.get("tank01_data", {}),
+                                "news": player.get("news", [])
                             })
                     
                     if players:  # Only add if we found players
@@ -489,16 +511,32 @@ Please provide a comprehensive analysis with specific recommendations for improv
         if "urls" in web_research:
             summary["data_sources"].extend(web_research["urls"])
         
-        # Try to extract current week opponent
+        # Try to extract current week opponent from matchup data
         if "league_context" in roster_analysis:
             league_context = roster_analysis["league_context"]
             if "matchups" in league_context:
+                matchups = league_context["matchups"]
                 # Look for current week matchup
-                for matchup in league_context["matchups"]:
-                    if isinstance(matchup, dict) and matchup.get("week") == 1:
-                        # This is a simplified extraction - would need more logic for actual opponent
-                        summary["current_week_opponent"] = "Week 1 Matchup Available"
-                        break
+                if "week_1" in matchups and "matchups" in matchups["week_1"]:
+                    week1_matchups = matchups["week_1"]["matchups"]
+                    # Find the matchup that contains the user's team
+                    user_team_key = "461.l.595012.t.3"  # This should be extracted from league info
+                    for matchup in week1_matchups:
+                        if "teams" in matchup and len(matchup["teams"]) == 2:
+                            team1 = matchup["teams"][0]
+                            team2 = matchup["teams"][1]
+                            
+                            # Check if user's team is in this matchup
+                            if (team1.get("team_key") == user_team_key or 
+                                team2.get("team_key") == user_team_key):
+                                # Find the opponent
+                                if team1.get("team_key") == user_team_key:
+                                    opponent = team2
+                                else:
+                                    opponent = team1
+                                
+                                summary["current_week_opponent"] = opponent.get("name", "Week 1 Opponent")
+                                break
         
         return summary
     
@@ -548,17 +586,21 @@ Please provide a comprehensive analysis with specific recommendations for improv
         """Format data sources for markdown report"""
         sources = []
         
-        # Add data files
-        if 'roster_analysis' in analysis_result and 'data_files' in analysis_result['roster_analysis']:
-            for file_type, file_path in analysis_result['roster_analysis']['data_files'].items():
-                if file_path:
-                    filename = os.path.basename(file_path)
-                    sources.append(f"- **{file_type}**: {filename}")
+        # Add data files from roster analysis
+        if 'roster_analysis' in analysis_result:
+            roster_analysis = analysis_result['roster_analysis']
+            if 'data_files' in roster_analysis:
+                for file_type, file_path in roster_analysis['data_files'].items():
+                    if file_path:
+                        filename = os.path.basename(file_path)
+                        sources.append(f"- **{file_type.replace('_', ' ').title()}**: {filename}")
         
         # Add web research sources
-        if 'web_research' in analysis_result and 'urls' in analysis_result['web_research']:
-            for url in analysis_result['web_research']['urls']:
-                sources.append(f"- **Web Research**: {url}")
+        if 'web_research' in analysis_result:
+            web_research = analysis_result['web_research']
+            if 'urls' in web_research:
+                for url in web_research['urls']:
+                    sources.append(f"- **Web Research**: {url}")
         
         # Add optimized player data info
         if 'optimized_data' in analysis_result:
@@ -748,19 +790,6 @@ Please provide a comprehensive analysis following the format specified in your s
             "markdown": markdown_filepath
         }
     
-    def _format_data_sources(self, analysis_result: Dict[str, Any]) -> str:
-        """Format data sources for markdown report"""
-        data_files = analysis_result.get('data_files', {})
-        if not data_files:
-            return "No data sources available"
-        
-        sources = []
-        for data_type, filepath in data_files.items():
-            if filepath:
-                filename = os.path.basename(filepath)
-                sources.append(f"- **{data_type.replace('_', ' ').title()}:** {filename}")
-        
-        return "\n".join(sources) if sources else "No data sources available"
     
     def _format_resources_used(self, analysis_result: Dict[str, Any]) -> str:
         """Format resources used for markdown report"""
