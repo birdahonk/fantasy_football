@@ -1,0 +1,323 @@
+{
+  "players_by_position": {
+    "QB": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.30123",
+          "player_id": "30123",
+          "name": {
+            "full": "Patrick Mahomes",
+            "first": "Patrick",
+            "last": "Mahomes",
+            "ascii_first": "Patrick",
+            "ascii_last": "Mahomes"
+          },
+          "display_position": "QB",
+          "team": "KC",
+          "bye_week": "10",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.40881",
+          "player_id": "40881",
+          "name": {
+            "full": "Drake Maye",
+            "first": "Drake",
+            "last": "Maye",
+            "ascii_first": "Drake",
+            "ascii_last": "Maye"
+          },
+          "display_position": "QB",
+          "team": "NE",
+          "bye_week": "14",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      }
+    ],
+    "WR": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.33393",
+          "player_id": "33393",
+          "name": {
+            "full": "Ja'Marr Chase",
+            "first": "Ja'Marr",
+            "last": "Chase",
+            "ascii_first": "Ja'Marr",
+            "ascii_last": "Chase"
+          },
+          "display_position": "WR",
+          "team": "Cin",
+          "bye_week": "10",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.31883",
+          "player_id": "31883",
+          "name": {
+            "full": "A.J. Brown",
+            "first": "A.J.",
+            "last": "Brown",
+            "ascii_first": "A.J.",
+            "ascii_last": "Brown"
+          },
+          "display_position": "WR",
+          "team": "Phi",
+          "bye_week": "9",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.29399",
+          "player_id": "29399",
+          "name": {
+            "full": "Tyreek Hill",
+            "first": "Tyreek",
+            "last": "Hill",
+            "ascii_first": "Tyreek",
+            "ascii_last": "Hill"
+          },
+          "display_position": "WR",
+          "team": "Mia",
+          "bye_week": "12",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.40063",
+          "player_id": "40063",
+          "name": {
+            "full": "Jayden Reed",
+            "first": "Jayden",
+            "last": "Reed",
+            "ascii_first": "Jayden",
+            "ascii_last": "Reed"
+          },
+          "display_position": "WR",
+          "team": "GB",
+          "bye_week": "5",
+          "injury_status": "Q",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      }
+    ],
+    "RB": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.40196",
+          "player_id": "40196",
+          "name": {
+            "full": "Chase Brown",
+            "first": "Chase",
+            "last": "Brown",
+            "ascii_first": "Chase",
+            "ascii_last": "Brown"
+          },
+          "display_position": "RB",
+          "team": "Cin",
+          "bye_week": "10",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.33514",
+          "player_id": "33514",
+          "name": {
+            "full": "Chuba Hubbard",
+            "first": "Chuba",
+            "last": "Hubbard",
+            "ascii_first": "Chuba",
+            "ascii_last": "Hubbard"
+          },
+          "display_position": "RB",
+          "team": "Car",
+          "bye_week": "14",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.30295",
+          "player_id": "30295",
+          "name": {
+            "full": "Aaron Jones Sr.",
+            "first": "Aaron",
+            "last": "Jones Sr.",
+            "ascii_first": "Aaron",
+            "ascii_last": "Jones Sr."
+          },
+          "display_position": "RB",
+          "team": "Min",
+          "bye_week": "6",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.41881",
+          "player_id": "41881",
+          "name": {
+            "full": "Kaleb Johnson",
+            "first": "Kaleb",
+            "last": "Johnson",
+            "ascii_first": "Kaleb",
+            "ascii_last": "Johnson"
+          },
+          "display_position": "RB",
+          "team": "Pit",
+          "bye_week": "5",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      }
+    ],
+    "TE": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.31056",
+          "player_id": "31056",
+          "name": {
+            "full": "Mark Andrews",
+            "first": "Mark",
+            "last": "Andrews",
+            "ascii_first": "Mark",
+            "ascii_last": "Andrews"
+          },
+          "display_position": "TE",
+          "team": "Bal",
+          "bye_week": "7",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.33392",
+          "player_id": "33392",
+          "name": {
+            "full": "Kyle Pitts Sr.",
+            "first": "Kyle",
+            "last": "Pitts Sr.",
+            "ascii_first": "Kyle",
+            "ascii_last": "Pitts Sr."
+          },
+          "display_position": "TE",
+          "team": "Atl",
+          "bye_week": "5",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      }
+    ],
+    "K": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.34344",
+          "player_id": "34344",
+          "name": {
+            "full": "Cameron Dicker",
+            "first": "Cameron",
+            "last": "Dicker",
+            "ascii_first": "Cameron",
+            "ascii_last": "Dicker"
+          },
+          "display_position": "K",
+          "team": "LAC",
+          "bye_week": "12",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      }
+    ],
+    "DEF": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.100034",
+          "player_id": "100034",
+          "name": {
+            "full": "Houston",
+            "first": "Houston",
+            "last": "",
+            "ascii_first": "Houston",
+            "ascii_last": ""
+          },
+          "display_position": "DEF",
+          "team": "Hou",
+          "bye_week": "6",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.100003",
+          "player_id": "100003",
+          "name": {
+            "full": "Chicago",
+            "first": "Chicago",
+            "last": "",
+            "ascii_first": "Chicago",
+            "ascii_last": ""
+          },
+          "display_position": "DEF",
+          "team": "Chi",
+          "bye_week": "5",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": null
+      }
+    ]
+  },
+  "total_players": 15,
+  "opponent_name": "Sinker Conkers",
+  "data_sources": [
+    "yahoo",
+    "sleeper",
+    "tank01"
+  ]
+}

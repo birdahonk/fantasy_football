@@ -1,0 +1,806 @@
+{
+  "WR": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40901",
+        "player_id": "40901",
+        "name": {
+          "full": "Rome Odunze",
+          "first": "Rome",
+          "last": "Odunze",
+          "ascii_first": "Rome",
+          "ascii_last": "Odunze"
+        },
+        "display_position": "WR",
+        "team": "Chi",
+        "bye_week": "5",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4431299",
+        "name": {
+          "full": "Rome Odunze",
+          "first": "Rome",
+          "last": "Odunze"
+        },
+        "display_position": "WR",
+        "team": "CHI",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4431299",
+          "sleeper_id": "11620",
+          "fantasypros_id": "25411",
+          "yahoo_id": "40901"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.34104",
+        "player_id": "34104",
+        "name": {
+          "full": "Khalil Shakir",
+          "first": "Khalil",
+          "last": "Shakir",
+          "ascii_first": "Khalil",
+          "ascii_last": "Shakir"
+        },
+        "display_position": "WR",
+        "team": "Buf",
+        "bye_week": "7",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4373678",
+        "name": {
+          "full": "Khalil Shakir",
+          "first": "Khalil",
+          "last": "Shakir"
+        },
+        "display_position": "WR",
+        "team": "BUF",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4373678",
+          "sleeper_id": "8134",
+          "fantasypros_id": "23748",
+          "yahoo_id": "34104"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40126",
+        "player_id": "40126",
+        "name": {
+          "full": "Josh Downs",
+          "first": "Josh",
+          "last": "Downs",
+          "ascii_first": "Josh",
+          "ascii_last": "Downs"
+        },
+        "display_position": "WR",
+        "team": "Ind",
+        "bye_week": "11",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4688813",
+        "name": {
+          "full": "Josh Downs",
+          "first": "Josh",
+          "last": "Downs"
+        },
+        "display_position": "WR",
+        "team": "IND",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4688813",
+          "sleeper_id": "9500",
+          "fantasypros_id": "24706",
+          "yahoo_id": "40126"
+        }
+      }
+    }
+  ],
+  "TE": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.30136",
+        "player_id": "30136",
+        "name": {
+          "full": "Evan Engram",
+          "first": "Evan",
+          "last": "Engram",
+          "ascii_first": "Evan",
+          "ascii_last": "Engram"
+        },
+        "display_position": "TE",
+        "team": "Den",
+        "bye_week": "12",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "3051876",
+        "name": {
+          "full": "Evan Engram",
+          "first": "Evan",
+          "last": "Engram"
+        },
+        "display_position": "TE",
+        "team": "DEN",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "20240501",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "3051876",
+          "sleeper_id": "4066",
+          "fantasypros_id": "16411",
+          "yahoo_id": "30136"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.29269",
+        "player_id": "29269",
+        "name": {
+          "full": "Hunter Henry",
+          "first": "Hunter",
+          "last": "Henry",
+          "ascii_first": "Hunter",
+          "ascii_last": "Henry"
+        },
+        "display_position": "TE",
+        "team": "NE",
+        "bye_week": "14",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "3046439",
+        "name": {
+          "full": "Hunter Henry",
+          "first": "Hunter",
+          "last": "Henry"
+        },
+        "display_position": "TE",
+        "team": "NE",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "20240501",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "3046439",
+          "sleeper_id": "3214",
+          "fantasypros_id": "15561",
+          "yahoo_id": "29269"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.34099",
+        "player_id": "34099",
+        "name": {
+          "full": "Chig Okonkwo",
+          "first": "Chig",
+          "last": "Okonkwo",
+          "ascii_first": "Chig",
+          "ascii_last": "Okonkwo"
+        },
+        "display_position": "TE",
+        "team": "Ten",
+        "bye_week": "10",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    }
+  ],
+  "QB": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40900",
+        "player_id": "40900",
+        "name": {
+          "full": "Caleb Williams",
+          "first": "Caleb",
+          "last": "Williams",
+          "ascii_first": "Caleb",
+          "ascii_last": "Williams"
+        },
+        "display_position": "QB",
+        "team": "Chi",
+        "bye_week": "5",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4431611",
+        "name": {
+          "full": "Caleb Williams",
+          "first": "Caleb",
+          "last": "Williams"
+        },
+        "display_position": "QB",
+        "team": "CHI",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "20240501",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4431611",
+          "sleeper_id": "11560",
+          "fantasypros_id": "23084",
+          "yahoo_id": "40900"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.32676",
+        "player_id": "32676",
+        "name": {
+          "full": "Justin Herbert",
+          "first": "Justin",
+          "last": "Herbert",
+          "ascii_first": "Justin",
+          "ascii_last": "Herbert"
+        },
+        "display_position": "QB",
+        "team": "LAC",
+        "bye_week": "12",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4038941",
+        "name": {
+          "full": "Justin Herbert",
+          "first": "Justin",
+          "last": "Herbert"
+        },
+        "display_position": "QB",
+        "team": "LAC",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4038941",
+          "sleeper_id": "6797",
+          "fantasypros_id": "18635",
+          "yahoo_id": "32676"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40905",
+        "player_id": "40905",
+        "name": {
+          "full": "J.J. McCarthy",
+          "first": "J.J.",
+          "last": "McCarthy",
+          "ascii_first": "J.J.",
+          "ascii_last": "McCarthy"
+        },
+        "display_position": "QB",
+        "team": "Min",
+        "bye_week": "6",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4433970",
+        "name": {
+          "full": "J.J. McCarthy",
+          "first": "J.J.",
+          "last": "McCarthy"
+        },
+        "display_position": "QB",
+        "team": "MIN",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "20240501",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4433970",
+          "sleeper_id": "11565",
+          "fantasypros_id": "23018",
+          "yahoo_id": "40905"
+        }
+      }
+    }
+  ],
+  "RB": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41900",
+        "player_id": "41900",
+        "name": {
+          "full": "Bhayshul Tuten",
+          "first": "Bhayshul",
+          "last": "Tuten",
+          "ascii_first": "Bhayshul",
+          "ascii_last": "Tuten"
+        },
+        "display_position": "RB",
+        "team": "Jax",
+        "bye_week": "8",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4882093",
+        "name": {
+          "full": "Bhayshul Tuten",
+          "first": "Bhayshul",
+          "last": "Tuten"
+        },
+        "display_position": "RB",
+        "team": "JAX",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4882093",
+          "sleeper_id": "12490",
+          "fantasypros_id": "27297",
+          "yahoo_id": "41900"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.33508",
+        "player_id": "33508",
+        "name": {
+          "full": "Rhamondre Stevenson",
+          "first": "Rhamondre",
+          "last": "Stevenson",
+          "ascii_first": "Rhamondre",
+          "ascii_last": "Stevenson"
+        },
+        "display_position": "RB",
+        "team": "NE",
+        "bye_week": "14",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "4569173",
+        "name": {
+          "full": "Rhamondre Stevenson",
+          "first": "Rhamondre",
+          "last": "Stevenson"
+        },
+        "display_position": "RB",
+        "team": "NE",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "4569173",
+          "sleeper_id": "7611",
+          "fantasypros_id": "22726",
+          "yahoo_id": "33508"
+        }
+      }
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41907",
+        "player_id": "41907",
+        "name": {
+          "full": "Dylan Sampson",
+          "first": "Dylan",
+          "last": "Sampson",
+          "ascii_first": "Dylan",
+          "ascii_last": "Sampson"
+        },
+        "display_position": "RB",
+        "team": "Cle",
+        "bye_week": "9",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": {
+        "player_id": "5081397",
+        "name": {
+          "full": "Dylan Sampson",
+          "first": "Dylan",
+          "last": "Sampson"
+        },
+        "display_position": "RB",
+        "team": "CLE",
+        "injury_status": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "projection": {},
+        "news": [],
+        "game_stats": {},
+        "depth_chart": {},
+        "transaction_trends": {},
+        "player_ids": {
+          "espn_id": "5081397",
+          "sleeper_id": "12469",
+          "fantasypros_id": "27102",
+          "yahoo_id": "41907"
+        }
+      }
+    }
+  ],
+  "DEF": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.100008",
+        "player_id": "100008",
+        "name": {
+          "full": "Detroit",
+          "first": "Detroit",
+          "last": "",
+          "ascii_first": "Detroit",
+          "ascii_last": ""
+        },
+        "display_position": "DEF",
+        "team": "Det",
+        "bye_week": "8",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.100020",
+        "player_id": "100020",
+        "name": {
+          "full": "New York",
+          "first": "New York",
+          "last": "",
+          "ascii_first": "New York",
+          "ascii_last": ""
+        },
+        "display_position": "DEF",
+        "team": "NYJ",
+        "bye_week": "9",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.100026",
+        "player_id": "100026",
+        "name": {
+          "full": "Seattle",
+          "first": "Seattle",
+          "last": "",
+          "ascii_first": "Seattle",
+          "ascii_last": ""
+        },
+        "display_position": "DEF",
+        "team": "Sea",
+        "bye_week": "8",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    }
+  ],
+  "K": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.33537",
+        "player_id": "33537",
+        "name": {
+          "full": "Evan McPherson",
+          "first": "Evan",
+          "last": "McPherson",
+          "ascii_first": "Evan",
+          "ascii_last": "McPherson"
+        },
+        "display_position": "K",
+        "team": "Cin",
+        "bye_week": "10",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.32858",
+        "player_id": "32858",
+        "name": {
+          "full": "Tyler Bass",
+          "first": "Tyler",
+          "last": "Bass",
+          "ascii_first": "Tyler",
+          "ascii_last": "Bass"
+        },
+        "display_position": "K",
+        "team": "Buf",
+        "bye_week": "7",
+        "injury_status": "IR",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41081",
+        "player_id": "41081",
+        "name": {
+          "full": "Joshua Karty",
+          "first": "Joshua",
+          "last": "Karty",
+          "ascii_first": "Joshua",
+          "ascii_last": "Karty"
+        },
+        "display_position": "K",
+        "team": "LAR",
+        "bye_week": "8",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    }
+  ],
+  "RB,TE": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41352",
+        "player_id": "41352",
+        "name": {
+          "full": "Jack Westover",
+          "first": "Jack",
+          "last": "Westover",
+          "ascii_first": "Jack",
+          "ascii_last": "Westover"
+        },
+        "display_position": "RB,TE",
+        "team": "NE",
+        "bye_week": "14",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41961",
+        "player_id": "41961",
+        "name": {
+          "full": "Robbie Ouzts",
+          "first": "Robbie",
+          "last": "Ouzts",
+          "ascii_first": "Robbie",
+          "ascii_last": "Ouzts"
+        },
+        "display_position": "RB,TE",
+        "team": "Sea",
+        "bye_week": "8",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40519",
+        "player_id": "40519",
+        "name": {
+          "full": "Brady Russell",
+          "first": "Brady",
+          "last": "Russell",
+          "ascii_first": "Brady",
+          "ascii_last": "Russell"
+        },
+        "display_position": "RB,TE",
+        "team": "Sea",
+        "bye_week": "8",
+        "injury_status": "Healthy",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    }
+  ],
+  "WR,RB": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40311",
+        "player_id": "40311",
+        "name": {
+          "full": "Kazmeir Allen",
+          "first": "Kazmeir",
+          "last": "Allen",
+          "ascii_first": "Kazmeir",
+          "ascii_last": "Allen"
+        },
+        "display_position": "WR,RB",
+        "team": "Was",
+        "bye_week": "12",
+        "injury_status": "NA",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40872",
+        "player_id": "40872",
+        "name": {
+          "full": "Louis Rees-Zammit",
+          "first": "Louis",
+          "last": "Rees-Zammit",
+          "ascii_first": "Louis",
+          "ascii_last": "Rees-Zammit"
+        },
+        "display_position": "WR,RB",
+        "team": "Jax",
+        "bye_week": "8",
+        "injury_status": "NA",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.34573",
+        "player_id": "34573",
+        "name": {
+          "full": "Tyreik McAllister",
+          "first": "Tyreik",
+          "last": "McAllister",
+          "ascii_first": "Tyreik",
+          "ascii_last": "McAllister"
+        },
+        "display_position": "WR,RB",
+        "team": "LV",
+        "bye_week": "8",
+        "injury_status": "NA",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    }
+  ],
+  "QB,WR": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.42091",
+        "player_id": "42091",
+        "name": {
+          "full": "Garrett Greene",
+          "first": "Garrett",
+          "last": "Greene",
+          "ascii_first": "Garrett",
+          "ascii_last": "Greene"
+        },
+        "display_position": "QB,WR",
+        "team": "TB",
+        "bye_week": "9",
+        "injury_status": "NA",
+        "percent_owned": "0"
+      },
+      "sleeper_data": null,
+      "tank01_data": null
+    }
+  ]
+}

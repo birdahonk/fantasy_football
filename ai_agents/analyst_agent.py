@@ -28,6 +28,7 @@ from ai_agents.analyst_tools import AnalystTools
 from ai_agents.prompt_manager import PromptManager
 from ai_agents.optimized_player_profiles import OptimizedPlayerProfiles
 from ai_agents.model_selector import ModelSelector
+from ai_agents.comprehensive_data_processor import ComprehensiveDataProcessor
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -390,6 +391,279 @@ For each recommended add/drop:
 Please provide a comprehensive analysis with specific recommendations for improving their existing roster."""
         
         return prompt
+    
+    def analyze_with_comprehensive_data(self, user_prompt: str, player_limits: Dict[str, int] = None, 
+                                      collect_data: bool = False, model_selection: bool = True) -> Dict[str, Any]:
+        """Analyze with comprehensive data including roster, opponent, and available players"""
+        
+        if player_limits is None:
+            from config.player_limits import DEFAULT_PLAYER_LIMITS
+            player_limits = DEFAULT_PLAYER_LIMITS
+        
+        logger.info("Starting comprehensive analysis...")
+        
+        # Initialize comprehensive data processor
+        data_processor = ComprehensiveDataProcessor(
+            data_dir=os.path.join(project_root, "data_collection", "outputs"),
+            player_limits=player_limits
+        )
+        
+        # Process all data
+        comprehensive_data = data_processor.process_all_data()
+        
+        # Perform web research
+        logger.info("Performing web research...")
+        web_research = self.tools.research_current_nfl_news()
+        
+        # Build comprehensive prompt
+        prompt = self._build_comprehensive_analysis_prompt(
+            user_prompt, comprehensive_data, web_research
+        )
+        
+        # Generate analysis with LLM
+        logger.info("Generating analysis with LLM...")
+        analysis = self._call_llm(prompt)
+        
+        # Save comprehensive reports
+        saved_files = self._save_comprehensive_reports(
+            comprehensive_data, web_research, analysis
+        )
+        
+        return {
+            "analysis_type": "comprehensive_data",
+            "model_provider": self.model_provider,
+            "model_name": self.model_name,
+            "analysis": analysis,
+            "comprehensive_data": comprehensive_data,
+            "web_research": web_research,
+            "saved_files": saved_files,
+            "total_tokens": comprehensive_data.get("total_tokens", 0)
+        }
+    
+    def _build_comprehensive_analysis_prompt(self, user_prompt: str, comprehensive_data: Dict[str, Any], 
+                                           web_research: Dict[str, Any]) -> str:
+        """Build comprehensive analysis prompt with all data"""
+        
+        season_context = comprehensive_data.get("season_context", {})
+        league_metadata = comprehensive_data.get("league_metadata", {})
+        my_roster = comprehensive_data.get("my_roster", {})
+        opponent_roster = comprehensive_data.get("opponent_roster", {})
+        available_players = comprehensive_data.get("available_players", {})
+        transaction_trends = comprehensive_data.get("transaction_trends", {})
+        
+        nfl_season = season_context.get("nfl_season", "2025")
+        current_week = season_context.get("current_week", 1)
+        league_name = league_metadata.get("league_name", "Unknown League")
+        team_name = league_metadata.get("team_name", "Unknown Team")
+        opponent_name = opponent_roster.get("opponent_name", "Unknown Opponent")
+        
+        prompt = f"""USER REQUEST: {user_prompt}
+
+CRITICAL CONTEXT: This is the {nfl_season} NFL season, Week {current_week}. You are analyzing for {team_name} in {league_name}.
+
+## LEAGUE METADATA
+- **League Name**: {league_name}
+- **Team Name**: {team_name}
+- **Current Week**: {current_week}
+- **NFL Season**: {nfl_season}
+- **Opponent**: {opponent_name}
+
+## MY ROSTER PLAYERS ({my_roster.get('total_players', 0)} players)
+{json.dumps(my_roster.get('players_by_position', {}), indent=2)}
+
+## OPPONENT ROSTER PLAYERS ({opponent_roster.get('total_players', 0)} players)
+{json.dumps(opponent_roster.get('players_by_position', {}), indent=2)}
+
+## AVAILABLE PLAYERS ({available_players.get('total_players', 0)} players)
+{json.dumps(available_players.get('players_by_position', {}), indent=2)}
+
+## TRANSACTION TRENDS
+{json.dumps(transaction_trends, indent=2)}
+
+## WEB RESEARCH
+{json.dumps(web_research, indent=2)}
+
+## ANALYSIS INSTRUCTIONS
+
+### 1. DATA UTILIZATION REQUIREMENTS
+- **MUST** analyze each player's projected points from Tank01 data (tank01_data.projection.fantasyPoints)
+- **MUST** follow and summarize news links from Tank01 data (tank01_data.news)
+- **MUST** consider depth chart positions from Sleeper data (sleeper_data.depth_chart_position)
+- **MUST** cross-reference player IDs across all 3 APIs
+- **MUST** use web research findings in your analysis
+
+### 2. REQUIRED OUTPUT FORMAT
+1. **Data Visibility Confirmation**: Show exactly what data you can see
+2. **Individual Player Summaries**: For EACH player on your roster, provide a detailed summary based on:
+   - Web research findings about that specific player
+   - News links provided in their Tank01 data
+   - Current injury status and role clarity
+   - Recent performance trends and expectations
+   - Projected fantasy points from Tank01 data
+3. **Opponent Analysis**: Detailed analysis of your Week {current_week} opponent ({opponent_name})
+4. **Available Players Analysis**: Top recommendations with specific reasoning
+5. **Specific Recommendations**: Exact add/drop suggestions with projected points comparisons
+6. **News Integration**: How news links influenced your recommendations
+
+### 3. CRITICAL INSTRUCTIONS
+- **MUST** use Tank01 projected points data (tank01_data.projection.fantasyPoints)
+- **MUST** follow and summarize news links from player data (tank01_data.news)
+- **MUST** provide individual summary for each roster player based on web research and news
+- **MUST** use Tank01 fantasy points for all projections (not Yahoo's 0 values)
+- **MUST** analyze your opponent's key players and their projected performance
+
+Please provide a comprehensive analysis with specific recommendations for improving your roster."""
+        
+        return prompt
+    
+    def _save_comprehensive_reports(self, comprehensive_data: Dict[str, Any], 
+                                  web_research: Dict[str, Any], analysis: str) -> Dict[str, str]:
+        """Save comprehensive reports including JSON and markdown"""
+        
+        timestamp = datetime.now(self.pacific_tz).strftime("%Y%m%d_%H%M%S")
+        output_dir = os.path.join(project_root, "data_collection", "outputs", "analyst_reports")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Save comprehensive JSON
+        json_filepath = os.path.join(output_dir, f"{timestamp}_comprehensive_analysis.json")
+        with open(json_filepath, 'w') as f:
+            json.dump({
+                "analysis": analysis,
+                "comprehensive_data": comprehensive_data,
+                "web_research": web_research,
+                "model_provider": self.model_provider,
+                "model_name": self.model_name,
+                "timestamp": timestamp
+            }, f, indent=2)
+        
+        # Save comprehensive markdown
+        markdown_filepath = os.path.join(output_dir, f"{timestamp}_comprehensive_analysis.md")
+        self._save_comprehensive_markdown_report(
+            comprehensive_data, web_research, analysis, markdown_filepath
+        )
+        
+        # Save comprehensive player data markdown
+        player_data_filepath = os.path.join(output_dir, f"{timestamp}_comprehensive_player_data.md")
+        self._save_comprehensive_player_data_markdown(comprehensive_data, player_data_filepath)
+        
+        logger.info(f"Comprehensive analysis saved to: {json_filepath}")
+        logger.info(f"Comprehensive markdown saved to: {markdown_filepath}")
+        logger.info(f"Comprehensive player data saved to: {player_data_filepath}")
+        
+        return {
+            "json": json_filepath,
+            "markdown": markdown_filepath,
+            "player_data": player_data_filepath
+        }
+    
+    def _save_comprehensive_markdown_report(self, comprehensive_data: Dict[str, Any], 
+                                          web_research: Dict[str, Any], analysis: str, 
+                                          filepath: str) -> None:
+        """Save comprehensive markdown report"""
+        
+        season_context = comprehensive_data.get("season_context", {})
+        league_metadata = comprehensive_data.get("league_metadata", {})
+        
+        markdown_content = f"""# Fantasy Football Comprehensive Analysis Report
+
+**Generated:** {datetime.now(self.pacific_tz).strftime("%Y-%m-%d %H:%M:%S PDT")}
+**Model:** {self.model_provider} - {self.model_name}
+**Season Context:** {season_context.get('nfl_season', 'Unknown')} - Week {season_context.get('current_week', 'Unknown')} ({season_context.get('season_phase', 'Unknown')})
+
+## League Information
+- **League Name:** {league_metadata.get('league_name', 'Unknown')}
+- **Team Name:** {league_metadata.get('team_name', 'Unknown')}
+- **Current Week:** {season_context.get('current_week', 'Unknown')}
+- **NFL Season:** {season_context.get('nfl_season', 'Unknown')}
+
+## Data Summary
+- **My Roster Players:** {comprehensive_data.get('my_roster', {}).get('total_players', 0)}
+- **Opponent Roster Players:** {comprehensive_data.get('opponent_roster', {}).get('total_players', 0)}
+- **Available Players:** {comprehensive_data.get('available_players', {}).get('total_players', 0)}
+- **Web Research Items:** {len(web_research.get('news_items', []))}
+- **Total Tokens Used:** {comprehensive_data.get('total_tokens', 0):,}
+
+## Analysis
+
+{analysis}
+
+## Data Sources
+
+{self._format_comprehensive_data_sources(comprehensive_data)}
+
+## Resources Used
+
+{self._format_comprehensive_resources_used(comprehensive_data, web_research)}
+"""
+        
+        with open(filepath, 'w') as f:
+            f.write(markdown_content)
+    
+    def _save_comprehensive_player_data_markdown(self, comprehensive_data: Dict[str, Any], filepath: str) -> None:
+        """Save comprehensive player data as markdown"""
+        
+        markdown_content = f"""# Comprehensive Player Data
+
+**Generated:** {datetime.now(self.pacific_tz).strftime("%Y-%m-%d %H:%M:%S PDT")}
+**Total Players:** {comprehensive_data.get('my_roster', {}).get('total_players', 0)} roster + {comprehensive_data.get('opponent_roster', {}).get('total_players', 0)} opponent + {comprehensive_data.get('available_players', {}).get('total_players', 0)} available
+
+## My Roster Players
+
+{self._format_players_by_position(comprehensive_data.get('my_roster', {}).get('players_by_position', {}))}
+
+## Opponent Roster Players
+
+{self._format_players_by_position(comprehensive_data.get('opponent_roster', {}).get('players_by_position', {}))}
+
+## Available Players
+
+{self._format_players_by_position(comprehensive_data.get('available_players', {}).get('players_by_position', {}))}
+"""
+        
+        with open(filepath, 'w') as f:
+            f.write(markdown_content)
+    
+    def _format_players_by_position(self, players_by_position: Dict[str, List[Dict[str, Any]]]) -> str:
+        """Format players by position for markdown"""
+        content = ""
+        
+        for position, players in players_by_position.items():
+            content += f"### {position} ({len(players)} players)\n\n"
+            for i, player in enumerate(players):
+                content += f"#### Player {i+1}\n"
+                content += f"```json\n{json.dumps(player, indent=2)}\n```\n\n"
+        
+        return content
+    
+    def _format_comprehensive_data_sources(self, comprehensive_data: Dict[str, Any]) -> str:
+        """Format data sources for comprehensive report"""
+        data_files = comprehensive_data.get("data_files", {})
+        sources = []
+        
+        for data_type, file_path in data_files.items():
+            if file_path:
+                filename = os.path.basename(file_path)
+                sources.append(f"- **{data_type.replace('_', ' ').title()}**: {filename}")
+        
+        return "\n".join(sources) if sources else "No data sources available"
+    
+    def _format_comprehensive_resources_used(self, comprehensive_data: Dict[str, Any], web_research: Dict[str, Any]) -> str:
+        """Format resources used for comprehensive report"""
+        resources = []
+        
+        # Add data summary
+        my_roster_count = comprehensive_data.get('my_roster', {}).get('total_players', 0)
+        opponent_roster_count = comprehensive_data.get('opponent_roster', {}).get('total_players', 0)
+        available_players_count = comprehensive_data.get('available_players', {}).get('total_players', 0)
+        web_research_items = len(web_research.get('news_items', []))
+        
+        resources.append(f"- **My Roster Players**: {my_roster_count}")
+        resources.append(f"- **Opponent Roster Players**: {opponent_roster_count}")
+        resources.append(f"- **Available Players**: {available_players_count}")
+        resources.append(f"- **Web Research Items**: {web_research_items}")
+        resources.append(f"- **Model**: {self.model_provider} - {self.model_name}")
+        
+        return "\n".join(resources)
     
     def _extract_roster_summary(self, roster_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """Extract only essential roster data to reduce token usage"""

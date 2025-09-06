@@ -1,0 +1,707 @@
+{
+  "players_by_position": {
+    "QB": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.32671",
+          "player_id": "32671",
+          "name": {
+            "full": "Joe Burrow",
+            "first": "Joe",
+            "last": "Burrow",
+            "ascii_first": "Joe",
+            "ascii_last": "Burrow"
+          },
+          "display_position": "QB",
+          "team": "Cin",
+          "bye_week": "10",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "3915511",
+          "name": {
+            "full": "Joe Burrow",
+            "first": "Joe",
+            "last": "Burrow"
+          },
+          "display_position": "QB",
+          "team": "CIN",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "3915511",
+            "sleeper_id": "6770",
+            "fantasypros_id": "19196",
+            "yahoo_id": "32671"
+          }
+        }
+      }
+    ],
+    "WR": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.40883",
+          "player_id": "40883",
+          "name": {
+            "full": "Brian Thomas Jr.",
+            "first": "Brian",
+            "last": "Thomas Jr.",
+            "ascii_first": "Brian",
+            "ascii_last": "Thomas Jr."
+          },
+          "display_position": "WR",
+          "team": "Jax",
+          "bye_week": "8",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4432773",
+          "name": {
+            "full": "Brian Thomas Jr.",
+            "first": "Brian",
+            "last": "Jr."
+          },
+          "display_position": "WR",
+          "team": "JAX",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4432773",
+            "sleeper_id": "11631",
+            "fantasypros_id": "23000",
+            "yahoo_id": "40883"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.32703",
+          "player_id": "32703",
+          "name": {
+            "full": "Tee Higgins",
+            "first": "Tee",
+            "last": "Higgins",
+            "ascii_first": "Tee",
+            "ascii_last": "Higgins"
+          },
+          "display_position": "WR",
+          "team": "Cin",
+          "bye_week": "10",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4239993",
+          "name": {
+            "full": "Tee Higgins",
+            "first": "Tee",
+            "last": "Higgins"
+          },
+          "display_position": "WR",
+          "team": "CIN",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4239993",
+            "sleeper_id": "6801",
+            "fantasypros_id": "19211",
+            "yahoo_id": "32703"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.33967",
+          "player_id": "33967",
+          "name": {
+            "full": "Jameson Williams",
+            "first": "Jameson",
+            "last": "Williams",
+            "ascii_first": "Jameson",
+            "ascii_last": "Williams"
+          },
+          "display_position": "WR",
+          "team": "Det",
+          "bye_week": "8",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4426388",
+          "name": {
+            "full": "Jameson Williams",
+            "first": "Jameson",
+            "last": "Williams"
+          },
+          "display_position": "WR",
+          "team": "DET",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4426388",
+            "sleeper_id": "8148",
+            "fantasypros_id": "23677",
+            "yahoo_id": "33967"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.31896",
+          "player_id": "31896",
+          "name": {
+            "full": "DK Metcalf",
+            "first": "DK",
+            "last": "Metcalf",
+            "ascii_first": "DK",
+            "ascii_last": "Metcalf"
+          },
+          "display_position": "WR",
+          "team": "Pit",
+          "bye_week": "5",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4047650",
+          "name": {
+            "full": "DK Metcalf",
+            "first": "DK",
+            "last": "Metcalf"
+          },
+          "display_position": "WR",
+          "team": "PIT",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4047650",
+            "sleeper_id": "5846",
+            "fantasypros_id": "18219",
+            "yahoo_id": "31896"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.31017",
+          "player_id": "31017",
+          "name": {
+            "full": "Christian Kirk",
+            "first": "Christian",
+            "last": "Kirk",
+            "ascii_first": "Christian",
+            "ascii_last": "Kirk"
+          },
+          "display_position": "WR",
+          "team": "Hou",
+          "bye_week": "6",
+          "injury_status": "O",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "3895856",
+          "name": {
+            "full": "Christian Kirk",
+            "first": "Christian",
+            "last": "Kirk"
+          },
+          "display_position": "WR",
+          "team": "HOU",
+          "injury_status": {
+            "injReturnDate": "20250907",
+            "description": "Sep 4: Kirk is dealing with a strained hamstring that is expected to sideline him for at least Sunday's season opener versus the Rams, Adam Schefter of ESPN reports.",
+            "injDate": "20240501",
+            "designation": "Questionable"
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "3895856",
+            "sleeper_id": "4950",
+            "fantasypros_id": "17268",
+            "yahoo_id": "31017"
+          }
+        }
+      }
+    ],
+    "RB": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.30121",
+          "player_id": "30121",
+          "name": {
+            "full": "Christian McCaffrey",
+            "first": "Christian",
+            "last": "McCaffrey",
+            "ascii_first": "Christian",
+            "ascii_last": "McCaffrey"
+          },
+          "display_position": "RB",
+          "team": "SF",
+          "bye_week": "14",
+          "injury_status": "Q",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "3117251",
+          "name": {
+            "full": "Christian McCaffrey",
+            "first": "Christian",
+            "last": "McCaffrey"
+          },
+          "display_position": "RB",
+          "team": "SF",
+          "injury_status": {
+            "injReturnDate": "20250907",
+            "description": "Sep 5: McCaffrey (calf) is warming up in uniform at the start of Friday's practice, Nick Wagoner of ESPN.com reports.",
+            "injDate": "",
+            "designation": "Questionable"
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "3117251",
+            "sleeper_id": "4034",
+            "fantasypros_id": "16393",
+            "yahoo_id": "30121"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.31005",
+          "player_id": "31005",
+          "name": {
+            "full": "Nick Chubb",
+            "first": "Nick",
+            "last": "Chubb",
+            "ascii_first": "Nick",
+            "ascii_last": "Chubb"
+          },
+          "display_position": "RB",
+          "team": "Hou",
+          "bye_week": "6",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "3128720",
+          "name": {
+            "full": "Nick Chubb",
+            "first": "Nick",
+            "last": "Chubb"
+          },
+          "display_position": "RB",
+          "team": "HOU",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "3128720",
+            "sleeper_id": "4988",
+            "fantasypros_id": "17246",
+            "yahoo_id": "31005"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.41807",
+          "player_id": "41807",
+          "name": {
+            "full": "Omarion Hampton",
+            "first": "Omarion",
+            "last": "Hampton",
+            "ascii_first": "Omarion",
+            "ascii_last": "Hampton"
+          },
+          "display_position": "RB",
+          "team": "LAC",
+          "bye_week": "12",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4685382",
+          "name": {
+            "full": "Omarion Hampton",
+            "first": "Omarion",
+            "last": "Hampton"
+          },
+          "display_position": "RB",
+          "team": "LAC",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4685382",
+            "sleeper_id": "12507",
+            "fantasypros_id": "25395",
+            "yahoo_id": "41807"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.40095",
+          "player_id": "40095",
+          "name": {
+            "full": "Tank Bigsby",
+            "first": "Tank",
+            "last": "Bigsby",
+            "ascii_first": "Tank",
+            "ascii_last": "Bigsby"
+          },
+          "display_position": "RB",
+          "team": "Jax",
+          "bye_week": "8",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4429013",
+          "name": {
+            "full": "Tank Bigsby",
+            "first": "Tank",
+            "last": "Bigsby"
+          },
+          "display_position": "RB",
+          "team": "JAX",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4429013",
+            "sleeper_id": "9225",
+            "fantasypros_id": "22908",
+            "yahoo_id": "40095"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.40998",
+          "player_id": "40998",
+          "name": {
+            "full": "Isaac Guerendo",
+            "first": "Isaac",
+            "last": "Guerendo",
+            "ascii_first": "Isaac",
+            "ascii_last": "Guerendo"
+          },
+          "display_position": "RB",
+          "team": "SF",
+          "bye_week": "14",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4372561",
+          "name": {
+            "full": "Isaac Guerendo",
+            "first": "Isaac",
+            "last": "Guerendo"
+          },
+          "display_position": "RB",
+          "team": "SF",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "20240501",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4372561",
+            "sleeper_id": "11651",
+            "fantasypros_id": "26392",
+            "yahoo_id": "40998"
+          }
+        }
+      }
+    ],
+    "TE": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.26658",
+          "player_id": "26658",
+          "name": {
+            "full": "Zach Ertz",
+            "first": "Zach",
+            "last": "Ertz",
+            "ascii_first": "Zach",
+            "ascii_last": "Ertz"
+          },
+          "display_position": "TE",
+          "team": "Was",
+          "bye_week": "12",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "15835",
+          "name": {
+            "full": "Zach Ertz",
+            "first": "Zach",
+            "last": "Ertz"
+          },
+          "display_position": "TE",
+          "team": "WSH",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "15835",
+            "sleeper_id": "1339",
+            "fantasypros_id": "11689",
+            "yahoo_id": "26658"
+          }
+        }
+      },
+      {
+        "yahoo_data": {
+          "player_key": "461.p.33443",
+          "player_id": "33443",
+          "name": {
+            "full": "Pat Freiermuth",
+            "first": "Pat",
+            "last": "Freiermuth",
+            "ascii_first": "Pat",
+            "ascii_last": "Freiermuth"
+          },
+          "display_position": "TE",
+          "team": "Pit",
+          "bye_week": "5",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4361411",
+          "name": {
+            "full": "Pat Freiermuth",
+            "first": "Pat",
+            "last": "Freiermuth"
+          },
+          "display_position": "TE",
+          "team": "PIT",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4361411",
+            "sleeper_id": "7600",
+            "fantasypros_id": "20163",
+            "yahoo_id": "33443"
+          }
+        }
+      }
+    ],
+    "K": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.31977",
+          "player_id": "31977",
+          "name": {
+            "full": "Matt Gay",
+            "first": "Matt",
+            "last": "Gay",
+            "ascii_first": "Matt",
+            "ascii_last": "Gay"
+          },
+          "display_position": "K",
+          "team": "Was",
+          "bye_week": "12",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "4249087",
+          "name": {
+            "full": "Matt Gay",
+            "first": "Matt",
+            "last": "Gay"
+          },
+          "display_position": "PK",
+          "team": "WSH",
+          "injury_status": {
+            "injReturnDate": "",
+            "description": "",
+            "injDate": "",
+            "designation": ""
+          },
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": "4249087",
+            "sleeper_id": "6083",
+            "fantasypros_id": "18545",
+            "yahoo_id": "31977"
+          }
+        }
+      }
+    ],
+    "DEF": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.100021",
+          "player_id": "100021",
+          "name": {
+            "full": "Philadelphia",
+            "first": "Philadelphia",
+            "last": "",
+            "ascii_first": "Philadelphia",
+            "ascii_last": ""
+          },
+          "display_position": "DEF",
+          "team": "Phi",
+          "bye_week": "9",
+          "injury_status": "Healthy",
+          "percent_owned": "0"
+        },
+        "sleeper_data": null,
+        "tank01_data": {
+          "player_id": "DEF_27",
+          "name": {
+            "full": "Phi Defense",
+            "first": "Phi",
+            "last": "Defense"
+          },
+          "display_position": "DEF",
+          "team": "Phi",
+          "injury_status": "Healthy",
+          "projection": {},
+          "news": [],
+          "game_stats": {},
+          "depth_chart": {},
+          "transaction_trends": {},
+          "player_ids": {
+            "espn_id": null,
+            "sleeper_id": null,
+            "fantasypros_id": null,
+            "yahoo_id": null
+          }
+        }
+      }
+    ]
+  },
+  "total_players": 15,
+  "data_sources": [
+    "yahoo",
+    "sleeper",
+    "tank01"
+  ]
+}
