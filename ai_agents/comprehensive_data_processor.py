@@ -162,10 +162,17 @@ class ComprehensiveDataProcessor:
                 
                 team_info = data.get("team_info", {})
                 league_info = data.get("league_info", {})
+                season_context = data.get("season_context", {})
+                
+                # Get league name from season_context if available
+                season_league_info = season_context.get("league_info", {})
+                league_name = (league_info.get("league_name") or 
+                             season_league_info.get("league_name") or 
+                             "Unknown")
                 
                 return {
                     "team_name": team_info.get("team_name", "Unknown"),
-                    "league_name": league_info.get("league_name", "Unknown")
+                    "league_name": league_name
                 }
         except Exception as e:
             logger.error(f"Error getting team and league info: {e}")

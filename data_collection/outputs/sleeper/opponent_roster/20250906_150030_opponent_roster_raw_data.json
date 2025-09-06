@@ -1,0 +1,1318 @@
+{
+  "extraction_metadata": {
+    "script": "sleeper_opponent_roster.py",
+    "extraction_timestamp": "2025-09-06T15:00:30.174218",
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "execution_stats": {
+      "start_time": "2025-09-06 15:00:29.376022",
+      "api_calls": 0,
+      "errors": 0,
+      "players_processed": 15,
+      "players_matched": 7,
+      "players_unmatched": 8
+    }
+  },
+  "opponent_info": {
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "total_players": 15,
+    "matched_players": 7,
+    "unmatched_players": 8
+  },
+  "matched_players": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.31833",
+        "player_id": "31833",
+        "name": {
+          "full": "Kyler Murray",
+          "first": "Kyler",
+          "last": "Murray",
+          "ascii_first": "Kyler",
+          "ascii_last": "Murray"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/31833",
+        "editorial_player_key": "nfl.p.31833",
+        "editorial_team_key": "nfl.t.22",
+        "editorial_team_full_name": "Arizona Cardinals",
+        "editorial_team_abbr": "Ari",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/arizona/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "1",
+        "display_position": "QB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/gU8IA_u68XP_HK5v8JX0Hw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/31833.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/gU8IA_u68XP_HK5v8JX0Hw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/31833.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "QB",
+        "eligible_positions": [
+          {
+            "position": "QB"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Kyler Murray",
+        "first_name": "Kyler",
+        "last_name": "Murray",
+        "ascii_first": "Kyler",
+        "ascii_last": "Murray",
+        "selected_position": "QB",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "QB"
+        ],
+        "bye_week": "8",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/gU8IA_u68XP_HK5v8JX0Hw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/31833.png"
+      },
+      "sleeper_player": {
+        "injury_status": null,
+        "rotoworld_id": 13950,
+        "birth_country": null,
+        "practice_participation": null,
+        "search_full_name": "kylermurray",
+        "fantasy_positions": [
+          "QB"
+        ],
+        "depth_chart_position": "QB",
+        "active": true,
+        "height": "70",
+        "birth_date": "1997-08-07",
+        "espn_id": 3917315,
+        "high_school": "Allen (TX)",
+        "hashtag": "#kylermurray-NFL-ARI-1",
+        "opta_id": null,
+        "swish_id": 879799,
+        "first_name": "Kyler",
+        "college": "Oklahoma",
+        "injury_body_part": null,
+        "years_exp": 6,
+        "sportradar_id": "dd5a6b6e-ffae-45a5-b8e6-718a9251f374",
+        "pandascore_id": null,
+        "player_id": "5849",
+        "status": "Active",
+        "depth_chart_order": 1,
+        "full_name": "Kyler Murray",
+        "news_updated": 1757166930527,
+        "fantasy_data_id": 20889,
+        "kalshi_id": "0471cbcd-9a96-43bb-83fa-5b7534f0ee82",
+        "team": "ARI",
+        "team_changed_at": null,
+        "birth_city": null,
+        "gsis_id": " 00-0035228",
+        "birth_state": null,
+        "search_last_name": "murray",
+        "number": 1,
+        "oddsjam_id": "4E6A6983DF4F",
+        "team_abbr": null,
+        "rotowire_id": 13613,
+        "injury_notes": null,
+        "yahoo_id": 31833,
+        "last_name": "Murray",
+        "sport": "nfl",
+        "weight": "207",
+        "age": 28,
+        "position": "QB",
+        "search_rank": 79,
+        "stats_id": 879799,
+        "metadata": {
+          "channel_id": "1113708849644204032",
+          "rookie_year": "2019"
+        },
+        "competitions": [],
+        "injury_start_date": null,
+        "search_first_name": "kyler",
+        "practice_description": null
+      },
+      "match_type": "direct"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.27581",
+        "player_id": "27581",
+        "name": {
+          "full": "Davante Adams",
+          "first": "Davante",
+          "last": "Adams",
+          "ascii_first": "Davante",
+          "ascii_last": "Adams"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/27581",
+        "editorial_player_key": "nfl.p.27581",
+        "editorial_team_key": "nfl.t.14",
+        "editorial_team_full_name": "Los Angeles Rams",
+        "editorial_team_abbr": "LAR",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/la-rams/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "17",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/Lq0buOz6WeFBtJha4zFsjQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/27581.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/Lq0buOz6WeFBtJha4zFsjQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/27581.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Davante Adams",
+        "first_name": "Davante",
+        "last_name": "Adams",
+        "ascii_first": "Davante",
+        "ascii_last": "Adams",
+        "selected_position": "WR",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "WR",
+          "W/R/T"
+        ],
+        "bye_week": "8",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/Lq0buOz6WeFBtJha4zFsjQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/27581.png"
+      },
+      "sleeper_player": {
+        "injury_status": null,
+        "rotoworld_id": 9273,
+        "birth_country": null,
+        "practice_participation": null,
+        "search_full_name": "davanteadams",
+        "fantasy_positions": [
+          "WR"
+        ],
+        "depth_chart_position": "LWR",
+        "active": true,
+        "height": "73",
+        "birth_date": "1992-12-24",
+        "espn_id": 16800,
+        "high_school": "Palo Alto (CA)",
+        "hashtag": "#davanteadams-NFL-LAR-17",
+        "opta_id": null,
+        "swish_id": 611417,
+        "first_name": "Davante",
+        "college": "Fresno State",
+        "injury_body_part": null,
+        "years_exp": 11,
+        "sportradar_id": "e7d6ae25-bf15-4660-8b37-c37716551de3",
+        "pandascore_id": null,
+        "player_id": "2133",
+        "status": "Active",
+        "depth_chart_order": 2,
+        "full_name": "Davante Adams",
+        "news_updated": 1757168430848,
+        "fantasy_data_id": 16470,
+        "kalshi_id": "224c89e1-8fba-44cd-a337-70b53547c35c",
+        "team": "LAR",
+        "team_changed_at": null,
+        "birth_city": null,
+        "gsis_id": "00-0031381",
+        "birth_state": null,
+        "search_last_name": "adams",
+        "number": 17,
+        "oddsjam_id": "616DA87E3731",
+        "team_abbr": null,
+        "rotowire_id": 9455,
+        "injury_notes": null,
+        "yahoo_id": 27581,
+        "last_name": "Adams",
+        "sport": "nfl",
+        "weight": "215",
+        "age": 32,
+        "position": "WR",
+        "search_rank": 44,
+        "stats_id": 611417,
+        "metadata": {
+          "channel_id": "1113708773697941505",
+          "rookie_year": "2014"
+        },
+        "competitions": [],
+        "injury_start_date": null,
+        "search_first_name": "davante",
+        "practice_description": null
+      },
+      "match_type": "direct"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.30972",
+        "player_id": "30972",
+        "name": {
+          "full": "Saquon Barkley",
+          "first": "Saquon",
+          "last": "Barkley",
+          "ascii_first": "Saquon",
+          "ascii_last": "Barkley"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/30972",
+        "editorial_player_key": "nfl.p.30972",
+        "editorial_team_key": "nfl.t.21",
+        "editorial_team_full_name": "Philadelphia Eagles",
+        "editorial_team_abbr": "Phi",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/philadelphia/",
+        "bye_weeks": {
+          "week": "9"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "26",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/gJ8KBLiyKMA4G7nQ4BDZnw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08062025/30972.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/gJ8KBLiyKMA4G7nQ4BDZnw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08062025/30972.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "has_recent_player_notes": 1,
+        "player_notes_last_timestamp": 1757047396,
+        "full_name": "Saquon Barkley",
+        "first_name": "Saquon",
+        "last_name": "Barkley",
+        "ascii_first": "Saquon",
+        "ascii_last": "Barkley",
+        "selected_position": "RB",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "9",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/gJ8KBLiyKMA4G7nQ4BDZnw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08062025/30972.png"
+      },
+      "sleeper_player": {
+        "injury_status": null,
+        "rotoworld_id": 13048,
+        "birth_country": null,
+        "practice_participation": null,
+        "search_full_name": "saquonbarkley",
+        "fantasy_positions": [
+          "RB"
+        ],
+        "depth_chart_position": "RB",
+        "active": true,
+        "height": "72",
+        "birth_date": "1997-02-09",
+        "espn_id": 3929630,
+        "high_school": "Whitehall (PA)",
+        "hashtag": "#saquonbarkley-NFL-PHI-26",
+        "opta_id": null,
+        "swish_id": 883302,
+        "first_name": "Saquon",
+        "college": "Penn State",
+        "injury_body_part": null,
+        "years_exp": 7,
+        "sportradar_id": "9811b753-347c-467a-b3cb-85937e71e2b9",
+        "pandascore_id": null,
+        "player_id": "4866",
+        "status": "Active",
+        "depth_chart_order": 1,
+        "full_name": "Saquon Barkley",
+        "news_updated": 1757079658972,
+        "fantasy_data_id": 19766,
+        "kalshi_id": "e29c0914-7743-4abc-af67-b38a4f1cb5eb",
+        "team": "PHI",
+        "team_changed_at": null,
+        "birth_city": null,
+        "gsis_id": "00-0034844",
+        "birth_state": null,
+        "search_last_name": "barkley",
+        "number": 26,
+        "oddsjam_id": "08F1CFA81F52",
+        "team_abbr": null,
+        "rotowire_id": 12507,
+        "injury_notes": null,
+        "yahoo_id": 30972,
+        "last_name": "Barkley",
+        "sport": "nfl",
+        "weight": "233",
+        "age": 28,
+        "position": "RB",
+        "search_rank": 2,
+        "stats_id": 883302,
+        "metadata": {
+          "channel_id": "1113708717460713472",
+          "rookie_year": "2018"
+        },
+        "competitions": [],
+        "injury_start_date": null,
+        "search_first_name": "saquon",
+        "practice_description": null
+      },
+      "match_type": "direct"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.32711",
+        "player_id": "32711",
+        "name": {
+          "full": "Jonathan Taylor",
+          "first": "Jonathan",
+          "last": "Taylor",
+          "ascii_first": "Jonathan",
+          "ascii_last": "Taylor"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/32711",
+        "editorial_player_key": "nfl.p.32711",
+        "editorial_team_key": "nfl.t.11",
+        "editorial_team_full_name": "Indianapolis Colts",
+        "editorial_team_abbr": "Ind",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/indianapolis/",
+        "bye_weeks": {
+          "week": "11"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "28",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/8eNYEWCS9awvVo_gEdfUqw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/32711.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/8eNYEWCS9awvVo_gEdfUqw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/32711.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Jonathan Taylor",
+        "first_name": "Jonathan",
+        "last_name": "Taylor",
+        "ascii_first": "Jonathan",
+        "ascii_last": "Taylor",
+        "selected_position": "RB",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "11",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/8eNYEWCS9awvVo_gEdfUqw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/32711.png"
+      },
+      "sleeper_player": {
+        "injury_status": null,
+        "rotoworld_id": null,
+        "birth_country": null,
+        "practice_participation": null,
+        "search_full_name": "jonathantaylor",
+        "fantasy_positions": [
+          "RB"
+        ],
+        "depth_chart_position": "RB",
+        "active": true,
+        "height": "70",
+        "birth_date": "1999-01-19",
+        "espn_id": 4242335,
+        "high_school": "Salem (NJ)",
+        "hashtag": "#jonathantaylor-NFL-IND-28",
+        "opta_id": null,
+        "swish_id": 1065406,
+        "first_name": "Jonathan",
+        "college": "Wisconsin",
+        "injury_body_part": null,
+        "years_exp": 5,
+        "sportradar_id": "925195a4-06ba-4e37-ae7d-a3d6a5419139",
+        "pandascore_id": null,
+        "player_id": "6813",
+        "status": "Active",
+        "depth_chart_order": 1,
+        "full_name": "Jonathan Taylor",
+        "news_updated": 1757159729477,
+        "fantasy_data_id": 21682,
+        "kalshi_id": "9842bc63-a72d-403a-b129-d690150b7618",
+        "team": "IND",
+        "team_changed_at": null,
+        "birth_city": null,
+        "gsis_id": null,
+        "birth_state": null,
+        "search_last_name": "taylor",
+        "number": 28,
+        "oddsjam_id": "289ADC2AF8BD",
+        "team_abbr": null,
+        "rotowire_id": 14455,
+        "injury_notes": null,
+        "yahoo_id": 32711,
+        "last_name": "Taylor",
+        "sport": "nfl",
+        "weight": "226",
+        "age": 26,
+        "position": "RB",
+        "search_rank": 16,
+        "stats_id": null,
+        "metadata": {
+          "channel_id": "1113708779398000640",
+          "rookie_year": "2020"
+        },
+        "competitions": [],
+        "injury_start_date": null,
+        "search_first_name": "jonathan",
+        "practice_description": null
+      },
+      "match_type": "direct"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.32705",
+        "player_id": "32705",
+        "name": {
+          "full": "D'Andre Swift",
+          "first": "D'Andre",
+          "last": "Swift",
+          "ascii_first": "D'Andre",
+          "ascii_last": "Swift"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/32705",
+        "editorial_player_key": "nfl.p.32705",
+        "editorial_team_key": "nfl.t.3",
+        "editorial_team_full_name": "Chicago Bears",
+        "editorial_team_abbr": "Chi",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/chicago/",
+        "bye_weeks": {
+          "week": "5"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "4",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/sByer7Pig96XvXa_8S8bnQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/32705.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/sByer7Pig96XvXa_8S8bnQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/32705.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "D'Andre Swift",
+        "first_name": "D'Andre",
+        "last_name": "Swift",
+        "ascii_first": "D'Andre",
+        "ascii_last": "Swift",
+        "selected_position": "BN",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "5",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/sByer7Pig96XvXa_8S8bnQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/32705.png"
+      },
+      "sleeper_player": {
+        "injury_status": null,
+        "rotoworld_id": null,
+        "birth_country": null,
+        "practice_participation": null,
+        "search_full_name": "dandreswift",
+        "fantasy_positions": [
+          "RB"
+        ],
+        "depth_chart_position": "RB",
+        "active": true,
+        "height": "68",
+        "birth_date": "1999-01-14",
+        "espn_id": 4259545,
+        "high_school": "St. Joseph's Prep (PA)",
+        "hashtag": "#dandreswift-NFL-CHI-4",
+        "opta_id": null,
+        "swish_id": 1069808,
+        "first_name": "D'Andre",
+        "college": "Georgia",
+        "injury_body_part": null,
+        "years_exp": 5,
+        "sportradar_id": "cc4b5f58-a11c-4450-a1df-617ad88336e4",
+        "pandascore_id": null,
+        "player_id": "6790",
+        "status": "Active",
+        "depth_chart_order": 1,
+        "full_name": "D'Andre Swift",
+        "news_updated": 1757190323838,
+        "fantasy_data_id": 21684,
+        "kalshi_id": "78339ba2-4d02-46e2-84d2-e2fe6a6325b0",
+        "team": "CHI",
+        "team_changed_at": null,
+        "birth_city": null,
+        "gsis_id": null,
+        "birth_state": null,
+        "search_last_name": "swift",
+        "number": 4,
+        "oddsjam_id": "8FC377188DC7",
+        "team_abbr": null,
+        "rotowire_id": 14394,
+        "injury_notes": null,
+        "yahoo_id": 32705,
+        "last_name": "Swift",
+        "sport": "nfl",
+        "weight": "204",
+        "age": 26,
+        "position": "RB",
+        "search_rank": 63,
+        "stats_id": null,
+        "metadata": {
+          "channel_id": "1113708765938479104",
+          "rookie_year": "2020"
+        },
+        "competitions": [],
+        "injury_start_date": null,
+        "search_first_name": "dandre",
+        "practice_description": null
+      },
+      "match_type": "direct"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.29792",
+        "player_id": "29792",
+        "name": {
+          "full": "Ka'imi Fairbairn",
+          "first": "Ka'imi",
+          "last": "Fairbairn",
+          "ascii_first": "Ka'imi",
+          "ascii_last": "Fairbairn"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/29792",
+        "editorial_player_key": "nfl.p.29792",
+        "editorial_team_key": "nfl.t.34",
+        "editorial_team_full_name": "Houston Texans",
+        "editorial_team_abbr": "Hou",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/houston/",
+        "bye_weeks": {
+          "week": "6"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "15",
+        "display_position": "K",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/.c6NIw1lGRTM_O_gZeDW4w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/29792.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/.c6NIw1lGRTM_O_gZeDW4w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/29792.png",
+        "is_undroppable": "0",
+        "position_type": "K",
+        "primary_position": "K",
+        "eligible_positions": [
+          {
+            "position": "K"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Ka'imi Fairbairn",
+        "first_name": "Ka'imi",
+        "last_name": "Fairbairn",
+        "ascii_first": "Ka'imi",
+        "ascii_last": "Fairbairn",
+        "selected_position": "K",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "K"
+        ],
+        "bye_week": "6",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/.c6NIw1lGRTM_O_gZeDW4w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/29792.png"
+      },
+      "sleeper_player": {
+        "injury_status": null,
+        "rotoworld_id": null,
+        "birth_country": null,
+        "practice_participation": null,
+        "search_full_name": "kaimifairbairn",
+        "fantasy_positions": [
+          "K"
+        ],
+        "depth_chart_position": "K",
+        "active": true,
+        "height": "72",
+        "birth_date": "1994-01-29",
+        "espn_id": 2971573,
+        "high_school": "Honolulu Punahou (HI)",
+        "hashtag": "#kaimifairbairn-NFL-HOU-15",
+        "opta_id": null,
+        "swish_id": 691032,
+        "first_name": "Ka'imi",
+        "college": "UCLA",
+        "injury_body_part": null,
+        "years_exp": 9,
+        "sportradar_id": "203b60aa-cb94-499c-a4ca-d3c6b94dddc4",
+        "pandascore_id": null,
+        "player_id": "3451",
+        "status": "Active",
+        "depth_chart_order": 1,
+        "full_name": "Ka'imi Fairbairn",
+        "news_updated": 1757130625443,
+        "fantasy_data_id": 18215,
+        "kalshi_id": "1865ff99-9448-4374-9484-87673bd6555d",
+        "team": "HOU",
+        "team_changed_at": null,
+        "birth_city": null,
+        "gsis_id": "00-0032726",
+        "birth_state": null,
+        "search_last_name": "fairbairn",
+        "number": 15,
+        "oddsjam_id": "A49FD8FC09EA",
+        "team_abbr": null,
+        "rotowire_id": 11031,
+        "injury_notes": null,
+        "yahoo_id": 29792,
+        "last_name": "Fairbairn",
+        "sport": "nfl",
+        "weight": "183",
+        "age": 31,
+        "position": "K",
+        "search_rank": 175,
+        "stats_id": 691032,
+        "metadata": {
+          "channel_id": "1113708783479058432",
+          "rookie_year": "2016"
+        },
+        "competitions": [],
+        "injury_start_date": null,
+        "search_first_name": "kaimi",
+        "practice_description": null
+      },
+      "match_type": "direct"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.100028",
+        "player_id": "100028",
+        "name": {
+          "full": "Washington",
+          "first": "Washington",
+          "last": "",
+          "ascii_first": "Washington",
+          "ascii_last": ""
+        },
+        "url": "https://sports.yahoo.com/nfl/teams/washington/",
+        "editorial_player_key": "nfl.p.100028",
+        "editorial_team_key": "nfl.t.28",
+        "editorial_team_full_name": "Washington Commanders",
+        "editorial_team_abbr": "Was",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/washington/",
+        "bye_weeks": {
+          "week": "12"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": false,
+        "display_position": "DEF",
+        "headshot": {
+          "url": "https://s.yimg.com/cv/apiv2/default/nfl/20200909/50x50/cr/washington.gif",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/cv/apiv2/default/nfl/20200909/50x50/cr/washington.gif",
+        "is_undroppable": "0",
+        "position_type": "DT",
+        "primary_position": "DEF",
+        "eligible_positions": [
+          {
+            "position": "DEF"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Washington",
+        "first_name": "Washington",
+        "last_name": "",
+        "ascii_first": "Washington",
+        "ascii_last": "",
+        "selected_position": "BN",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "DEF"
+        ],
+        "bye_week": "12",
+        "headshot_url": "https://s.yimg.com/cv/apiv2/default/nfl/20200909/50x50/cr/washington.gif"
+      },
+      "sleeper_player": {
+        "injury_status": null,
+        "rotoworld_id": null,
+        "birth_country": null,
+        "practice_participation": null,
+        "search_full_name": "corneliuswashington",
+        "fantasy_positions": [
+          "DL"
+        ],
+        "depth_chart_position": null,
+        "active": false,
+        "height": "6'4\"",
+        "birth_date": "1989-09-10",
+        "espn_id": 15914,
+        "high_school": "Burke County (GA)",
+        "hashtag": "#corneliuswashington-NFL-FA-90",
+        "opta_id": null,
+        "swish_id": null,
+        "first_name": "Cornelius",
+        "college": "Georgia",
+        "injury_body_part": null,
+        "years_exp": 7,
+        "sportradar_id": "adf28620-33a3-4619-b511-1853f2f12ef0",
+        "pandascore_id": null,
+        "player_id": "1511",
+        "status": "Inactive",
+        "depth_chart_order": null,
+        "full_name": "Cornelius Washington",
+        "news_updated": 1534787706778,
+        "fantasy_data_id": 15117,
+        "kalshi_id": null,
+        "team": null,
+        "team_changed_at": null,
+        "birth_city": null,
+        "gsis_id": null,
+        "birth_state": null,
+        "search_last_name": "washington",
+        "number": 90,
+        "oddsjam_id": null,
+        "team_abbr": null,
+        "rotowire_id": 8871,
+        "injury_notes": null,
+        "yahoo_id": 26811,
+        "last_name": "Washington",
+        "sport": "nfl",
+        "weight": "280",
+        "age": 31,
+        "position": "DE",
+        "search_rank": 9999999,
+        "stats_id": null,
+        "metadata": null,
+        "competitions": [],
+        "injury_start_date": null,
+        "search_first_name": "cornelius",
+        "practice_description": null
+      },
+      "match_type": "name_team"
+    }
+  ],
+  "unmatched_players": [
+    {
+      "player_key": "461.p.41793",
+      "player_id": "41793",
+      "name": {
+        "full": "Tetairoa McMillan",
+        "first": "Tetairoa",
+        "last": "McMillan",
+        "ascii_first": "Tetairoa",
+        "ascii_last": "McMillan"
+      },
+      "url": "https://sports.yahoo.com/nfl/players/41793",
+      "editorial_player_key": "nfl.p.41793",
+      "editorial_team_key": "nfl.t.29",
+      "editorial_team_full_name": "Carolina Panthers",
+      "editorial_team_abbr": "Car",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/carolina/",
+      "bye_weeks": {
+        "week": "14"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": "4",
+      "display_position": "WR",
+      "headshot": {
+        "url": "https://s.yimg.com/iu/api/res/1.2/2vcf3NUsYjm_FWkOjgjO5A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07282025/41793.png",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/iu/api/res/1.2/2vcf3NUsYjm_FWkOjgjO5A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07282025/41793.png",
+      "is_undroppable": "0",
+      "position_type": "O",
+      "primary_position": "WR",
+      "eligible_positions": [
+        {
+          "position": "WR"
+        },
+        {
+          "position": "W/R/T"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "has_player_notes": 1,
+      "player_notes_last_timestamp": 1756929178,
+      "full_name": "Tetairoa McMillan",
+      "first_name": "Tetairoa",
+      "last_name": "McMillan",
+      "ascii_first": "Tetairoa",
+      "ascii_last": "McMillan",
+      "selected_position": "WR",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "WR",
+        "W/R/T"
+      ],
+      "bye_week": "14",
+      "headshot_url": "https://s.yimg.com/iu/api/res/1.2/2vcf3NUsYjm_FWkOjgjO5A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07282025/41793.png"
+    },
+    {
+      "player_key": "461.p.40878",
+      "player_id": "40878",
+      "name": {
+        "full": "Brock Bowers",
+        "first": "Brock",
+        "last": "Bowers",
+        "ascii_first": "Brock",
+        "ascii_last": "Bowers"
+      },
+      "url": "https://sports.yahoo.com/nfl/players/40878",
+      "editorial_player_key": "nfl.p.40878",
+      "editorial_team_key": "nfl.t.13",
+      "editorial_team_full_name": "Las Vegas Raiders",
+      "editorial_team_abbr": "LV",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/las-vegas/",
+      "bye_weeks": {
+        "week": "8"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": "89",
+      "display_position": "TE",
+      "headshot": {
+        "url": "https://s.yimg.com/iu/api/res/1.2/5wVhLYIcCZJlywOkUH1Q7g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/40878.png",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/iu/api/res/1.2/5wVhLYIcCZJlywOkUH1Q7g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/40878.png",
+      "is_undroppable": "0",
+      "position_type": "O",
+      "primary_position": "TE",
+      "eligible_positions": [
+        {
+          "position": "TE"
+        },
+        {
+          "position": "W/R/T"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "full_name": "Brock Bowers",
+      "first_name": "Brock",
+      "last_name": "Bowers",
+      "ascii_first": "Brock",
+      "ascii_last": "Bowers",
+      "selected_position": "TE",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "TE",
+        "W/R/T"
+      ],
+      "bye_week": "8",
+      "headshot_url": "https://s.yimg.com/iu/api/res/1.2/5wVhLYIcCZJlywOkUH1Q7g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/40878.png"
+    },
+    {
+      "player_key": "461.p.33996",
+      "player_id": "33996",
+      "name": {
+        "full": "Kenneth Walker III",
+        "first": "Kenneth",
+        "last": "Walker III",
+        "ascii_first": "Kenneth",
+        "ascii_last": "Walker III"
+      },
+      "url": "https://sports.yahoo.com/nfl/players/33996",
+      "editorial_player_key": "nfl.p.33996",
+      "editorial_team_key": "nfl.t.26",
+      "editorial_team_full_name": "Seattle Seahawks",
+      "editorial_team_abbr": "Sea",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/seattle/",
+      "bye_weeks": {
+        "week": "8"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": "9",
+      "display_position": "RB",
+      "headshot": {
+        "url": "https://s.yimg.com/iu/api/res/1.2/P2y_qVCj3vm_QUj_nxpxMA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09032024/33996.png",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/iu/api/res/1.2/P2y_qVCj3vm_QUj_nxpxMA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09032024/33996.png",
+      "is_undroppable": "0",
+      "position_type": "O",
+      "primary_position": "RB",
+      "eligible_positions": [
+        {
+          "position": "RB"
+        },
+        {
+          "position": "W/R/T"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "has_player_notes": 1,
+      "player_notes_last_timestamp": 1756515627,
+      "full_name": "Kenneth Walker III",
+      "first_name": "Kenneth",
+      "last_name": "Walker III",
+      "ascii_first": "Kenneth",
+      "ascii_last": "Walker III",
+      "selected_position": "W/R/T",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "RB",
+        "W/R/T"
+      ],
+      "bye_week": "8",
+      "headshot_url": "https://s.yimg.com/iu/api/res/1.2/P2y_qVCj3vm_QUj_nxpxMA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09032024/33996.png"
+    },
+    {
+      "player_key": "461.p.34218",
+      "player_id": "34218",
+      "name": {
+        "full": "Brock Purdy",
+        "first": "Brock",
+        "last": "Purdy",
+        "ascii_first": "Brock",
+        "ascii_last": "Purdy"
+      },
+      "url": "https://sports.yahoo.com/nfl/players/34218",
+      "editorial_player_key": "nfl.p.34218",
+      "editorial_team_key": "nfl.t.25",
+      "editorial_team_full_name": "San Francisco 49ers",
+      "editorial_team_abbr": "SF",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/san-francisco/",
+      "bye_weeks": {
+        "week": "14"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": "13",
+      "display_position": "QB",
+      "headshot": {
+        "url": "https://s.yimg.com/iu/api/res/1.2/x1u7DOCV2z5df1c8rlyV1A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/34218.png",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/iu/api/res/1.2/x1u7DOCV2z5df1c8rlyV1A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/34218.png",
+      "is_undroppable": "0",
+      "position_type": "O",
+      "primary_position": "QB",
+      "eligible_positions": [
+        {
+          "position": "QB"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "full_name": "Brock Purdy",
+      "first_name": "Brock",
+      "last_name": "Purdy",
+      "ascii_first": "Brock",
+      "ascii_last": "Purdy",
+      "selected_position": "BN",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "QB"
+      ],
+      "bye_week": "14",
+      "headshot_url": "https://s.yimg.com/iu/api/res/1.2/x1u7DOCV2z5df1c8rlyV1A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/34218.png"
+    },
+    {
+      "player_key": "461.p.41804",
+      "player_id": "41804",
+      "name": {
+        "full": "Emeka Egbuka",
+        "first": "Emeka",
+        "last": "Egbuka",
+        "ascii_first": "Emeka",
+        "ascii_last": "Egbuka"
+      },
+      "url": "https://sports.yahoo.com/nfl/players/41804",
+      "editorial_player_key": "nfl.p.41804",
+      "editorial_team_key": "nfl.t.27",
+      "editorial_team_full_name": "Tampa Bay Buccaneers",
+      "editorial_team_abbr": "TB",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/tampa-bay/",
+      "bye_weeks": {
+        "week": "9"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": "2",
+      "display_position": "WR",
+      "headshot": {
+        "url": "https://s.yimg.com/iu/api/res/1.2/4zlKzRjiLf8g8.j4JJxvqQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/41804.png",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/iu/api/res/1.2/4zlKzRjiLf8g8.j4JJxvqQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/41804.png",
+      "is_undroppable": "0",
+      "position_type": "O",
+      "primary_position": "WR",
+      "eligible_positions": [
+        {
+          "position": "WR"
+        },
+        {
+          "position": "W/R/T"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "full_name": "Emeka Egbuka",
+      "first_name": "Emeka",
+      "last_name": "Egbuka",
+      "ascii_first": "Emeka",
+      "ascii_last": "Egbuka",
+      "selected_position": "BN",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "WR",
+        "W/R/T"
+      ],
+      "bye_week": "9",
+      "headshot_url": "https://s.yimg.com/iu/api/res/1.2/4zlKzRjiLf8g8.j4JJxvqQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/41804.png"
+    },
+    {
+      "player_key": "461.p.33423",
+      "player_id": "33423",
+      "name": {
+        "full": "Javonte Williams",
+        "first": "Javonte",
+        "last": "Williams",
+        "ascii_first": "Javonte",
+        "ascii_last": "Williams"
+      },
+      "url": "https://sports.yahoo.com/nfl/players/33423",
+      "editorial_player_key": "nfl.p.33423",
+      "editorial_team_key": "nfl.t.6",
+      "editorial_team_full_name": "Dallas Cowboys",
+      "editorial_team_abbr": "Dal",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/dallas/",
+      "bye_weeks": {
+        "week": "10"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": "33",
+      "display_position": "RB",
+      "headshot": {
+        "url": "https://s.yimg.com/iu/api/res/1.2/vnnZp9u8jIYMVkEzDvjIvw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/33423.png",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/iu/api/res/1.2/vnnZp9u8jIYMVkEzDvjIvw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/33423.png",
+      "is_undroppable": "0",
+      "position_type": "O",
+      "primary_position": "RB",
+      "eligible_positions": [
+        {
+          "position": "RB"
+        },
+        {
+          "position": "W/R/T"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "has_player_notes": 1,
+      "has_recent_player_notes": 1,
+      "player_notes_last_timestamp": 1757048297,
+      "full_name": "Javonte Williams",
+      "first_name": "Javonte",
+      "last_name": "Williams",
+      "ascii_first": "Javonte",
+      "ascii_last": "Williams",
+      "selected_position": "BN",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "RB",
+        "W/R/T"
+      ],
+      "bye_week": "10",
+      "headshot_url": "https://s.yimg.com/iu/api/res/1.2/vnnZp9u8jIYMVkEzDvjIvw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/33423.png"
+    },
+    {
+      "player_key": "461.p.41799",
+      "player_id": "41799",
+      "name": {
+        "full": "Tyler Warren",
+        "first": "Tyler",
+        "last": "Warren",
+        "ascii_first": "Tyler",
+        "ascii_last": "Warren"
+      },
+      "url": "https://sports.yahoo.com/nfl/players/41799",
+      "editorial_player_key": "nfl.p.41799",
+      "editorial_team_key": "nfl.t.11",
+      "editorial_team_full_name": "Indianapolis Colts",
+      "editorial_team_abbr": "Ind",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/indianapolis/",
+      "bye_weeks": {
+        "week": "11"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": "84",
+      "display_position": "TE",
+      "headshot": {
+        "url": "https://s.yimg.com/iu/api/res/1.2/xBqnY7pk58aTLbN2kQqfAQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/41799.png",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/iu/api/res/1.2/xBqnY7pk58aTLbN2kQqfAQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/41799.png",
+      "is_undroppable": "0",
+      "position_type": "O",
+      "primary_position": "TE",
+      "eligible_positions": [
+        {
+          "position": "TE"
+        },
+        {
+          "position": "W/R/T"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "full_name": "Tyler Warren",
+      "first_name": "Tyler",
+      "last_name": "Warren",
+      "ascii_first": "Tyler",
+      "ascii_last": "Warren",
+      "selected_position": "BN",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "TE",
+        "W/R/T"
+      ],
+      "bye_week": "11",
+      "headshot_url": "https://s.yimg.com/iu/api/res/1.2/xBqnY7pk58aTLbN2kQqfAQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/41799.png"
+    },
+    {
+      "player_key": "461.p.100014",
+      "player_id": "100014",
+      "name": {
+        "full": "Los Angeles",
+        "first": "Los Angeles",
+        "last": "",
+        "ascii_first": "Los Angeles",
+        "ascii_last": ""
+      },
+      "url": "https://sports.yahoo.com/nfl/teams/la-rams/",
+      "editorial_player_key": "nfl.p.100014",
+      "editorial_team_key": "nfl.t.14",
+      "editorial_team_full_name": "Los Angeles Rams",
+      "editorial_team_abbr": "LAR",
+      "editorial_team_url": "https://sports.yahoo.com/nfl/teams/la-rams/",
+      "bye_weeks": {
+        "week": "8"
+      },
+      "is_keeper": {
+        "status": false,
+        "cost": false,
+        "kept": false
+      },
+      "uniform_number": false,
+      "display_position": "DEF",
+      "headshot": {
+        "url": "https://s.yimg.com/lq/i/us/sp/v/nfl/teams/1/50x50w/stl.gif",
+        "size": "small"
+      },
+      "image_url": "https://s.yimg.com/lq/i/us/sp/v/nfl/teams/1/50x50w/stl.gif",
+      "is_undroppable": "0",
+      "position_type": "DT",
+      "primary_position": "DEF",
+      "eligible_positions": [
+        {
+          "position": "DEF"
+        }
+      ],
+      "eligible_positions_to_add": [],
+      "full_name": "Los Angeles",
+      "first_name": "Los Angeles",
+      "last_name": "",
+      "ascii_first": "Los Angeles",
+      "ascii_last": "",
+      "selected_position": "DEF",
+      "selected_coverage_type": "",
+      "selected_date": "",
+      "eligible_positions_list": [
+        "DEF"
+      ],
+      "bye_week": "8",
+      "headshot_url": "https://s.yimg.com/lq/i/us/sp/v/nfl/teams/1/50x50w/stl.gif"
+    }
+  ]
+}

@@ -40,7 +40,15 @@ from data_collection.scripts.shared.file_utils import DataFileManager
 
 # Configuration
 DEVELOPMENT_MODE = False  # Set to False for production
-AVAILABLE_PLAYERS_LIMIT = 5 if DEVELOPMENT_MODE else 25
+
+# Import player limits from config
+from config.player_limits import DEFAULT_PLAYER_LIMITS, get_player_limits
+
+# Use position-based limits instead of total limit
+PLAYER_LIMITS = get_player_limits() if not DEVELOPMENT_MODE else {
+    "QB": 2, "RB": 2, "WR": 2, "TE": 2, "K": 2, "DEF": 2, "FLEX": 2
+}
+
 INJURY_REPORTS_LIMIT = 25  # Process 25 injury report players
 TOP_AVAILABLE_LIMIT = 15   # Process 15 top available players
 
@@ -165,18 +173,20 @@ class Tank01AvailablePlayersCollector:
             raise
     
     def extract_players_by_section(self, yahoo_data: Dict[str, Any]) -> Dict[str, List[Dict]]:
-        """Extract players from different sections based on configuration limits"""
+        """Extract players from different sections based on position-based configuration limits"""
         available_players = yahoo_data.get('available_players', [])
         
-        # Apply limits
-        available_limited = available_players[:AVAILABLE_PLAYERS_LIMIT]
+        # Filter players by position with limits
+        available_limited = self._filter_players_by_position_limits(available_players)
         
         # For now, injury reports and top available are empty (limits set to 0)
         injury_reports = []  # Would extract from yahoo_data if limit > 0
         top_available = []   # Would extract from yahoo_data if limit > 0
         
-        logger.info(f"Extracting players with limits:")
-        logger.info(f"  Available Players: {len(available_limited)} (limit: {AVAILABLE_PLAYERS_LIMIT})")
+        total_expected = sum(PLAYER_LIMITS.values())
+        logger.info(f"Extracting players with position-based limits:")
+        logger.info(f"  Available Players: {len(available_limited)} (expected: {total_expected})")
+        logger.info(f"  Position limits: {PLAYER_LIMITS}")
         logger.info(f"  Injury Reports: {len(injury_reports)} (limit: {INJURY_REPORTS_LIMIT})")
         logger.info(f"  Top Available: {len(top_available)} (limit: {TOP_AVAILABLE_LIMIT})")
         
@@ -185,6 +195,34 @@ class Tank01AvailablePlayersCollector:
             'injury_reports': injury_reports,
             'top_available': top_available
         }
+    
+    def _filter_players_by_position_limits(self, players: List[Dict]) -> List[Dict]:
+        """Filter players by position-based limits"""
+        position_counts = {pos: 0 for pos in PLAYER_LIMITS.keys()}
+        filtered_players = []
+        
+        for player in players:
+            position = player.get('display_position', 'Unknown')
+            
+            # Handle multi-position players (FLEX)
+            if position in ['W/R/T', 'W/R', 'Q/W/R/T']:
+                position = 'FLEX'
+            
+            # Check if we need more players for this position
+            if position in position_counts and position_counts[position] < PLAYER_LIMITS[position]:
+                filtered_players.append(player)
+                position_counts[position] += 1
+                
+                # Log progress for first few players of each position
+                if position_counts[position] <= 3:
+                    logger.info(f"  Added {position} player {position_counts[position]}: {player.get('name', {}).get('full', 'Unknown')}")
+        
+        # Log final counts
+        for position, count in position_counts.items():
+            limit = PLAYER_LIMITS[position]
+            logger.info(f"  {position}: {count}/{limit} players")
+        
+        return filtered_players
     
     def match_player_to_tank01(self, yahoo_player: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Match a Yahoo player to Tank01 player data"""
@@ -576,7 +614,7 @@ class Tank01AvailablePlayersCollector:
 {chr(10).join(f"- {note}" for note in season_context.get('verification_notes', []))}
 
 ## Configuration
-- **Available Players Limit:** {AVAILABLE_PLAYERS_LIMIT}
+- **Player Limits:** {PLAYER_LIMITS}
 - **Injury Reports Limit:** {INJURY_REPORTS_LIMIT}
 - **Top Available Limit:** {TOP_AVAILABLE_LIMIT}
 
@@ -1076,7 +1114,7 @@ class Tank01AvailablePlayersCollector:
                     "script": "tank01_available_players.py",
                     "development_mode": DEVELOPMENT_MODE,
                     "configuration": {
-                        "available_players_limit": AVAILABLE_PLAYERS_LIMIT,
+                        "player_limits": PLAYER_LIMITS,
                         "injury_reports_limit": INJURY_REPORTS_LIMIT,
                         "top_available_limit": TOP_AVAILABLE_LIMIT
                     },
@@ -1113,7 +1151,8 @@ class Tank01AvailablePlayersCollector:
         try:
             logger.info("Starting Tank01 Available Players Data Collection")
             logger.info(f"Development Mode: {DEVELOPMENT_MODE}")
-            logger.info(f"Available Players Limit: {AVAILABLE_PLAYERS_LIMIT}")
+            logger.info(f"Player Limits: {PLAYER_LIMITS}")
+            logger.info(f"Total Expected Players: {sum(PLAYER_LIMITS.values())}")
             
             # Load Yahoo available players data
             yahoo_data = self.load_yahoo_available_players()
@@ -1145,14 +1184,14 @@ class Tank01AvailablePlayersCollector:
 def main():
     """Main entry point with command line argument support"""
     # Declare globals first
-    global AVAILABLE_PLAYERS_LIMIT, INJURY_REPORTS_LIMIT, TOP_AVAILABLE_LIMIT
+    global PLAYER_LIMITS, INJURY_REPORTS_LIMIT, TOP_AVAILABLE_LIMIT
     
     parser = argparse.ArgumentParser(description="Tank01 Available Players Data Collection")
     parser.add_argument(
         "--players", 
         type=int, 
-        default=AVAILABLE_PLAYERS_LIMIT,
-        help=f"Number of available players to process (default: {AVAILABLE_PLAYERS_LIMIT})"
+        default=sum(PLAYER_LIMITS.values()),
+        help=f"Total number of available players to process (default: {sum(PLAYER_LIMITS.values())})"
     )
     parser.add_argument(
         "--injury-reports",
@@ -1170,12 +1209,14 @@ def main():
     args = parser.parse_args()
     
     # Update global configuration based on arguments
-    AVAILABLE_PLAYERS_LIMIT = args.players
+    # Note: Position-based limits are used instead of total limit
+    # args.players is kept for compatibility but not used in filtering
     INJURY_REPORTS_LIMIT = args.injury_reports
     TOP_AVAILABLE_LIMIT = args.top_available
     
     print(f"🏈 Tank01 Available Players Collection")
-    print(f"📊 Processing {AVAILABLE_PLAYERS_LIMIT} available players")
+    print(f"📊 Processing players with position limits: {PLAYER_LIMITS}")
+    print(f"📊 Total expected players: {sum(PLAYER_LIMITS.values())}")
     if INJURY_REPORTS_LIMIT > 0:
         print(f"🏥 Processing {INJURY_REPORTS_LIMIT} injury report players")
     if TOP_AVAILABLE_LIMIT > 0:
