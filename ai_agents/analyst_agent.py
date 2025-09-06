@@ -26,6 +26,8 @@ load_dotenv(os.path.join(project_root, '.env'))
 from data_collection.scripts.shared.file_utils import DataFileManager
 from ai_agents.analyst_tools import AnalystTools
 from ai_agents.prompt_manager import PromptManager
+from ai_agents.optimized_player_profiles import OptimizedPlayerProfiles
+from ai_agents.model_selector import ModelSelector
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -39,13 +41,13 @@ class AnalystAgent:
     Supports multiple LLM providers with conversation memory and data collection orchestration.
     """
     
-    def __init__(self, model_provider: str = "anthropic", model_name: str = "claude-3-7-sonnet-20250219"):
+    def __init__(self, model_provider: str = "anthropic", model_name: str = "claude-opus-4-1-20250805"):
         """
         Initialize the Analyst Agent
         
         Args:
             model_provider: "openai" or "anthropic" (default: "anthropic")
-            model_name: Specific model name (default: "claude-3-7-sonnet-20250219")
+            model_name: Specific model name (default: "claude-opus-4-1-20250805")
         """
         self.model_provider = model_provider.lower()
         self.model_name = model_name
@@ -162,6 +164,144 @@ class AnalystAgent:
         
         logger.info("Analysis completed successfully")
         return result
+    
+    def analyze_with_optimized_profiles(self, user_prompt: str, player_limits: Optional[Dict[str, int]] = None, 
+                                      collect_data: Optional[bool] = None, 
+                                      model_selection: Optional[bool] = None) -> Dict[str, Any]:
+        """
+        Enhanced analysis using optimized player profiles with configurable limits
+        
+        Args:
+            user_prompt: User's question or request
+            player_limits: Custom player limits per position (default: 20 per position, 10 for DEF)
+            collect_data: Whether to collect fresh data (None=ask user, True=collect, False=use existing)
+            model_selection: Whether to show model selection menu (None=ask user, True=show, False=use default)
+            
+        Returns:
+            Dictionary with analysis results, recommendations, and metadata
+        """
+        logger.info(f"Starting optimized analysis for prompt: {user_prompt[:100]}...")
+        
+        # Step 1: Model selection
+        if model_selection is None:
+            print("\n🤖 Model Selection")
+            print("Would you like to:")
+            print("1. Use default model (Claude Opus 4.1)")
+            print("2. Choose from available models")
+            choice = input("Enter choice (1 or 2): ").strip()
+            model_selection = choice == "2"
+        
+        if model_selection:
+            model_selector = ModelSelector()
+            self.model_provider, self.model_name = model_selector.get_model_selection()
+            logger.info(f"Selected model: {self.model_provider} - {self.model_name}")
+        else:
+            logger.info(f"Using default model: {self.model_provider} - {self.model_name}")
+        
+        # Step 2: Data collection strategy
+        data_collection_results = {}
+        if collect_data is None:
+            data_freshness = self.tools.check_data_freshness()
+            if data_freshness["is_current"]:
+                print(f"\n📊 Found current data from {data_freshness['most_recent_file']}")
+                print("Would you like to:")
+                print("1. Use existing data (faster)")
+                print("2. Collect fresh data (slower, but most current)")
+                choice = input("Enter choice (1 or 2): ").strip()
+                collect_data = choice == "2"
+            else:
+                print(f"\n⚠️  Existing data is {data_freshness['age_hours']:.1f} hours old")
+                print("Would you like to:")
+                print("1. Collect fresh data (recommended)")
+                print("2. Use existing data anyway")
+                choice = input("Enter choice (1 or 2): ").strip()
+                collect_data = choice == "1"
+        
+        # Step 3: Collect fresh data if requested
+        if collect_data:
+            logger.info("Collecting fresh data from all APIs...")
+            data_collection_results = self.tools.collect_all_data()
+        
+        # Step 4: Create optimized player profiles
+        logger.info("Creating optimized player profiles...")
+        profile_builder = OptimizedPlayerProfiles(player_limits)
+        
+        # Get token estimate
+        token_estimate = profile_builder.get_token_estimate()
+        print(f"\n📊 Token Usage Estimate:")
+        print(f"   Total players: {token_estimate['total_players']}")
+        print(f"   Estimated tokens: {token_estimate['estimated_total_tokens']:,}")
+        print(f"   Within 200k limit: {'✅ Yes' if token_estimate['within_200k_limit'] else '❌ No'}")
+        
+        # Create optimized available players
+        data_dir = "data_collection/outputs"
+        optimized_data = profile_builder.create_optimized_available_players(data_dir)
+        
+        # Step 5: Analyze roster data (my team)
+        logger.info("Analyzing roster data...")
+        roster_analysis = self.tools.analyze_recent_data()
+        
+        # Step 6: Perform web research
+        logger.info("Performing web research...")
+        web_research = self.tools.research_current_nfl_news()
+        
+        # Step 7: Build enhanced analysis prompt
+        analysis_prompt = self._build_optimized_analysis_prompt(
+            user_prompt, optimized_data, roster_analysis, web_research
+        )
+        
+        # Step 8: Generate analysis using LLM
+        logger.info("Generating analysis with LLM...")
+        llm_response = self._call_llm(analysis_prompt)
+        
+        # Step 9: Structure the response
+        result = {
+            "timestamp": datetime.now(self.pacific_tz).isoformat(),
+            "model_provider": self.model_provider,
+            "model_name": self.model_name,
+            "user_prompt": user_prompt,
+            "data_collection_results": data_collection_results,
+            "optimized_data": optimized_data,
+            "roster_analysis": roster_analysis,
+            "web_research": web_research,
+            "llm_response": llm_response,
+            "analysis_type": "optimized_profiles"
+        }
+        
+        return result
+    
+    def _build_optimized_analysis_prompt(self, user_prompt: str, optimized_data: Dict[str, Any], 
+                                       roster_analysis: Dict[str, Any], web_research: Dict[str, Any]) -> str:
+        """Build enhanced prompt using optimized player profiles"""
+        season_context = optimized_data.get("season_context", {})
+        nfl_season = season_context.get("nfl_season", "current")
+        season_phase = season_context.get("season_phase", "Regular Season")
+        
+        prompt = f"""USER REQUEST: {user_prompt}
+
+CRITICAL CONTEXT: This is the {nfl_season} NFL season ({season_phase}). Use ONLY the data provided below and current {nfl_season} season information. Do NOT use training data from previous seasons.
+
+OPTIMIZED PLAYER DATA ({optimized_data.get('total_players', 0)} players, {optimized_data.get('total_tokens', 0):,} tokens):
+{json.dumps(optimized_data, indent=2)}
+
+MY ROSTER ANALYSIS:
+{json.dumps(roster_analysis, indent=2)}
+
+CURRENT NFL NEWS & CONTEXT:
+{json.dumps(web_research, indent=2)}
+
+INSTRUCTIONS:
+1. Focus heavily on MY ROSTER players for detailed analysis and recommendations
+2. Use the optimized player profiles for available players analysis
+3. Cross-reference player IDs across Yahoo, Sleeper, and Tank01 data
+4. Follow news links provided in player data for additional context
+5. Provide specific add/drop recommendations based on projected points and depth charts
+6. Consider bye weeks, injury status, and transaction trends in recommendations
+7. Prioritize players with the best projected points and favorable matchups
+
+Please provide a comprehensive analysis with specific recommendations."""
+        
+        return prompt
     
     def _build_analysis_prompt(self, user_prompt: str, analysis_data: Dict, web_research: Dict) -> str:
         """Build the complete prompt for LLM analysis"""
