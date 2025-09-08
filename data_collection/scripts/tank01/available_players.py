@@ -35,14 +35,66 @@ import pytz
 project_root = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from data_collection.scripts.shared.tank01_client import SimpleTank01Client
-from data_collection.scripts.shared.file_utils import DataFileManager
-
-# Configuration
-DEVELOPMENT_MODE = False  # Set to False for production
+# Add shared utilities to path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'shared'))
 
 # Import player limits from config
 from config.player_limits import DEFAULT_PLAYER_LIMITS, get_player_limits
+
+from tank01_client import SimpleTank01Client
+from file_utils import DataFileManager
+
+def parse_arguments():
+    """Parse command line arguments for configurable player limits"""
+    parser = argparse.ArgumentParser(description='Tank01 Available Players Data Collection')
+    
+    # Individual position limits
+    parser.add_argument('--qb', type=int, help='Number of QB players to collect (default: 20)')
+    parser.add_argument('--rb', type=int, help='Number of RB players to collect (default: 20)')
+    parser.add_argument('--wr', type=int, help='Number of WR players to collect (default: 20)')
+    parser.add_argument('--te', type=int, help='Number of TE players to collect (default: 20)')
+    parser.add_argument('--k', type=int, help='Number of K players to collect (default: 20)')
+    parser.add_argument('--defense', type=int, help='Number of DEF players to collect (default: 10)')
+    parser.add_argument('--flex', type=int, help='Number of FLEX players to collect (default: 15)')
+    
+    # Bulk limit
+    parser.add_argument('--all', type=int, help='Set all positions to this number (overrides individual limits)')
+    
+    # Development mode
+    parser.add_argument('--dev', action='store_true', help='Enable development mode (reduced limits)')
+    
+    args = parser.parse_args()
+    
+    # Get default limits
+    if args.dev:
+        player_limits = {"QB": 2, "RB": 2, "WR": 2, "TE": 2, "K": 2, "DEF": 2, "FLEX": 2}
+    else:
+        player_limits = get_player_limits()
+    
+    # Apply bulk limit if specified
+    if args.all:
+        player_limits = {pos: args.all for pos in player_limits.keys()}
+    
+    # Apply individual limits if specified
+    if args.qb is not None:
+        player_limits['QB'] = args.qb
+    if args.rb is not None:
+        player_limits['RB'] = args.rb
+    if args.wr is not None:
+        player_limits['WR'] = args.wr
+    if args.te is not None:
+        player_limits['TE'] = args.te
+    if args.k is not None:
+        player_limits['K'] = args.k
+    if args.defense is not None:
+        player_limits['DEF'] = args.defense
+    if args.flex is not None:
+        player_limits['FLEX'] = args.flex
+    
+    return player_limits
+
+# Configuration
+DEVELOPMENT_MODE = False  # Set to False for production
 
 # Use position-based limits instead of total limit
 PLAYER_LIMITS = get_player_limits() if not DEVELOPMENT_MODE else {
@@ -86,20 +138,21 @@ def format_timestamp_pacific(timestamp):
     except (ValueError, TypeError) as e:
         return f"Invalid timestamp: {timestamp}"
 
-def normalize_team_abbreviation(team_abv, source_api='yahoo'):
-    """Normalize team abbreviation to standard format using comprehensive mapping"""
-    if not team_abv:
-        return team_abv
-    
-    # Import team mapping utility
-    from ..shared.team_mapping import normalize_team_abbreviation as normalize_team
-    
-    return normalize_team(team_abv, source_api)
+# Import shared team mapping
+import sys
+import os
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(project_root))
+from data_collection.scripts.shared.team_mapping import normalize_team_abbreviation
 
 class Tank01AvailablePlayersCollector:
-    def __init__(self):
+    def __init__(self, player_limits: Dict[str, int] = None):
         self.tank01 = SimpleTank01Client()
         self.file_manager = DataFileManager()
+        
+        # Set player limits (use defaults if not provided)
+        self.player_limits = player_limits or get_player_limits()
+        
         self.stats = {
             "start_time": datetime.now(),
             "api_calls": 0,
@@ -157,12 +210,35 @@ class Tank01AvailablePlayersCollector:
         injury_reports = []  # Would extract from yahoo_data if limit > 0
         top_available = []   # Would extract from yahoo_data if limit > 0
         
-        total_expected = sum(PLAYER_LIMITS.values())
+        # Add FLEX players from RB, WR, TE positions
+        # Group players by position first
+        players_by_position = {}
+        for player in available_limited:
+            position = player.get('display_position', 'Unknown')
+            if position not in players_by_position:
+                players_by_position[position] = []
+            players_by_position[position].append(player)
+        
+        # Create FLEX players from RB, WR, TE
+        flex_players = []
+        for position in ['RB', 'WR', 'TE']:
+            if position in players_by_position:
+                # Take the first few players from each position for FLEX
+                flex_count = min(5, len(players_by_position[position]), self.player_limits['FLEX'] - len(flex_players))
+                flex_players.extend(players_by_position[position][:flex_count])
+                if len(flex_players) >= self.player_limits['FLEX']:
+                    break
+        
+        # Add FLEX players to the available_limited list
+        if flex_players:
+            available_limited.extend(flex_players[:self.player_limits['FLEX']])
+        
+        total_expected = sum(self.player_limits.values())
         logger.info(f"Extracting players with position-based limits:")
         logger.info(f"  Available Players: {len(available_limited)} (expected: {total_expected})")
-        logger.info(f"  Position limits: {PLAYER_LIMITS}")
-        logger.info(f"  Injury Reports: {len(injury_reports)} (limit: {INJURY_REPORTS_LIMIT})")
-        logger.info(f"  Top Available: {len(top_available)} (limit: {TOP_AVAILABLE_LIMIT})")
+        logger.info(f"  Position limits: {self.player_limits}")
+        logger.info(f"  Injury Reports: {len(injury_reports)} (limit: 0)")
+        logger.info(f"  Top Available: {len(top_available)} (limit: 0)")
         
         return {
             'available_players': available_limited,
@@ -172,7 +248,7 @@ class Tank01AvailablePlayersCollector:
     
     def _filter_players_by_position_limits(self, players: List[Dict]) -> List[Dict]:
         """Filter players by position-based limits"""
-        position_counts = {pos: 0 for pos in PLAYER_LIMITS.keys()}
+        position_counts = {pos: 0 for pos in self.player_limits.keys()}
         filtered_players = []
         
         for player in players:
@@ -183,7 +259,7 @@ class Tank01AvailablePlayersCollector:
                 position = 'FLEX'
             
             # Check if we need more players for this position
-            if position in position_counts and position_counts[position] < PLAYER_LIMITS[position]:
+            if position in position_counts and position_counts[position] < self.player_limits[position]:
                 filtered_players.append(player)
                 position_counts[position] += 1
                 
@@ -193,7 +269,7 @@ class Tank01AvailablePlayersCollector:
         
         # Log final counts
         for position, count in position_counts.items():
-            limit = PLAYER_LIMITS[position]
+            limit = self.player_limits[position]
             logger.info(f"  {position}: {count}/{limit} players")
         
         return filtered_players
@@ -227,7 +303,35 @@ class Tank01AvailablePlayersCollector:
                     logger.debug(f"Last name + team match for {full_name}: {player.get('playerID')}")
                     return player
             
-            # Strategy 4: Use get_player_info API for unmatched players
+            # Strategy 4: Special handling for defense players
+            if position == 'DEF':
+                # For defenses, try to match by team abbreviation in cached teams
+                if team_abv:
+                    # Normalize team abbreviation for lookup
+                    normalized_team = normalize_team_abbreviation(team_abv)
+                    if normalized_team in self.cached_teams:
+                        team_data = self.cached_teams[normalized_team]
+                        # Create a mock player object for defense
+                        defense_player = {
+                            'playerID': f"DEF_{normalized_team}",
+                            'fullName': full_name,
+                            'firstName': full_name,
+                            'lastName': '',
+                            'team': normalized_team,
+                            'pos': 'DEF',
+                            'isTeamDefense': True,
+                            'teamData': team_data
+                        }
+                        logger.info(f"Defense match for {full_name} ({team_abv} -> {normalized_team}): DEF_{normalized_team}")
+                        return defense_player
+                    else:
+                        logger.warning(f"No team data found for defense {full_name} ({team_abv} -> {normalized_team})")
+                        return None
+                else:
+                    logger.warning(f"No team abbreviation for defense {full_name}")
+                    return None
+            
+            # Strategy 5: Use get_player_info API for unmatched players
             logger.info(f"Attempting get_player_info API call for unmatched player: {full_name}")
             player_info_response = self.tank01.get_player_info(full_name, team_abv)
             if player_info_response and player_info_response.get('body'):
@@ -515,7 +619,9 @@ class Tank01AvailablePlayersCollector:
                     if self.cached_projections:
                         # Check if this is a team defense
                         if tank01_player.get('isTeamDefense'):
-                            team_id = tank01_player.get('teamID')
+                            # For defense players, get teamID from teamData
+                            team_data = tank01_player.get('teamData', {})
+                            team_id = team_data.get('teamID')
                             if team_id and 'teamDefenseProjections' in self.cached_projections:
                                 team_def_projs = self.cached_projections['teamDefenseProjections']
                                 if team_id in team_def_projs:
@@ -653,14 +759,15 @@ class Tank01AvailablePlayersCollector:
                     report += f"#### Tank01 Player Information\n"
                     report += f"- **Tank01 ID**: {tank01_data.get('playerID', 'N/A')}\n"
                     report += f"- **Yahoo ID**: {yahoo_id}\n"
-                    report += f"- **Long Name**: {tank01_data.get('longName', 'N/A')}\n"
+                    report += f"- **Long Name**: {tank01_data.get('fullName', 'N/A')}\n"
                     report += f"- **Team**: {tank01_data.get('team', 'N/A')}\n"
                     
                     # Conditional display based on player type
                     if tank01_data.get('pos') == 'DEF':
                         # Team Defense Information
                         report += f"#### Team Defense Information\n"
-                        report += f"- **Team ID**: {tank01_data.get('teamID', 'N/A')}\n"
+                        team_data = tank01_data.get('teamData', {})
+                        report += f"- **Team ID**: {team_data.get('teamID', 'N/A')}\n"
                         report += f"- **Team Abbreviation**: {tank01_data.get('team', 'N/A')}\n"
                         report += f"- **Position**: {tank01_data.get('pos', 'N/A')}\n"
                         report += f"- **Is Team Defense**: {tank01_data.get('isTeamDefense', 'N/A')}\n"
@@ -702,7 +809,7 @@ class Tank01AvailablePlayersCollector:
                     # Fantasy Projections
                     if projection and projection != {}:
                         report += f"\n#### Fantasy Projections\n"
-                        report += f"- **Fantasy Points**: {projection.get('fantasyPoints', 'N/A')}\n"
+                        report += f"- **Fantasy Points**: {projection.get('fantasyPointsDefault', 'N/A')}\n"
                         
                         # Show fantasy points by format (matching my_roster logic)
                         if 'fantasyPointsDefault' in projection:
@@ -990,8 +1097,8 @@ class Tank01AvailablePlayersCollector:
                 logger.warning("Team matchups directory not found")
                 return None
 
-            # Get the most recent matchups file
-            matchup_files = list(matchups_dir.glob("*_team_matchups_raw_data.json"))
+            # Get the most recent matchups file (search recursively in YYYY/MM/DD structure)
+            matchup_files = list(matchups_dir.glob("**/*_team_matchups_raw_data.json"))
             if not matchup_files:
                 logger.warning("No team matchups files found")
                 return None
@@ -1103,6 +1210,11 @@ class Tank01AvailablePlayersCollector:
                 },
                 "season_context": season_context,
                 "processed_data": processed_data,
+                "cached_data": {
+                    "projections": self.cached_projections,
+                    "depth_charts": self.cached_depth_charts,
+                    "teams": self.cached_teams
+                },
                 "efficiency_metrics": {
                     "players_processed": self.stats["players_processed"],
                     "players_matched": self.stats["players_matched"],
@@ -1128,9 +1240,8 @@ class Tank01AvailablePlayersCollector:
         """Main execution method"""
         try:
             logger.info("Starting Tank01 Available Players Data Collection")
-            logger.info(f"Development Mode: {DEVELOPMENT_MODE}")
-            logger.info(f"Player Limits: {PLAYER_LIMITS}")
-            logger.info(f"Total Expected Players: {sum(PLAYER_LIMITS.values())}")
+            logger.info(f"Player Limits: {self.player_limits}")
+            logger.info(f"Total Expected Players: {sum(self.player_limits.values())}")
             
             # Load Yahoo available players data
             yahoo_data = self.load_yahoo_available_players()
@@ -1161,47 +1272,19 @@ class Tank01AvailablePlayersCollector:
 
 def main():
     """Main entry point with command line argument support"""
-    # Declare globals first
-    global PLAYER_LIMITS, INJURY_REPORTS_LIMIT, TOP_AVAILABLE_LIMIT
+    # Parse command line arguments
+    player_limits = parse_arguments()
     
-    parser = argparse.ArgumentParser(description="Tank01 Available Players Data Collection")
-    parser.add_argument(
-        "--players", 
-        type=int, 
-        default=sum(PLAYER_LIMITS.values()),
-        help=f"Total number of available players to process (default: {sum(PLAYER_LIMITS.values())})"
-    )
-    parser.add_argument(
-        "--injury-reports",
-        type=int,
-        default=INJURY_REPORTS_LIMIT,
-        help=f"Number of injury report players to process (default: {INJURY_REPORTS_LIMIT})"
-    )
-    parser.add_argument(
-        "--top-available",
-        type=int,
-        default=TOP_AVAILABLE_LIMIT,
-        help=f"Number of top available players to process (default: {TOP_AVAILABLE_LIMIT})"
-    )
+    # Create collector with configurable limits
+    collector = Tank01AvailablePlayersCollector(player_limits)
     
-    args = parser.parse_args()
-    
-    # Update global configuration based on arguments
-    # Note: Position-based limits are used instead of total limit
-    # args.players is kept for compatibility but not used in filtering
-    INJURY_REPORTS_LIMIT = args.injury_reports
-    TOP_AVAILABLE_LIMIT = args.top_available
-    
+    # Show configuration
+    print(f"🎯 Player Limits: {player_limits}")
     print(f"🏈 Tank01 Available Players Collection")
-    print(f"📊 Processing players with position limits: {PLAYER_LIMITS}")
-    print(f"📊 Total expected players: {sum(PLAYER_LIMITS.values())}")
-    if INJURY_REPORTS_LIMIT > 0:
-        print(f"🏥 Processing {INJURY_REPORTS_LIMIT} injury report players")
-    if TOP_AVAILABLE_LIMIT > 0:
-        print(f"⭐ Processing {TOP_AVAILABLE_LIMIT} top available players")
+    print(f"📊 Processing players with position limits: {player_limits}")
+    print(f"📊 Total expected players: {sum(player_limits.values())}")
     print("=" * 50)
     
-    collector = Tank01AvailablePlayersCollector()
     collector.run()
 
 if __name__ == "__main__":

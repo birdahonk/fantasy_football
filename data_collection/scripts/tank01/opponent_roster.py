@@ -46,11 +46,12 @@ def format_timestamp_pacific(timestamp):
     except (ValueError, TypeError) as e:
         return f"Invalid timestamp: {timestamp}"
 
-def normalize_team_abbreviation(team_abv):
-    """Normalize team abbreviation to uppercase for API consistency."""
-    if not team_abv:
-        return None
-    return team_abv.upper().strip()
+# Import shared team mapping
+import sys
+from pathlib import Path
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(project_root))
+from data_collection.scripts.shared.team_mapping import normalize_team_abbreviation
 
 class Tank01OpponentRosterExtractor:
     """Extract comprehensive Tank01 data for opponent roster players."""
@@ -83,9 +84,9 @@ class Tank01OpponentRosterExtractor:
 
             # Look for opponent roster files
             pattern = os.path.join(
-                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'opponent_rosters', '*_raw_data.json'
+                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'opponent_rosters', '**', '*_raw_data.json'
             )
-            files = glob.glob(pattern)
+            files = glob.glob(pattern, recursive=True)
             
             if not files:
                 self.logger.error("No Yahoo opponent roster files found")
@@ -130,9 +131,9 @@ class Tank01OpponentRosterExtractor:
         try:
             # Look for team matchups files
             matchups_pattern = os.path.join(
-                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'team_matchups', '*_raw_data.json'
+                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'team_matchups', '**', '*_raw_data.json'
             )
-            matchups_files = glob.glob(matchups_pattern)
+            matchups_files = glob.glob(matchups_pattern, recursive=True)
             
             if not matchups_files:
                 self.logger.error("No team matchups files found")
@@ -236,9 +237,9 @@ class Tank01OpponentRosterExtractor:
                 
             # Look for team matchups file
             matchups_pattern = os.path.join(
-                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'team_matchups', '*_raw_data.json'
+                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'team_matchups', '**', '*_raw_data.json'
             )
-            matchups_files = glob.glob(matchups_pattern)
+            matchups_files = glob.glob(matchups_pattern, recursive=True)
             
             if not matchups_files:
                 return None

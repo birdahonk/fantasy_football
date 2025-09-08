@@ -99,7 +99,7 @@ class Tank01TransactionTrendsEnricher:
         """Load the latest Yahoo transaction trends data."""
         try:
             # Find the latest Yahoo transaction trends file
-            yahoo_files = glob.glob("../../outputs/yahoo/transaction_trends/**/*_raw_data.json", recursive=True)
+            yahoo_files = glob.glob("../outputs/yahoo/transaction_trends/**/*_raw_data.json", recursive=True)
             if not yahoo_files:
                 self.logger.error("No Yahoo transaction trends files found")
                 return None

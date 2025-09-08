@@ -116,8 +116,8 @@ def analyze_missing_sleeper_tank01_data():
     import glob
     import os
     
-    sleeper_files = glob.glob("data_collection/outputs/sleeper/*/*_raw_data.json")
-    tank01_files = glob.glob("data_collection/outputs/tank01/*/*_raw_data.json")
+    sleeper_files = glob.glob("data_collection/outputs/sleeper/**/*_raw_data.json", recursive=True)
+    tank01_files = glob.glob("data_collection/outputs/tank01/**/*_raw_data.json", recursive=True)
     
     print("Sleeper files:")
     for file in sleeper_files:

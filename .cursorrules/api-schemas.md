@@ -48,14 +48,21 @@ This guide provides high-level structure guidance for working with API data in t
 **ALWAYS CHECK**: `data_collection/schemas/tank01_api_schemas.md` for complete details
 
 #### **Key Patterns:**
-- **Player Data**: Usually in `processed_data.available_players` array
-- **Team Data**: Usually in `processed_data.teams` array
-- **Raw Data**: Usually in `raw_data` object
+- **Available Players**: `matched_players` array contains enriched player data
+- **Player Structure**: Each player has `yahoo_player`, `tank01_player`, and `mapping` objects
+- **Position Data**: Use `player['yahoo_player']['display_position']` for position filtering
+- **Command Line**: Supports `--qb`, `--rb`, `--wr`, `--te`, `--k`, `--defense`, `--flex`, `--all`, `--dev` parameters
+- **Team Mapping**: Uses shared `team_mapping.py` for consistent team abbreviation normalization
+- **Defense Players**: Special handling for team defense with `DEF_{teamID}` format
 
 #### **Common Mistakes to Avoid:**
-- ❌ **Don't assume** data is at top level - check `processed_data` first
-- ❌ **Don't assume** arrays are simple - check for nested structures
+- ❌ **Don't assume** position is at top level - it's in `yahoo_player.display_position`
+- ❌ **Don't assume** all data is in arrays - check for dictionaries
+- ❌ **Don't assume** team abbreviations are consistent - use `normalize_team_abbreviation()`
+- ❌ **Don't assume** defense players are individual players - they're team-based
 - ✅ **Always check** the actual structure before accessing data
+- ✅ **Use** `player['yahoo_player']['display_position']` for position filtering
+- ✅ **Use** shared team mapping for consistent team abbreviation handling
 
 ## 🔧 Script Creation Guidelines
 
@@ -98,8 +105,25 @@ matchups = data['matchups']  # Array of matchup objects
 
 ### **Tank01 API Data Access:**
 ```python
-# Check schema file for exact structure
-# Usually: data['processed_data']['available_players']
+# Available Players (enriched with Yahoo data)
+matched_players = data['matched_players']  # Array of enriched player objects
+for player in matched_players:
+    yahoo_data = player['yahoo_player']
+    tank01_data = player['tank01_player']
+    position = yahoo_data['display_position']
+    
+# Transaction Trends (enriched with Tank01 data)
+enriched_players = data['enriched_players']  # Array of enriched transaction players
+for player in enriched_players:
+    yahoo_data = player['yahoo_player']
+    tank01_data = player['tank01_player']
+    
+# NFL Matchups
+games = data['games']  # Array of game objects
+for game in games:
+    home_team = game['home']
+    away_team = game['away']
+    game_time = game['gameTime']
 ```
 
 ## ⚠️ Common Pitfalls

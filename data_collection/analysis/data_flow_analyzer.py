@@ -118,7 +118,7 @@ def check_missing_data():
             for subdir in os.listdir(data_dir):
                 subdir_path = os.path.join(data_dir, subdir)
                 if os.path.isdir(subdir_path):
-                    json_files = glob.glob(os.path.join(subdir_path, "*_raw_data.json"))
+                    json_files = glob.glob(os.path.join(subdir_path, "**/*_raw_data.json"), recursive=True)
                     if json_files:
                         latest_file = max(json_files, key=os.path.getctime)
                         file_size = os.path.getsize(latest_file)

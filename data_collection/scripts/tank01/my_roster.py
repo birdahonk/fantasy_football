@@ -45,20 +45,12 @@ def format_timestamp_pacific(timestamp):
     except (ValueError, TypeError) as e:
         return f"Invalid timestamp: {timestamp}"
 
-def normalize_team_abbreviation(team_abv):
-    """Normalize team abbreviation to uppercase for API consistency."""
-    if not team_abv:
-        return team_abv
-    
-    # Team abbreviation mapping for case normalization
-    team_mapping = {
-        'phi': 'PHI', 'pit': 'PIT', 'sf': 'SF', 'sea': 'SEA', 'tb': 'TB', 'ten': 'TEN', 'wsh': 'WSH',
-        'ari': 'ARI', 'atl': 'ATL', 'bal': 'BAL', 'buf': 'BUF', 'car': 'CAR', 'chi': 'CHI', 'cin': 'CIN', 'cle': 'CLE',
-        'dal': 'DAL', 'den': 'DEN', 'det': 'DET', 'gb': 'GB', 'hou': 'HOU', 'ind': 'IND', 'jax': 'JAX', 'kc': 'KC',
-        'lv': 'LV', 'lac': 'LAC', 'lar': 'LAR', 'mia': 'MIA', 'min': 'MIN', 'ne': 'NE', 'no': 'NO', 'nyg': 'NYG', 'nyj': 'NYJ'
-    }
-    
-    return team_mapping.get(team_abv.lower(), team_abv.upper())
+# Import shared team mapping
+import sys
+from pathlib import Path
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(project_root))
+from data_collection.scripts.shared.team_mapping import normalize_team_abbreviation
 
 class Tank01MyRosterExtractor:
     """
@@ -270,7 +262,7 @@ class Tank01MyRosterExtractor:
                 return None
             
             # Get the most recent matchups file
-            matchup_files = list(matchups_dir.glob("*_team_matchups_raw_data.json"))
+            matchup_files = list(matchups_dir.glob("**/*_team_matchups_raw_data.json"))
             if not matchup_files:
                 self.logger.warning("No team matchups files found")
                 return None
@@ -372,7 +364,7 @@ class Tank01MyRosterExtractor:
                 raise FileNotFoundError(f"Yahoo my roster output directory not found: {yahoo_output_dir}")
             
             # Get the most recent file
-            roster_files = list(yahoo_output_dir.glob("*_my_roster_raw_data.json"))
+            roster_files = list(yahoo_output_dir.glob("**/*_my_roster_raw_data.json"))
             if not roster_files:
                 raise FileNotFoundError("No Yahoo my roster raw data files found")
             

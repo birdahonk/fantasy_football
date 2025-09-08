@@ -112,7 +112,7 @@ def debug_roster_token_discrepancy():
     import glob
     import os
     
-    opponent_files = glob.glob("data_collection/outputs/yahoo/opponent_rosters/*_raw_data.json")
+    opponent_files = glob.glob("data_collection/outputs/yahoo/opponent_rosters/**/*_raw_data.json", recursive=True)
     if opponent_files:
         latest_file = max(opponent_files, key=os.path.getctime)
         print(f"Latest opponent file: {os.path.basename(latest_file)}")

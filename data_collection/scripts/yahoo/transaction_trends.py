@@ -228,7 +228,7 @@ class TransactionTrendsExtractor:
                 return None
 
             # Get the most recent matchups file
-            matchup_files = list(matchups_dir.glob("*_team_matchups_raw_data.json"))
+            matchup_files = list(matchups_dir.glob("**/*_team_matchups_raw_data.json"))
             if not matchup_files:
                 self.logger.warning("No team matchups files found")
                 return None
