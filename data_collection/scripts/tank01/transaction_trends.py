@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 """
-Tank01 NFL API - Transaction Trends Data Extraction
+Tank01 NFL API - Transaction Trends Data Enrichment
 
-This script extracts transaction trends data from the Tank01 API by analyzing
-news, player information, and team data to infer fantasy football transaction
-patterns and trends.
+This script enriches Yahoo Fantasy transaction trends data with Tank01 API data.
+It reads the Yahoo transaction trends to get the list of players being added/dropped
+in the user's league, then enriches that data with Tank01 news, projections, and
+market intelligence.
 
-Purpose: Extract transaction trends and market intelligence from Tank01 API
-Output: Organized markdown file + raw JSON data with transaction trends
-Focus: News analysis, player movement patterns, and market trends
+Purpose: Enrich Yahoo transaction trends with Tank01 data for analyst agent
+Output: Organized markdown file + raw JSON data with enriched transaction trends
+Focus: League-specific player analysis with market intelligence
 """
 
 import os
 import sys
 import json
 import logging
+import glob
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 
@@ -26,8 +28,8 @@ from data_formatter import MarkdownFormatter
 from file_utils import DataFileManager
 
 
-class Tank01TransactionTrendsExtractor:
-    """Extract transaction trends from Tank01 API using news and player data analysis."""
+class Tank01TransactionTrendsEnricher:
+    """Enrich Yahoo transaction trends with Tank01 API data for league-specific analysis."""
 
     def __init__(self) -> None:
         logging.basicConfig(
@@ -44,232 +46,284 @@ class Tank01TransactionTrendsExtractor:
             'start_time': datetime.now(),
             'api_calls': 0,
             'errors': 0,
-            'news_items_analyzed': 0,
-            'players_analyzed': 0,
-            'trends_identified': 0
+            'yahoo_transactions_processed': 0,
+            'players_enriched': 0,
+            'news_items_found': 0
         }
 
-    def extract_transaction_trends(self) -> Dict[str, Any]:
-        """Extract transaction trends from Tank01 API data."""
+    def enrich_yahoo_transaction_trends(self) -> Dict[str, Any]:
+        """Enrich Yahoo transaction trends with Tank01 API data."""
         try:
-            self.logger.info("Starting Tank01 transaction trends extraction...")
+            self.logger.info("Starting Yahoo transaction trends enrichment with Tank01 data...")
             
-            # Get current season context
-            season_context = self._get_current_season_context()
+            # Load Yahoo transaction trends data
+            yahoo_data = self._load_yahoo_transaction_trends()
+            if not yahoo_data:
+                raise Exception("Could not load Yahoo transaction trends data")
             
-            # Get fantasy news for trending analysis
-            fantasy_news = self._get_fantasy_news()
+            # Extract player names from Yahoo transactions
+            league_players = self._extract_league_players(yahoo_data)
+            self.execution_stats['yahoo_transactions_processed'] = len(league_players)
             
-            # Get player database for context
-            player_database = self._get_player_database()
+            # Get Tank01 player database for matching
+            tank01_players = self._get_tank01_player_database()
             
-            # Get team information for context
-            team_info = self._get_team_information()
+            # Match league players to Tank01 players
+            matched_players = self._match_players_to_tank01(league_players, tank01_players)
             
-            # Analyze trends from the data
-            trends_analysis = self._analyze_transaction_trends(
-                fantasy_news, player_database, team_info
-            )
+            # Enrich each matched player with Tank01 data
+            enriched_players = self._enrich_players_with_tank01_data(matched_players)
+            self.execution_stats['players_enriched'] = len(enriched_players)
             
             # Compile results
             result = {
-                'season_context': season_context,
-                'fantasy_news': fantasy_news,
-                'player_database_summary': self._summarize_player_database(player_database),
-                'team_information_summary': self._summarize_team_info(team_info),
-                'trends_analysis': trends_analysis,
+                'yahoo_data': yahoo_data,
+                'league_players': league_players,
+                'enriched_players': enriched_players,
+                'enrichment_summary': self._create_enrichment_summary(enriched_players),
                 'api_usage': self.tank01.get_api_usage()
             }
             
             self.execution_stats['api_calls'] = self.tank01.get_api_usage()['calls_made_this_session']
-            self.execution_stats['news_items_analyzed'] = len(fantasy_news.get('news_items', []))
-            self.execution_stats['players_analyzed'] = len(player_database.get('players', []))
-            self.execution_stats['trends_identified'] = len(trends_analysis.get('trends', []))
             
-            self.logger.info(f"Successfully extracted transaction trends with {self.execution_stats['trends_identified']} trends identified")
+            self.logger.info(f"Successfully enriched {self.execution_stats['players_enriched']} players with Tank01 data")
             
             return result
             
         except Exception as e:
-            self.logger.error(f"Error extracting transaction trends: {e}")
+            self.logger.error(f"Error enriching Yahoo transaction trends: {e}")
             self.execution_stats['errors'] += 1
             raise
 
-    def _get_current_season_context(self) -> Dict[str, Any]:
-        """Get current NFL season context."""
+    def _load_yahoo_transaction_trends(self) -> Optional[Dict[str, Any]]:
+        """Load the latest Yahoo transaction trends data."""
         try:
-            # Use today's date to determine current week
-            today = datetime.now()
+            # Find the latest Yahoo transaction trends file
+            yahoo_files = glob.glob("../../outputs/yahoo/transaction_trends/**/*_raw_data.json", recursive=True)
+            if not yahoo_files:
+                self.logger.error("No Yahoo transaction trends files found")
+                return None
             
-            # For now, we'll use a simple week calculation
-            # In a real implementation, you'd get this from the NFL API
-            current_week = 1  # Default to week 1
-            season = "2025"
+            # Get the most recent file
+            latest_file = max(yahoo_files, key=os.path.getctime)
+            self.logger.info(f"Loading Yahoo data from: {latest_file}")
             
-            return {
-                'current_week': current_week,
-                'season': season,
-                'season_type': 'Regular Season',
-                'extraction_date': today.isoformat()
-            }
+            with open(latest_file, 'r') as f:
+                return json.load(f)
+                
+        except Exception as e:
+            self.logger.error(f"Error loading Yahoo transaction trends: {e}")
+            return None
+
+    def _extract_league_players(self, yahoo_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Extract unique players from Yahoo transaction data."""
+        try:
+            players = []
+            transactions = yahoo_data.get('transactions', [])
+            
+            self.logger.info(f"Found {len(transactions)} transactions to process")
+            
+            for i, transaction in enumerate(transactions):
+                self.logger.info(f"Processing transaction {i+1}: {type(transaction)}")
+                self.logger.info(f"Transaction content: {str(transaction)[:200]}...")
+                
+                if not isinstance(transaction, dict):
+                    self.logger.warning(f"Transaction {i+1} is not a dict: {type(transaction)}")
+                    continue
+                    
+                try:
+                    transaction_type = transaction.get('type', 'Unknown')
+                except AttributeError as e:
+                    self.logger.error(f"Error getting transaction type: {e}")
+                    self.logger.error(f"Transaction is actually: {type(transaction)} - {transaction}")
+                    continue
+                transaction_time = transaction.get('timestamp', 'Unknown')
+                
+                # Extract players from the transaction
+                transaction_players = transaction.get('players', [])
+                
+                # Handle case where players might be a string or other format
+                if isinstance(transaction_players, str):
+                    self.logger.warning(f"Transaction players is a string: {transaction_players}")
+                    continue
+                elif not isinstance(transaction_players, list):
+                    self.logger.warning(f"Transaction players is not a list: {type(transaction_players)}")
+                    continue
+                
+                for player_data in transaction_players:
+                    # Debug: check if player_data is a dict
+                    if not isinstance(player_data, dict):
+                        self.logger.warning(f"Player data is not a dict: {type(player_data)} - {player_data}")
+                        continue
+                    
+                    # Get player name
+                    name_info = player_data.get('name', {})
+                    if not isinstance(name_info, dict):
+                        self.logger.warning(f"Name info is not a dict: {type(name_info)} - {name_info}")
+                        continue
+                        
+                    player_name = name_info.get('full', 'Unknown')
+                    
+                    # Get position and team
+                    position = player_data.get('display_position', 'Unknown')
+                    team = player_data.get('editorial_team_abbr', 'Unknown')
+                    
+                    # Get transaction details
+                    transaction_details = player_data.get('transaction_data', [])
+                    
+                    # Handle case where transaction_details might not be a list
+                    if not isinstance(transaction_details, list):
+                        self.logger.warning(f"Transaction details is not a list: {type(transaction_details)}")
+                        transaction_details = []
+                    
+                    for detail in transaction_details:
+                        if not isinstance(detail, dict):
+                            self.logger.warning(f"Transaction detail is not a dict: {type(detail)} - {detail}")
+                            continue
+                            
+                        action_type = detail.get('type', 'Unknown')
+                        
+                        players.append({
+                            'name': player_name,
+                            'position': position,
+                            'team': team,
+                            'transaction_type': f"{transaction_type}_{action_type}",
+                            'transaction_time': transaction_time,
+                            'yahoo_data': {
+                                'transaction': transaction,
+                                'player': player_data,
+                                'transaction_detail': detail
+                            }
+                        })
+            
+            # Remove duplicates while preserving transaction context
+            unique_players = {}
+            for player in players:
+                key = f"{player['name']}_{player['team']}"
+                if key not in unique_players:
+                    unique_players[key] = player
+                else:
+                    # Merge transaction types if player appears multiple times
+                    existing = unique_players[key]
+                    if player['transaction_type'] != existing['transaction_type']:
+                        existing['transaction_type'] = 'mixed'
+            
+            self.logger.info(f"Extracted {len(unique_players)} unique players from {len(transactions)} transactions")
+            return list(unique_players.values())
             
         except Exception as e:
-            self.logger.error(f"Error getting season context: {e}")
-            return {
-                'current_week': 1,
-                'season': '2025',
-                'season_type': 'Regular Season',
-                'extraction_date': datetime.now().isoformat()
-            }
+            import traceback
+            self.logger.error(f"Error extracting league players: {e}")
+            self.logger.error(f"Full traceback: {traceback.format_exc()}")
+            return []
 
-    def _get_fantasy_news(self) -> Dict[str, Any]:
-        """Get fantasy football news for trend analysis."""
+    def _get_tank01_player_database(self) -> Dict[str, Any]:
+        """Get Tank01 player database for matching."""
         try:
-            # Get general fantasy news
-            news_response = self.tank01.get_news(
-                fantasy_news=True,
-                max_items=50
-            )
-            
-            news_items = []
-            if news_response and 'body' in news_response:
-                for item in news_response['body']:
-                    news_items.append({
-                        'title': item.get('title', 'Unknown'),
-                        'link': item.get('link', 'Unknown'),
-                        'image': item.get('image', 'Unknown'),
-                        'player_id': item.get('playerID', 'Unknown')
-                    })
-            
-            return {
-                'news_items': news_items,
-                'total_items': len(news_items),
-                'extraction_time': datetime.now().isoformat()
-            }
-            
-        except Exception as e:
-            self.logger.error(f"Error getting fantasy news: {e}")
-            return {
-                'news_items': [],
-                'total_items': 0,
-                'extraction_time': datetime.now().isoformat(),
-                'error': str(e)
-            }
-
-    def _get_player_database(self) -> Dict[str, Any]:
-        """Get player database for context analysis."""
-        try:
-            # Get player list for context
             players_response = self.tank01.get_player_list()
             
-            players = []
+            players = {}
             if players_response and 'body' in players_response:
-                for player in players_response['body'][:100]:  # Limit to first 100 for analysis
-                    players.append({
-                        'player_id': player.get('playerID', 'Unknown'),
+                for player in players_response['body']:
+                    player_id = player.get('playerID', 'Unknown')
+                    players[player_id] = {
+                        'player_id': player_id,
                         'name': player.get('longName', 'Unknown'),
                         'team': player.get('team', 'Unknown'),
                         'position': player.get('pos', 'Unknown'),
                         'yahoo_id': player.get('yahooPlayerID', 'Unknown'),
                         'sleeper_id': player.get('sleeperBotID', 'Unknown')
-                    })
+                    }
             
-            return {
-                'players': players,
-                'total_players': len(players),
-                'extraction_time': datetime.now().isoformat()
-            }
+            return players
             
         except Exception as e:
-            self.logger.error(f"Error getting player database: {e}")
-            return {
-                'players': [],
-                'total_players': 0,
-                'extraction_time': datetime.now().isoformat(),
-                'error': str(e)
-            }
+            self.logger.error(f"Error getting Tank01 player database: {e}")
+            return {}
 
-    def _get_team_information(self) -> Dict[str, Any]:
-        """Get team information for context analysis."""
+    def _match_players_to_tank01(self, league_players: List[Dict[str, Any]], tank01_players: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Match league players to Tank01 players."""
         try:
-            # Get team information
-            teams_response = self.tank01.get_nfl_teams(
-                sort_by='standings',
-                rosters=False,
-                schedules=False,
-                top_performers=True,
-                team_stats=True,
-                team_stats_season='2024'
-            )
+            matched_players = []
             
-            teams = []
-            if teams_response and 'body' in teams_response:
-                for team in teams_response['body']:
-                    teams.append({
-                        'team_id': team.get('teamID', 'Unknown'),
-                        'team_abv': team.get('teamAbv', 'Unknown'),
-                        'team_name': team.get('teamName', 'Unknown'),
-                        'team_city': team.get('teamCity', 'Unknown'),
-                        'wins': team.get('wins', '0'),
-                        'losses': team.get('loss', '0'),
-                        'ties': team.get('tie', '0'),
-                        'division': team.get('division', 'Unknown'),
-                        'conference': team.get('conference', 'Unknown')
-                    })
-            
-            return {
-                'teams': teams,
-                'total_teams': len(teams),
-                'extraction_time': datetime.now().isoformat()
-            }
-            
-        except Exception as e:
-            self.logger.error(f"Error getting team information: {e}")
-            return {
-                'teams': [],
-                'total_teams': 0,
-                'extraction_time': datetime.now().isoformat(),
-                'error': str(e)
-            }
-
-    def _analyze_transaction_trends(self, news_data: Dict[str, Any], 
-                                  player_data: Dict[str, Any], 
-                                  team_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Analyze transaction trends from the collected data."""
-        try:
-            trends = []
-            
-            # Analyze news for transaction indicators
-            news_trends = self._analyze_news_trends(news_data)
-            trends.extend(news_trends)
-            
-            # Analyze player data for movement patterns
-            player_trends = self._analyze_player_trends(player_data)
-            trends.extend(player_trends)
-            
-            # Analyze team data for context
-            team_trends = self._analyze_team_trends(team_data)
-            trends.extend(team_trends)
-            
-            return {
-                'trends': trends,
-                'total_trends': len(trends),
-                'analysis_time': datetime.now().isoformat(),
-                'trend_categories': {
-                    'news_based': len([t for t in trends if t.get('category') == 'news']),
-                    'player_based': len([t for t in trends if t.get('category') == 'player']),
-                    'team_based': len([t for t in trends if t.get('category') == 'team'])
+            for league_player in league_players:
+                player_name = league_player['name']
+                player_team = league_player['team']
+                player_position = league_player['position']
+                
+                # Try to find matching Tank01 player
+                tank01_match = None
+                
+                # Strategy 1: Exact name and team match
+                for tank01_id, tank01_player in tank01_players.items():
+                    if (tank01_player['name'].lower() == player_name.lower() and 
+                        tank01_player['team'].upper() == player_team.upper()):
+                        tank01_match = tank01_player
+                        break
+                
+                # Strategy 2: Partial name match with team
+                if not tank01_match:
+                    for tank01_id, tank01_player in tank01_players.items():
+                        if (player_name.lower() in tank01_player['name'].lower() and 
+                            tank01_player['team'].upper() == player_team.upper()):
+                            tank01_match = tank01_player
+                            break
+                
+                # Strategy 3: Name match only (if team doesn't match)
+                if not tank01_match:
+                    for tank01_id, tank01_player in tank01_players.items():
+                        if tank01_player['name'].lower() == player_name.lower():
+                            tank01_match = tank01_player
+                            break
+                
+                # Create enriched player data
+                enriched_player = {
+                    'yahoo_data': league_player,
+                    'tank01_data': tank01_match,
+                    'match_status': 'matched' if tank01_match else 'unmatched',
+                    'match_confidence': 'high' if tank01_match and tank01_match['team'].upper() == player_team.upper() else 'medium' if tank01_match else 'none'
                 }
-            }
+                
+                matched_players.append(enriched_player)
+            
+            return matched_players
             
         except Exception as e:
-            self.logger.error(f"Error analyzing transaction trends: {e}")
-            return {
-                'trends': [],
-                'total_trends': 0,
-                'analysis_time': datetime.now().isoformat(),
-                'error': str(e)
-            }
+            self.logger.error(f"Error matching players to Tank01: {e}")
+            return []
+
+    def _enrich_players_with_tank01_data(self, matched_players: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Enrich matched players with additional Tank01 data."""
+        try:
+            enriched_players = []
+            
+            for player in matched_players:
+                if player['match_status'] == 'matched' and player['tank01_data']:
+                    tank01_player = player['tank01_data']
+                    player_id = tank01_player['player_id']
+                    
+                    # Get news for this specific player
+                    player_news = self._get_player_news(player_id)
+                    
+                    # Get weekly projections for this player
+                    projections = self._get_player_projections(player_id)
+                    
+                    # Add enrichment data
+                    player['tank01_enrichment'] = {
+                        'news': player_news,
+                        'projections': projections,
+                        'enrichment_time': datetime.now().isoformat()
+                    }
+                    
+                    self.execution_stats['news_items_found'] += len(player_news.get('news_items', []))
+                
+                enriched_players.append(player)
+            
+            return enriched_players
+            
+        except Exception as e:
+            self.logger.error(f"Error enriching players with Tank01 data: {e}")
+            return matched_players
 
     def _analyze_news_trends(self, news_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Analyze news data for transaction trends."""
@@ -425,16 +479,39 @@ class Tank01TransactionTrendsExtractor:
             return {'error': str(e)}
 
     def generate_markdown_report(self, data: Dict[str, Any]) -> str:
-        """Generate a comprehensive markdown report of transaction trends."""
+        """Generate a comprehensive markdown report of enriched transaction trends."""
         try:
             report = []
             
             # Header
-            report.append("# Tank01 Transaction Trends Analysis")
+            report.append("# Yahoo Transaction Trends - Tank01 Enrichment")
             report.append(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-            report.append(f"**Week:** {data['season_context']['current_week']}")
-            report.append(f"**Season:** {data['season_context']['season']}")
+            
+            # League Information
+            yahoo_data = data.get('yahoo_data', {})
+            league_info = yahoo_data.get('extraction_metadata', {}).get('league_info', {})
+            report.append(f"**League:** {league_info.get('league_name', 'Unknown')}")
+            report.append(f"**League Key:** {league_info.get('league_key', 'Unknown')}")
             report.append("")
+            
+            # Enrichment Summary
+            enrichment_summary = data.get('enrichment_summary', {})
+            report.append("## Enrichment Summary")
+            report.append(f"- **Total Players Processed:** {enrichment_summary.get('total_players_processed', 0)}")
+            report.append(f"- **Players Matched:** {enrichment_summary.get('matched_players', 0)}")
+            report.append(f"- **Players Unmatched:** {enrichment_summary.get('unmatched_players', 0)}")
+            report.append(f"- **Match Rate:** {enrichment_summary.get('match_rate', '0%')}")
+            report.append(f"- **High Confidence Matches:** {enrichment_summary.get('high_confidence_matches', 0)}")
+            report.append(f"- **Medium Confidence Matches:** {enrichment_summary.get('medium_confidence_matches', 0)}")
+            report.append("")
+            
+            # Transaction Types
+            transaction_types = enrichment_summary.get('transaction_types', {})
+            if transaction_types:
+                report.append("### Transaction Types")
+                for trans_type, count in transaction_types.items():
+                    report.append(f"- **{trans_type}:** {count}")
+                report.append("")
             
             # API Usage
             api_usage = data.get('api_usage', {})
@@ -444,51 +521,53 @@ class Tank01TransactionTrendsExtractor:
             report.append(f"- **Remaining:** {api_usage.get('remaining_calls', 'Unknown')}")
             report.append("")
             
-            # Data Summary
-            report.append("## Data Summary")
-            report.append(f"- **News Items Analyzed:** {data['fantasy_news']['total_items']}")
-            report.append(f"- **Players Analyzed:** {data['player_database_summary']['total_players']}")
-            report.append(f"- **Teams Analyzed:** {data['team_information_summary']['total_teams']}")
-            report.append(f"- **Trends Identified:** {data['trends_analysis']['total_trends']}")
+            # Enriched Players Summary
+            enriched_players = data.get('enriched_players', [])
+            matched_players = [p for p in enriched_players if p.get('match_status') == 'matched']
+            
+            report.append("## Enriched Players Summary")
+            report.append(f"- **Total Players:** {len(enriched_players)}")
+            report.append(f"- **Successfully Matched:** {len(matched_players)}")
+            report.append(f"- **Unmatched:** {len(enriched_players) - len(matched_players)}")
             report.append("")
             
-            # Transaction Trends
-            trends = data['trends_analysis']['trends']
-            if trends:
-                report.append("## Transaction Trends Identified")
+            # Top Enriched Players
+            if matched_players:
+                report.append("## Top Enriched Players")
                 report.append("")
                 
-                # Group trends by category
-                news_trends = [t for t in trends if t.get('category') == 'news']
-                player_trends = [t for t in trends if t.get('category') == 'player']
-                team_trends = [t for t in trends if t.get('category') == 'team']
-                
-                if news_trends:
-                    report.append("### News-Based Trends")
-                    for trend in news_trends[:10]:  # Limit to top 10
-                        report.append(f"- **{trend.get('type', 'Unknown').replace('_', ' ').title()}:** {trend.get('title', 'Unknown')}")
-                        report.append(f"  - Player ID: {trend.get('player_id', 'Unknown')}")
-                        report.append(f"  - Confidence: {trend.get('confidence', 'Unknown')}")
-                        report.append("")
-                
-                if player_trends:
-                    report.append("### Player-Based Trends")
-                    for trend in player_trends[:5]:  # Limit to top 5
-                        report.append(f"- **{trend.get('type', 'Unknown').replace('_', ' ').title()}:** Player {trend.get('player_id', 'Unknown')}")
-                        report.append(f"  - Teams: {', '.join(trend.get('teams', []))}")
-                        report.append(f"  - Confidence: {trend.get('confidence', 'Unknown')}")
-                        report.append("")
-                
-                if team_trends:
-                    report.append("### Team-Based Trends")
-                    for trend in team_trends[:5]:  # Limit to top 5
-                        report.append(f"- **{trend.get('type', 'Unknown').replace('_', ' ').title()}:** {trend.get('team', 'Unknown')}")
-                        report.append(f"  - Record: {trend.get('record', 'Unknown')}")
-                        report.append(f"  - Confidence: {trend.get('confidence', 'Unknown')}")
-                        report.append("")
+                # Show top 10 matched players with their enrichment data
+                for i, player in enumerate(matched_players[:10]):
+                    yahoo_data = player.get('yahoo_data', {})
+                    tank01_data = player.get('tank01_data', {})
+                    tank01_enrichment = player.get('tank01_enrichment', {})
+                    
+                    player_name = yahoo_data.get('name', 'Unknown')
+                    position = yahoo_data.get('position', 'Unknown')
+                    team = yahoo_data.get('team', 'Unknown')
+                    transaction_type = yahoo_data.get('transaction_type', 'Unknown')
+                    match_confidence = player.get('match_confidence', 'Unknown')
+                    
+                    report.append(f"### {i+1}. {player_name} ({position}, {team})")
+                    report.append(f"- **Transaction Type:** {transaction_type}")
+                    report.append(f"- **Match Confidence:** {match_confidence}")
+                    report.append(f"- **Tank01 Player ID:** {tank01_data.get('player_id', 'Unknown')}")
+                    
+                    # News summary
+                    news_data = tank01_enrichment.get('news', {})
+                    news_items = news_data.get('news_items', [])
+                    if news_items:
+                        report.append(f"- **Recent News:** {len(news_items)} items")
+                        # Show first news item
+                        first_news = news_items[0]
+                        report.append(f"  - {first_news.get('title', 'No title')[:100]}...")
+                    else:
+                        report.append("- **Recent News:** No news found")
+                    
+                    report.append("")
             else:
-                report.append("## Transaction Trends")
-                report.append("No significant transaction trends identified in the current data.")
+                report.append("## Enriched Players")
+                report.append("No players were successfully matched and enriched.")
                 report.append("")
             
             # Fantasy Football Context
@@ -507,12 +586,12 @@ class Tank01TransactionTrendsExtractor:
             return f"# Error generating report: {e}"
 
     def run(self) -> bool:
-        """Run the complete transaction trends extraction process."""
+        """Run the complete transaction trends enrichment process."""
         try:
-            self.logger.info("Starting Tank01 transaction trends extraction...")
+            self.logger.info("Starting Yahoo transaction trends enrichment with Tank01 data...")
             
-            # Extract data
-            data = self.extract_transaction_trends()
+            # Enrich Yahoo data with Tank01 data
+            data = self.enrich_yahoo_transaction_trends()
             
             # Generate timestamp
             timestamp = self.file_manager.generate_timestamp()
@@ -539,7 +618,7 @@ class Tank01TransactionTrendsExtractor:
                 "tank01", "transaction_trends", self.execution_stats, timestamp
             )
             
-            self.logger.info(f"Tank01 transaction trends extraction completed successfully!")
+            self.logger.info(f"Yahoo transaction trends enrichment completed successfully!")
             self.logger.info(f"Clean data saved to: {clean_file}")
             self.logger.info(f"Raw data saved to: {raw_file}")
             self.logger.info(f"Execution log saved to: {log_file}")
@@ -551,11 +630,105 @@ class Tank01TransactionTrendsExtractor:
             self.execution_stats['errors'] += 1
             return False
 
+    def _get_player_news(self, player_id: str) -> Dict[str, Any]:
+        """Get news for a specific player."""
+        try:
+            news_response = self.tank01.get_news(
+                fantasy_news=True,
+                max_items=10,
+                player_id=player_id
+            )
+            
+            news_items = []
+            if news_response and 'body' in news_response:
+                for item in news_response['body']:
+                    news_items.append({
+                        'title': item.get('title', 'Unknown'),
+                        'link': item.get('link', 'Unknown'),
+                        'image': item.get('image', 'Unknown'),
+                        'player_id': item.get('playerID', 'Unknown')
+                    })
+            
+            return {
+                'news_items': news_items,
+                'total_items': len(news_items),
+                'player_id': player_id
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Error getting player news for {player_id}: {e}")
+            return {
+                'news_items': [],
+                'total_items': 0,
+                'player_id': player_id,
+                'error': str(e)
+            }
+
+    def _get_player_projections(self, player_id: str) -> Dict[str, Any]:
+        """Get weekly projections for a specific player."""
+        try:
+            # For now, return a placeholder since Tank01 doesn't have direct projections
+            # In a real implementation, you might get this from another API or calculate it
+            return {
+                'player_id': player_id,
+                'projections': {
+                    'week_1': 'Not available',
+                    'season': 'Not available'
+                },
+                'note': 'Projections not available from Tank01 API'
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Error getting player projections for {player_id}: {e}")
+            return {
+                'player_id': player_id,
+                'projections': {},
+                'error': str(e)
+            }
+
+    def _create_enrichment_summary(self, enriched_players: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Create a summary of the enrichment process."""
+        try:
+            total_players = len(enriched_players)
+            matched_players = len([p for p in enriched_players if p['match_status'] == 'matched'])
+            unmatched_players = total_players - matched_players
+            
+            high_confidence_matches = len([p for p in enriched_players if p.get('match_confidence') == 'high'])
+            medium_confidence_matches = len([p for p in enriched_players if p.get('match_confidence') == 'medium'])
+            
+            # Analyze transaction types
+            transaction_types = {}
+            for player in enriched_players:
+                yahoo_data = player.get('yahoo_data', {})
+                trans_type = yahoo_data.get('transaction_type', 'Unknown')
+                transaction_types[trans_type] = transaction_types.get(trans_type, 0) + 1
+            
+            return {
+                'total_players_processed': total_players,
+                'matched_players': matched_players,
+                'unmatched_players': unmatched_players,
+                'match_rate': f"{(matched_players/total_players*100):.1f}%" if total_players > 0 else "0%",
+                'high_confidence_matches': high_confidence_matches,
+                'medium_confidence_matches': medium_confidence_matches,
+                'transaction_types': transaction_types,
+                'enrichment_time': datetime.now().isoformat()
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Error creating enrichment summary: {e}")
+            return {
+                'total_players_processed': 0,
+                'matched_players': 0,
+                'unmatched_players': 0,
+                'match_rate': '0%',
+                'error': str(e)
+            }
+
 
 def main():
     """Main execution function."""
-    extractor = Tank01TransactionTrendsExtractor()
-    success = extractor.run()
+    enricher = Tank01TransactionTrendsEnricher()
+    success = enricher.run()
     
     if success:
         print("✅ Tank01 transaction trends extraction completed successfully!")
