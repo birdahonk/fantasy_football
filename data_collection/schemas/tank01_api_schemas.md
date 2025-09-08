@@ -756,9 +756,32 @@ All endpoints return consistent error structures:
 ## Rate Limiting & Usage Tracking
 
 - **Current Plan**: 1000 calls/day (upgraded plan)
-- **Usage Tracking**: RapidAPI header-based tracking (authoritative source)
+- **Usage Tracking**: Centralized API usage manager with RapidAPI header-based tracking
 - **Optimization**: Batch calls where possible to minimize usage
 - **Monitoring**: Real-time usage tracking with Pacific Time Zone display
+
+### Centralized API Usage Manager
+
+**New Implementation**: All Tank01 scripts now use a centralized `ApiUsageManager` class for consistent API usage tracking and reporting.
+
+**Location**: `data_collection/scripts/shared/api_usage_manager.py`
+
+**Key Features**:
+- **Unified Interface**: Single point of control for all API usage tracking
+- **Pacific Time Zone**: Consistent timezone handling across all scripts
+- **Reset Time Calculation**: Accurate calculation of limit reset times
+- **Standardized Reporting**: Consistent API usage reporting format
+- **Rate Limit Monitoring**: Real-time monitoring with alerts
+
+**Usage Manager Methods**:
+```python
+class ApiUsageManager:
+    def get_usage_info(self) -> dict
+    def get_usage_summary_for_markdown(self) -> str
+    def get_reset_time_pacific(self) -> str
+    def is_near_limit(self, threshold: float = 0.9) -> bool
+    def get_usage_percentage(self) -> float
+```
 
 ### RapidAPI Usage Headers
 
@@ -789,6 +812,7 @@ The Tank01 API via RapidAPI provides real-time usage data in response headers:
 - **Timezone Support**: Displays reset times in Pacific Time Zone
 - **Countdown Format**: Reset timestamp is seconds until reset, not Unix timestamp
 - **Current Time Display**: Shows current time in Pacific Time Zone for context
+- **Centralized Management**: All scripts use the same usage manager for consistency
 
 ## Optimized Player Profile Data Structure
 

@@ -34,13 +34,19 @@ data_collection/
 
 ## 🎉 **ALL SCRIPTS COMPLETE - 100% DATA EXTRACTION ACHIEVED!**
 
-**Last Updated**: September 1, 2025  
-**Status**: ✅ **ALL 9 DATA COLLECTION SCRIPTS COMPLETE WITH 100% SUCCESS RATES**
+**Last Updated**: September 8, 2025  
+**Status**: ✅ **ALL 12 DATA COLLECTION SCRIPTS COMPLETE WITH 100% SUCCESS RATES**
 
 ### 📊 **COMPLETION SUMMARY**
 - **Yahoo API Scripts**: 5/5 ✅ **COMPLETE** (my_roster, opponent_rosters, team_matchups, available_players, transaction_trends)
-- **Sleeper API Scripts**: 2/2 ✅ **COMPLETE** (my_roster, available_players, trending)
-- **Tank01 API Scripts**: 2/2 ✅ **COMPLETE** (my_roster, available_players)
+- **Sleeper API Scripts**: 4/4 ✅ **COMPLETE** (my_roster, available_players, opponent_roster, trending)
+- **Tank01 API Scripts**: 5/5 ✅ **COMPLETE** (my_roster, available_players, opponent_roster, transaction_trends, nfl_matchups)
+
+### 🔧 **LATEST ENHANCEMENTS (September 8, 2025)**
+- **Centralized API Usage Management**: New shared utility for consistent API usage tracking across all Tank01 scripts
+- **Complete Reset Time Tracking**: Accurate limit reset time calculations with Pacific Time Zone support
+- **Standardized Reporting**: Consistent API usage reporting format across all scripts
+- **Enhanced Markdown Output**: All scripts now include complete API usage data with reset time in both top and bottom sections
 
 ### 🚀 Quick Start
 
