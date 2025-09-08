@@ -25,6 +25,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", "shared"))
 
 from tank01_client import SimpleTank01Client
 from file_utils import DataFileManager
+from api_usage_manager import APIUsageManager
 from data_formatter import MarkdownFormatter
 
 def get_current_time_pacific():
@@ -61,6 +62,9 @@ class Tank01OpponentRosterExtractor:
         self.tank01_client = SimpleTank01Client()
         self.file_manager = DataFileManager()
         self.formatter = MarkdownFormatter()
+        
+        # Initialize centralized API usage manager
+        self.usage_manager = APIUsageManager(self.tank01_client, "Tank01")
         
         # Cache for weekly projections
         self._weekly_projections_cache = None
@@ -951,6 +955,10 @@ class Tank01OpponentRosterExtractor:
                 if len(unmatched) > 100:
                     report.append("")
                     report.append(f"*... and {len(unmatched) - 100} more unmatched players*")
+            
+            # API Usage (using centralized manager)
+            report.append("")
+            report.append(self.usage_manager.get_usage_summary_for_markdown())
             
             return "\n".join(report)
         except Exception as e:

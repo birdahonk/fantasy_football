@@ -25,6 +25,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'shared'))
 from tank01_client import SimpleTank01Client
 from data_formatter import MarkdownFormatter
 from file_utils import DataFileManager
+from api_usage_manager import APIUsageManager
 
 
 class NFLMatchupsExtractor:
@@ -40,6 +41,7 @@ class NFLMatchupsExtractor:
         self.tank01 = SimpleTank01Client()
         self.formatter = MarkdownFormatter()
         self.file_manager = DataFileManager()
+        self.usage_manager = APIUsageManager(self.tank01, "Tank01")
 
         self.execution_stats: Dict[str, Any] = {
             'start_time': datetime.now(),
@@ -283,12 +285,8 @@ class NFLMatchupsExtractor:
             report.append(f"**Season:** {data['season_context']['season']}")
             report.append("")
             
-            # API Usage
-            api_usage = data.get('api_usage', {})
-            report.append("## API Usage")
-            report.append(f"- **Calls Made:** {api_usage.get('calls_made_this_session', 'Unknown')}")
-            report.append(f"- **Daily Limit:** {api_usage.get('daily_limit', 'Unknown')}")
-            report.append(f"- **Remaining:** {api_usage.get('remaining_calls', 'Unknown')}")
+            # API Usage (using centralized manager)
+            report.append(self.usage_manager.get_usage_summary_for_markdown())
             report.append("")
             
             # Games Summary

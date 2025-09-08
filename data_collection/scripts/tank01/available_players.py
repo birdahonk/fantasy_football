@@ -43,6 +43,7 @@ from config.player_limits import DEFAULT_PLAYER_LIMITS, get_player_limits
 
 from tank01_client import SimpleTank01Client
 from file_utils import DataFileManager
+from api_usage_manager import APIUsageManager
 
 def parse_arguments():
     """Parse command line arguments for configurable player limits"""
@@ -119,24 +120,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def get_current_time_pacific():
-    """Get current time in Pacific Time Zone"""
-    pacific = pytz.timezone('US/Pacific')
-    return datetime.now(pacific)
-
-def format_timestamp_pacific(timestamp):
-    """Format timestamp to Pacific Time Zone"""
-    if not timestamp:
-        return "N/A"
-    
-    try:
-        # RapidAPI reset timestamp contains seconds remaining until reset, not Unix timestamp
-        # Calculate when the reset will occur by adding to current time
-        current_time = get_current_time_pacific()
-        reset_time = current_time + timedelta(seconds=timestamp)
-        return reset_time.strftime("%Y-%m-%d %H:%M:%S %Z")
-    except (ValueError, TypeError) as e:
-        return f"Invalid timestamp: {timestamp}"
+# Timezone functions are now handled by the centralized APIUsageManager
 
 # Import shared team mapping
 import sys
@@ -152,6 +136,9 @@ class Tank01AvailablePlayersCollector:
         
         # Set player limits (use defaults if not provided)
         self.player_limits = player_limits or get_player_limits()
+        
+        # Initialize centralized API usage manager
+        self.usage_manager = APIUsageManager(self.tank01, "Tank01")
         
         self.stats = {
             "start_time": datetime.now(),
@@ -661,22 +648,16 @@ class Tank01AvailablePlayersCollector:
     
     def generate_markdown_report(self, processed_data: Dict[str, List[Dict]], yahoo_metadata: Dict[str, Any]) -> str:
         """Generate comprehensive markdown report"""
-        current_time = get_current_time_pacific()
-        
-        # Get API usage info
-        usage_info = self.tank01.get_api_usage()
-        total_calls = usage_info.get('total_calls', 0)
-        
-        # If total_calls is 0, get it from the client directly
-        if total_calls == 0:
-            total_calls = self.tank01.tank01_client.api_calls_made
+        # Get API usage info from centralized manager
+        usage_info = self.usage_manager.get_usage_info()
+        total_calls = usage_info.get('calls_made_this_session', 0)
         
         # Extract season context
         season_context = self._extract_season_context(yahoo_metadata)
         
         report = f"""# Tank01 Available Players Data
 
-**Extraction Date:** {current_time.strftime("%Y-%m-%d %H:%M:%S %Z")}
+**Extraction Date:** {usage_info.get('current_time_formatted', 'Unknown')}
 **Development Mode:** {DEVELOPMENT_MODE}
 **Source:** Yahoo Fantasy Football Available Players
 **League:** {yahoo_metadata.get('league_info', {}).get('league_name', 'Unknown')}
@@ -710,12 +691,7 @@ class Tank01AvailablePlayersCollector:
 - **Errors:** {self.stats['errors']}
 - **Execution Time:** {(datetime.now() - self.stats['start_time']).total_seconds():.2f}s
 
-## API Usage (RapidAPI Headers)
-- **Current Time (Pacific):** {current_time.strftime("%Y-%m-%d %H:%M:%S %Z")}
-- **Total API Calls:** {total_calls}
-- **Daily Limit:** {usage_info.get('daily_limit', 'Unknown')}
-- **Remaining Calls:** {usage_info.get('remaining_calls', 'Unknown')}
-- **Limit Resets:** {format_timestamp_pacific(usage_info.get('reset_timestamp'))}
+{self.usage_manager.get_usage_summary_for_markdown()}
 
 """
         
@@ -913,8 +889,8 @@ class Tank01AvailablePlayersCollector:
         # Add comprehensive API usage tracking section
         report += f"\n## 📊 API Usage Tracking\n\n"
         
-        # Get detailed API usage info
-        usage_info = self.tank01.get_api_usage()
+        # Get detailed API usage info from centralized manager
+        usage_info = self.usage_manager.get_usage_info()
         total_calls = usage_info.get('total_calls', 0)
         
         # If total_calls is 0, get it from the client directly
@@ -941,14 +917,14 @@ class Tank01AvailablePlayersCollector:
         report += f"  - Player Info Calls: {player_info_calls} (getNFLPlayerInfo - for unmatched)\n"
         
         report += f"\n### Current API Status (RapidAPI Headers)\n"
-        report += f"- **Report Generated**: {current_time.strftime('%Y-%m-%d %H:%M:%S %Z')}\n"
+        report += f"- **Report Generated**: {usage_info.get('current_time_formatted', 'Unknown')}\n"
         report += f"- **Calls Made This Session**: {total_calls}\n"
         report += f"- **Daily Limit**: {usage_info.get('daily_limit', 'N/A')}\n"
         report += f"- **Remaining Calls Today**: {usage_info.get('remaining_calls', 'N/A')}\n"
         report += f"- **Usage Percentage**: {usage_info.get('percentage_used', 0):.1f}%\n"
         report += f"- **Data Source**: {usage_info.get('data_source', 'Unknown')}\n"
-        if usage_info.get('reset_timestamp'):
-            report += f"- **Limit Resets**: {format_timestamp_pacific(usage_info.get('reset_timestamp'))}\n"
+        if usage_info.get('reset_time_pacific'):
+            report += f"- **Limit Resets**: {usage_info.get('reset_time_pacific')}\n"
         report += f"- **Client Available**: {usage_info.get('available', False)}\n"
         
         report += f"\n### API Efficiency Metrics\n"
@@ -1219,12 +1195,8 @@ class Tank01AvailablePlayersCollector:
                     "players_processed": self.stats["players_processed"],
                     "players_matched": self.stats["players_matched"],
                     "match_rate": (self.stats["players_matched"] / max(self.stats["players_processed"], 1) * 100),
-                    "api_calls_made": self.tank01.get_api_usage().get('total_calls', 0),
                     "execution_time_seconds": (datetime.now() - self.stats["start_time"]).total_seconds(),
-                    "report_generated_pacific": get_current_time_pacific().isoformat(),
-                    "reset_timestamp_pacific": format_timestamp_pacific(
-                        self.tank01.get_api_usage().get('reset_timestamp')
-                    )
+                    **self.usage_manager.get_usage_summary_for_json()
                 }
             }
         

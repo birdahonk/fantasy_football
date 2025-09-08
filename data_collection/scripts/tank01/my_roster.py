@@ -24,6 +24,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", "shared"))
 
 from tank01_client import SimpleTank01Client
 from file_utils import DataFileManager
+from api_usage_manager import APIUsageManager
 from data_formatter import MarkdownFormatter
 
 def get_current_time_pacific():
@@ -73,6 +74,9 @@ class Tank01MyRosterExtractor:
         self.tank01 = SimpleTank01Client()
         if not self.tank01.is_available():
             raise ValueError("Tank01 client not available. Check RAPIDAPI_KEY environment variable.")
+        
+        # Initialize centralized API usage manager
+        self.usage_manager = APIUsageManager(self.tank01, "Tank01")
         
         # Cache for Tank01 player database
         self._tank01_player_cache = None
@@ -927,16 +931,17 @@ class Tank01MyRosterExtractor:
         report.append(f"**Errors:** {self.stats['errors']}")
         report.append("")
         
-        # Tank01 API Usage Info (from RapidAPI headers)
+        # Tank01 API Usage Info (from centralized manager)
         report.append("## Tank01 API Usage")
-        report.append(f"- **Current Time (Pacific):** {get_current_time_pacific().strftime('%Y-%m-%d %H:%M:%S %Z')}")
+        usage_info = self.usage_manager.get_usage_info()
+        report.append(f"- **Current Time (Pacific):** {usage_info.get('current_time_formatted', 'Unknown')}")
         report.append(f"- **Calls Made This Session:** {actual_calls}")
         report.append(f"- **Daily Limit:** {usage_info.get('daily_limit', 'Unknown')}")
         report.append(f"- **Remaining Calls Today:** {usage_info.get('remaining_calls', 'Unknown')}")
         report.append(f"- **Usage Percentage:** {usage_info.get('percentage_used', 0):.1f}%")
         report.append(f"- **Data Source:** {usage_info.get('data_source', 'Unknown')}")
-        if usage_info.get('reset_timestamp'):
-            report.append(f"- **Limit Resets:** {format_timestamp_pacific(usage_info['reset_timestamp'])}")
+        if usage_info.get('reset_time_pacific'):
+            report.append(f"- **Limit Resets:** {usage_info.get('reset_time_pacific')}")
         report.append(f"- **Client Available:** {usage_info.get('available', False)}")
         report.append("")
         
@@ -1184,9 +1189,9 @@ class Tank01MyRosterExtractor:
         report.append("")
         report.append("## 📊 API Usage Tracking")
         report.append("")
-        # Get final API usage for accurate reporting
-        final_usage = self.tank01.get_api_usage()
-        actual_calls = final_usage.get('calls_made_this_session', 0)
+        # Get final API usage for accurate reporting from centralized manager
+        final_usage = self.usage_manager.get_usage_info()
+        actual_calls = final_usage.get('total_calls', 0)
         
         # Calculate breakdown based on actual calls made
         base_calls = 4  # player list, projections, depth charts, teams
@@ -1206,17 +1211,16 @@ class Tank01MyRosterExtractor:
         report.append(f"  - Player Info Calls: {max(0, player_specific_calls - (self.stats['players_matched'] * 2))} (getNFLPlayerInfo - for unmatched)")
         report.append("")
         
-        # Current usage status (from RapidAPI headers)
-        final_usage = self.tank01.get_api_usage()
+        # Current usage status (from centralized manager)
         report.append("### Current API Status (RapidAPI Headers)")
-        report.append(f"- **Report Generated:** {get_current_time_pacific().strftime('%Y-%m-%d %H:%M:%S %Z')}")
-        report.append(f"- **Calls Made This Session:** {final_usage.get('calls_made_this_session', 'Unknown')}")
+        report.append(f"- **Report Generated:** {final_usage.get('current_time_formatted', 'Unknown')}")
+        report.append(f"- **Calls Made This Session:** {final_usage.get('total_calls', 'Unknown')}")
         report.append(f"- **Daily Limit:** {final_usage.get('daily_limit', 'Unknown')}")
         report.append(f"- **Remaining Calls Today:** {final_usage.get('remaining_calls', 'Unknown')}")
         report.append(f"- **Usage Percentage:** {final_usage.get('percentage_used', 0):.1f}%")
         report.append(f"- **Data Source:** {final_usage.get('data_source', 'Unknown')}")
-        if final_usage.get('reset_timestamp'):
-            report.append(f"- **Limit Resets:** {format_timestamp_pacific(final_usage['reset_timestamp'])}")
+        if final_usage.get('reset_time_pacific'):
+            report.append(f"- **Limit Resets:** {final_usage.get('reset_time_pacific')}")
         report.append("")
         
         # API efficiency metrics
