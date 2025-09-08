@@ -58,18 +58,29 @@ class DataFileManager:
         """Generate timestamp string for file naming."""
         return datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    def get_output_directory(self, api_name: str, script_name: str) -> Path:
+    def get_output_directory(self, api_name: str, script_name: str, timestamp: str = None) -> Path:
         """
-        Get the output directory for a specific API and script.
+        Get the output directory for a specific API and script with YYYY/MM/DD structure.
         
         Args:
             api_name: API name (yahoo, sleeper, tank01)
             script_name: Script name (my_roster, opponent_rosters, etc.)
+            timestamp: Timestamp string (YYYYMMDD_HHMMSS) - if None, uses current time
             
         Returns:
             Path object for the output directory
         """
-        output_dir = self.base_output_dir / api_name / script_name
+        if timestamp is None:
+            timestamp = self.generate_timestamp()
+        
+        # Extract date components from timestamp
+        date_str = timestamp.split('_')[0]  # Get YYYYMMDD part
+        year = date_str[:4]
+        month = date_str[4:6]
+        day = date_str[6:8]
+        
+        # Create YYYY/MM/DD structure
+        output_dir = self.base_output_dir / api_name / script_name / year / month / day
         output_dir.mkdir(parents=True, exist_ok=True)
         return output_dir
     
@@ -108,7 +119,7 @@ class DataFileManager:
         if not timestamp:
             timestamp = self.generate_timestamp()
         
-        output_dir = self.get_output_directory(api_name, script_name)
+        output_dir = self.get_output_directory(api_name, script_name, timestamp)
         filename = self.generate_filename(timestamp, script_name, "clean")
         filepath = output_dir / filename
         
@@ -139,7 +150,7 @@ class DataFileManager:
         if not timestamp:
             timestamp = self.generate_timestamp()
         
-        output_dir = self.get_output_directory(api_name, script_name)
+        output_dir = self.get_output_directory(api_name, script_name, timestamp)
         filename = self.generate_filename(timestamp, script_name, "raw_data")
         filepath = output_dir / filename
         
@@ -241,17 +252,18 @@ class DataFileManager:
         Returns:
             Path to latest file or None if not found
         """
-        output_dir = self.get_output_directory(api_name, script_name)
+        # Search in the base directory for the script (not date-specific)
+        base_script_dir = self.base_output_dir / api_name / script_name
         
-        # Look for files matching the pattern
+        # Look for files matching the pattern in all YYYY/MM/DD subdirectories
         if file_type == "clean":
-            pattern = f"*_{script_name}_clean.md"
+            pattern = f"**/*_{script_name}_clean.md"
         elif file_type == "raw_data":
-            pattern = f"*_{script_name}_raw_data.json"
+            pattern = f"**/*_{script_name}_raw_data.json"
         else:
-            pattern = f"*_{script_name}_*.{file_type}"
+            pattern = f"**/*_{script_name}_*.{file_type}"
         
-        files = list(output_dir.glob(pattern))
+        files = list(base_script_dir.glob(pattern))
         
         if not files:
             return None
@@ -271,10 +283,11 @@ class DataFileManager:
         Returns:
             Dict with 'clean' and 'raw_data' file lists
         """
-        output_dir = self.get_output_directory(api_name, script_name)
+        # Search in the base directory for the script (not date-specific)
+        base_script_dir = self.base_output_dir / api_name / script_name
         
-        clean_files = list(output_dir.glob(f"*_{script_name}_clean.md"))
-        raw_files = list(output_dir.glob(f"*_{script_name}_raw_data.json"))
+        clean_files = list(base_script_dir.glob(f"**/*_{script_name}_clean.md"))
+        raw_files = list(base_script_dir.glob(f"**/*_{script_name}_raw_data.json"))
         
         return {
             'clean': [str(f) for f in sorted(clean_files, reverse=True)],
