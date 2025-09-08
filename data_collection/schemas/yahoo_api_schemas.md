@@ -15,6 +15,67 @@ This document defines the expected response structures for Yahoo Fantasy Sports 
 - 📋 **Data Storage**: Properties stored as **arrays of objects** rather than simple objects
 - 🎯 **XML Artifacts**: Contains XML-style attributes like `"xml:lang"`, `"yahoo:uri"`
 
+## 📋 **ACTUAL PROCESSED DATA STRUCTURES**
+
+**After processing by our scripts, the data is restructured for easier access:**
+
+### **1. My Roster** (`my_roster_raw_data.json`):
+```json
+{
+  "team_info": {...},
+  "roster_players": [...],  // ← Array of player objects
+  "season_context": {...},
+  "extraction_metadata": {...}
+}
+```
+
+### **2. Opponent Rosters** (`opponent_rosters_raw_data.json`):
+```json
+{
+  "league_info": {...},
+  "teams": [...],           // ← Array of team metadata
+  "rosters": {              // ← Dictionary keyed by team_key
+    "461.l.595012.t.1": {
+      "players": [...]      // ← Array of player objects
+    }
+  },
+  "season_context": {...},
+  "extraction_metadata": {...}
+}
+```
+
+### **3. Team Matchups** (`team_matchups_raw_data.json`):
+```json
+{
+  "league_info": {...},
+  "matchups": [...],        // ← Array of matchup objects
+  "season_context": {...},
+  "extraction_metadata": {...}
+}
+```
+
+### **4. Available Players** (`available_players_raw_data.json`):
+```json
+{
+  "available_players": [...], // ← Array of 1095+ player objects
+  "injury_reports": [...],
+  "whos_hot": [...],
+  "top_available": [...],
+  "season_context": {...},
+  "extraction_metadata": {...}
+}
+```
+
+### **5. Transaction Trends** (`transaction_trends_raw_data.json`):
+```json
+{
+  "transactions": [...],    // ← Array of transaction objects
+  "player_trends": {...},
+  "season_context": {...},
+  "extraction_metadata": {...}
+}
+```
+
 ### **Critical Parsing Patterns:**
 
 #### **1. List-of-Lists Structure:**
@@ -189,6 +250,44 @@ player.get('bye_weeks', {}).get('bye_week', 'N/A')  // ❌ This will fail!
 - **Performance**: 2 API calls, 0.39s execution, 0 errors
 - **Bye Weeks**: ✅ **CORRECTLY EXTRACTED** and displayed
 
+### **ACTUAL PROCESSED DATA STRUCTURE**:
+```json
+{
+  "team_info": {
+    "team_key": "461.l.595012.t.3",
+    "team_name": "birdahonkers",
+    "team_id": "3",
+    "league_key": "461.l.595012",
+    "league_name": "Fantasy League (2025)"
+  },
+  "roster_raw": "object",
+  "roster_players": [
+    {
+      "player_key": "string",
+      "player_id": "string",
+      "name": {
+        "full": "Joe Burrow",
+        "first": "Joe",
+        "last": "Burrow"
+      },
+      "display_position": "QB",
+      "editorial_team_abbr": "Cin",
+      "bye_week": "10",
+      "selected_position": "QB",
+      "selected_coverage_type": "week",
+      "selected_date": "2025-09-07"
+    }
+  ],
+  "season_context": "object",
+  "extraction_metadata": "object"
+}
+```
+
+### **CRITICAL STRUCTURE NOTES**:
+- ✅ **`roster_players`**: Array of player objects (not nested under other keys)
+- ✅ **Each player contains**: All standard player fields plus selected position data
+- ✅ **Team info**: Stored separately in `team_info` object
+
 ---
 
 ## 2. Opponent Team Rosters - `league/{league_key}/teams` + `team/{team_key}/roster`
@@ -262,6 +361,72 @@ player.get('bye_weeks', {}).get('bye_week', 'N/A')  // ❌ This will fail!
 - **Bye Weeks**: ✅ **CORRECTLY EXTRACTED** and displayed in all sections
 - **Team Discovery**: ✅ **AUTOMATIC** - Finds all teams in league
 - **Roster Parsing**: ✅ **COMPLETE** - All players with positions, status, metadata
+
+### **ACTUAL PROCESSED DATA STRUCTURE**:
+```json
+{
+  "league_info": {
+    "league_key": "461.l.595012",
+    "league_id": "595012",
+    "name": "Fantasy League (2025)",
+    "num_teams": "10",
+    "current_week": "1",
+    "season": "2025"
+  },
+  "season_context": {
+    "current_week": "1",
+    "season": "2025",
+    "season_type": "Regular"
+  },
+  "teams": [
+    {
+      "team_key": "461.l.595012.t.1",
+      "team_id": "1",
+      "name": "Sinker Conkers",
+      "url": "string",
+      "team_logos": "object",
+      "previous_season_team_rank": "string",
+      "number_of_moves": "string",
+      "number_of_trades": "string",
+      "roster_adds": "object",
+      "league_scoring_type": "string",
+      "draft_position": "string",
+      "has_draft_grade": "string",
+      "managers": "array"
+    }
+  ],
+  "rosters": {
+    "461.l.595012.t.1": {
+      "team_info": "object",
+      "players": [
+        {
+          "player_key": "string",
+          "player_id": "string",
+          "name": {
+            "full": "Patrick Mahomes",
+            "first": "Patrick",
+            "last": "Mahomes"
+          },
+          "display_position": "QB",
+          "editorial_team_abbr": "KC",
+          "bye_week": "10",
+          "selected_position": "QB",
+          "selected_coverage_type": "week",
+          "selected_date": "2025-09-07"
+        }
+      ],
+      "roster_summary": "object"
+    }
+  },
+  "extraction_metadata": "object"
+}
+```
+
+### **CRITICAL STRUCTURE NOTES**:
+- ✅ **`teams`**: Array of team metadata (names, keys, etc.)
+- ✅ **`rosters`**: Dictionary keyed by `team_key` (e.g., "461.l.595012.t.1")
+- ✅ **Each roster contains**: `team_info`, `players` array, `roster_summary`
+- ✅ **Players array**: Contains all player data for that team
 
 ---
 

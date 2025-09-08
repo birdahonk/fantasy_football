@@ -4,6 +4,65 @@
 
 This document defines the expected response structures for Sleeper NFL API endpoints. The Sleeper API is completely free with no authentication required and provides comprehensive NFL player data and trending insights.
 
+## ACTUAL PROCESSED DATA STRUCTURES
+
+### **Available Players Data Structure**
+**File**: `data_collection/outputs/sleeper/available_players/YYYY/MM/DD/YYYYMMDD_HHMMSS_available_players_raw_data.json`
+
+```json
+{
+  "extraction_metadata": {
+    "extraction_date": "2025-09-08T00:26:09.369000",
+    "script_version": "1.0",
+    "development_mode": false,
+    "player_limits": {"QB": 20, "RB": 20, "WR": 20, "TE": 20, "K": 20, "DEF": 10, "FLEX": 15}
+  },
+  "season_context": {
+    "nfl_season": 2025,
+    "current_week": 1,
+    "season_phase": "Regular Season"
+  },
+  "matched_players": [
+    {
+      "yahoo_player": {
+        "player_id": "string",
+        "name": {"full": "string", "first": "string", "last": "string"},
+        "display_position": "QB|RB|WR|TE|K|DEF",
+        "editorial_team_abbr": "string",
+        "status": "string",
+        "bye_weeks": [number]
+      },
+      "sleeper_player": {
+        "player_id": "string",
+        "first_name": "string",
+        "last_name": "string", 
+        "full_name": "string",
+        "position": "QB|RB|WR|TE|K|DEF",
+        "team": "string",
+        "age": number,
+        "years_exp": number,
+        "height": "string",
+        "weight": "string",
+        "college": "string",
+        "news_updated": "string",
+        "yahoo_id": "string"
+      },
+      "mapping": {
+        "match_method": "direct_yahoo_id|name_team_match|defense_team_match",
+        "confidence": "high|medium|low"
+      }
+    }
+  ],
+  "unmatched_players": []
+}
+```
+
+**Key Notes:**
+- **Position Filtering**: Script applies position-based limits (default: QB:20, RB:20, WR:20, TE:20, K:20, DEF:10, FLEX:15)
+- **Player Structure**: Each matched player contains both `yahoo_player` and `sleeper_player` data
+- **Position Access**: Use `player['yahoo_player']['display_position']` for position filtering
+- **Command Line Options**: Supports `--qb`, `--rb`, `--wr`, `--te`, `--k`, `--defense`, `--flex`, `--all`, `--dev` parameters
+
 ## API Details
 
 - **Base URL**: `https://api.sleeper.app/v1/`
