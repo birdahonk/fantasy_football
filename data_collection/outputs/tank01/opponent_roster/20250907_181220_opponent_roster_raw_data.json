@@ -1,0 +1,4759 @@
+{
+  "extraction_metadata": {
+    "script": "tank01_opponent_roster.py",
+    "extraction_timestamp": "2025-09-07T18:12:20.900294",
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "execution_stats": {
+      "players_processed": 15,
+      "players_matched": 13,
+      "players_unmatched": 0,
+      "api_calls": 4,
+      "errors": 2
+    }
+  },
+  "season_context": {
+    "nfl_season": "2025",
+    "current_date": "2025-09-07",
+    "season_phase": "Preseason",
+    "extraction_timestamp": "2025-09-07T18:12:03.033852-07:00",
+    "current_week": 2
+  },
+  "opponent_info": {
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "total_players": 15,
+    "matched_players": 13,
+    "unmatched_players": 0
+  },
+  "matched_players": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.31833",
+        "player_id": "31833",
+        "name": {
+          "full": "Kyler Murray",
+          "first": "Kyler",
+          "last": "Murray",
+          "ascii_first": "Kyler",
+          "ascii_last": "Murray"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/31833",
+        "editorial_player_key": "nfl.p.31833",
+        "editorial_team_key": "nfl.t.22",
+        "editorial_team_full_name": "Arizona Cardinals",
+        "editorial_team_abbr": "Ari",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/arizona/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "1",
+        "display_position": "QB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/gU8IA_u68XP_HK5v8JX0Hw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/31833.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/gU8IA_u68XP_HK5v8JX0Hw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/31833.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "QB",
+        "eligible_positions": [
+          {
+            "position": "QB"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Kyler Murray",
+        "first_name": "Kyler",
+        "last_name": "Murray",
+        "ascii_first": "Kyler",
+        "ascii_last": "Murray",
+        "selected_position": "QB",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "QB"
+        ],
+        "bye_week": "8",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/gU8IA_u68XP_HK5v8JX0Hw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/31833.png"
+      },
+      "tank01_data": {
+        "espnID": "3917315",
+        "espnName": "Kyler Murray",
+        "sleeperBotID": "5849",
+        "fantasyProsPlayerID": "18600",
+        "espnIDFull": "3917315/kyler-murray",
+        "fRefID": "MurrKy00",
+        "weight": "207",
+        "jerseyNum": "1",
+        "cbsShortName": "K. Murray",
+        "team": "ARI",
+        "yahooPlayerID": "31833",
+        "age": "28",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/3917315/kyler-murray",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/31833",
+        "bDay": "8/7/1997",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/3917315.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "kyler-murray-13613",
+        "cbsLongName": "Kyler Murray",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "1",
+        "pos": "QB",
+        "school": "Oklahoma",
+        "cbsPlayerID": "2180829",
+        "longName": "Kyler Murray",
+        "rotoWirePlayerID": "13613",
+        "height": "5'10\"",
+        "cbsPlayerIDFull": "2180829/kyler-murray",
+        "lastGamePlayed": "20250907_ARI@NO",
+        "playerID": "3917315",
+        "exp": "7",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/kyler-murray.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.1",
+          "Rushing": {
+            "rushYds": "28.0",
+            "carries": "5.3",
+            "rushTD": "0.2"
+          },
+          "Passing": {
+            "passAttempts": "31.4",
+            "passTD": "1.3",
+            "passYds": "219",
+            "int": "0.7",
+            "passCompletions": "20.4"
+          },
+          "Receiving": {
+            "receptions": "0",
+            "recTD": "0",
+            "targets": "0",
+            "recYds": "0"
+          },
+          "fumblesLost": "0.1",
+          "pos": "QB",
+          "teamID": "1",
+          "team": "ARI",
+          "longName": "Kyler Murray",
+          "playerID": "3917315",
+          "fantasyPoints": "22.32",
+          "fantasyPointsDefault": {
+            "standard": "17.26",
+            "PPR": "17.26",
+            "halfPPR": "17.26"
+          }
+        },
+        "recent_news": [
+          {
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/3917315.png",
+            "link": "https://www.azcardinals.com/news/kyler-murray-added-to-injury-report-but-still-active-for-cardinals",
+            "playerID": "3917315",
+            "title": "Murray (illness) is listed as active for Sunday's game at New Orleans, Darren Urban of the Cardinals' official site reports."
+          },
+          {
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/3917315.png",
+            "link": "https://x.com/AZCardinals/status/1964681879371894931",
+            "playerID": "3917315",
+            "title": "The Cardinals added Murray to their Week 1 injury report with an illness, though he doesn't have a designation and is on track to play Sunday in New Orleans."
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0523/r1497307_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46096687",
+            "playerID": "3917315",
+            "title": "NFL Week 1 best bets: Will the underdogs deliver?"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0826/r1537230_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46083059",
+            "playerID": "3917315",
+            "title": "Why Arizona believes returning 10 starters on offense will lead to big things"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0806/r1528349_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46064610",
+            "playerID": "3917315",
+            "title": "How Kyler Murray and Marvin Harrison Jr. have gone about getting on the same page in 2025"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20250105_SF@ARI",
+          "recent_games": [
+            {
+              "Passing": {
+                "qbr": "59.3",
+                "rtg": "128.5",
+                "sacked": "0-0",
+                "passAttempts": "35",
+                "passAvg": "6.9",
+                "passTD": "4",
+                "passYds": "242",
+                "int": "0",
+                "passCompletions": "25"
+              },
+              "Rushing": {
+                "rushAvg": "7.3",
+                "rushYds": "22",
+                "carries": "3",
+                "longRush": "9",
+                "rushTD": "0"
+              },
+              "longName": "Kyler Murray",
+              "playerID": "3917315",
+              "scoringPlays": [
+                {
+                  "score": "Greg Dortch 23 Yd pass from Kyler Murray (Chad Ryland Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "10",
+                  "awayScore": "3",
+                  "teamID": "1",
+                  "scoreDetails": "7 plays, 45 yards, 2:16",
+                  "scoreType": "TD",
+                  "scoreTime": "12:55",
+                  "team": "ARI",
+                  "playerIDs": [
+                    "3917315",
+                    "4037235",
+                    "4363538"
+                  ]
+                },
+                {
+                  "score": "Trey McBride 2 Yd pass from Kyler Murray (Chad Ryland Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "17",
+                  "awayScore": "10",
+                  "teamID": "1",
+                  "scoreDetails": "8 plays, 70 yards, 3:52",
+                  "scoreType": "TD",
+                  "scoreTime": "1:51",
+                  "team": "ARI",
+                  "playerIDs": [
+                    "3917315",
+                    "4361307",
+                    "4363538"
+                  ]
+                },
+                {
+                  "score": "Greg Dortch 2 Yd pass from Kyler Murray (Two-Point Run Conversion Failed)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "26",
+                  "awayScore": "17",
+                  "teamID": "1",
+                  "scoreDetails": "6 plays, 49 yards, 3:13",
+                  "scoreType": "TD",
+                  "scoreTime": "8:28",
+                  "team": "ARI",
+                  "playerIDs": [
+                    "3917315",
+                    "4037235"
+                  ]
+                },
+                {
+                  "score": "Marvin Harrison Jr. 12 Yd pass from Kyler Murray (Chad Ryland Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "40",
+                  "awayScore": "24",
+                  "teamID": "1",
+                  "scoreDetails": "2 plays, 39 yards, 0:51",
+                  "scoreType": "TD",
+                  "scoreTime": "5:47",
+                  "team": "ARI",
+                  "playerIDs": [
+                    "3917315",
+                    "4432708",
+                    "4363538"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.92",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "60",
+                "defSnapPct": "0.00"
+              },
+              "team": "ARI",
+              "teamAbv": "ARI",
+              "teamID": "1",
+              "gameID": "20250105_SF@ARI"
+            },
+            {
+              "Passing": {
+                "qbr": "54.5",
+                "rtg": "76.8",
+                "sacked": "4-38",
+                "passAttempts": "48",
+                "passAvg": "6.7",
+                "passTD": "1",
+                "passYds": "321",
+                "int": "2",
+                "passCompletions": "33"
+              },
+              "Rushing": {
+                "rushAvg": "8.0",
+                "rushYds": "32",
+                "carries": "4",
+                "longRush": "12",
+                "rushTD": "0"
+              },
+              "longName": "Kyler Murray",
+              "playerID": "3917315",
+              "scoringPlays": [
+                {
+                  "score": "Trey McBride 1 Yd pass from Kyler Murray (Chad Ryland PAT blocked)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "10",
+                  "awayScore": "6",
+                  "teamID": "1",
+                  "scoreDetails": "13 plays, 68 yards, 6:29",
+                  "scoreType": "TD",
+                  "scoreTime": "8:31",
+                  "team": "ARI",
+                  "playerIDs": [
+                    "3917315",
+                    "4361307",
+                    "4363538"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "1.00",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "79",
+                "defSnapPct": "0.00"
+              },
+              "team": "ARI",
+              "teamAbv": "ARI",
+              "teamID": "1",
+              "gameID": "20241228_ARI@LAR"
+            },
+            {
+              "Defense": {
+                "fumblesLost": "1",
+                "defensiveInterceptions": "0",
+                "forcedFumbles": "0",
+                "fumbles": "1",
+                "fumblesRecovered": "0"
+              },
+              "Passing": {
+                "qbr": "58.2",
+                "rtg": "77.9",
+                "sacked": "3-26",
+                "passAttempts": "32",
+                "passAvg": "6.3",
+                "passTD": "1",
+                "passYds": "202",
+                "int": "1",
+                "passCompletions": "20"
+              },
+              "Rushing": {
+                "rushAvg": "7.9",
+                "rushYds": "63",
+                "carries": "8",
+                "longRush": "20",
+                "rushTD": "1"
+              },
+              "longName": "Kyler Murray",
+              "playerID": "3917315",
+              "scoringPlays": [
+                {
+                  "score": "DeeJay Dallas 1 Yd pass from Kyler Murray (Chad Ryland Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "20",
+                  "awayScore": "17",
+                  "teamID": "1",
+                  "scoreDetails": "9 plays, 68 yards, 4:13",
+                  "scoreType": "TD",
+                  "scoreTime": "0:07",
+                  "team": "ARI",
+                  "playerIDs": [
+                    "3917315",
+                    "4240631",
+                    "4363538"
+                  ]
+                },
+                {
+                  "score": "Kyler Murray 20 Yd Rush (Chad Ryland Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "30",
+                  "awayScore": "27",
+                  "teamID": "1",
+                  "scoreDetails": "9 plays, 70 yards, 5:08",
+                  "scoreType": "TD",
+                  "scoreTime": "6:56",
+                  "team": "ARI",
+                  "playerIDs": [
+                    "3917315",
+                    "4363538"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "1.00",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "70",
+                "defSnapPct": "0.00"
+              },
+              "team": "ARI",
+              "teamAbv": "ARI",
+              "teamID": "1",
+              "gameID": "20241222_ARI@CAR"
+            }
+          ],
+          "total_games": 17
+        },
+        "depth_chart": {
+          "depth_position": "QB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 3
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "West",
+          "conference": "NFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {},
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.27581",
+        "player_id": "27581",
+        "name": {
+          "full": "Davante Adams",
+          "first": "Davante",
+          "last": "Adams",
+          "ascii_first": "Davante",
+          "ascii_last": "Adams"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/27581",
+        "editorial_player_key": "nfl.p.27581",
+        "editorial_team_key": "nfl.t.14",
+        "editorial_team_full_name": "Los Angeles Rams",
+        "editorial_team_abbr": "LAR",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/la-rams/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "17",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/Lq0buOz6WeFBtJha4zFsjQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/27581.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/Lq0buOz6WeFBtJha4zFsjQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/27581.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Davante Adams",
+        "first_name": "Davante",
+        "last_name": "Adams",
+        "ascii_first": "Davante",
+        "ascii_last": "Adams",
+        "selected_position": "WR",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "WR",
+          "W/R/T"
+        ],
+        "bye_week": "8",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/Lq0buOz6WeFBtJha4zFsjQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/27581.png"
+      },
+      "tank01_data": {
+        "espnID": "16800",
+        "espnName": "Davante Adams",
+        "sleeperBotID": "2133",
+        "fantasyProsPlayerID": "12123",
+        "espnIDFull": "16800/davante-adams",
+        "fRefID": "AdamDa01",
+        "weight": "215",
+        "jerseyNum": "17",
+        "cbsShortName": "D. Adams",
+        "team": "LAR",
+        "yahooPlayerID": "27581",
+        "age": "32",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/16800/davante-adams",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/27581",
+        "bDay": "12/24/1992",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/16800.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "davante-adams-9455",
+        "cbsLongName": "Davante Adams",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "19",
+        "pos": "WR",
+        "school": "Fresno State",
+        "cbsPlayerID": "1893167",
+        "longName": "Davante Adams",
+        "rotoWirePlayerID": "9455",
+        "height": "6'1\"",
+        "cbsPlayerIDFull": "1893167/davante-adams",
+        "lastGamePlayed": "20250907_HOU@LAR",
+        "playerID": "16800",
+        "exp": "12",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/davante-adams.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "0",
+            "carries": "0",
+            "rushTD": "0"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "5.1",
+            "recTD": "0.5",
+            "targets": "8.6",
+            "recYds": "67.5"
+          },
+          "fumblesLost": "0.0",
+          "pos": "WR",
+          "teamID": "19",
+          "team": "LAR",
+          "longName": "Davante Adams",
+          "playerID": "16800",
+          "fantasyPoints": "15.71",
+          "fantasyPointsDefault": {
+            "standard": "9.75",
+            "PPR": "14.85",
+            "halfPPR": "12.3"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "16800",
+            "link": "https://www.espn.com/nfl/story/_/id/45913415",
+            "image": "https://a.espncdn.com/photo/2025/0806/r1528497_1296x518_5-2.jpg",
+            "title": "EA Sports reveals top 10 wide receivers in Madden NFL 26"
+          },
+          {
+            "playerID": "16800",
+            "link": "https://www.espn.com/nfl/story/_/id/45787796",
+            "image": "https://a.espncdn.com/photo/2025/0709/r1516945_1296x518_5-2.jpg",
+            "title": "We ranked the 50 most impactful NFL offseason moves, from Davante Adams to Russell Wilson"
+          },
+          {
+            "playerID": "16800",
+            "link": "https://www.espn.com/nfl/story/_/id/45756452",
+            "image": "https://a.espncdn.com/photo/2024/1230/r1433198_1296x518_5-2.jpg",
+            "title": "Los Angeles Rams 2025 training camp preview: A post-Cooper Kupp era"
+          },
+          {
+            "playerID": "16800",
+            "link": "https://www.espn.com/nfl/story/_/id/45748000",
+            "image": "https://a.espncdn.com/photo/2025/0715/r1519479_1296x518_5-2.jpg",
+            "title": "Fantasy football: From Chase to London, ranking the most reliable TD scorers among WRs"
+          },
+          {
+            "playerID": "16800",
+            "link": "https://x.com/AdamGrosbard/status/1932567131155280236",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/16800.png",
+            "title": "Adams said Tuesday that he feels rejuvenated with the Rams, Adam Grosbard of The Orange County Register reports."
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20250105_MIA@NYJ",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "6",
+                "recTD": "1",
+                "longRec": "30",
+                "targets": "12",
+                "recYds": "88",
+                "recAvg": "14.7"
+              },
+              "longName": "Davante Adams",
+              "playerID": "16800",
+              "scoringPlays": [
+                {
+                  "score": "Davante Adams 4 Yd pass from Aaron Rodgers (Greg Joseph Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "25",
+                  "awayScore": "13",
+                  "teamID": "25",
+                  "scoreDetails": "7 plays, 70 yards, 3:48",
+                  "scoreType": "TD",
+                  "scoreTime": "10:24",
+                  "team": "NYJ",
+                  "playerIDs": [
+                    "8439",
+                    "16800",
+                    "3975763"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.92",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "59",
+                "defSnapPct": "0.00"
+              },
+              "team": "NYJ",
+              "teamAbv": "NYJ",
+              "teamID": "25",
+              "gameID": "20250105_MIA@NYJ"
+            },
+            {
+              "Receiving": {
+                "receptions": "5",
+                "recTD": "0",
+                "longRec": "22",
+                "targets": "8",
+                "recYds": "47",
+                "recAvg": "9.4"
+              },
+              "longName": "Davante Adams",
+              "playerID": "16800",
+              "snapCounts": {
+                "offSnapPct": "0.76",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "48",
+                "defSnapPct": "0.00"
+              },
+              "team": "NYJ",
+              "teamAbv": "NYJ",
+              "teamID": "25",
+              "gameID": "20241229_NYJ@BUF"
+            },
+            {
+              "Receiving": {
+                "receptions": "7",
+                "recTD": "1",
+                "longRec": "13",
+                "targets": "13",
+                "recYds": "68",
+                "recAvg": "9.7"
+              },
+              "longName": "Davante Adams",
+              "playerID": "16800",
+              "scoringPlays": [
+                {
+                  "score": "Davante Adams 11 Yd pass from Aaron Rodgers (Anders Carlson PAT Failed)",
+                  "scorePeriod": "Q1",
+                  "homeScore": "6",
+                  "awayScore": "0",
+                  "teamID": "25",
+                  "scoreDetails": "14 plays, 99 yards, 8:22",
+                  "scoreType": "TD",
+                  "scoreTime": "0:23",
+                  "team": "NYJ",
+                  "playerIDs": [
+                    "8439",
+                    "16800",
+                    "4242519"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.97",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "67",
+                "defSnapPct": "0.00"
+              },
+              "team": "NYJ",
+              "teamAbv": "NYJ",
+              "teamID": "25",
+              "gameID": "20241222_LAR@NYJ"
+            }
+          ],
+          "total_games": 14
+        },
+        "depth_chart": {
+          "depth_position": "WR2",
+          "depth_rank": 2,
+          "opportunity": "High",
+          "total_at_position": 7
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "West",
+          "conference": "NFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {},
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41793",
+        "player_id": "41793",
+        "name": {
+          "full": "Tetairoa McMillan",
+          "first": "Tetairoa",
+          "last": "McMillan",
+          "ascii_first": "Tetairoa",
+          "ascii_last": "McMillan"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/41793",
+        "editorial_player_key": "nfl.p.41793",
+        "editorial_team_key": "nfl.t.29",
+        "editorial_team_full_name": "Carolina Panthers",
+        "editorial_team_abbr": "Car",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/carolina/",
+        "bye_weeks": {
+          "week": "14"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "4",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/2vcf3NUsYjm_FWkOjgjO5A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07282025/41793.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/2vcf3NUsYjm_FWkOjgjO5A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07282025/41793.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "player_notes_last_timestamp": 1756929178,
+        "full_name": "Tetairoa McMillan",
+        "first_name": "Tetairoa",
+        "last_name": "McMillan",
+        "ascii_first": "Tetairoa",
+        "ascii_last": "McMillan",
+        "selected_position": "WR",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "WR",
+          "W/R/T"
+        ],
+        "bye_week": "14",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/2vcf3NUsYjm_FWkOjgjO5A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/07282025/41793.png"
+      },
+      "tank01_data": {
+        "espnID": "4685472",
+        "espnName": "Tetairoa McMillan",
+        "sleeperBotID": "12526",
+        "fantasyProsPlayerID": "25417",
+        "espnIDFull": "4685472/tetairoa-mcmillan",
+        "fRefID": "McMiTe00",
+        "weight": "212",
+        "jerseyNum": "4",
+        "cbsShortName": "T. McMillan",
+        "team": "CAR",
+        "yahooPlayerID": "41793",
+        "age": "22",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4685472/tetairoa-mcmillan",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/41793",
+        "bDay": "4/5/2003",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4685472.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "tetairoa-mcmillan-18547",
+        "cbsLongName": "Tetairoa McMillan",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "5",
+        "pos": "WR",
+        "school": "Arizona",
+        "cbsPlayerID": "28877124",
+        "longName": "Tetairoa McMillan",
+        "rotoWirePlayerID": "18547",
+        "height": "6'5\"",
+        "cbsPlayerIDFull": "28877124/tetairoa-mcmillan",
+        "lastGamePlayed": "20250907_CAR@JAX",
+        "playerID": "4685472",
+        "exp": "R",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/tetairoa-mcmillan.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "0.4",
+            "carries": "0.1",
+            "rushTD": "0.0"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "6.6",
+            "recTD": "0.3",
+            "targets": "12.6",
+            "recYds": "66.1"
+          },
+          "fumblesLost": "0.0",
+          "pos": "WR",
+          "teamID": "5",
+          "team": "CAR",
+          "longName": "Tetairoa McMillan",
+          "playerID": "4685472",
+          "fantasyPoints": "16.33",
+          "fantasyPointsDefault": {
+            "standard": "8.45",
+            "PPR": "15.05",
+            "halfPPR": "11.75"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4685472",
+            "link": "https://www.espn.com/nfl/story/_/id/46158016",
+            "image": "https://a.espncdn.com/photo/2025/0904/r1541006_1296x518_5-2.jpg",
+            "title": "'We've got a great leader': Panthers counting on Bryce Young to step up in Year 3"
+          },
+          {
+            "playerID": "4685472",
+            "link": "https://www.panthers.com/team/injury-report/",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4685472.png",
+            "title": "McMillan (hamstring) wasn't listed on the Panthers' first Week 1 injury report Wednesday."
+          },
+          {
+            "playerID": "4685472",
+            "link": "https://www.espn.com/nfl/story/_/id/46136528",
+            "image": "https://a.espncdn.com/photo/2025/0903/r1540438_1296x518_5-2.jpg",
+            "title": "Bowen: The 11 biggest questions heading into fantasy Week 1"
+          },
+          {
+            "playerID": "4685472",
+            "link": "https://www.espn.com/nfl/story/_/id/45979912",
+            "image": "https://a.espncdn.com/photo/2025/0828/r1537981_1296x518_5-2.jpg",
+            "title": "Guide to the NFL's rookie class: Who is flying under the radar? Who will win OROY, DROY?"
+          },
+          {
+            "playerID": "4685472",
+            "link": "https://www.espn.com/nfl/story/_/id/46081297",
+            "image": "https://a.espncdn.com/photo/2025/0828/r1537903_1296x518_5-2.jpg",
+            "title": "Liz Loza's draft rules (there are none!), five players to pick and two to fade"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "N/A",
+          "recent_games": [],
+          "total_games": 0
+        },
+        "depth_chart": {
+          "depth_position": "WR1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 9
+        },
+        "team_context": {
+          "team_performance": "0-1",
+          "division": "South",
+          "conference": "NFC",
+          "fantasy_outlook": "Challenging",
+          "top_performers": {},
+          "current_streak": {
+            "result": "L",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.30972",
+        "player_id": "30972",
+        "name": {
+          "full": "Saquon Barkley",
+          "first": "Saquon",
+          "last": "Barkley",
+          "ascii_first": "Saquon",
+          "ascii_last": "Barkley"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/30972",
+        "editorial_player_key": "nfl.p.30972",
+        "editorial_team_key": "nfl.t.21",
+        "editorial_team_full_name": "Philadelphia Eagles",
+        "editorial_team_abbr": "Phi",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/philadelphia/",
+        "bye_weeks": {
+          "week": "9"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "26",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/gJ8KBLiyKMA4G7nQ4BDZnw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08062025/30972.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/gJ8KBLiyKMA4G7nQ4BDZnw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08062025/30972.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "has_recent_player_notes": 1,
+        "player_notes_last_timestamp": 1757047396,
+        "full_name": "Saquon Barkley",
+        "first_name": "Saquon",
+        "last_name": "Barkley",
+        "ascii_first": "Saquon",
+        "ascii_last": "Barkley",
+        "selected_position": "RB",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "9",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/gJ8KBLiyKMA4G7nQ4BDZnw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08062025/30972.png"
+      },
+      "tank01_data": {
+        "espnID": "3929630",
+        "espnName": "Saquon Barkley",
+        "sleeperBotID": "4866",
+        "fantasyProsPlayerID": "17240",
+        "espnIDFull": "3929630/saquon-barkley",
+        "fRefID": "BarkSa00",
+        "weight": "233",
+        "jerseyNum": "26",
+        "team": "PHI",
+        "yahooPlayerID": "30972",
+        "age": "28",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/3929630/saquon-barkley",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/30972",
+        "bDay": "2/9/1997",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/3929630.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "saquon-barkley-12507",
+        "cbsLongName": "Saquon Barkley",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "27",
+        "pos": "RB",
+        "school": "Penn State",
+        "cbsPlayerID": "2185957",
+        "longName": "Saquon Barkley",
+        "rotoWirePlayerID": "12507",
+        "height": "6'0\"",
+        "cbsPlayerIDFull": "2185957/saquon-barkley/",
+        "lastGamePlayed": "20250904_DAL@PHI",
+        "playerID": "3929630",
+        "exp": "8",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/saquon-barkley.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "105",
+            "carries": "21.1",
+            "rushTD": "0.8"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "1.9",
+            "recTD": "0.1",
+            "targets": "2.4",
+            "recYds": "14.3"
+          },
+          "fumblesLost": "0.1",
+          "pos": "RB",
+          "teamID": "27",
+          "team": "PHI",
+          "longName": "Saquon Barkley",
+          "playerID": "3929630",
+          "fantasyPoints": "23.49",
+          "fantasyPointsDefault": {
+            "standard": "17.13",
+            "PPR": "19.03",
+            "halfPPR": "18.08"
+          }
+        },
+        "recent_news": [
+          {
+            "image": "https://a.espncdn.com/photo/2025/0903/r1540488_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46139913",
+            "playerID": "3929630",
+            "title": "What will Saquon Barkley do for an Eagles encore?"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0902/r1540167_480x192_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46138948",
+            "playerID": "3929630",
+            "title": "NFL award winners to wear 'Gold Shield' patches"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0710/r1484270_2_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/34096853",
+            "playerID": "3929630",
+            "title": "The NFL's highest-paid players at every position: Here's who makes the most money, from QB to punter"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0731/250801_nfl_dont-draft-list_5x2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45862352",
+            "playerID": "3929630",
+            "title": "Do Not Draft list: McCaffrey, Andrews among players being overvalued"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0821/r1534819_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46037366",
+            "playerID": "3929630",
+            "title": "Tough draft-day decisions: Can you pick a top-5 QB and top-3 TE and like your team?"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20250209_KC@PHI",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "6",
+                "recTD": "0",
+                "longRec": "22",
+                "targets": "7",
+                "recYds": "40",
+                "recAvg": "6.7"
+              },
+              "Rushing": {
+                "rushAvg": "2.3",
+                "rushYds": "57",
+                "carries": "25",
+                "longRush": "10",
+                "rushTD": "0"
+              },
+              "longName": "Saquon Barkley",
+              "playerID": "3929630",
+              "snapCounts": {
+                "offSnapPct": "0.81",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "60",
+                "defSnapPct": "0.00"
+              },
+              "team": "PHI",
+              "teamAbv": "PHI",
+              "teamID": "27",
+              "gameID": "20250209_KC@PHI"
+            },
+            {
+              "Receiving": {
+                "receptions": "1",
+                "recTD": "0",
+                "longRec": "4",
+                "targets": "2",
+                "recYds": "4",
+                "recAvg": "4.0"
+              },
+              "Rushing": {
+                "rushAvg": "7.9",
+                "rushYds": "118",
+                "carries": "15",
+                "longRush": "60",
+                "rushTD": "3"
+              },
+              "longName": "Saquon Barkley",
+              "playerID": "3929630",
+              "scoringPlays": [
+                {
+                  "score": "Saquon Barkley 60 Yd Rush (Jake Elliott Kick)",
+                  "scorePeriod": "Q1",
+                  "homeScore": "7",
+                  "awayScore": "3",
+                  "teamID": "27",
+                  "scoreDetails": "1 play, 60 yards, 0:18",
+                  "scoreType": "TD",
+                  "scoreTime": "7:39",
+                  "team": "PHI",
+                  "playerIDs": [
+                    "3929630",
+                    "3050478"
+                  ]
+                },
+                {
+                  "score": "Saquon Barkley 4 Yd Rush (Jake Elliott Kick)",
+                  "scorePeriod": "Q1",
+                  "homeScore": "14",
+                  "awayScore": "3",
+                  "teamID": "27",
+                  "scoreDetails": "6 plays, 48 yards, 2:02",
+                  "scoreType": "TD",
+                  "scoreTime": "3:43",
+                  "team": "PHI",
+                  "playerIDs": [
+                    "3929630",
+                    "3050478"
+                  ]
+                },
+                {
+                  "score": "Saquon Barkley 4 Yd Rush (Jake Elliott Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "48",
+                  "awayScore": "23",
+                  "teamID": "27",
+                  "scoreDetails": "4 plays, 31 yards, 2:21",
+                  "scoreType": "TD",
+                  "scoreTime": "7:58",
+                  "team": "PHI",
+                  "playerIDs": [
+                    "3929630",
+                    "3050478"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.73",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "52",
+                "defSnapPct": "0.00"
+              },
+              "team": "PHI",
+              "teamAbv": "PHI",
+              "teamID": "27",
+              "gameID": "20250126_WSH@PHI"
+            },
+            {
+              "Receiving": {
+                "receptions": "4",
+                "recTD": "0",
+                "longRec": "16",
+                "targets": "4",
+                "recYds": "27",
+                "recAvg": "6.8"
+              },
+              "Rushing": {
+                "rushAvg": "7.9",
+                "rushYds": "205",
+                "carries": "26",
+                "longRush": "78",
+                "rushTD": "2"
+              },
+              "longName": "Saquon Barkley",
+              "playerID": "3929630",
+              "scoringPlays": [
+                {
+                  "score": "Saquon Barkley 62 Yd Rush (Jake Elliott Kick)",
+                  "scorePeriod": "Q1",
+                  "homeScore": "13",
+                  "awayScore": "7",
+                  "teamID": "27",
+                  "scoreDetails": "3 plays, 83 yards, 1:34",
+                  "scoreType": "TD",
+                  "scoreTime": "1:07",
+                  "team": "PHI",
+                  "playerIDs": [
+                    "3929630",
+                    "3050478"
+                  ]
+                },
+                {
+                  "score": "Saquon Barkley 78 Yd Rush (Jake Elliott PAT Failed)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "28",
+                  "awayScore": "15",
+                  "teamID": "27",
+                  "scoreDetails": "1 play, 78 yards, 0:11",
+                  "scoreType": "TD",
+                  "scoreTime": "4:36",
+                  "team": "PHI",
+                  "playerIDs": [
+                    "3929630",
+                    "3050478"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.90",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "57",
+                "defSnapPct": "0.00"
+              },
+              "team": "PHI",
+              "teamAbv": "PHI",
+              "teamID": "27",
+              "gameID": "20250119_LAR@PHI"
+            }
+          ],
+          "total_games": 20
+        },
+        "depth_chart": {
+          "depth_position": "RB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 4
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "East",
+          "conference": "NFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {
+            "Rushing": {
+              "rushYds": {
+                "total": "62",
+                "playerID": [
+                  "4040715"
+                ]
+              },
+              "rushingTwoPointConversion": {
+                "total": "0",
+                "playerID": [
+                  "4040715",
+                  "4239934",
+                  "3929630",
+                  "4431545"
+                ]
+              },
+              "carries": {
+                "total": "18",
+                "playerID": [
+                  "3929630"
+                ]
+              },
+              "rushTD": {
+                "total": "2",
+                "playerID": [
+                  "4040715"
+                ]
+              }
+            },
+            "Kicking": {
+              "fgAttempts": {
+                "total": "1",
+                "playerID": [
+                  "3050478"
+                ]
+              },
+              "fgMade": {
+                "total": "1",
+                "playerID": [
+                  "3050478"
+                ]
+              },
+              "xpMade": {
+                "total": "3",
+                "playerID": [
+                  "3050478"
+                ]
+              },
+              "fgYds": {
+                "total": "0",
+                "playerID": [
+                  "3050478"
+                ]
+              },
+              "kickYards": {
+                "total": "0",
+                "playerID": [
+                  "3050478"
+                ]
+              },
+              "xpAttempts": {
+                "total": "3",
+                "playerID": [
+                  "3050478"
+                ]
+              }
+            },
+            "Passing": {
+              "passAttempts": {
+                "total": "23",
+                "playerID": [
+                  "4040715"
+                ]
+              },
+              "passTD": {
+                "total": "0",
+                "playerID": [
+                  "4040715"
+                ]
+              },
+              "passYds": {
+                "total": "152",
+                "playerID": [
+                  "4040715"
+                ]
+              },
+              "int": {
+                "total": "0",
+                "playerID": [
+                  "4040715"
+                ]
+              },
+              "passingTwoPointConversion": {
+                "total": "0",
+                "playerID": [
+                  "4040715"
+                ]
+              },
+              "passCompletions": {
+                "total": "19",
+                "playerID": [
+                  "4040715"
+                ]
+              }
+            },
+            "Punting": {
+              "puntYds": {
+                "total": "146",
+                "playerID": [
+                  "4035239"
+                ]
+              },
+              "punts": {
+                "total": "3",
+                "playerID": [
+                  "4035239"
+                ]
+              },
+              "puntsin20": {
+                "total": "2",
+                "playerID": [
+                  "4035239"
+                ]
+              },
+              "puntTouchBacks": {
+                "total": "0",
+                "playerID": [
+                  "4035239"
+                ]
+              }
+            },
+            "Receiving": {
+              "receivingTwoPointConversion": {
+                "total": "0",
+                "playerID": [
+                  "4039160",
+                  "4241478",
+                  "3929630",
+                  "4361409",
+                  "3121023",
+                  "4047646"
+                ]
+              },
+              "receptions": {
+                "total": "7",
+                "playerID": [
+                  "3121023"
+                ]
+              },
+              "recTD": {
+                "total": "0",
+                "playerID": [
+                  "4039160",
+                  "4241478",
+                  "3929630",
+                  "4361409",
+                  "3121023",
+                  "4047646"
+                ]
+              },
+              "targets": {
+                "total": "7",
+                "playerID": [
+                  "3121023"
+                ]
+              },
+              "recYds": {
+                "total": "59",
+                "playerID": [
+                  "4361409"
+                ]
+              }
+            },
+            "Defense": {
+              "totalTackles": {
+                "total": "9",
+                "playerID": [
+                  "3917657"
+                ]
+              },
+              "fumblesLost": {
+                "total": "0",
+                "playerID": [
+                  "4686911",
+                  "4360386",
+                  "3120347",
+                  "4686273",
+                  "4381558",
+                  "4039160",
+                  "3917657",
+                  "4602197",
+                  "4567123",
+                  "4685287",
+                  "4567096",
+                  "4426331",
+                  "4046528",
+                  "4571162",
+                  "4362116",
+                  "4243956",
+                  "4682618",
+                  "4432777"
+                ]
+              },
+              "defTD": {
+                "total": "0",
+                "playerID": [
+                  "4686911",
+                  "4360386",
+                  "3120347",
+                  "4686273",
+                  "4381558",
+                  "4039160",
+                  "3917657",
+                  "4602197",
+                  "4567123",
+                  "4685287",
+                  "4567096",
+                  "4426331",
+                  "4046528",
+                  "4571162",
+                  "4362116",
+                  "4243956",
+                  "4682618",
+                  "4432777"
+                ]
+              },
+              "fumbles": {
+                "total": "0",
+                "playerID": [
+                  "4686911",
+                  "4360386",
+                  "3120347",
+                  "4686273",
+                  "4381558",
+                  "4039160",
+                  "3917657",
+                  "4602197",
+                  "4567123",
+                  "4685287",
+                  "4567096",
+                  "4426331",
+                  "4046528",
+                  "4571162",
+                  "4362116",
+                  "4243956",
+                  "4682618",
+                  "4432777"
+                ]
+              },
+              "fumblesRecovered": {
+                "total": "1",
+                "playerID": [
+                  "4686273"
+                ]
+              },
+              "twoPointConversionReturn": {
+                "total": "0",
+                "playerID": [
+                  "4686911",
+                  "4360386",
+                  "3120347",
+                  "4686273",
+                  "4381558",
+                  "4039160",
+                  "3917657",
+                  "4602197",
+                  "4567123",
+                  "4685287",
+                  "4567096",
+                  "4426331",
+                  "4046528",
+                  "4571162",
+                  "4362116",
+                  "4243956",
+                  "4682618",
+                  "4432777"
+                ]
+              },
+              "soloTackles": {
+                "total": "6",
+                "playerID": [
+                  "3917657"
+                ]
+              },
+              "defensiveInterceptions": {
+                "total": "0",
+                "playerID": [
+                  "4686911",
+                  "4360386",
+                  "3120347",
+                  "4686273",
+                  "4381558",
+                  "4039160",
+                  "3917657",
+                  "4602197",
+                  "4567123",
+                  "4685287",
+                  "4567096",
+                  "4426331",
+                  "4046528",
+                  "4571162",
+                  "4362116",
+                  "4243956",
+                  "4682618",
+                  "4432777"
+                ]
+              },
+              "qbHits": {
+                "total": "1",
+                "playerID": [
+                  "4362116"
+                ]
+              },
+              "tfl": {
+                "total": "1",
+                "playerID": [
+                  "4381558",
+                  "3917657",
+                  "4571162"
+                ]
+              },
+              "passDeflections": {
+                "total": "1",
+                "playerID": [
+                  "3120347",
+                  "4686273",
+                  "4381558",
+                  "3917657",
+                  "4685287",
+                  "4682618"
+                ]
+              },
+              "sacks": {
+                "total": "0",
+                "playerID": [
+                  "4686911",
+                  "4360386",
+                  "3120347",
+                  "4686273",
+                  "4381558",
+                  "4039160",
+                  "3917657",
+                  "4602197",
+                  "4567123",
+                  "4685287",
+                  "4567096",
+                  "4426331",
+                  "4046528",
+                  "4571162",
+                  "4362116",
+                  "4243956",
+                  "4682618",
+                  "4432777"
+                ]
+              }
+            }
+          },
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.32711",
+        "player_id": "32711",
+        "name": {
+          "full": "Jonathan Taylor",
+          "first": "Jonathan",
+          "last": "Taylor",
+          "ascii_first": "Jonathan",
+          "ascii_last": "Taylor"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/32711",
+        "editorial_player_key": "nfl.p.32711",
+        "editorial_team_key": "nfl.t.11",
+        "editorial_team_full_name": "Indianapolis Colts",
+        "editorial_team_abbr": "Ind",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/indianapolis/",
+        "bye_weeks": {
+          "week": "11"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "28",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/8eNYEWCS9awvVo_gEdfUqw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/32711.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/8eNYEWCS9awvVo_gEdfUqw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/32711.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Jonathan Taylor",
+        "first_name": "Jonathan",
+        "last_name": "Taylor",
+        "ascii_first": "Jonathan",
+        "ascii_last": "Taylor",
+        "selected_position": "RB",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "11",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/8eNYEWCS9awvVo_gEdfUqw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/32711.png"
+      },
+      "tank01_data": {
+        "espnID": "4242335",
+        "espnName": "Jonathan Taylor",
+        "sleeperBotID": "6813",
+        "fantasyProsPlayerID": "19217",
+        "espnIDFull": "4242335/jonathan-taylor",
+        "fRefID": "TaylJo02",
+        "weight": "226",
+        "jerseyNum": "28",
+        "cbsShortName": "J. Taylor",
+        "team": "IND",
+        "yahooPlayerID": "32711",
+        "age": "26",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4242335/jonathan-taylor",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/32711",
+        "bDay": "1/19/1999",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4242335.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "jonathan-taylor-14455",
+        "cbsLongName": "Jonathan Taylor",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "14",
+        "pos": "RB",
+        "school": "Wisconsin",
+        "cbsPlayerID": "2866395",
+        "longName": "Jonathan Taylor",
+        "rotoWirePlayerID": "14455",
+        "height": "5'10\"",
+        "cbsPlayerIDFull": "2866395/jonathan-taylor",
+        "lastGamePlayed": "20250907_MIA@IND",
+        "playerID": "4242335",
+        "exp": "6",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/jonathan-taylor.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "90.6",
+            "carries": "19.9",
+            "rushTD": "0.8"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "2.0",
+            "recTD": "0.1",
+            "targets": "2.7",
+            "recYds": "14.4"
+          },
+          "fumblesLost": "0.1",
+          "pos": "RB",
+          "teamID": "14",
+          "team": "IND",
+          "longName": "Jonathan Taylor",
+          "playerID": "4242335",
+          "fantasyPoints": "21.95",
+          "fantasyPointsDefault": {
+            "standard": "15.7",
+            "PPR": "17.7",
+            "halfPPR": "16.7"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4242335",
+            "link": "https://www.espn.com/nfl/story/_/id/46040816",
+            "image": "https://a.espncdn.com/photo/2025/0826/r1536919_1296x518_5-2.jpg",
+            "title": "NFL betting: Why Jayden Daniels and Drake Maye will beat player futures projections"
+          },
+          {
+            "playerID": "4242335",
+            "link": "https://www.espn.com/nfl/story/_/id/46068455",
+            "image": "https://a.espncdn.com/photo/2025/0826/r1536390_2_1296x518_5-2.jpg",
+            "title": "Bo Nix, Calvin Ridley among Eric Moody's top draft targets"
+          },
+          {
+            "playerID": "4242335",
+            "link": "https://www.espn.com/nfl/story/_/id/45944596",
+            "image": "https://a.espncdn.com/photo/2025/0815/fan_mike_clay_ultimate_draft_board_5x2.jpg",
+            "title": "Ultimate Draft Board: Perfect picks for every round in a 12-team league"
+          },
+          {
+            "playerID": "4242335",
+            "link": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-preseason-week-2-game-vs-green-bay-packers",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4242335.png",
+            "title": "After not seeing any action in the Colts' preseason opener, Taylor is a candidate to log snaps Saturday against the Packers,  Amanda Foster of the Colts' official site reports."
+          },
+          {
+            "playerID": "4242335",
+            "link": "https://x.com/HolderStephen/status/1953583975752249685",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4242335.png",
+            "title": "Taylor is not in line to play in Thursday's preseason opener against the Ravens, Stephen Holder of ESPN.com reports."
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20250105_JAX@IND",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "1",
+                "recTD": "0",
+                "longRec": "3",
+                "targets": "2",
+                "recYds": "3",
+                "recAvg": "3.0"
+              },
+              "Rushing": {
+                "rushAvg": "5.2",
+                "rushYds": "177",
+                "carries": "34",
+                "longRush": "17",
+                "rushTD": "1"
+              },
+              "longName": "Jonathan Taylor",
+              "playerID": "4242335",
+              "scoringPlays": [
+                {
+                  "score": "Jonathan Taylor 6 Yd Rush (Matt Gay Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "14",
+                  "awayScore": "10",
+                  "teamID": "14",
+                  "scoreDetails": "8 plays, 70 yards, 4:45",
+                  "scoreType": "TD",
+                  "scoreTime": "9:32",
+                  "team": "IND",
+                  "playerIDs": [
+                    "4242335",
+                    "4249087"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.72",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "56",
+                "defSnapPct": "0.00"
+              },
+              "team": "IND",
+              "teamAbv": "IND",
+              "teamID": "14",
+              "gameID": "20250105_JAX@IND"
+            },
+            {
+              "Receiving": {
+                "receptions": "2",
+                "recTD": "0",
+                "longRec": "7",
+                "targets": "4",
+                "recYds": "11",
+                "recAvg": "5.5"
+              },
+              "Rushing": {
+                "rushAvg": "3.9",
+                "rushYds": "125",
+                "carries": "32",
+                "longRush": "26",
+                "rushTD": "2"
+              },
+              "longName": "Jonathan Taylor",
+              "playerID": "4242335",
+              "scoringPlays": [
+                {
+                  "score": "Jonathan Taylor 3 Yd Rush (Matt Gay Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "21",
+                  "awayScore": "13",
+                  "teamID": "14",
+                  "scoreDetails": "14 plays, 70 yards, 5:35",
+                  "scoreType": "TD",
+                  "scoreTime": "0:20",
+                  "team": "IND",
+                  "playerIDs": [
+                    "4242335",
+                    "4249087"
+                  ]
+                },
+                {
+                  "score": "Jonathan Taylor 26 Yd Rush (Matt Gay Kick)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "28",
+                  "awayScore": "20",
+                  "teamID": "14",
+                  "scoreDetails": "7 plays, 70 yards, 3:45",
+                  "scoreType": "TD",
+                  "scoreTime": "11:03",
+                  "team": "IND",
+                  "playerIDs": [
+                    "4242335",
+                    "4249087"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.88",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "68",
+                "defSnapPct": "0.00"
+              },
+              "team": "IND",
+              "teamAbv": "IND",
+              "teamID": "14",
+              "gameID": "20241229_IND@NYG"
+            },
+            {
+              "Rushing": {
+                "rushAvg": "7.5",
+                "rushYds": "218",
+                "carries": "29",
+                "longRush": "70",
+                "rushTD": "3"
+              },
+              "longName": "Jonathan Taylor",
+              "playerID": "4242335",
+              "scoringPlays": [
+                {
+                  "score": "Jonathan Taylor 65 Yd Rush (Matt Gay Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "14",
+                  "awayScore": "7",
+                  "teamID": "14",
+                  "scoreDetails": "4 plays, 80 yards, 2:10",
+                  "scoreType": "TD",
+                  "scoreTime": "7:25",
+                  "team": "IND",
+                  "playerIDs": [
+                    "4242335",
+                    "4249087"
+                  ]
+                },
+                {
+                  "score": "Jonathan Taylor 70 Yd Rush (Matt Gay Kick)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "31",
+                  "awayScore": "7",
+                  "teamID": "14",
+                  "scoreDetails": "1 play, 70 yards, 0:18",
+                  "scoreType": "TD",
+                  "scoreTime": "14:42",
+                  "team": "IND",
+                  "playerIDs": [
+                    "4242335",
+                    "4249087"
+                  ]
+                },
+                {
+                  "score": "Jonathan Taylor 1 Yd Rush (Matt Gay Kick)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "38",
+                  "awayScore": "7",
+                  "teamID": "14",
+                  "scoreDetails": "4 plays, 40 yards, 1:43",
+                  "scoreType": "TD",
+                  "scoreTime": "6:50",
+                  "team": "IND",
+                  "playerIDs": [
+                    "4242335",
+                    "4249087"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.76",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "47",
+                "defSnapPct": "0.00"
+              },
+              "team": "IND",
+              "teamAbv": "IND",
+              "teamID": "14",
+              "gameID": "20241222_TEN@IND"
+            }
+          ],
+          "total_games": 16
+        },
+        "depth_chart": {
+          "depth_position": "RB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 3
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "South",
+          "conference": "AFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {},
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.40878",
+        "player_id": "40878",
+        "name": {
+          "full": "Brock Bowers",
+          "first": "Brock",
+          "last": "Bowers",
+          "ascii_first": "Brock",
+          "ascii_last": "Bowers"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/40878",
+        "editorial_player_key": "nfl.p.40878",
+        "editorial_team_key": "nfl.t.13",
+        "editorial_team_full_name": "Las Vegas Raiders",
+        "editorial_team_abbr": "LV",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/las-vegas/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "89",
+        "display_position": "TE",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/5wVhLYIcCZJlywOkUH1Q7g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/40878.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/5wVhLYIcCZJlywOkUH1Q7g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/40878.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "TE",
+        "eligible_positions": [
+          {
+            "position": "TE"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Brock Bowers",
+        "first_name": "Brock",
+        "last_name": "Bowers",
+        "ascii_first": "Brock",
+        "ascii_last": "Bowers",
+        "selected_position": "TE",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "TE",
+          "W/R/T"
+        ],
+        "bye_week": "8",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/5wVhLYIcCZJlywOkUH1Q7g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/40878.png"
+      },
+      "tank01_data": {
+        "espnID": "4432665",
+        "espnName": "Brock Bowers",
+        "sleeperBotID": "11604",
+        "fantasyProsPlayerID": "22955",
+        "espnIDFull": "4432665/brock-bowers",
+        "fRefID": "BoweBr01",
+        "weight": "235",
+        "jerseyNum": "89",
+        "team": "LV",
+        "yahooPlayerID": "40878",
+        "age": "22",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4432665/brock-bowers",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/40878",
+        "bDay": "12/13/2002",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4432665.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "brock-bowers-17693",
+        "cbsLongName": "Brock Bowers",
+        "injury": {
+          "injReturnDate": "20250907",
+          "description": "Sep 7: Following Sunday's 20-10 win over the Patriots, Bowers downplayed the knee issue that caused his exit from the contest, Tom Pelissero of NFL Network reports.",
+          "injDate": "",
+          "designation": "Questionable"
+        },
+        "teamID": "17",
+        "pos": "TE",
+        "school": "Georgia",
+        "cbsPlayerID": "26693971",
+        "longName": "Brock Bowers",
+        "rotoWirePlayerID": "17693",
+        "height": "6'4\"",
+        "cbsPlayerIDFull": "26693971/brock-bowers/",
+        "lastGamePlayed": "20250907_LV@NE",
+        "playerID": "4432665",
+        "exp": "2",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/brock-bowers.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "0.7",
+            "carries": "0.1",
+            "rushTD": "0.0"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "6.8",
+            "recTD": "0.3",
+            "targets": "8.9",
+            "recYds": "68.6"
+          },
+          "fumblesLost": "0.0",
+          "pos": "TE",
+          "teamID": "17",
+          "team": "LV",
+          "longName": "Brock Bowers",
+          "playerID": "4432665",
+          "fantasyPoints": "16.44",
+          "fantasyPointsDefault": {
+            "standard": "8.73",
+            "PPR": "15.53",
+            "halfPPR": "12.13"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4432665",
+            "link": "https://www.espn.com/nfl/story/_/id/46188663",
+            "image": "https://a.espncdn.com/photo/2025/0907/r1542402_1296x518_5-2.jpg",
+            "title": "Ranking Week 1 fantasy football winners and losers and injury impacts from Sunday"
+          },
+          {
+            "playerID": "4432665",
+            "link": "https://x.com/TomPelissero/status/1964788699146924206",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4432665.png",
+            "title": "Following Sunday's 20-10 win over the Patriots, Bowers downplayed the knee issue that caused his exit from the contest, Tom Pelissero of NFL Network reports."
+          },
+          {
+            "playerID": "4432665",
+            "link": "https://x.com/Raiders/status/1964774219654545844",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4432665.png",
+            "title": "Bowers exited Sunday's season opener against the Patriots with a knee injury."
+          },
+          {
+            "playerID": "4432665",
+            "link": "https://www.espn.com/nfl/story/_/id/46039591",
+            "image": "https://a.espncdn.com/photo/2025/0822/fan_schefter's_fantasy_football_cheat_sheet_5x2_new.jpg",
+            "title": "Schefter's cheat sheet: Value picks and sleepers to target"
+          },
+          {
+            "playerID": "4432665",
+            "link": "https://x.com/ryanmcfadden_/status/1951725764992438529",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4432665.png",
+            "title": "Bowers (undisclosed) is practicing Saturday, Ryan McFadden of ESPN.com reports."
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20250105_LAC@LV",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "4",
+                "recTD": "1",
+                "longRec": "21",
+                "targets": "9",
+                "recYds": "50",
+                "recAvg": "12.5"
+              },
+              "longName": "Brock Bowers",
+              "playerID": "4432665",
+              "scoringPlays": [
+                {
+                  "score": "Brock Bowers 12 Yd pass from Aidan O'Connell (Daniel Carlson Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "20",
+                  "awayScore": "34",
+                  "teamID": "17",
+                  "scoreDetails": "12 plays, 70 yards, 3:13",
+                  "scoreType": "TD",
+                  "scoreTime": "0:25",
+                  "team": "LV",
+                  "playerIDs": [
+                    "4260394",
+                    "4432665",
+                    "3051909"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.94",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "48",
+                "defSnapPct": "0.00"
+              },
+              "team": "LV",
+              "teamAbv": "LV",
+              "teamID": "17",
+              "gameID": "20250105_LAC@LV"
+            },
+            {
+              "Receiving": {
+                "receptions": "7",
+                "recTD": "0",
+                "longRec": "17",
+                "targets": "7",
+                "recYds": "77",
+                "recAvg": "11.0"
+              },
+              "Rushing": {
+                "rushAvg": "-1.0",
+                "rushYds": "-1",
+                "carries": "1",
+                "longRush": "-1",
+                "rushTD": "0"
+              },
+              "longName": "Brock Bowers",
+              "playerID": "4432665",
+              "snapCounts": {
+                "offSnapPct": "0.91",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "70",
+                "defSnapPct": "0.00"
+              },
+              "team": "LV",
+              "teamAbv": "LV",
+              "teamID": "17",
+              "gameID": "20241229_LV@NO"
+            },
+            {
+              "Receiving": {
+                "receptions": "11",
+                "recTD": "0",
+                "longRec": "32",
+                "targets": "13",
+                "recYds": "99",
+                "recAvg": "9.0"
+              },
+              "longName": "Brock Bowers",
+              "playerID": "4432665",
+              "snapCounts": {
+                "offSnapPct": "0.95",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "70",
+                "defSnapPct": "0.00"
+              },
+              "team": "LV",
+              "teamAbv": "LV",
+              "teamID": "17",
+              "gameID": "20241222_JAX@LV"
+            }
+          ],
+          "total_games": 18
+        },
+        "depth_chart": {
+          "depth_position": "TE1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 4
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "West",
+          "conference": "AFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {},
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.33996",
+        "player_id": "33996",
+        "name": {
+          "full": "Kenneth Walker III",
+          "first": "Kenneth",
+          "last": "Walker III",
+          "ascii_first": "Kenneth",
+          "ascii_last": "Walker III"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/33996",
+        "editorial_player_key": "nfl.p.33996",
+        "editorial_team_key": "nfl.t.26",
+        "editorial_team_full_name": "Seattle Seahawks",
+        "editorial_team_abbr": "Sea",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/seattle/",
+        "bye_weeks": {
+          "week": "8"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "9",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/P2y_qVCj3vm_QUj_nxpxMA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09032024/33996.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/P2y_qVCj3vm_QUj_nxpxMA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09032024/33996.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "player_notes_last_timestamp": 1756515627,
+        "full_name": "Kenneth Walker III",
+        "first_name": "Kenneth",
+        "last_name": "Walker III",
+        "ascii_first": "Kenneth",
+        "ascii_last": "Walker III",
+        "selected_position": "W/R/T",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "8",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/P2y_qVCj3vm_QUj_nxpxMA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09032024/33996.png"
+      },
+      "tank01_data": {
+        "espnID": "4567048",
+        "espnName": "Kenneth Walker III",
+        "sleeperBotID": "8151",
+        "fantasyProsPlayerID": "23021",
+        "espnIDFull": "4567048/kenneth-walker-iii",
+        "fRefID": "WalkKe00",
+        "weight": "211",
+        "jerseyNum": "9",
+        "cbsShortName": "K. Walker III",
+        "team": "SEA",
+        "yahooPlayerID": "33996",
+        "age": "24",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4567048/kenneth-walker-iii",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/33996",
+        "bDay": "10/20/2000",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4567048.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "kenneth-walker-15909",
+        "cbsLongName": "Kenneth Walker III",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "20240501",
+          "designation": ""
+        },
+        "teamID": "29",
+        "pos": "RB",
+        "school": "Michigan State",
+        "cbsPlayerID": "3121372",
+        "longName": "Kenneth Walker III",
+        "rotoWirePlayerID": "15909",
+        "height": "5'9\"",
+        "cbsPlayerIDFull": "3121372/kenneth-walker-iii",
+        "lastGamePlayed": "20250907_SF@SEA",
+        "playerID": "4567048",
+        "exp": "4",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/kenneth-walker-rb.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "58.5",
+            "carries": "13.3",
+            "rushTD": "0.6"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "2.6",
+            "recTD": "0.1",
+            "targets": "3.2",
+            "recYds": "18.4"
+          },
+          "fumblesLost": "0.1",
+          "pos": "RB",
+          "teamID": "29",
+          "team": "SEA",
+          "longName": "Kenneth Walker III",
+          "playerID": "4567048",
+          "fantasyPoints": "17.27",
+          "fantasyPointsDefault": {
+            "standard": "11.69",
+            "PPR": "14.29",
+            "halfPPR": "12.99"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4567048",
+            "link": "https://www.espn.com/nfl/story/_/id/46188663",
+            "image": "https://a.espncdn.com/photo/2025/0907/r1542402_1296x518_5-2.jpg",
+            "title": "Ranking Week 1 fantasy football winners and losers and injury impacts from Sunday"
+          },
+          {
+            "playerID": "4567048",
+            "link": "https://www.espn.com/nfl/story/_/id/40699880",
+            "image": "https://a.espncdn.com/photo/2025/0906/r1541986_1296x518_5-2.jpg",
+            "title": "Fantasy football buzz: Injury updates on Matthew Stafford, Malik Nabers and more"
+          },
+          {
+            "playerID": "4567048",
+            "link": "https://www.espn.com/nfl/story/_/id/45704305",
+            "image": "https://a.espncdn.com/photo/2025/0730/r1525452_1296x518_5-2.jpg",
+            "title": "What we're hearing and seeing at Seahawks training camp: Darnold and Smith-Njigba show off chemistry in Green Bay"
+          },
+          {
+            "playerID": "4567048",
+            "link": "https://www.espn.com/nfl/story/_/id/46020452",
+            "image": "https://a.espncdn.com/photo/2025/0819/r1533959_1296x518_5-2.jpg",
+            "title": "'He's just a stud': Why Zach Charbonnet appears to be pushing Ken Walker III in Seahawks' backfield"
+          },
+          {
+            "playerID": "4567048",
+            "link": "https://www.thenewstribune.com/sports/nfl/seattle-seahawks/article311667939.html",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4567048.png",
+            "title": "Walker has been alternating days on and off the practice field since returning from a minor foot injury last week, Gregg Bell of The News Tribune reports."
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20241222_MIN@SEA",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "8",
+                "recTD": "0",
+                "longRec": "8",
+                "targets": "8",
+                "recYds": "28",
+                "recAvg": "3.5"
+              },
+              "Rushing": {
+                "rushAvg": "3.9",
+                "rushYds": "31",
+                "carries": "8",
+                "longRush": "11",
+                "rushTD": "0"
+              },
+              "longName": "Kenneth Walker III",
+              "playerID": "4567048",
+              "snapCounts": {
+                "offSnapPct": "0.59",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "38",
+                "defSnapPct": "0.00"
+              },
+              "team": "SEA",
+              "teamAbv": "SEA",
+              "teamID": "29",
+              "gameID": "20241222_MIN@SEA"
+            },
+            {
+              "Defense": {
+                "fumblesLost": "0",
+                "defensiveInterceptions": "0",
+                "forcedFumbles": "0",
+                "fumbles": "1",
+                "fumblesRecovered": "0"
+              },
+              "Receiving": {
+                "receptions": "2",
+                "recTD": "0",
+                "longRec": "1",
+                "targets": "3",
+                "recYds": "-3",
+                "recAvg": "-1.5"
+              },
+              "Rushing": {
+                "rushAvg": "3.1",
+                "rushYds": "49",
+                "carries": "16",
+                "longRush": "11",
+                "rushTD": "0"
+              },
+              "longName": "Kenneth Walker III",
+              "playerID": "4567048",
+              "snapCounts": {
+                "offSnapPct": "0.61",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "39",
+                "defSnapPct": "0.00"
+              },
+              "team": "SEA",
+              "teamAbv": "SEA",
+              "teamID": "29",
+              "gameID": "20241201_SEA@NYJ"
+            },
+            {
+              "Receiving": {
+                "receptions": "4",
+                "recTD": "0",
+                "longRec": "21",
+                "targets": "6",
+                "recYds": "52",
+                "recAvg": "13.0"
+              },
+              "Rushing": {
+                "rushAvg": "2.6",
+                "rushYds": "41",
+                "carries": "16",
+                "longRush": "14",
+                "rushTD": "0"
+              },
+              "longName": "Kenneth Walker III",
+              "playerID": "4567048",
+              "snapCounts": {
+                "offSnapPct": "0.64",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "41",
+                "defSnapPct": "0.00"
+              },
+              "team": "SEA",
+              "teamAbv": "SEA",
+              "teamID": "29",
+              "gameID": "20241124_ARI@SEA"
+            }
+          ],
+          "total_games": 11
+        },
+        "depth_chart": {
+          "depth_position": "RB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 4
+        },
+        "team_context": {
+          "team_performance": "0-1",
+          "division": "West",
+          "conference": "NFC",
+          "fantasy_outlook": "Challenging",
+          "top_performers": {},
+          "current_streak": {
+            "result": "L",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.34218",
+        "player_id": "34218",
+        "name": {
+          "full": "Brock Purdy",
+          "first": "Brock",
+          "last": "Purdy",
+          "ascii_first": "Brock",
+          "ascii_last": "Purdy"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/34218",
+        "editorial_player_key": "nfl.p.34218",
+        "editorial_team_key": "nfl.t.25",
+        "editorial_team_full_name": "San Francisco 49ers",
+        "editorial_team_abbr": "SF",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/san-francisco/",
+        "bye_weeks": {
+          "week": "14"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "13",
+        "display_position": "QB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/x1u7DOCV2z5df1c8rlyV1A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/34218.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/x1u7DOCV2z5df1c8rlyV1A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/34218.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "QB",
+        "eligible_positions": [
+          {
+            "position": "QB"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Brock Purdy",
+        "first_name": "Brock",
+        "last_name": "Purdy",
+        "ascii_first": "Brock",
+        "ascii_last": "Purdy",
+        "selected_position": "BN",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "QB"
+        ],
+        "bye_week": "14",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/x1u7DOCV2z5df1c8rlyV1A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08272025/34218.png"
+      },
+      "tank01_data": {
+        "espnID": "4361741",
+        "espnName": "Brock Purdy",
+        "sleeperBotID": "8183",
+        "fantasyProsPlayerID": "19797",
+        "espnIDFull": "4361741/brock-purdy",
+        "fRefID": "PurdBr00",
+        "weight": "220",
+        "jerseyNum": "13",
+        "cbsShortName": "B. Purdy",
+        "team": "SF",
+        "yahooPlayerID": "34218",
+        "age": "25",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4361741/brock-purdy",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/34218",
+        "bDay": "12/27/1999",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4361741.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "brock-purdy-15834",
+        "cbsLongName": "Brock Purdy",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "28",
+        "pos": "QB",
+        "school": "Iowa State",
+        "cbsPlayerID": "2961306",
+        "longName": "Brock Purdy",
+        "rotoWirePlayerID": "15834",
+        "height": "6'1\"",
+        "cbsPlayerIDFull": "2961306/brock-purdy",
+        "lastGamePlayed": "20250907_SF@SEA",
+        "playerID": "4361741",
+        "exp": "4",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/brock-purdy.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.1",
+          "Rushing": {
+            "rushYds": "17.6",
+            "carries": "4.0",
+            "rushTD": "0.2"
+          },
+          "Passing": {
+            "passAttempts": "31.1",
+            "passTD": "1.5",
+            "passYds": "240",
+            "int": "0.7",
+            "passCompletions": "21.1"
+          },
+          "Receiving": {
+            "receptions": "0",
+            "recTD": "0",
+            "targets": "0",
+            "recYds": "0"
+          },
+          "fumblesLost": "0.1",
+          "pos": "QB",
+          "teamID": "28",
+          "team": "SF",
+          "longName": "Brock Purdy",
+          "playerID": "4361741",
+          "fantasyPoints": "23.51",
+          "fantasyPointsDefault": {
+            "standard": "17.86",
+            "PPR": "17.86",
+            "halfPPR": "17.86"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4361741",
+            "link": "https://www.espn.com/nfl/story/_/id/46159589",
+            "image": "https://a.espncdn.com/photo/2025/0904/r1541074_1296x518_5-2.jpg",
+            "title": "Underwood looks to join Hurts, Purdy as true freshman QB who shined in first big test"
+          },
+          {
+            "playerID": "4361741",
+            "link": "https://www.espn.com/nfl/story/_/id/45812150",
+            "image": "https://a.espncdn.com/photo/2025/0811/r1530522_837x335_5-2.jpg",
+            "title": "NFL international search interest: 2025 trends to know"
+          },
+          {
+            "playerID": "4361741",
+            "link": "https://www.espn.com/nfl/story/_/id/46078639",
+            "image": "https://a.espncdn.com/photo/2025/0826/r1537062_1296x518_5-2.jpg",
+            "title": "Finding the overs: Why the prop lines offer value on Evans, Hunter, Harrison and more"
+          },
+          {
+            "playerID": "4361741",
+            "link": "https://www.espn.com/nfl/story/_/id/45921194",
+            "image": "https://a.espncdn.com/photo/2025/0807/250801_nfl_do-draft-list_5x2.jpg",
+            "title": "Do Draft list: Henry, Purdy, Kelce among players being undervalued"
+          },
+          {
+            "playerID": "4361741",
+            "link": "https://www.espn.com/nfl/story/_/id/46029854",
+            "image": "https://a.espncdn.com/photo/2025/0821/r1534702_1296x518_5-2.jpg",
+            "title": "Inside Brock Purdy's massive raise -- and the expectations for 2025 that follow"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20241230_DET@SF",
+          "recent_games": [
+            {
+              "Passing": {
+                "qbr": "86.6",
+                "rtg": "116.0",
+                "sacked": "2-12",
+                "passAttempts": "35",
+                "passAvg": "10.8",
+                "passTD": "3",
+                "passYds": "377",
+                "int": "2",
+                "passCompletions": "27"
+              },
+              "Rushing": {
+                "rushAvg": "4.0",
+                "rushYds": "12",
+                "carries": "3",
+                "longRush": "9",
+                "rushTD": "1"
+              },
+              "longName": "Brock Purdy",
+              "playerID": "4361741",
+              "scoringPlays": [
+                {
+                  "score": "Ricky Pearsall 3 Yd pass from Brock Purdy (Jake Moody Kick)",
+                  "scorePeriod": "Q1",
+                  "homeScore": "7",
+                  "awayScore": "0",
+                  "teamID": "28",
+                  "scoreDetails": "11 plays, 61 yards, 6:23",
+                  "scoreType": "TD",
+                  "scoreTime": "8:37",
+                  "team": "SF",
+                  "playerIDs": [
+                    "4361741",
+                    "4428209",
+                    "4372066"
+                  ]
+                },
+                {
+                  "score": "Kyle Juszczyk 9 Yd pass from Brock Purdy (Jake Moody Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "14",
+                  "awayScore": "6",
+                  "teamID": "28",
+                  "scoreDetails": "6 plays, 70 yards, 3:49",
+                  "scoreType": "TD",
+                  "scoreTime": "14:53",
+                  "team": "SF",
+                  "playerIDs": [
+                    "4361741",
+                    "16002",
+                    "4372066"
+                  ]
+                },
+                {
+                  "score": "Brock Purdy 9 Yd Rush (Jake Moody Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "21",
+                  "awayScore": "13",
+                  "teamID": "28",
+                  "scoreDetails": "7 plays, 70 yards, 3:56",
+                  "scoreType": "TD",
+                  "scoreTime": "6:13",
+                  "team": "SF",
+                  "playerIDs": [
+                    "4361741",
+                    "4372066"
+                  ]
+                },
+                {
+                  "score": "Deebo Samuel Sr. 5 Yd pass from Brock Purdy (Jake Moody Kick)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "28",
+                  "awayScore": "21",
+                  "teamID": "28",
+                  "scoreDetails": "6 plays, 84 yards, 2:18",
+                  "scoreType": "TD",
+                  "scoreTime": "7:40",
+                  "team": "SF",
+                  "playerIDs": [
+                    "4361741",
+                    "3126486",
+                    "4372066"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.92",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "59",
+                "defSnapPct": "0.00"
+              },
+              "team": "SF",
+              "teamAbv": "SF",
+              "teamID": "28",
+              "gameID": "20241230_DET@SF"
+            },
+            {
+              "Passing": {
+                "qbr": "69.7",
+                "rtg": "95.1",
+                "sacked": "3-20",
+                "passAttempts": "40",
+                "passAvg": "7.8",
+                "passTD": "2",
+                "passYds": "313",
+                "int": "1",
+                "passCompletions": "26"
+              },
+              "Rushing": {
+                "rushAvg": "6.5",
+                "rushYds": "26",
+                "carries": "4",
+                "longRush": "16",
+                "rushTD": "0"
+              },
+              "longName": "Brock Purdy",
+              "playerID": "4361741",
+              "scoringPlays": [
+                {
+                  "score": "Deebo Samuel Sr. 16 Yd pass from Brock Purdy (Jake Moody Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "3",
+                  "awayScore": "7",
+                  "teamID": "28",
+                  "scoreDetails": "10 plays, 70 yards, 4:16",
+                  "scoreType": "TD",
+                  "scoreTime": "14:14",
+                  "team": "SF",
+                  "playerIDs": [
+                    "4361741",
+                    "3126486",
+                    "4372066"
+                  ]
+                },
+                {
+                  "score": "Eric Saubert 2 Yd pass from Brock Purdy (Jake Moody Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "19",
+                  "awayScore": "17",
+                  "teamID": "28",
+                  "scoreDetails": "9 plays, 60 yards, 4:06",
+                  "scoreType": "TD",
+                  "scoreTime": "12:02",
+                  "team": "SF",
+                  "playerIDs": [
+                    "4361741",
+                    "2975863",
+                    "4372066"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "1.00",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "64",
+                "defSnapPct": "0.00"
+              },
+              "team": "SF",
+              "teamAbv": "SF",
+              "teamID": "28",
+              "gameID": "20241222_SF@MIA"
+            },
+            {
+              "Passing": {
+                "qbr": "20.3",
+                "rtg": "45.4",
+                "sacked": "3-14",
+                "passAttempts": "31",
+                "passAvg": "4.6",
+                "passTD": "0",
+                "passYds": "142",
+                "int": "1",
+                "passCompletions": "14"
+              },
+              "Rushing": {
+                "rushAvg": "3.0",
+                "rushYds": "3",
+                "carries": "1",
+                "longRush": "3",
+                "rushTD": "0"
+              },
+              "longName": "Brock Purdy",
+              "playerID": "4361741",
+              "snapCounts": {
+                "offSnapPct": "1.00",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "54",
+                "defSnapPct": "0.00"
+              },
+              "team": "SF",
+              "teamAbv": "SF",
+              "teamID": "28",
+              "gameID": "20241212_LAR@SF"
+            }
+          ],
+          "total_games": 17
+        },
+        "depth_chart": {
+          "depth_position": "QB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 3
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "West",
+          "conference": "NFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {},
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.32705",
+        "player_id": "32705",
+        "name": {
+          "full": "D'Andre Swift",
+          "first": "D'Andre",
+          "last": "Swift",
+          "ascii_first": "D'Andre",
+          "ascii_last": "Swift"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/32705",
+        "editorial_player_key": "nfl.p.32705",
+        "editorial_team_key": "nfl.t.3",
+        "editorial_team_full_name": "Chicago Bears",
+        "editorial_team_abbr": "Chi",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/chicago/",
+        "bye_weeks": {
+          "week": "5"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "4",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/sByer7Pig96XvXa_8S8bnQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/32705.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/sByer7Pig96XvXa_8S8bnQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/32705.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "D'Andre Swift",
+        "first_name": "D'Andre",
+        "last_name": "Swift",
+        "ascii_first": "D'Andre",
+        "ascii_last": "Swift",
+        "selected_position": "BN",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "5",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/sByer7Pig96XvXa_8S8bnQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08012025/32705.png"
+      },
+      "tank01_data": {
+        "espnID": "4259545",
+        "espnName": "D'Andre Swift",
+        "sleeperBotID": "6790",
+        "fantasyProsPlayerID": "19210",
+        "espnIDFull": "4259545/dandre-swift",
+        "fRefID": "SwifDA00",
+        "weight": "204",
+        "jerseyNum": "4",
+        "cbsShortName": "D. Swift",
+        "team": "CHI",
+        "yahooPlayerID": "32705",
+        "age": "26",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4259545/dandre-swift",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/32705",
+        "bDay": "1/14/1999",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4259545.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "dandre-swift-14394",
+        "cbsLongName": "D'Andre Swift",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "6",
+        "pos": "RB",
+        "school": "Georgia",
+        "cbsPlayerID": "2871710",
+        "longName": "D'Andre Swift",
+        "rotoWirePlayerID": "14394",
+        "height": "5'8\"",
+        "cbsPlayerIDFull": "2871710/dandre-swift",
+        "lastGamePlayed": "20250822_CHI@KC",
+        "playerID": "4259545",
+        "exp": "6",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/dandre-swift.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "56.5",
+            "carries": "13.8",
+            "rushTD": "0.4"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "2.2",
+            "recTD": "0.1",
+            "targets": "2.7",
+            "recYds": "15.3"
+          },
+          "fumblesLost": "0.1",
+          "pos": "RB",
+          "teamID": "6",
+          "team": "CHI",
+          "longName": "D'Andre Swift",
+          "playerID": "4259545",
+          "fantasyPoints": "15.21",
+          "fantasyPointsDefault": {
+            "standard": "9.98",
+            "PPR": "12.18",
+            "halfPPR": "11.08"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4259545",
+            "link": "https://www.espn.com/nfl/story/_/id/46154729",
+            "image": "https://a.espncdn.com/photo/2025/0904/r1540818_1296x518_5-2.jpg",
+            "title": "Facts vs. Feelings: Seven potential difference-makers for Week 1"
+          },
+          {
+            "playerID": "4259545",
+            "link": "https://www.espn.com/nfl/story/_/id/46136528",
+            "image": "https://a.espncdn.com/photo/2025/0903/r1540438_1296x518_5-2.jpg",
+            "title": "Bowen: The 11 biggest questions heading into fantasy Week 1"
+          },
+          {
+            "playerID": "4259545",
+            "link": "https://www.espn.com/nfl/story/_/id/46068455",
+            "image": "https://a.espncdn.com/photo/2025/0826/r1536390_2_1296x518_5-2.jpg",
+            "title": "Bo Nix, Calvin Ridley among Eric Moody's top draft targets"
+          },
+          {
+            "playerID": "4259545",
+            "link": "https://x.com/sean_hammond/status/1957195984758530089",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4259545.png",
+            "title": "Swift is in line to play with the rest of the Bears' starters during Sunday's preseason game against Buffalo, Sean Hammond of the Chicago Tribune reports."
+          },
+          {
+            "playerID": "4259545",
+            "link": "https://www.espn.com/nfl/story/_/id/45959542",
+            "image": "https://a.espncdn.com/photo/2025/0812/r1530992_1296x518_5-2.jpg",
+            "title": "Fantasy football: Answering one key preseason question for 20 NFL teams"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "20250105_CHI@GB",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "0",
+                "recTD": "0",
+                "longRec": "0",
+                "targets": "2",
+                "recYds": "0",
+                "recAvg": "0.0"
+              },
+              "Rushing": {
+                "rushAvg": "3.3",
+                "rushYds": "65",
+                "carries": "20",
+                "longRush": "14",
+                "rushTD": "1"
+              },
+              "longName": "D'Andre Swift",
+              "playerID": "4259545",
+              "scoringPlays": [
+                {
+                  "score": "D'Andre Swift 4 Yd Rush (Cairo Santos Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "3",
+                  "awayScore": "14",
+                  "teamID": "6",
+                  "scoreDetails": "3 plays, 21 yards, 0:45",
+                  "scoreType": "TD",
+                  "scoreTime": "14:17",
+                  "team": "CHI",
+                  "playerIDs": [
+                    "4259545",
+                    "17427"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.79",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "49",
+                "defSnapPct": "0.00"
+              },
+              "team": "CHI",
+              "teamAbv": "CHI",
+              "teamID": "6",
+              "gameID": "20250105_CHI@GB"
+            },
+            {
+              "Receiving": {
+                "receptions": "4",
+                "recTD": "0",
+                "longRec": "24",
+                "targets": "5",
+                "recYds": "28",
+                "recAvg": "7.0"
+              },
+              "Rushing": {
+                "rushAvg": "4.4",
+                "rushYds": "53",
+                "carries": "12",
+                "longRush": "12",
+                "rushTD": "0"
+              },
+              "longName": "D'Andre Swift",
+              "playerID": "4259545",
+              "snapCounts": {
+                "offSnapPct": "0.66",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "40",
+                "defSnapPct": "0.00"
+              },
+              "team": "CHI",
+              "teamAbv": "CHI",
+              "teamID": "6",
+              "gameID": "20241226_SEA@CHI"
+            },
+            {
+              "Receiving": {
+                "receptions": "3",
+                "recTD": "0",
+                "longRec": "13",
+                "targets": "3",
+                "recYds": "33",
+                "recAvg": "11.0"
+              },
+              "Rushing": {
+                "rushAvg": "2.2",
+                "rushYds": "20",
+                "carries": "9",
+                "longRush": "7",
+                "rushTD": "0"
+              },
+              "longName": "D'Andre Swift",
+              "playerID": "4259545",
+              "snapCounts": {
+                "offSnapPct": "0.73",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "47",
+                "defSnapPct": "0.00"
+              },
+              "team": "CHI",
+              "teamAbv": "CHI",
+              "teamID": "6",
+              "gameID": "20241222_DET@CHI"
+            }
+          ],
+          "total_games": 18
+        },
+        "depth_chart": {
+          "depth_position": "RB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 5
+        },
+        "team_context": {
+          "team_performance": "0-0",
+          "division": "North",
+          "conference": "NFC",
+          "fantasy_outlook": "Neutral",
+          "top_performers": {},
+          "current_streak": {
+            "result": "",
+            "length": "0"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41804",
+        "player_id": "41804",
+        "name": {
+          "full": "Emeka Egbuka",
+          "first": "Emeka",
+          "last": "Egbuka",
+          "ascii_first": "Emeka",
+          "ascii_last": "Egbuka"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/41804",
+        "editorial_player_key": "nfl.p.41804",
+        "editorial_team_key": "nfl.t.27",
+        "editorial_team_full_name": "Tampa Bay Buccaneers",
+        "editorial_team_abbr": "TB",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/tampa-bay/",
+        "bye_weeks": {
+          "week": "9"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "2",
+        "display_position": "WR",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/4zlKzRjiLf8g8.j4JJxvqQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/41804.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/4zlKzRjiLf8g8.j4JJxvqQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/41804.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "WR",
+        "eligible_positions": [
+          {
+            "position": "WR"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Emeka Egbuka",
+        "first_name": "Emeka",
+        "last_name": "Egbuka",
+        "ascii_first": "Emeka",
+        "ascii_last": "Egbuka",
+        "selected_position": "BN",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "WR",
+          "W/R/T"
+        ],
+        "bye_week": "9",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/4zlKzRjiLf8g8.j4JJxvqQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09022025/41804.png"
+      },
+      "tank01_data": {
+        "espnID": "4567750",
+        "espnName": "Emeka Egbuka",
+        "sleeperBotID": "12514",
+        "fantasyProsPlayerID": "23062",
+        "espnIDFull": "4567750/emeka-egbuka",
+        "fRefID": "EgbuEm01",
+        "weight": "205",
+        "jerseyNum": "2",
+        "cbsShortName": "E. Egbuka",
+        "team": "TB",
+        "yahooPlayerID": "41804",
+        "age": "22",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4567750/emeka-egbuka",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/41804",
+        "bDay": "10/14/2002",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4567750.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "emeka-egbuka-18549",
+        "cbsLongName": "Emeka Egbuka",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "30",
+        "pos": "WR",
+        "school": "Ohio State",
+        "cbsPlayerID": "26696165",
+        "longName": "Emeka Egbuka",
+        "rotoWirePlayerID": "18549",
+        "height": "6'1\"",
+        "cbsPlayerIDFull": "26696165/emeka-egbuka",
+        "lastGamePlayed": "20250907_TB@ATL",
+        "playerID": "4567750",
+        "exp": "R",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/emeka-egbuka.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "0.3",
+            "carries": "0.1",
+            "rushTD": "0.0"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "4.7",
+            "recTD": "0.3",
+            "targets": "6.9",
+            "recYds": "49.2"
+          },
+          "fumblesLost": "0.0",
+          "pos": "WR",
+          "teamID": "30",
+          "team": "TB",
+          "longName": "Emeka Egbuka",
+          "playerID": "4567750",
+          "fantasyPoints": "12.16",
+          "fantasyPointsDefault": {
+            "standard": "6.75",
+            "PPR": "11.45",
+            "halfPPR": "9.1"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4567750",
+            "link": "https://www.espn.com/nfl/story/_/id/46191749",
+            "image": "https://a.espncdn.com/photo/2025/0907/r1542437_1296x518_5-2.jpg",
+            "title": "Rookie WR Egbuka stars for Bucs with 2 TDs"
+          },
+          {
+            "playerID": "4567750",
+            "link": "https://www.espn.com/nfl/story/_/id/40699880",
+            "image": "https://a.espncdn.com/photo/2025/0907/r1542305_1296x518_5-2.jpg",
+            "title": "Early-game headlines: Fields-Wilson combo shines in opener"
+          },
+          {
+            "playerID": "4567750",
+            "link": "https://www.espn.com/nfl/story/_/id/46136043",
+            "image": "https://a.espncdn.com/photo/2025/0902/r1540250_1296x518_5-2.jpg",
+            "title": "Matchup rankings: Chase Brown, Emeka Egbuka stand out in Week 1"
+          },
+          {
+            "playerID": "4567750",
+            "link": "https://www.espn.com/nfl/story/_/id/46105164",
+            "image": "https://a.espncdn.com/photo/2025/0829/r1538414_1296x518_5-2.jpg",
+            "title": "Can Bucs rookie Emeka Egbuka, others step up for injured WRs Godwin, McMillan?"
+          },
+          {
+            "playerID": "4567750",
+            "link": "https://www.espn.com/nfl/story/_/id/46068455",
+            "image": "https://a.espncdn.com/photo/2025/0826/r1536390_2_1296x518_5-2.jpg",
+            "title": "Bo Nix, Calvin Ridley among Eric Moody's top draft targets"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "N/A",
+          "recent_games": [],
+          "total_games": 0
+        },
+        "depth_chart": {
+          "depth_position": "WR2",
+          "depth_rank": 2,
+          "opportunity": "High",
+          "total_at_position": 8
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "South",
+          "conference": "NFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {},
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.33423",
+        "player_id": "33423",
+        "name": {
+          "full": "Javonte Williams",
+          "first": "Javonte",
+          "last": "Williams",
+          "ascii_first": "Javonte",
+          "ascii_last": "Williams"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/33423",
+        "editorial_player_key": "nfl.p.33423",
+        "editorial_team_key": "nfl.t.6",
+        "editorial_team_full_name": "Dallas Cowboys",
+        "editorial_team_abbr": "Dal",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/dallas/",
+        "bye_weeks": {
+          "week": "10"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "33",
+        "display_position": "RB",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/vnnZp9u8jIYMVkEzDvjIvw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/33423.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/vnnZp9u8jIYMVkEzDvjIvw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/33423.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "RB",
+        "eligible_positions": [
+          {
+            "position": "RB"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "has_player_notes": 1,
+        "has_recent_player_notes": 1,
+        "player_notes_last_timestamp": 1757048297,
+        "full_name": "Javonte Williams",
+        "first_name": "Javonte",
+        "last_name": "Williams",
+        "ascii_first": "Javonte",
+        "ascii_last": "Williams",
+        "selected_position": "BN",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "RB",
+          "W/R/T"
+        ],
+        "bye_week": "10",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/vnnZp9u8jIYMVkEzDvjIvw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08072025/33423.png"
+      },
+      "tank01_data": {
+        "espnID": "4361579",
+        "espnName": "Javonte Williams",
+        "sleeperBotID": "7588",
+        "fantasyProsPlayerID": "22739",
+        "espnIDFull": "4361579/javonte-williams",
+        "fRefID": "WillJa10",
+        "weight": "220",
+        "jerseyNum": "33",
+        "cbsShortName": "J. Williams",
+        "team": "DAL",
+        "yahooPlayerID": "33423",
+        "age": "25",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4361579/javonte-williams",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/33423",
+        "bDay": "4/25/2000",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4361579.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "javonte-williams-15306",
+        "cbsLongName": "Javonte Williams",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "9",
+        "pos": "RB",
+        "school": "North Carolina",
+        "cbsPlayerID": "2961719",
+        "longName": "Javonte Williams",
+        "rotoWirePlayerID": "15306",
+        "height": "5'10\"",
+        "cbsPlayerIDFull": "2961719/javonte-williams",
+        "lastGamePlayed": "20250904_DAL@PHI",
+        "playerID": "4361579",
+        "exp": "5",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/javonte-williams.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "42.0",
+            "carries": "10.7",
+            "rushTD": "0.4"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "2.1",
+            "recTD": "0.1",
+            "targets": "2.6",
+            "recYds": "12.5"
+          },
+          "fumblesLost": "0.1",
+          "pos": "RB",
+          "teamID": "9",
+          "team": "DAL",
+          "longName": "Javonte Williams",
+          "playerID": "4361579",
+          "fantasyPoints": "12.75",
+          "fantasyPointsDefault": {
+            "standard": "8.25",
+            "PPR": "10.35",
+            "halfPPR": "9.3"
+          }
+        },
+        "recent_news": [
+          {
+            "playerID": "4361579",
+            "link": "https://www.espn.com/nfl/story/_/id/46155720",
+            "image": "https://a.espncdn.com/photo/2025/0905/r1541216_1296x518_5-2.jpg",
+            "title": "Banner day for Eagles as champs hold off Cowboys in wild one"
+          },
+          {
+            "playerID": "4361579",
+            "link": "https://www.espn.com/nfl/story/_/id/40699880",
+            "image": "https://a.espncdn.com/photo/2025/0905/r1541409_1296x518_5-2.jpg",
+            "title": "Fantasy Buzz: Javonte Williams scores two, A.J. Brown invisible in season opener"
+          },
+          {
+            "playerID": "4361579",
+            "link": "https://x.com/jonmachota/status/1962879486786961639",
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/4361579.png",
+            "title": "Williams, who is in line to serve as the Cowboys' starting running back in Thursday's game versus the Eagles, said that he hasn't been told what his workload will look like in the season opener, Jon Machota of The Athletic reports."
+          },
+          {
+            "playerID": "4361579",
+            "link": "https://www.espn.com/nfl/story/_/id/45862352",
+            "image": "https://a.espncdn.com/photo/2025/0731/250801_nfl_dont-draft-list_5x2.jpg",
+            "title": "Do Not Draft list: McCaffrey, Andrews among players being overvalued"
+          },
+          {
+            "playerID": "4361579",
+            "link": "https://www.espn.com/nfl/story/_/id/45871241",
+            "image": "https://a.espncdn.com/photo/2025/0812/r1530799_1296x518_5-2.jpg",
+            "title": "NFL betting: Eight player props we like to hit the 'over' this season"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Limited Role",
+          "last_game_played": "20250112_DEN@BUF",
+          "recent_games": [
+            {
+              "Receiving": {
+                "receptions": "2",
+                "recTD": "0",
+                "longRec": "7",
+                "targets": "2",
+                "recYds": "14",
+                "recAvg": "7.0"
+              },
+              "Rushing": {
+                "rushAvg": "4.1",
+                "rushYds": "29",
+                "carries": "7",
+                "longRush": "6",
+                "rushTD": "0"
+              },
+              "longName": "Javonte Williams",
+              "playerID": "4361579",
+              "snapCounts": {
+                "offSnapPct": "0.74",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "31",
+                "defSnapPct": "0.00"
+              },
+              "team": "DEN",
+              "teamAbv": "DEN",
+              "teamID": "10",
+              "gameID": "20250112_DEN@BUF"
+            },
+            {
+              "Receiving": {
+                "receptions": "3",
+                "recTD": "0",
+                "longRec": "25",
+                "targets": "4",
+                "recYds": "50",
+                "recAvg": "16.7"
+              },
+              "Rushing": {
+                "rushAvg": "5.6",
+                "rushYds": "28",
+                "carries": "5",
+                "longRush": "10",
+                "rushTD": "0"
+              },
+              "longName": "Javonte Williams",
+              "playerID": "4361579",
+              "snapCounts": {
+                "offSnapPct": "0.31",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "23",
+                "defSnapPct": "0.00"
+              },
+              "team": "DEN",
+              "teamAbv": "DEN",
+              "teamID": "10",
+              "gameID": "20250105_KC@DEN"
+            },
+            {
+              "Defense": {
+                "totalTackles": "1",
+                "defTD": "0",
+                "forcedFumbles": "0",
+                "soloTackles": "1",
+                "tfl": "0",
+                "qbHits": "0",
+                "defensiveInterceptions": "0",
+                "sacks": "0",
+                "passDeflections": "0"
+              },
+              "Receiving": {
+                "receptions": "2",
+                "recTD": "0",
+                "longRec": "6",
+                "targets": "2",
+                "recYds": "0",
+                "recAvg": "0.0"
+              },
+              "longName": "Javonte Williams",
+              "playerID": "4361579",
+              "snapCounts": {
+                "offSnapPct": "0.37",
+                "defSnap": "0",
+                "stSnap": "0",
+                "stSnapPct": "0.00",
+                "offSnap": "22",
+                "defSnapPct": "0.00"
+              },
+              "team": "DEN",
+              "teamAbv": "DEN",
+              "teamID": "10",
+              "gameID": "20241228_DEN@CIN"
+            }
+          ],
+          "total_games": 20
+        },
+        "depth_chart": {
+          "depth_position": "RB1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 6
+        },
+        "team_context": {
+          "team_performance": "0-1",
+          "division": "East",
+          "conference": "NFC",
+          "fantasy_outlook": "Challenging",
+          "top_performers": {
+            "Rushing": {
+              "rushYds": {
+                "total": "54",
+                "playerID": [
+                  "4361579"
+                ]
+              },
+              "rushingTwoPointConversion": {
+                "total": "0",
+                "playerID": [
+                  "2577417",
+                  "4045163",
+                  "4361579",
+                  "3676833"
+                ]
+              },
+              "carries": {
+                "total": "15",
+                "playerID": [
+                  "4361579"
+                ]
+              },
+              "rushTD": {
+                "total": "2",
+                "playerID": [
+                  "4361579"
+                ]
+              }
+            },
+            "Kicking": {
+              "fgAttempts": {
+                "total": "2",
+                "playerID": [
+                  "3953687"
+                ]
+              },
+              "fgMade": {
+                "total": "2",
+                "playerID": [
+                  "3953687"
+                ]
+              },
+              "xpMade": {
+                "total": "2",
+                "playerID": [
+                  "3953687"
+                ]
+              },
+              "fgYds": {
+                "total": "0",
+                "playerID": [
+                  "3953687"
+                ]
+              },
+              "kickYards": {
+                "total": "0",
+                "playerID": [
+                  "3953687"
+                ]
+              },
+              "xpAttempts": {
+                "total": "2",
+                "playerID": [
+                  "3953687"
+                ]
+              }
+            },
+            "Passing": {
+              "passAttempts": {
+                "total": "34",
+                "playerID": [
+                  "2577417"
+                ]
+              },
+              "passTD": {
+                "total": "0",
+                "playerID": [
+                  "2577417"
+                ]
+              },
+              "passYds": {
+                "total": "188",
+                "playerID": [
+                  "2577417"
+                ]
+              },
+              "int": {
+                "total": "0",
+                "playerID": [
+                  "2577417"
+                ]
+              },
+              "passingTwoPointConversion": {
+                "total": "0",
+                "playerID": [
+                  "2577417"
+                ]
+              },
+              "passCompletions": {
+                "total": "21",
+                "playerID": [
+                  "2577417"
+                ]
+              }
+            },
+            "Punting": {
+              "puntYds": {
+                "total": "87",
+                "playerID": [
+                  "14950"
+                ]
+              },
+              "punts": {
+                "total": "2",
+                "playerID": [
+                  "14950"
+                ]
+              },
+              "puntsin20": {
+                "total": "1",
+                "playerID": [
+                  "14950"
+                ]
+              },
+              "puntTouchBacks": {
+                "total": "0",
+                "playerID": [
+                  "14950"
+                ]
+              }
+            },
+            "Receiving": {
+              "receivingTwoPointConversion": {
+                "total": "0",
+                "playerID": [
+                  "4241389",
+                  "4426354",
+                  "4372096",
+                  "4242355",
+                  "4045163",
+                  "4361579",
+                  "3676833",
+                  "4249417",
+                  "4360967"
+                ]
+              },
+              "receptions": {
+                "total": "7",
+                "playerID": [
+                  "4241389"
+                ]
+              },
+              "recTD": {
+                "total": "0",
+                "playerID": [
+                  "4241389",
+                  "4426354",
+                  "4372096",
+                  "4242355",
+                  "4045163",
+                  "4361579",
+                  "3676833",
+                  "4249417",
+                  "4360967"
+                ]
+              },
+              "targets": {
+                "total": "13",
+                "playerID": [
+                  "4241389"
+                ]
+              },
+              "recYds": {
+                "total": "110",
+                "playerID": [
+                  "4241389"
+                ]
+              }
+            },
+            "Defense": {
+              "totalTackles": {
+                "total": "9",
+                "playerID": [
+                  "4241394",
+                  "3121415"
+                ]
+              },
+              "fumblesLost": {
+                "total": "1",
+                "playerID": [
+                  "4045163"
+                ]
+              },
+              "defTD": {
+                "total": "0",
+                "playerID": [
+                  "4035840",
+                  "4683848",
+                  "4240608",
+                  "4372576",
+                  "4567399",
+                  "3117258",
+                  "2577417",
+                  "4427816",
+                  "3122135",
+                  "4567242",
+                  "4045163",
+                  "4429996",
+                  "4241394",
+                  "3121415",
+                  "4248911",
+                  "4040966",
+                  "4362636",
+                  "3122752",
+                  "2980100",
+                  "4431603"
+                ]
+              },
+              "fumbles": {
+                "total": "1",
+                "playerID": [
+                  "4045163"
+                ]
+              },
+              "fumblesRecovered": {
+                "total": "0",
+                "playerID": [
+                  "4035840",
+                  "4683848",
+                  "4240608",
+                  "4372576",
+                  "4567399",
+                  "3117258",
+                  "2577417",
+                  "4427816",
+                  "3122135",
+                  "4567242",
+                  "4045163",
+                  "4429996",
+                  "4241394",
+                  "3121415",
+                  "4248911",
+                  "4040966",
+                  "4362636",
+                  "3122752",
+                  "2980100",
+                  "4431603"
+                ]
+              },
+              "twoPointConversionReturn": {
+                "total": "0",
+                "playerID": [
+                  "4035840",
+                  "4683848",
+                  "4240608",
+                  "4372576",
+                  "4567399",
+                  "3117258",
+                  "2577417",
+                  "4427816",
+                  "3122135",
+                  "4567242",
+                  "4045163",
+                  "4429996",
+                  "4241394",
+                  "3121415",
+                  "4248911",
+                  "4040966",
+                  "4362636",
+                  "3122752",
+                  "2980100",
+                  "4431603"
+                ]
+              },
+              "soloTackles": {
+                "total": "4",
+                "playerID": [
+                  "4567399",
+                  "4241394",
+                  "3121415"
+                ]
+              },
+              "defensiveInterceptions": {
+                "total": "0",
+                "playerID": [
+                  "4035840",
+                  "4683848",
+                  "4240608",
+                  "4372576",
+                  "4567399",
+                  "3117258",
+                  "2577417",
+                  "4427816",
+                  "3122135",
+                  "4567242",
+                  "4045163",
+                  "4429996",
+                  "4241394",
+                  "3121415",
+                  "4248911",
+                  "4040966",
+                  "4362636",
+                  "3122752",
+                  "2980100",
+                  "4431603"
+                ]
+              },
+              "qbHits": {
+                "total": "1",
+                "playerID": [
+                  "4035840",
+                  "4683848",
+                  "4567242",
+                  "4429996",
+                  "2980100"
+                ]
+              },
+              "tfl": {
+                "total": "1",
+                "playerID": [
+                  "4240608",
+                  "4372576",
+                  "3117258",
+                  "4567242",
+                  "4429996"
+                ]
+              },
+              "passDeflections": {
+                "total": "0",
+                "playerID": [
+                  "4035840",
+                  "4683848",
+                  "4240608",
+                  "4372576",
+                  "4567399",
+                  "3117258",
+                  "2577417",
+                  "4427816",
+                  "3122135",
+                  "4567242",
+                  "4045163",
+                  "4429996",
+                  "4241394",
+                  "3121415",
+                  "4248911",
+                  "4040966",
+                  "4362636",
+                  "3122752",
+                  "2980100",
+                  "4431603"
+                ]
+              },
+              "sacks": {
+                "total": "1",
+                "playerID": [
+                  "4429996"
+                ]
+              }
+            }
+          },
+          "current_streak": {
+            "result": "L",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.41799",
+        "player_id": "41799",
+        "name": {
+          "full": "Tyler Warren",
+          "first": "Tyler",
+          "last": "Warren",
+          "ascii_first": "Tyler",
+          "ascii_last": "Warren"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/41799",
+        "editorial_player_key": "nfl.p.41799",
+        "editorial_team_key": "nfl.t.11",
+        "editorial_team_full_name": "Indianapolis Colts",
+        "editorial_team_abbr": "Ind",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/indianapolis/",
+        "bye_weeks": {
+          "week": "11"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "84",
+        "display_position": "TE",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/xBqnY7pk58aTLbN2kQqfAQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/41799.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/xBqnY7pk58aTLbN2kQqfAQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/41799.png",
+        "is_undroppable": "0",
+        "position_type": "O",
+        "primary_position": "TE",
+        "eligible_positions": [
+          {
+            "position": "TE"
+          },
+          {
+            "position": "W/R/T"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Tyler Warren",
+        "first_name": "Tyler",
+        "last_name": "Warren",
+        "ascii_first": "Tyler",
+        "ascii_last": "Warren",
+        "selected_position": "BN",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "TE",
+          "W/R/T"
+        ],
+        "bye_week": "11",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/xBqnY7pk58aTLbN2kQqfAQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08042025/41799.png"
+      },
+      "tank01_data": {
+        "espnID": "4431459",
+        "espnName": "Tyler Warren",
+        "sleeperBotID": "12518",
+        "fantasyProsPlayerID": "26434",
+        "espnIDFull": "4431459/tyler-warren",
+        "fRefID": "WarrTy00",
+        "weight": "256",
+        "jerseyNum": "84",
+        "team": "IND",
+        "yahooPlayerID": "41799",
+        "age": "23",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/4431459/tyler-warren",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/41799",
+        "bDay": "5/24/2002",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/4431459.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "tyler-warren-18534",
+        "cbsLongName": "Tyler Warren",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "14",
+        "pos": "TE",
+        "school": "Penn State",
+        "cbsPlayerID": "3168800",
+        "longName": "Tyler Warren",
+        "rotoWirePlayerID": "18534",
+        "height": "6'6\"",
+        "cbsPlayerIDFull": "3168800/tyler-warren/",
+        "lastGamePlayed": "20250907_MIA@IND",
+        "playerID": "4431459",
+        "exp": "R",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/tyler-warren.php",
+        "fantasy_projections": {
+          "twoPointConversion": "0.0",
+          "Rushing": {
+            "rushYds": "1.1",
+            "carries": "0.3",
+            "rushTD": "0.0"
+          },
+          "Passing": {
+            "passAttempts": "0",
+            "passTD": "0",
+            "passYds": "0",
+            "int": "0",
+            "passCompletions": "0"
+          },
+          "Receiving": {
+            "receptions": "3.5",
+            "recTD": "0.2",
+            "targets": "5.1",
+            "recYds": "34.5"
+          },
+          "fumblesLost": "0.0",
+          "pos": "TE",
+          "teamID": "14",
+          "team": "IND",
+          "longName": "Tyler Warren",
+          "playerID": "4431459",
+          "fantasyPoints": "8.83",
+          "fantasyPointsDefault": {
+            "standard": "4.76",
+            "PPR": "8.26",
+            "halfPPR": "6.51"
+          }
+        },
+        "recent_news": [
+          {
+            "image": "https://a.espncdn.com/photo/2025/0907/r1542305_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/40699880",
+            "playerID": "4431459",
+            "title": "Early-game headlines: Fields-Wilson combo shines in opener"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0807/250801_nfl_do-draft-list_5x2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45921194",
+            "playerID": "4431459",
+            "title": "Do Draft list: Henry, Purdy, Kelce among players being undervalued"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0819/r1533793_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46010305",
+            "playerID": "4431459",
+            "title": "Burrow, McConkey among Matt Bowen's top 10 draft targets, Warren among late fliers"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0818/r1533462_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/46009977",
+            "playerID": "4431459",
+            "title": "Colts' TE Tyler Warren living up to the first-round hype"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2025/0807/250801_nfl_do-draft-list_5x2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/45921194",
+            "playerID": "4431459",
+            "title": "Do Draft list: Henry, Purdy, Kelce among players being undervalued"
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Healthy",
+          "last_game_played": "N/A",
+          "recent_games": [],
+          "total_games": 0
+        },
+        "depth_chart": {
+          "depth_position": "TE1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 5
+        },
+        "team_context": {
+          "team_performance": "1-0",
+          "division": "South",
+          "conference": "AFC",
+          "fantasy_outlook": "Positive",
+          "top_performers": {},
+          "current_streak": {
+            "result": "W",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    },
+    {
+      "yahoo_data": {
+        "player_key": "461.p.29792",
+        "player_id": "29792",
+        "name": {
+          "full": "Ka'imi Fairbairn",
+          "first": "Ka'imi",
+          "last": "Fairbairn",
+          "ascii_first": "Ka'imi",
+          "ascii_last": "Fairbairn"
+        },
+        "url": "https://sports.yahoo.com/nfl/players/29792",
+        "editorial_player_key": "nfl.p.29792",
+        "editorial_team_key": "nfl.t.34",
+        "editorial_team_full_name": "Houston Texans",
+        "editorial_team_abbr": "Hou",
+        "editorial_team_url": "https://sports.yahoo.com/nfl/teams/houston/",
+        "bye_weeks": {
+          "week": "6"
+        },
+        "is_keeper": {
+          "status": false,
+          "cost": false,
+          "kept": false
+        },
+        "uniform_number": "15",
+        "display_position": "K",
+        "headshot": {
+          "url": "https://s.yimg.com/iu/api/res/1.2/.c6NIw1lGRTM_O_gZeDW4w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/29792.png",
+          "size": "small"
+        },
+        "image_url": "https://s.yimg.com/iu/api/res/1.2/.c6NIw1lGRTM_O_gZeDW4w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/29792.png",
+        "is_undroppable": "0",
+        "position_type": "K",
+        "primary_position": "K",
+        "eligible_positions": [
+          {
+            "position": "K"
+          }
+        ],
+        "eligible_positions_to_add": [],
+        "full_name": "Ka'imi Fairbairn",
+        "first_name": "Ka'imi",
+        "last_name": "Fairbairn",
+        "ascii_first": "Ka'imi",
+        "ascii_last": "Fairbairn",
+        "selected_position": "K",
+        "selected_coverage_type": "",
+        "selected_date": "",
+        "eligible_positions_list": [
+          "K"
+        ],
+        "bye_week": "6",
+        "headshot_url": "https://s.yimg.com/iu/api/res/1.2/.c6NIw1lGRTM_O_gZeDW4w--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08192025/29792.png"
+      },
+      "tank01_data": {
+        "espnID": "2971573",
+        "espnName": "Ka'imi Fairbairn",
+        "sleeperBotID": "3451",
+        "fantasyProsPlayerID": "15756",
+        "espnIDFull": "2971573/kaimi-fairbairn",
+        "fRefID": "FairKa01",
+        "weight": "183",
+        "jerseyNum": "15",
+        "cbsShortName": "K. Fairbairn",
+        "team": "HOU",
+        "yahooPlayerID": "29792",
+        "age": "31",
+        "espnLink": "https://www.espn.com/nfl/player/_/id/2971573/kaimi-fairbairn",
+        "yahooLink": "https://sports.yahoo.com/nfl/players/29792",
+        "bDay": "1/29/1994",
+        "espnHeadshot": "https://a.espncdn.com/i/headshots/nfl/players/full/2971573.png",
+        "isFreeAgent": "False",
+        "rotoWirePlayerIDFull": "kaimi-fairbairn-11031",
+        "cbsLongName": "Ka'imi Fairbairn",
+        "injury": {
+          "injReturnDate": "",
+          "description": "",
+          "injDate": "",
+          "designation": ""
+        },
+        "teamID": "13",
+        "pos": "PK",
+        "school": "UCLA",
+        "cbsPlayerID": "1996562",
+        "longName": "Ka'imi Fairbairn",
+        "rotoWirePlayerID": "11031",
+        "height": "6'0\"",
+        "cbsPlayerIDFull": "1996562/kaimi-fairbairn",
+        "lastGamePlayed": "20250907_HOU@LAR",
+        "playerID": "2971573",
+        "exp": "10",
+        "fantasyProsLink": "https://www.fantasypros.com/nfl/players/kaimi-fairbairn.php",
+        "stats": {},
+        "fantasy_projections": {
+          "Kicking": {
+            "fgMade": "1.6",
+            "fgMissed": "0.2",
+            "xpMade": "2.1",
+            "xpMissed": "0.2"
+          },
+          "team": "HOU",
+          "pos": "PK",
+          "longName": "Ka'imi Fairbairn",
+          "teamID": "13",
+          "playerID": "2971573",
+          "fantasyPoints": "6.5",
+          "fantasyPointsDefault": {
+            "standard": "6.5",
+            "PPR": "6.5",
+            "halfPPR": "6.5"
+          }
+        },
+        "recent_news": [
+          {
+            "image": "https://a.espncdn.com/photo/2024/1020/r1403217_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/41908327",
+            "playerID": "2971573",
+            "title": "How the Texans exploited a little-known kickoff loophole against the Packers"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2024/0312/r1304093_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/39584955",
+            "playerID": "2971573",
+            "title": "Texans 2024 free agency tracker: Houston makes big splash with DE Danielle Hunter signing"
+          },
+          {
+            "image": "https://a.espncdn.com/photo/2024/0305/r1300526_1296x518_5-2.jpg",
+            "link": "https://www.espn.com/nfl/story/_/id/39584955",
+            "playerID": "2971573",
+            "title": "Texans 2024 free agency tracker: Texans re-sign TE Dalton Schultz ahead of new league year"
+          },
+          {
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/2971573.png",
+            "link": "https://twitter.com/AaronWilson_NFL/status/1765419751751164186",
+            "playerID": "2971573",
+            "title": "Fairbairn is re-signing with Houston on a three-year contract, Aaron Wilson of KPRC 2 Houston reports."
+          },
+          {
+            "image": "https://a.espncdn.com/i/headshots/nfl/players/full/2971573.png",
+            "link": "https://twitter.com/HoustonTexans/status/1736127080520089805",
+            "playerID": "2971573",
+            "title": "Fairbairn (quad) was activated off injured reserve and will kick Sunday against the Titans."
+          }
+        ],
+        "game_stats": {
+          "injury_status": "Injured/Limited",
+          "last_game_played": "20250118_HOU@KC",
+          "recent_games": [
+            {
+              "Kicking": {
+                "fgLong": "48",
+                "fgMade": "2",
+                "fgAttempts": "4",
+                "xpMade": "0",
+                "fgPct": "50.0",
+                "kickingPts": "6",
+                "xpAttempts": "1"
+              },
+              "longName": "Ka'imi Fairbairn",
+              "playerID": "2971573",
+              "scoringPlays": [
+                {
+                  "score": "Ka'imi Fairbairn 30 Yd Field Goal",
+                  "scorePeriod": "Q1",
+                  "homeScore": "3",
+                  "awayScore": "3",
+                  "teamID": "13",
+                  "scoreDetails": "10 plays, 68 yards, 5:17",
+                  "scoreType": "FG",
+                  "scoreTime": "8:41",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Ka'imi Fairbairn 48 Yd Field Goal ",
+                  "scorePeriod": "Q2",
+                  "homeScore": "13",
+                  "awayScore": "6",
+                  "teamID": "13",
+                  "scoreDetails": "9 plays, 41 yards, 4:20",
+                  "scoreType": "FG",
+                  "scoreTime": "0:16",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Joe Mixon 13 Yd Rush (Ka'imi Fairbairn PAT Failed)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "13",
+                  "awayScore": "12",
+                  "teamID": "13",
+                  "scoreDetails": "15 plays, 82 yards, 10:24",
+                  "scoreType": "TD",
+                  "scoreTime": "4:36",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "3116385",
+                    "2971573"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.00",
+                "defSnap": "0",
+                "stSnap": "9",
+                "stSnapPct": "0.35",
+                "offSnap": "0",
+                "defSnapPct": "0.00"
+              },
+              "team": "HOU",
+              "teamAbv": "HOU",
+              "teamID": "13",
+              "gameID": "20250118_HOU@KC"
+            },
+            {
+              "Kicking": {
+                "fgLong": "41",
+                "fgMade": "3",
+                "fgAttempts": "3",
+                "xpMade": "3",
+                "fgPct": "100.0",
+                "kickingPts": "12",
+                "xpAttempts": "3"
+              },
+              "longName": "Ka'imi Fairbairn",
+              "playerID": "2971573",
+              "scoringPlays": [
+                {
+                  "score": "Nico Collins 13 Yd pass from C.J. Stroud (Ka'imi Fairbairn Kick)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "7",
+                  "awayScore": "6",
+                  "teamID": "13",
+                  "scoreDetails": "13 plays, 99 yards, 5:17",
+                  "scoreType": "TD",
+                  "scoreTime": "0:58",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "4432577",
+                    "4258173",
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Ka'imi Fairbairn 41 Yd Field Goal",
+                  "scorePeriod": "Q2",
+                  "homeScore": "10",
+                  "awayScore": "6",
+                  "teamID": "13",
+                  "scoreDetails": "5 plays, 45 yards, 0:24",
+                  "scoreType": "FG",
+                  "scoreTime": "0:03",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Ka'imi Fairbairn 37 Yd Field Goal ",
+                  "scorePeriod": "Q3",
+                  "homeScore": "13",
+                  "awayScore": "6",
+                  "teamID": "13",
+                  "scoreDetails": "10 plays, 46 yards, 5:22",
+                  "scoreType": "FG",
+                  "scoreTime": "4:48",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Eric Murray 38 Yd Interception Return (Ka'imi Fairbairn Kick)",
+                  "scorePeriod": "Q3",
+                  "homeScore": "20",
+                  "awayScore": "6",
+                  "teamID": "13",
+                  "scoreDetails": "1 play, 0 yards, 0:08",
+                  "scoreType": "TD",
+                  "scoreTime": "0:13",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "2970716",
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Ka'imi Fairbairn 30 Yd Field Goal ",
+                  "scorePeriod": "Q4",
+                  "homeScore": "23",
+                  "awayScore": "6",
+                  "teamID": "13",
+                  "scoreDetails": "4 plays, 1 yard, 1:44",
+                  "scoreType": "FG",
+                  "scoreTime": "12:00",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Joe Mixon 17 Yd Rush (Ka'imi Fairbairn Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "32",
+                  "awayScore": "12",
+                  "teamID": "13",
+                  "scoreDetails": "14 plays, 74 yards, 6:56",
+                  "scoreType": "TD",
+                  "scoreTime": "3:42",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "3116385",
+                    "2971573"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.00",
+                "defSnap": "0",
+                "stSnap": "13",
+                "stSnapPct": "0.45",
+                "offSnap": "0",
+                "defSnapPct": "0.00"
+              },
+              "team": "HOU",
+              "teamAbv": "HOU",
+              "teamID": "13",
+              "gameID": "20250111_LAC@HOU"
+            },
+            {
+              "Defense": {
+                "totalTackles": "1",
+                "defTD": "0",
+                "forcedFumbles": "0",
+                "soloTackles": "1",
+                "tfl": "0",
+                "qbHits": "0",
+                "defensiveInterceptions": "0",
+                "sacks": "0",
+                "passDeflections": "0"
+              },
+              "Kicking": {
+                "fgLong": "27",
+                "fgMade": "1",
+                "fgAttempts": "1",
+                "xpMade": "2",
+                "fgPct": "100.0",
+                "kickingPts": "5",
+                "xpAttempts": "3"
+              },
+              "longName": "Ka'imi Fairbairn",
+              "playerID": "2971573",
+              "scoringPlays": [
+                {
+                  "score": "Nico Collins 2 Yd pass from C.J. Stroud (Ka'imi Fairbairn Kick)",
+                  "scorePeriod": "Q1",
+                  "homeScore": "0",
+                  "awayScore": "7",
+                  "teamID": "13",
+                  "scoreDetails": "11 plays, 69 yards, 7:17",
+                  "scoreType": "TD",
+                  "scoreTime": "7:43",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "4432577",
+                    "4258173",
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Dameon Pierce 92 Yd Rush (Ka'imi Fairbairn PAT Failed)",
+                  "scorePeriod": "Q2",
+                  "homeScore": "0",
+                  "awayScore": "13",
+                  "teamID": "13",
+                  "scoreDetails": "1 play, 92 yards, 0:12",
+                  "scoreType": "TD",
+                  "scoreTime": "13:55",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "4360238",
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Ka'imi Fairbairn 27 Yd Field Goal",
+                  "scorePeriod": "Q2",
+                  "homeScore": "3",
+                  "awayScore": "16",
+                  "teamID": "13",
+                  "scoreDetails": "7 plays, 51 yards, 1:41",
+                  "scoreType": "FG",
+                  "scoreTime": "0:00",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "2971573"
+                  ]
+                },
+                {
+                  "score": "Derek Barnett 36 Yd Fumble Recovery (Ka'imi Fairbairn Kick)",
+                  "scorePeriod": "Q4",
+                  "homeScore": "6",
+                  "awayScore": "23",
+                  "teamID": "13",
+                  "scoreDetails": "5 plays, 35 yards, 2:27",
+                  "scoreType": "TD",
+                  "scoreTime": "13:50",
+                  "team": "HOU",
+                  "playerIDs": [
+                    "3115336",
+                    "2971573"
+                  ]
+                }
+              ],
+              "snapCounts": {
+                "offSnapPct": "0.00",
+                "defSnap": "0",
+                "stSnap": "8",
+                "stSnapPct": "0.35",
+                "offSnap": "0",
+                "defSnapPct": "0.00"
+              },
+              "team": "HOU",
+              "teamAbv": "HOU",
+              "teamID": "13",
+              "gameID": "20250105_HOU@TEN"
+            }
+          ],
+          "total_games": 23
+        },
+        "depth_chart": {
+          "depth_position": "PK1",
+          "depth_rank": 1,
+          "opportunity": "High",
+          "total_at_position": 1
+        },
+        "team_context": {
+          "team_performance": "0-1",
+          "division": "South",
+          "conference": "AFC",
+          "fantasy_outlook": "Challenging",
+          "top_performers": {},
+          "current_streak": {
+            "result": "L",
+            "length": "1"
+          }
+        }
+      },
+      "match_type": "direct_id"
+    }
+  ],
+  "unmatched_players": []
+}

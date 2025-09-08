@@ -256,6 +256,44 @@ def match_player(yahoo_name, yahoo_team, sleeper_players):
 - **position**: Position consistency validation
 - **injury_status**: Real-time injury updates
 
+## Team Defense Data
+
+Team defense players in Sleeper have a special structure:
+
+```json
+{
+  "player_id": "DEF_WSH",
+  "first_name": "Washington",
+  "last_name": "Commanders",
+  "full_name": "Washington Commanders",
+  "position": "DEF",
+  "team": "WAS",
+  "age": null,
+  "birth_date": null,
+  "years_exp": null,
+  "height": null,
+  "weight": null,
+  "college": null,
+  "status": "Active",
+  "injury_status": null,
+  "active": true,
+  "sport": "nfl"
+}
+```
+
+**Key Defense Player Fields**:
+- **Name**: Full team name (e.g., "Washington Commanders", "Philadelphia Eagles")
+- **Position**: Always "DEF"
+- **Team**: Team abbreviation (e.g., "WAS", "PHI", "LAR")
+- **Player ID**: Format "DEF_{TEAM_ABBR}" (e.g., "DEF_WSH", "DEF_PHI")
+- **No Individual Stats**: Most individual player fields are null for defense
+
+**Defense Player Identification Patterns**:
+- **Sleeper Team Abbreviations**: Uses uppercase (e.g., "WAS", "PHI", "LAR", "CIN", "JAX")
+- **Team Name Mapping**: Full team names in `full_name` field
+- **Cross-API Matching**: Requires team abbreviation normalization for matching with Yahoo and Tank01
+- **Special Handling**: Defense names converted to team names in ALL CAPS for display
+
 ---
 
 ## Validation Rules

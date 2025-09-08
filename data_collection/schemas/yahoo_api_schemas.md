@@ -565,6 +565,41 @@ for pos_item in selected_position:
 - **Bench Position**: "BN" (Bench)
 - **Unknown**: "Unknown" (fallback for parsing errors)
 
+## Team Defense Data
+
+Team defense players in Yahoo Fantasy have a special structure:
+
+```json
+{
+  "player_key": "461.p.9999",
+  "player_id": "9999",
+  "name": {
+    "full": "Philadelphia",
+    "first": "Philadelphia",
+    "last": ""
+  },
+  "display_position": "DEF",
+  "editorial_team_abbr": "Phi",
+  "bye_weeks": {
+    "week": "10"
+  },
+  "injury_status": "",
+  "percent_owned": "85.2"
+}
+```
+
+**Key Defense Player Fields**:
+- **Name**: Team name only (e.g., "Philadelphia", "Washington", "Los Angeles")
+- **Position**: Always "DEF"
+- **Team**: Team abbreviation in `editorial_team_abbr` (e.g., "Phi", "Was", "LAR")
+- **No Individual Stats**: Defense players don't have individual player statistics
+
+**Defense Player Identification Patterns**:
+- **Yahoo Team Abbreviations**: Uses mixed case (e.g., "Phi", "Was", "LAR", "Cin", "Jax")
+- **Team Name Mapping**: Full team names in `name.full` field
+- **Roster Position**: Defense players appear in roster with `selected_position` containing "DEF"
+- **Cross-API Matching**: Requires team abbreviation normalization for matching with Sleeper and Tank01
+
 **Implementation in ComprehensiveDataProcessor**:
 - **Yahoo Roster Loading**: Extracts `selected_position` from raw roster data
 - **Position Mapping**: Creates `roster_position` field for each player
