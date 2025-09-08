@@ -86,41 +86,15 @@ def format_timestamp_pacific(timestamp):
     except (ValueError, TypeError) as e:
         return f"Invalid timestamp: {timestamp}"
 
-def normalize_team_abbreviation(team_abv):
-    """Normalize team abbreviation to uppercase for API consistency"""
+def normalize_team_abbreviation(team_abv, source_api='yahoo'):
+    """Normalize team abbreviation to standard format using comprehensive mapping"""
     if not team_abv:
         return team_abv
     
-    # Common lowercase to uppercase mappings
-    mappings = {
-        'phi': 'PHI',
-        'was': 'WSH',
-        'gb': 'GB',
-        'den': 'DEN',
-        'chi': 'CHI',
-        'buf': 'BUF',
-        'ind': 'IND',
-        'jax': 'JAX',
-        'ne': 'NE',
-        'cle': 'CLE',
-        'sea': 'SEA',
-        'min': 'MIN',
-        'bal': 'BAL',
-        'tb': 'TB',
-        'atl': 'ATL',
-        'ten': 'TEN',
-        'nyg': 'NYG',
-        'car': 'CAR',
-        'ari': 'ARI',
-        'lac': 'LAC',
-        'dal': 'DAL',
-        'lv': 'LV',
-        'hou': 'HOU',
-        'mia': 'MIA',
-        'lar': 'LAR'
-    }
+    # Import team mapping utility
+    from ..shared.team_mapping import normalize_team_abbreviation as normalize_team
     
-    return mappings.get(team_abv.lower(), team_abv.upper())
+    return normalize_team(team_abv, source_api)
 
 class Tank01AvailablePlayersCollector:
     def __init__(self):

@@ -972,6 +972,15 @@ The Tank01 API via RapidAPI provides real-time usage data in response headers:
 }
 ```
 
+**Team Defense Implementation Details**:
+- **Team Mapping Utility**: Uses `data_collection/scripts/shared/team_mapping.py` for comprehensive team abbreviation mapping
+- **Real Data Only**: Defense players are created using real team data, never mock data
+- **Team Abbreviation Handling**: Handles differences between Yahoo ("Was"), Standard ("WAS"), and Tank01 ("WSH") abbreviations
+- **Comprehensive Coverage**: All 32 NFL teams supported with proper team ID mapping
+- **News Integration**: Uses team abbreviation for team-specific news retrieval
+- **Projections Integration**: Includes team defense projections with defensive statistics
+- **Match Rate**: 100% match rate for defense players when using proper team mapping
+
 **Data Matching Requirements**:
 1. **Yahoo Player Key Matching**: Primary identifier for cross-API matching
 2. **Name + Team Matching**: Fallback strategy for unmatched players

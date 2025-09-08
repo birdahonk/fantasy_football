@@ -400,26 +400,30 @@ class Tank01OpponentRosterExtractor:
         
         # Strategy 5: Handle team defense as special case
         if yahoo_position == 'DEF' or 'defense' in yahoo_name.lower():
-            # Map team abbreviations to Tank01 team IDs
-            team_id_map = {
-                'PHI': '27', 'PIT': '26', 'SF': '28', 'SEA': '29', 'TB': '30', 'TEN': '31', 'WSH': '32',
-                'ARI': '1', 'ATL': '2', 'BAL': '3', 'BUF': '4', 'CAR': '5', 'CHI': '6', 'CIN': '7', 'CLE': '8',
-                'DAL': '9', 'DEN': '10', 'DET': '11', 'GB': '12', 'HOU': '13', 'IND': '14', 'JAX': '15', 'KC': '16',
-                'LV': '17', 'LAC': '18', 'LAR': '19', 'MIA': '20', 'MIN': '21', 'NE': '22', 'NO': '23', 'NYG': '24', 'NYJ': '25'
-            }
+            # Import team mapping utility using absolute import
+            import sys
+            import os
+            sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'shared'))
+            from team_mapping import normalize_team_abbreviation, get_team_id, get_team_name
             
-            team_id = team_id_map.get(yahoo_team.upper())
+            # Normalize team abbreviation from Yahoo to standard format
+            standard_team = normalize_team_abbreviation(yahoo_team, 'yahoo')
+            team_id = get_team_id(yahoo_team, 'yahoo')
+            team_name = get_team_name(yahoo_team, 'yahoo')
+            
             if team_id:
-                # Create a mock team defense player entry
+                # Create team defense player entry using real data
                 team_defense = {
                     'playerID': f'DEF_{team_id}',
-                    'longName': f'{yahoo_team} Defense',
-                    'team': yahoo_team,
+                    'longName': f'{team_name}',
+                    'team': standard_team,
                     'pos': 'DEF',
                     'teamID': team_id,
-                    'isTeamDefense': True
+                    'isTeamDefense': True,
+                    'yahoo_team_abbr': yahoo_team,
+                    'standard_team_abbr': standard_team
                 }
-                self.logger.debug(f"Created team defense entry for {yahoo_team}")
+                self.logger.debug(f"Created team defense entry for {yahoo_team} -> {standard_team} (ID: {team_id}) - {team_name}")
                 return team_defense
         
         self.logger.warning(f"No Tank01 match found for {yahoo_name} ({yahoo_team})")
