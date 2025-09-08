@@ -533,6 +533,44 @@ player.get('bye_weeks', {}).get('bye_week', 'N/A')  // ❌ This will fail!
 - **Bye Week Extraction**: ✅ **FIXED** - Correctly extracts from `bye_weeks.week` and stores as `bye_week`
 - **Position Parsing**: ✅ **WORKING** - Correctly identifies starting positions vs bench
 
+### ⚠️ **CRITICAL: Roster Position Parsing**
+
+**Selected Position Structure**:
+```json
+"selected_position": [
+  {
+    "coverage_type": "week",
+    "week": "1"
+  },
+  {
+    "position": "QB"  // ← This is the actual roster position!
+  }
+]
+```
+
+**Correct Parsing Logic**:
+```python
+# WRONG: Taking first item
+position = selected_position[0].get('position')  # Returns "week"
+
+# CORRECT: Search for object with 'position' key
+for pos_item in selected_position:
+    if 'position' in pos_item:
+        actual_position = pos_item['position']  # Returns "QB"
+        break
+```
+
+**Roster Position Values**:
+- **Starting Positions**: "QB", "RB", "WR", "TE", "K", "DEF", "FLEX"
+- **Bench Position**: "BN" (Bench)
+- **Unknown**: "Unknown" (fallback for parsing errors)
+
+**Implementation in ComprehensiveDataProcessor**:
+- **Yahoo Roster Loading**: Extracts `selected_position` from raw roster data
+- **Position Mapping**: Creates `roster_position` field for each player
+- **Roster Organization**: Groups players into `starting_lineup` vs `bench_players`
+- **Validation**: Ensures position consistency across data sources
+
 ---
 
 **Note**: This schema represents the expected "perfect" response. Scripts should extract ALL available data from the actual response and validate against this schema to identify any missing or changed fields.

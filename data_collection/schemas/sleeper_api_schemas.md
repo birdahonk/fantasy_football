@@ -214,6 +214,19 @@ This document defines the expected response structures for Sleeper NFL API endpo
   - **Defense Names**: Team names in ALL CAPS (e.g., "ARIZONA", "NEW ENGLAND")
 - **Enhanced Fields**: Same comprehensive data as my_roster script for all available players
 
+### ✅ **Opponent Roster Script**: COMPLETE - All data extracted successfully
+- **Script**: `sleeper_opponent_roster.py`
+- **Data Quality**: 15/15 players matched (100% success rate)
+- **Performance**: 0.60s execution, 0 errors
+- **Data Source**: Latest Yahoo opponent_rosters.py output
+- **Current Week Opponent**: Automatically identifies current week opponent from Yahoo team matchups
+- **Output Structure**:
+  - **Matched Players**: Array of opponent players with Sleeper enrichment
+  - **Yahoo Player Data**: Original Yahoo player information
+  - **Sleeper Player Data**: Enhanced Sleeper metadata and injury status
+  - **Team Context**: Opponent team name and identification
+- **Enhanced Fields**: Same comprehensive data as my_roster script for opponent players
+
 ### For Available Players:
 1. **Get Yahoo free agents list**
 2. **Match to Sleeper database**

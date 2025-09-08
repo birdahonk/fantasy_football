@@ -172,6 +172,68 @@ Team defense players have a different data structure than individual players:
 - Detailed stat breakdowns by category
 - Separate team defense projections
 
+**⚠️ CRITICAL: Fantasy Projections Integration**
+
+**Data Collection Scripts MUST Include Fantasy Projections**:
+- **My Roster Script**: ✅ **IMPLEMENTED** - Loads weekly projections and adds `fantasy_projections` to each player
+- **Available Players Script**: ✅ **IMPLEMENTED** - Loads weekly projections and adds `fantasy_projections` to each player  
+- **Opponent Roster Script**: ✅ **IMPLEMENTED** - Loads weekly projections and adds `fantasy_projections` to each player
+
+**Fantasy Projections Data Structure in Player Profiles**:
+```json
+{
+  "fantasy_projections": {
+    "fantasyPoints": "number",
+    "fantasyPointsDefault": {
+      "standard": "number",
+      "PPR": "number", 
+      "halfPPR": "number"
+    },
+    "Passing": {
+      "passAttempts": "number",
+      "passTD": "number",
+      "passYds": "number",
+      "int": "number",
+      "passCompletions": "number"
+    },
+    "Rushing": {
+      "rushYds": "number",
+      "carries": "number",
+      "rushTD": "number"
+    },
+    "Receiving": {
+      "receptions": "number",
+      "recTD": "number",
+      "targets": "number",
+      "recYds": "number"
+    }
+  }
+}
+```
+
+**Team Defense Fantasy Projections**:
+```json
+{
+  "fantasy_projections": {
+    "fantasyPoints": "number",
+    "defTD": "number",
+    "sacks": "number",
+    "int": "number",
+    "fumblesRecovered": "number",
+    "safeties": "number",
+    "pointsAllowed": "number",
+    "yardsAllowed": "number"
+  }
+}
+```
+
+**Implementation Requirements**:
+1. **Weekly Projections Loading**: Scripts must call `getNFLProjections(week=current_week, archiveSeason=2025)` at startup
+2. **Projections Caching**: Cache projections data to avoid repeated API calls
+3. **Player Matching**: Match each player's `playerID` to projections data
+4. **Data Integration**: Add `fantasy_projections` field to each player's `tank01_data` section
+5. **Markdown Display**: Include fantasy projections in markdown reports with proper formatting
+
 ### 3. Player Game Stats (`getNFLGamesForPlayer`)
 
 **Purpose**: Get historical game statistics for a specific player.
@@ -727,6 +789,200 @@ The Tank01 API via RapidAPI provides real-time usage data in response headers:
 - **Timezone Support**: Displays reset times in Pacific Time Zone
 - **Countdown Format**: Reset timestamp is seconds until reset, not Unix timestamp
 - **Current Time Display**: Shows current time in Pacific Time Zone for context
+
+## Optimized Player Profile Data Structure
+
+### Comprehensive Data Integration Schema
+
+**Purpose**: Documents the complete data structure used in the `ComprehensiveDataProcessor` for optimized player profiles that combine Yahoo, Sleeper, and Tank01 data.
+
+**Data Sources Integration**:
+- **Yahoo Fantasy Sports API**: Base player data, roster positions, team info
+- **Sleeper NFL API**: Enhanced player metadata, injury status, depth chart positions
+- **Tank01 NFL API**: Fantasy projections, news, game stats, team context
+
+**Complete Player Profile Structure**:
+```json
+{
+  "yahoo_data": {
+    "player_key": "string",
+    "player_id": "string", 
+    "name": {
+      "full": "string",
+      "first": "string",
+      "last": "string"
+    },
+    "display_position": "string",
+    "team": "string",
+    "bye_week": "string",
+    "injury_status": "string",
+    "percent_owned": "string"
+  },
+  "sleeper_data": {
+    "player_id": "string",
+    "name": "string",
+    "position": "string",
+    "team": "string",
+    "team_abbr": "string",
+    "depth_chart_position": "string",
+    "injury_status": "string",
+    "status": "string",
+    "active": "boolean",
+    "years_exp": "number",
+    "age": "number",
+    "height": "string",
+    "weight": "string",
+    "college": "string",
+    "birth_date": "string",
+    "fantasy_positions": ["string"],
+    "player_ids": {
+      "sleeper_id": "string",
+      "yahoo_id": "string",
+      "espn_id": "string",
+      "sportradar_id": "string",
+      "gsis_id": "string",
+      "rotowire_id": "string",
+      "fantasy_data_id": "string",
+      "pandascore_id": "string",
+      "oddsjam_id": "string"
+    }
+  },
+  "tank01_data": {
+    "player_id": "string",
+    "name": {
+      "full": "string",
+      "first": "string", 
+      "last": "string"
+    },
+    "display_position": "string",
+    "team": "string",
+    "team_id": "string",
+    "jersey_number": "string",
+    "age": "string",
+    "height": "string",
+    "weight": "string",
+    "college": "string",
+    "years_exp": "string",
+    "last_game_played": "string",
+    "injury": "object",
+    "fantasy_projections": {
+      "fantasyPoints": "number",
+      "fantasyPointsDefault": {
+        "standard": "number",
+        "PPR": "number",
+        "halfPPR": "number"
+      },
+      "Passing": {
+        "passAttempts": "number",
+        "passTD": "number",
+        "passYds": "number",
+        "int": "number",
+        "passCompletions": "number"
+      },
+      "Rushing": {
+        "rushYds": "number",
+        "carries": "number",
+        "rushTD": "number"
+      },
+      "Receiving": {
+        "receptions": "number",
+        "recTD": "number",
+        "targets": "number",
+        "recYds": "number"
+      }
+    },
+    "recent_news": [
+      {
+        "title": "string",
+        "link": "string",
+        "date": "string"
+      }
+    ],
+    "game_stats": "object",
+    "depth_chart": "object",
+    "team_context": "object",
+    "player_ids": {
+      "espn_id": "string",
+      "sleeper_id": "string",
+      "fantasypros_id": "string",
+      "yahoo_id": "string",
+      "rotowire_id": "string",
+      "cbs_id": "string",
+      "fref_id": "string"
+    }
+  },
+  "roster_position": "string"
+}
+```
+
+**Roster Organization Structure**:
+```json
+{
+  "players_by_position": {
+    "starting_lineup": {
+      "QB": [player_profile],
+      "RB": [player_profile],
+      "WR": [player_profile],
+      "TE": [player_profile],
+      "K": [player_profile],
+      "DEF": [player_profile],
+      "FLEX": [player_profile]
+    },
+    "bench_players": {
+      "QB": [player_profile],
+      "RB": [player_profile],
+      "WR": [player_profile],
+      "TE": [player_profile],
+      "K": [player_profile],
+      "DEF": [player_profile]
+    }
+  }
+}
+```
+
+**Team Defense Special Handling**:
+```json
+{
+  "tank01_data": {
+    "player_id": "DEF_27",
+    "name": {
+      "full": "Philadelphia Defense"
+    },
+    "display_position": "DEF",
+    "team": "PHI",
+    "team_id": "27",
+    "fantasy_projections": {
+      "fantasyPoints": "number",
+      "defTD": "number",
+      "sacks": "number",
+      "int": "number",
+      "fumblesRecovered": "number",
+      "safeties": "number",
+      "pointsAllowed": "number",
+      "yardsAllowed": "number"
+    },
+    "recent_news": [
+      {
+        "title": "string",
+        "link": "string",
+        "date": "string"
+      }
+    ]
+  }
+}
+```
+
+**Data Matching Requirements**:
+1. **Yahoo Player Key Matching**: Primary identifier for cross-API matching
+2. **Name + Team Matching**: Fallback strategy for unmatched players
+3. **Position Validation**: Ensure position consistency across APIs
+4. **Team Abbreviation Normalization**: Handle case differences (PHI vs phi)
+
+**Token Optimization Strategy**:
+- **Selective Data Inclusion**: Only include essential fields for analysis
+- **Position-Based Limits**: Configurable limits per position (20 QB/RB/WR/TE/K, 10 DEF)
+- **Structured Organization**: Group players by roster status and position
+- **Comprehensive Enrichment**: 100% data matching across all three APIs
 
 ## Latest Development Learnings (September 2025)
 
