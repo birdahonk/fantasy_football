@@ -118,7 +118,7 @@ class Tank01AvailablePlayersCollector:
     def load_yahoo_available_players(self) -> Dict[str, Any]:
         """Load the latest Yahoo available players data"""
         try:
-            # Find the latest available players file
+            # Find the latest available players file using the new YYYY/MM/DD structure
             # Get the data_collection root directory
             script_dir = Path(__file__).parent
             data_collection_root = script_dir.parent.parent
@@ -127,8 +127,8 @@ class Tank01AvailablePlayersCollector:
             if not outputs_dir.exists():
                 raise FileNotFoundError(f"Yahoo available players output directory not found: {outputs_dir}")
             
-            # Get the most recent file
-            files = list(outputs_dir.glob("*_available_players_raw_data.json"))
+            # Get the most recent file using recursive search
+            files = list(outputs_dir.glob("**/*_available_players_raw_data.json"))
             if not files:
                 raise FileNotFoundError("No Yahoo available players raw data files found")
             
@@ -537,7 +537,11 @@ class Tank01AvailablePlayersCollector:
                         'news': news,
                         'game_stats': game_stats,
                         'depth_chart': depth_chart,
-                        'team_context': team_context
+                        'team_context': team_context,
+                        # Add top-level fields for easier access
+                        'display_position': yahoo_player.get('display_position', 'Unknown'),
+                        'name': yahoo_player.get('name', {}),
+                        'team': yahoo_player.get('editorial_team_abbr', 'Unknown')
                     }
                     
                     processed_data[section_name].append(enriched_player)
