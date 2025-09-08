@@ -210,25 +210,25 @@ class AnalystTools:
         """Find the most recent files for each data type"""
         recent_files = {}
         
-        # Define file patterns to look for
+        # Define file patterns to look for (using ** for recursive search in YYYY/MM/DD structure)
         patterns = {
-            "yahoo_roster": "yahoo/my_roster/*_my_roster_raw_data.json",
-            "yahoo_available": "yahoo/available_players/*_available_players_raw_data.json",
-            "yahoo_opponents": "yahoo/opponent_rosters/*_opponent_rosters_raw_data.json",
-            "yahoo_matchups": "yahoo/team_matchups/*_team_matchups_raw_data.json",
-            "yahoo_transactions": "yahoo/transaction_trends/*_transaction_trends_raw_data.json",
-            "sleeper_roster": "sleeper/my_roster/*_my_roster_raw_data.json",
-            "sleeper_available": "sleeper/available_players/*_available_players_raw_data.json",
-            "sleeper_trending": "sleeper/trending/*_trending_raw_data.json",
-            "tank01_roster": "tank01/my_roster/*_my_roster_raw_data.json",
-            "tank01_available": "tank01/available_players/*_available_players_raw_data.json"
+            "yahoo_roster": "yahoo/my_roster/**/*_my_roster_raw_data.json",
+            "yahoo_available": "yahoo/available_players/**/*_available_players_raw_data.json",
+            "yahoo_opponents": "yahoo/opponent_rosters/**/*_opponent_rosters_raw_data.json",
+            "yahoo_matchups": "yahoo/team_matchups/**/*_team_matchups_raw_data.json",
+            "yahoo_transactions": "yahoo/transaction_trends/**/*_transaction_trends_raw_data.json",
+            "sleeper_roster": "sleeper/my_roster/**/*_my_roster_raw_data.json",
+            "sleeper_available": "sleeper/available_players/**/*_available_players_raw_data.json",
+            "sleeper_trending": "sleeper/trending/**/*_trending_raw_data.json",
+            "tank01_roster": "tank01/my_roster/**/*_my_roster_raw_data.json",
+            "tank01_available": "tank01/available_players/**/*_available_players_raw_data.json"
         }
         
         for data_type, pattern in patterns.items():
             try:
-                # Find most recent file matching pattern
+                # Find most recent file matching pattern with recursive search for YYYY/MM/DD structure
                 import glob
-                files = glob.glob(os.path.join(self.outputs_dir, pattern))
+                files = glob.glob(os.path.join(self.outputs_dir, pattern), recursive=True)
                 if files:
                     # Sort by modification time, get most recent
                     most_recent = max(files, key=os.path.getmtime)

@@ -312,8 +312,15 @@ def analyze_current_data_structure():
     
     # Check Yahoo player data
     try:
-        with open("data_collection/outputs/yahoo/available_players/20250905_140659_available_players_raw_data.json", 'r') as f:
-            yahoo_data = json.load(f)
+        import glob
+        yahoo_files = glob.glob("data_collection/outputs/yahoo/available_players/**/*_raw_data.json", recursive=True)
+        if yahoo_files:
+            latest_yahoo = max(yahoo_files, key=lambda x: x.split('/')[-1])
+            with open(latest_yahoo, 'r') as f:
+                yahoo_data = json.load(f)
+        else:
+            print("No Yahoo available players data found")
+            return
         
         if "available_players" in yahoo_data and yahoo_data["available_players"]:
             sample_yahoo = yahoo_data["available_players"][0]
@@ -325,8 +332,14 @@ def analyze_current_data_structure():
     
     # Check Sleeper player data
     try:
-        with open("data_collection/outputs/sleeper/available_players/20250905_140711_available_players_raw_data.json", 'r') as f:
-            sleeper_data = json.load(f)
+        sleeper_files = glob.glob("data_collection/outputs/sleeper/available_players/**/*_raw_data.json", recursive=True)
+        if sleeper_files:
+            latest_sleeper = max(sleeper_files, key=lambda x: x.split('/')[-1])
+            with open(latest_sleeper, 'r') as f:
+                sleeper_data = json.load(f)
+        else:
+            print("No Sleeper available players data found")
+            return
         
         if "available_players" in sleeper_data and sleeper_data["available_players"]:
             sample_sleeper = sleeper_data["available_players"][0]
@@ -338,8 +351,14 @@ def analyze_current_data_structure():
     
     # Check Tank01 player data
     try:
-        with open("data_collection/outputs/tank01/available_players/20250905_140853_available_players_raw_data.json", 'r') as f:
-            tank01_data = json.load(f)
+        tank01_files = glob.glob("data_collection/outputs/tank01/available_players/**/*_raw_data.json", recursive=True)
+        if tank01_files:
+            latest_tank01 = max(tank01_files, key=lambda x: x.split('/')[-1])
+            with open(latest_tank01, 'r') as f:
+                tank01_data = json.load(f)
+        else:
+            print("No Tank01 available players data found")
+            return
         
         if "available_players" in tank01_data and tank01_data["available_players"]:
             sample_tank01 = tank01_data["available_players"][0]

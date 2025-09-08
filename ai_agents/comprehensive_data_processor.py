@@ -696,10 +696,11 @@ class ComprehensiveDataProcessor:
         return []
     
     def _find_latest_file(self, subdirectory: str, pattern: str) -> Optional[str]:
-        """Find the latest file matching pattern in subdirectory"""
+        """Find the latest file matching pattern in subdirectory with YYYY/MM/DD structure"""
         try:
             directory = os.path.join(self.data_dir, subdirectory)
-            files = glob.glob(f"{directory}/{pattern}")
+            # Use recursive search to find files in YYYY/MM/DD subdirectories
+            files = glob.glob(f"{directory}/**/{pattern}", recursive=True)
             if files:
                 return max(files, key=os.path.getctime)
         except Exception as e:

@@ -281,11 +281,11 @@ class OptimizedPlayerProfiles:
         return None
     
     def _find_latest_file(self, directory: str, pattern: str) -> Optional[str]:
-        """Find the latest file matching pattern in directory"""
+        """Find the latest file matching pattern in directory with YYYY/MM/DD structure"""
         import glob
         import os
         
-        files = glob.glob(f"{directory}/{pattern}")
+        files = glob.glob(f"{directory}/**/{pattern}", recursive=True)
         if not files:
             return None
         
