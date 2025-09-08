@@ -16,8 +16,17 @@ import sys
 import json
 import glob
 import logging
+import argparse
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, List, Any, Optional
+
+# Add the project root to the Python path
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+# Import player limits from config
+from config.player_limits import DEFAULT_PLAYER_LIMITS, get_player_limits
 
 # Add shared utilities to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'shared'))
@@ -26,16 +35,70 @@ from sleeper_client import SimpleSleeperClient
 from data_formatter import MarkdownFormatter
 from file_utils import DataFileManager
 
+# Configuration
+DEVELOPMENT_MODE = False  # Set to False for production
+
+def parse_arguments():
+    """Parse command line arguments for configurable player limits"""
+    parser = argparse.ArgumentParser(description='Sleeper Available Players Data Extraction')
+    
+    # Individual position limits
+    parser.add_argument('--qb', type=int, help='Number of QB players to collect (default: 20)')
+    parser.add_argument('--rb', type=int, help='Number of RB players to collect (default: 20)')
+    parser.add_argument('--wr', type=int, help='Number of WR players to collect (default: 20)')
+    parser.add_argument('--te', type=int, help='Number of TE players to collect (default: 20)')
+    parser.add_argument('--k', type=int, help='Number of K players to collect (default: 20)')
+    parser.add_argument('--defense', type=int, help='Number of DEF players to collect (default: 10)')
+    parser.add_argument('--flex', type=int, help='Number of FLEX players to collect (default: 15)')
+    
+    # Bulk limit
+    parser.add_argument('--all', type=int, help='Set all positions to this number (overrides individual limits)')
+    
+    # Development mode
+    parser.add_argument('--dev', action='store_true', help='Enable development mode (reduced limits)')
+    
+    args = parser.parse_args()
+    
+    # Get default limits
+    if args.dev:
+        player_limits = {"QB": 2, "RB": 2, "WR": 2, "TE": 2, "K": 2, "DEF": 2, "FLEX": 2}
+    else:
+        player_limits = get_player_limits()
+    
+    # Apply bulk limit if specified
+    if args.all:
+        player_limits = {pos: args.all for pos in player_limits.keys()}
+    
+    # Apply individual limits if specified
+    if args.qb is not None:
+        player_limits['QB'] = args.qb
+    if args.rb is not None:
+        player_limits['RB'] = args.rb
+    if args.wr is not None:
+        player_limits['WR'] = args.wr
+    if args.te is not None:
+        player_limits['TE'] = args.te
+    if args.k is not None:
+        player_limits['K'] = args.k
+    if args.defense is not None:
+        player_limits['DEF'] = args.defense
+    if args.flex is not None:
+        player_limits['FLEX'] = args.flex
+    
+    return player_limits
 
 class SleeperAvailablePlayersExtractor:
     """Loads Yahoo available players and enriches with comprehensive Sleeper data."""
 
-    def __init__(self) -> None:
+    def __init__(self, player_limits: Dict[str, int] = None) -> None:
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         )
         self.logger = logging.getLogger(__name__)
+        
+        # Set player limits (use defaults if not provided)
+        self.player_limits = player_limits or get_player_limits()
 
         self.sleeper = SimpleSleeperClient()
         self.formatter = MarkdownFormatter()
@@ -50,6 +113,34 @@ class SleeperAvailablePlayersExtractor:
             'players_matched': 0,
             'players_unmatched': 0
         }
+    
+    def _filter_players_by_position_limits(self, players: List[Dict]) -> List[Dict]:
+        """Filter players by position-based limits"""
+        position_counts = {pos: 0 for pos in self.player_limits.keys()}
+        filtered_players = []
+        
+        for player in players:
+            position = player.get('display_position', 'Unknown')
+            
+            # Handle multi-position players (FLEX)
+            if position in ['W/R/T', 'W/R', 'Q/W/R/T']:
+                position = 'FLEX'
+            
+            # Check if we need more players for this position
+            if position in position_counts and position_counts[position] < self.player_limits[position]:
+                filtered_players.append(player)
+                position_counts[position] += 1
+                
+                # Log progress for first few players of each position
+                if position_counts[position] <= 3:
+                    self.logger.info(f"  Added {position} player {position_counts[position]}: {player.get('name', {}).get('full', 'Unknown')}")
+        
+        # Log final counts
+        for position, count in position_counts.items():
+            limit = self.player_limits[position]
+            self.logger.info(f"  {position}: {count}/{limit} players")
+        
+        return filtered_players
 
     def extract_all_data(self) -> Dict[str, Any]:
         """Load latest Yahoo available players, match to Sleeper, return consolidated data."""
@@ -63,6 +154,11 @@ class SleeperAvailablePlayersExtractor:
 
             self.execution_stats['yahoo_players_loaded'] = len(yahoo_players)
             self.logger.info(f"📄 Loaded {len(yahoo_players)} Yahoo available players")
+            
+            # Apply position-based limits
+            self.logger.info(f"🔍 Applying position-based limits: {self.player_limits}")
+            yahoo_players = self._filter_players_by_position_limits(yahoo_players)
+            self.logger.info(f"📊 Filtered to {len(yahoo_players)} players after position limits")
 
             matched_players: List[Dict[str, Any]] = []
             unmatched_players: List[Dict[str, Any]] = []
@@ -244,8 +340,8 @@ class SleeperAvailablePlayersExtractor:
                 os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'available_players'
             )
             base_dir = os.path.abspath(base_dir)
-            pattern = os.path.join(base_dir, '*_available_players_raw_data.json')
-            files = sorted(glob.glob(pattern))
+            pattern = os.path.join(base_dir, '**', '*_available_players_raw_data.json')
+            files = sorted(glob.glob(pattern, recursive=True))
             if not files:
                 return None
             
@@ -263,8 +359,8 @@ class SleeperAvailablePlayersExtractor:
                 os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'available_players'
             )
             base_dir = os.path.abspath(base_dir)
-            pattern = os.path.join(base_dir, '*_available_players_raw_data.json')
-            files = sorted(glob.glob(pattern))
+            pattern = os.path.join(base_dir, '**', '*_available_players_raw_data.json')
+            files = sorted(glob.glob(pattern, recursive=True))
             if not files:
                 self.logger.error(f"No Yahoo available players raw files found at {pattern}")
                 return []
@@ -586,7 +682,15 @@ class SleeperAvailablePlayersExtractor:
 
 
 def main() -> None:
-    extractor = SleeperAvailablePlayersExtractor()
+    # Parse command line arguments
+    player_limits = parse_arguments()
+    
+    # Create extractor with configurable limits
+    extractor = SleeperAvailablePlayersExtractor(player_limits)
+    
+    # Show configuration
+    print(f"🎯 Player Limits: {player_limits}")
+    
     data = extractor.extract_all_data()
     if data:
         ok = extractor.save_data(data)
