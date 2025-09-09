@@ -395,7 +395,15 @@ class SimpleTank01Client:
                     "xpMade": 1,
                     "xpMissed": -1,
                     "fgMade": 3,
-                    "fgMissed": -3
+                    "fgMissed": -3,
+                    "idpTotalTackles": 1,
+                    "idpSoloTackles": 1,
+                    "idpTFL": 1,
+                    "idpQbHits": 1,
+                    "idpInt": 1,
+                    "idpSacks": 1,
+                    "idpPassDeflections": 1,
+                    "idpFumblesRecovered": 1
                 }
                 
                 # Override with custom scoring if provided
