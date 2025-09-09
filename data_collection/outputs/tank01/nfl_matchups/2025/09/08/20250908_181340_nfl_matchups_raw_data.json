@@ -1,0 +1,3822 @@
+{
+  "season_context": {
+    "current_week": 1,
+    "season": "2025",
+    "season_type": "Regular Season",
+    "extraction_date": "2025-09-08T18:13:40.504477"
+  },
+  "games": [
+    {
+      "game_id": "20250905_KC@LAC",
+      "date": "20250905",
+      "week": 1,
+      "season": "2025",
+      "home_team": "LAC",
+      "away_team": "KC",
+      "venue": "Corinthians Arena",
+      "game_time_et": "8:00p",
+      "game_time_pt": "05:00p",
+      "game_time_epoch": "1757116800.0",
+      "game_time_utc": "2025-09-06T00:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "True",
+      "espn_id": "401772714",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772714",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250905_KC@LAC",
+      "team_id_home": "18",
+      "team_id_away": "16",
+      "top_performers": {
+        "KC": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3139477"
+              ],
+              "total": "39"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3139477"
+              ],
+              "total": "24"
+            },
+            "passTD": {
+              "playerID": [
+                "3139477"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "3139477"
+              ],
+              "total": "258"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3139477"
+              ],
+              "total": "6"
+            },
+            "rushTD": {
+              "playerID": [
+                "3139477"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "3139477"
+              ],
+              "total": "57"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4241372"
+              ],
+              "total": "10"
+            },
+            "recTD": {
+              "playerID": [
+                "15847"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4241372"
+              ],
+              "total": "99"
+            },
+            "targets": {
+              "playerID": [
+                "4241372"
+              ],
+              "total": "16"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4426405",
+                "4697639"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "3129310"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "3129310"
+              ],
+              "total": "2"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4361964"
+              ],
+              "total": "7"
+            },
+            "tfl": {
+              "playerID": [
+                "3129310",
+                "4426659"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4361964"
+              ],
+              "total": "10"
+            }
+          }
+        },
+        "LAC": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4038941"
+              ],
+              "total": "34"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4038941"
+              ],
+              "total": "25"
+            },
+            "passTD": {
+              "playerID": [
+                "4038941"
+              ],
+              "total": "3"
+            },
+            "passYds": {
+              "playerID": [
+                "4038941"
+              ],
+              "total": "318"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4685382"
+              ],
+              "total": "15"
+            },
+            "rushYds": {
+              "playerID": [
+                "4685382"
+              ],
+              "total": "48"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "15818"
+              ],
+              "total": "7"
+            },
+            "recTD": {
+              "playerID": [
+                "4429025"
+              ],
+              "total": "2"
+            },
+            "recYds": {
+              "playerID": [
+                "4429025"
+              ],
+              "total": "79"
+            },
+            "targets": {
+              "playerID": [
+                "15818"
+              ],
+              "total": "10"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4374269"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "4431442",
+                "3126352",
+                "3691739"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "4241597",
+                "3126352"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3691739"
+              ],
+              "total": "5"
+            },
+            "tfl": {
+              "playerID": [
+                "4241597",
+                "3126352",
+                "3691739"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4039413"
+              ],
+              "total": "9"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_CAR@JAX",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "JAX",
+      "away_team": "CAR",
+      "venue": "EverBank Stadium",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772828",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772828",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_CAR@JAC",
+      "team_id_home": "15",
+      "team_id_away": "5",
+      "top_performers": {
+        "CAR": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "4685720"
+              ],
+              "total": "2"
+            },
+            "passAttempts": {
+              "playerID": [
+                "4685720"
+              ],
+              "total": "35"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4685720"
+              ],
+              "total": "18"
+            },
+            "passTD": {
+              "playerID": [
+                "4685720"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4685720"
+              ],
+              "total": "154"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4241416"
+              ],
+              "total": "16"
+            },
+            "rushYds": {
+              "playerID": [
+                "4241416"
+              ],
+              "total": "57"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4685472"
+              ],
+              "total": "5"
+            },
+            "recTD": {
+              "playerID": [
+                "4241416"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4685472"
+              ],
+              "total": "68"
+            },
+            "targets": {
+              "playerID": [
+                "4685472"
+              ],
+              "total": "9"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "4362847"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "3917853",
+                "4038849",
+                "3116179",
+                "4362847"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "3054857"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4362487",
+                "3909013"
+              ],
+              "total": "7"
+            },
+            "tfl": {
+              "playerID": [
+                "3917853"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4362487"
+              ],
+              "total": "11"
+            }
+          }
+        },
+        "JAX": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "4360310"
+              ],
+              "total": "1"
+            },
+            "passAttempts": {
+              "playerID": [
+                "4360310"
+              ],
+              "total": "31"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4360310"
+              ],
+              "total": "19"
+            },
+            "passTD": {
+              "playerID": [
+                "4360310"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4360310"
+              ],
+              "total": "178"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4239996"
+              ],
+              "total": "16"
+            },
+            "rushTD": {
+              "playerID": [
+                "4432773"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4239996"
+              ],
+              "total": "143"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4685415"
+              ],
+              "total": "6"
+            },
+            "recTD": {
+              "playerID": [
+                "4239944"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4430539"
+              ],
+              "total": "59"
+            },
+            "targets": {
+              "playerID": [
+                "4685415"
+              ],
+              "total": "8"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "3050073",
+                "3045207"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "3045207"
+              ],
+              "total": "3"
+            },
+            "qbHits": {
+              "playerID": [
+                "3042476",
+                "3915239",
+                "2971275",
+                "2970716",
+                "3045207"
+              ],
+              "total": "1"
+            },
+            "sacks": {
+              "playerID": [
+                "3042476"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3050073"
+              ],
+              "total": "6"
+            },
+            "tfl": {
+              "playerID": [
+                "3042476",
+                "4379397"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "3050073"
+              ],
+              "total": "10"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_CIN@CLE",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "CLE",
+      "away_team": "CIN",
+      "venue": "Huntington Bank Field",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772829",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772829",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_CIN@CLE",
+      "team_id_home": "8",
+      "team_id_away": "7",
+      "top_performers": {
+        "CIN": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3915511"
+              ],
+              "total": "23"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3915511"
+              ],
+              "total": "14"
+            },
+            "passTD": {
+              "playerID": [
+                "3915511"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "3915511"
+              ],
+              "total": "113"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4362238"
+              ],
+              "total": "21"
+            },
+            "rushTD": {
+              "playerID": [
+                "4362238"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4362238"
+              ],
+              "total": "43"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4036131"
+              ],
+              "total": "4"
+            },
+            "recTD": {
+              "playerID": [
+                "4036131"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4239993"
+              ],
+              "total": "33"
+            },
+            "targets": {
+              "playerID": [
+                "4036131",
+                "4362628"
+              ],
+              "total": "5"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "4572036",
+                "4567098"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "4572036",
+                "3918330"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "3052743"
+              ],
+              "total": "3"
+            },
+            "sacks": {
+              "playerID": [
+                "3052743",
+                "3116748"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4427729"
+              ],
+              "total": "8"
+            },
+            "tfl": {
+              "playerID": [
+                "3052743",
+                "3116748",
+                "17230",
+                "3051746"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4567098"
+              ],
+              "total": "12"
+            }
+          }
+        },
+        "CLE": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "11252"
+              ],
+              "total": "2"
+            },
+            "passAttempts": {
+              "playerID": [
+                "11252"
+              ],
+              "total": "45"
+            },
+            "passCompletions": {
+              "playerID": [
+                "11252"
+              ],
+              "total": "31"
+            },
+            "passTD": {
+              "playerID": [
+                "11252"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "11252"
+              ],
+              "total": "290"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "5081397"
+              ],
+              "total": "12"
+            },
+            "rushTD": {
+              "playerID": [
+                "4601080"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "5081397"
+              ],
+              "total": "29"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "5081397"
+              ],
+              "total": "8"
+            },
+            "recTD": {
+              "playerID": [
+                "4369863"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4241463"
+              ],
+              "total": "66"
+            },
+            "targets": {
+              "playerID": [
+                "5083076"
+              ],
+              "total": "9"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4361266"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "3122132"
+              ],
+              "total": "3"
+            },
+            "sacks": {
+              "playerID": [
+                "3122132"
+              ],
+              "total": "2"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3122132"
+              ],
+              "total": "5"
+            },
+            "tfl": {
+              "playerID": [
+                "3122132"
+              ],
+              "total": "4"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4876017"
+              ],
+              "total": "8"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_MIA@IND",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "IND",
+      "away_team": "MIA",
+      "venue": "Lucas Oil Stadium",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772719",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772719",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_MIA@IND",
+      "team_id_home": "14",
+      "team_id_away": "20",
+      "top_performers": {
+        "MIA": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "4241479"
+              ],
+              "total": "2"
+            },
+            "passAttempts": {
+              "playerID": [
+                "4241479"
+              ],
+              "total": "23"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4241479"
+              ],
+              "total": "14"
+            },
+            "passTD": {
+              "playerID": [
+                "4241479"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4241479"
+              ],
+              "total": "114"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4429160"
+              ],
+              "total": "7"
+            },
+            "rushYds": {
+              "playerID": [
+                "4429160"
+              ],
+              "total": "55"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3116406",
+                "4372016"
+              ],
+              "total": "4"
+            },
+            "recTD": {
+              "playerID": [
+                "4429160"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "3116406"
+              ],
+              "total": "40"
+            },
+            "targets": {
+              "playerID": [
+                "3116406"
+              ],
+              "total": "6"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4035686",
+                "3943270",
+                "3925345",
+                "4427103"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "3116733",
+                "4432730"
+              ],
+              "total": "1"
+            },
+            "sacks": {
+              "playerID": [
+                "3116733"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3925345",
+                "4035232",
+                "4240401"
+              ],
+              "total": "6"
+            },
+            "tfl": {
+              "playerID": [
+                "3116733",
+                "3858271",
+                "4043130",
+                "4035232"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4043130"
+              ],
+              "total": "14"
+            }
+          }
+        },
+        "IND": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3917792"
+              ],
+              "total": "29"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3917792"
+              ],
+              "total": "22"
+            },
+            "passTD": {
+              "playerID": [
+                "3917792"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "3917792"
+              ],
+              "total": "272"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4242335"
+              ],
+              "total": "18"
+            },
+            "rushTD": {
+              "playerID": [
+                "3917792"
+              ],
+              "total": "2"
+            },
+            "rushYds": {
+              "playerID": [
+                "4242335"
+              ],
+              "total": "71"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4431459"
+              ],
+              "total": "7"
+            },
+            "recTD": {
+              "playerID": [
+                "4035687"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4035687"
+              ],
+              "total": "80"
+            },
+            "targets": {
+              "playerID": [
+                "4431459"
+              ],
+              "total": "9"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "4426473",
+                "4035861"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "4035861"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "3045527"
+              ],
+              "total": "3"
+            },
+            "sacks": {
+              "playerID": [
+                "4426403",
+                "4218312",
+                "3045527"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4426403",
+                "4037361"
+              ],
+              "total": "4"
+            },
+            "tfl": {
+              "playerID": [
+                "4248455",
+                "4426403",
+                "4258194",
+                "3045527"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4036507",
+                "4426403",
+                "4037361"
+              ],
+              "total": "6"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_LV@NE",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "NE",
+      "away_team": "LV",
+      "venue": "Gillette Stadium",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772720",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772720",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_LV@NE",
+      "team_id_home": "22",
+      "team_id_away": "17",
+      "top_performers": {
+        "LV": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "15864"
+              ],
+              "total": "1"
+            },
+            "passAttempts": {
+              "playerID": [
+                "15864"
+              ],
+              "total": "34"
+            },
+            "passCompletions": {
+              "playerID": [
+                "15864"
+              ],
+              "total": "24"
+            },
+            "passTD": {
+              "playerID": [
+                "15864"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "15864"
+              ],
+              "total": "362"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4890973"
+              ],
+              "total": "19"
+            },
+            "rushTD": {
+              "playerID": [
+                "4890973"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4890973"
+              ],
+              "total": "38"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3916433"
+              ],
+              "total": "8"
+            },
+            "recTD": {
+              "playerID": [
+                "4428718"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4432665"
+              ],
+              "total": "103"
+            },
+            "targets": {
+              "playerID": [
+                "3916433"
+              ],
+              "total": "10"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "4259632"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "3916655",
+                "4259632",
+                "4427695",
+                "4360749"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "3916655",
+                "4372533",
+                "4239719"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "3916655",
+                "4372533",
+                "4239719",
+                "4373956"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4035434"
+              ],
+              "total": "8"
+            },
+            "tfl": {
+              "playerID": [
+                "3916655",
+                "4372533",
+                "4259632",
+                "4239719",
+                "4259561",
+                "4035434"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4035434"
+              ],
+              "total": "11"
+            }
+          }
+        },
+        "NE": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "4431452"
+              ],
+              "total": "1"
+            },
+            "passAttempts": {
+              "playerID": [
+                "4431452"
+              ],
+              "total": "46"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4431452"
+              ],
+              "total": "30"
+            },
+            "passTD": {
+              "playerID": [
+                "4431452"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4431452"
+              ],
+              "total": "287"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4569173"
+              ],
+              "total": "7"
+            },
+            "rushYds": {
+              "playerID": [
+                "4432710"
+              ],
+              "total": "27"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4429022",
+                "4432710",
+                "2976212"
+              ],
+              "total": "6"
+            },
+            "recTD": {
+              "playerID": [
+                "4427095"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4429022"
+              ],
+              "total": "103"
+            },
+            "targets": {
+              "playerID": [
+                "4429022",
+                "3046439"
+              ],
+              "total": "8"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "3858276"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "3916923"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "3122793"
+              ],
+              "total": "4"
+            },
+            "sacks": {
+              "playerID": [
+                "3858276"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4428930",
+                "4245273",
+                "3858276"
+              ],
+              "total": "5"
+            },
+            "tfl": {
+              "playerID": [
+                "3122793"
+              ],
+              "total": "3"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4245273"
+              ],
+              "total": "8"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_TB@ATL",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "ATL",
+      "away_team": "TB",
+      "venue": "Mercedes-Benz Stadium",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772830",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772830",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_TB@ATL",
+      "team_id_home": "2",
+      "team_id_away": "30",
+      "top_performers": {
+        "TB": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3052587"
+              ],
+              "total": "32"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3052587"
+              ],
+              "total": "17"
+            },
+            "passTD": {
+              "playerID": [
+                "3052587"
+              ],
+              "total": "3"
+            },
+            "passYds": {
+              "playerID": [
+                "3052587"
+              ],
+              "total": "167"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4596448"
+              ],
+              "total": "14"
+            },
+            "rushYds": {
+              "playerID": [
+                "3052587"
+              ],
+              "total": "39"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "16737"
+              ],
+              "total": "5"
+            },
+            "recTD": {
+              "playerID": [
+                "4567750"
+              ],
+              "total": "2"
+            },
+            "recYds": {
+              "playerID": [
+                "4567750"
+              ],
+              "total": "67"
+            },
+            "targets": {
+              "playerID": [
+                "16737"
+              ],
+              "total": "8"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "3873935"
+              ],
+              "total": "3"
+            },
+            "qbHits": {
+              "playerID": [
+                "4686334"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "2980504"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4429511",
+                "4250392",
+                "4428522"
+              ],
+              "total": "7"
+            },
+            "tfl": {
+              "playerID": [
+                "4429511"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4428522"
+              ],
+              "total": "11"
+            }
+          }
+        },
+        "ATL": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4360423"
+              ],
+              "total": "42"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4360423"
+              ],
+              "total": "27"
+            },
+            "passTD": {
+              "playerID": [
+                "4360423"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4360423"
+              ],
+              "total": "298"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4430807"
+              ],
+              "total": "12"
+            },
+            "rushTD": {
+              "playerID": [
+                "4360423"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4373626",
+                "4430807"
+              ],
+              "total": "24"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4426502"
+              ],
+              "total": "8"
+            },
+            "recTD": {
+              "playerID": [
+                "4430807"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4430807"
+              ],
+              "total": "100"
+            },
+            "targets": {
+              "playerID": [
+                "4426502"
+              ],
+              "total": "15"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4239995",
+                "4431005"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "5081394",
+                "4431194",
+                "4037626"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4239995",
+                "4431005"
+              ],
+              "total": "6"
+            },
+            "tfl": {
+              "playerID": [
+                "4037626",
+                "4257591"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4431194",
+                "4037626",
+                "3919512",
+                "4239995",
+                "4431005"
+              ],
+              "total": "6"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_PIT@NYJ",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "NYJ",
+      "away_team": "PIT",
+      "venue": "MetLife Stadium",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772721",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772721",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_PIT@NYJ",
+      "team_id_home": "25",
+      "team_id_away": "26",
+      "top_performers": {
+        "PIT": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "8439"
+              ],
+              "total": "30"
+            },
+            "passCompletions": {
+              "playerID": [
+                "8439"
+              ],
+              "total": "22"
+            },
+            "passTD": {
+              "playerID": [
+                "8439"
+              ],
+              "total": "4"
+            },
+            "passYds": {
+              "playerID": [
+                "8439"
+              ],
+              "total": "244"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4569987"
+              ],
+              "total": "11"
+            },
+            "rushYds": {
+              "playerID": [
+                "4569987"
+              ],
+              "total": "37"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3054212"
+              ],
+              "total": "5"
+            },
+            "recTD": {
+              "playerID": [
+                "4035656",
+                "4569987",
+                "4243389",
+                "3054212"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4047650"
+              ],
+              "total": "83"
+            },
+            "targets": {
+              "playerID": [
+                "4047650"
+              ],
+              "total": "7"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "3045373"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "4037333"
+              ],
+              "total": "3"
+            },
+            "sacks": {
+              "playerID": [
+                "4037333"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3045463"
+              ],
+              "total": "6"
+            },
+            "tfl": {
+              "playerID": [
+                "3045282"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "3917909",
+                "3045463",
+                "4242207",
+                "4037333"
+              ],
+              "total": "8"
+            }
+          }
+        },
+        "NYJ": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4362887"
+              ],
+              "total": "22"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4362887"
+              ],
+              "total": "16"
+            },
+            "passTD": {
+              "playerID": [
+                "4362887"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4362887"
+              ],
+              "total": "218"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4427366"
+              ],
+              "total": "19"
+            },
+            "rushTD": {
+              "playerID": [
+                "4362887"
+              ],
+              "total": "2"
+            },
+            "rushYds": {
+              "playerID": [
+                "4427366"
+              ],
+              "total": "107"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4569618"
+              ],
+              "total": "7"
+            },
+            "recTD": {
+              "playerID": [
+                "4569618"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4569618"
+              ],
+              "total": "95"
+            },
+            "targets": {
+              "playerID": [
+                "4569618"
+              ],
+              "total": "9"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4427250"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "4361767",
+                "4040982"
+              ],
+              "total": "3"
+            },
+            "sacks": {
+              "playerID": [
+                "4361767"
+              ],
+              "total": "2"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4045299",
+                "3110565",
+                "4040982"
+              ],
+              "total": "4"
+            },
+            "tfl": {
+              "playerID": [
+                "4361767",
+                "4040982"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4240532",
+                "4361331",
+                "3110565"
+              ],
+              "total": "6"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_ARI@NO",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "NO",
+      "away_team": "ARI",
+      "venue": "Caesars Superdome",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772718",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772718",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_ARI@NO",
+      "team_id_home": "23",
+      "team_id_away": "1",
+      "top_performers": {
+        "ARI": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3917315"
+              ],
+              "total": "29"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3917315"
+              ],
+              "total": "21"
+            },
+            "passTD": {
+              "playerID": [
+                "3917315"
+              ],
+              "total": "2"
+            },
+            "passYds": {
+              "playerID": [
+                "3917315"
+              ],
+              "total": "163"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3045147"
+              ],
+              "total": "12"
+            },
+            "rushYds": {
+              "playerID": [
+                "4429275"
+              ],
+              "total": "69"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4361307"
+              ],
+              "total": "6"
+            },
+            "recTD": {
+              "playerID": [
+                "4432708",
+                "3045147"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4432708"
+              ],
+              "total": "71"
+            },
+            "targets": {
+              "playerID": [
+                "4361307"
+              ],
+              "total": "9"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4685408"
+              ],
+              "total": "3"
+            },
+            "qbHits": {
+              "playerID": [
+                "4241987",
+                "3693166"
+              ],
+              "total": "1"
+            },
+            "sacks": {
+              "playerID": [
+                "4241987"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3127287"
+              ],
+              "total": "5"
+            },
+            "tfl": {
+              "playerID": [
+                "4241987",
+                "4040983",
+                "3127287"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "3127287"
+              ],
+              "total": "10"
+            }
+          }
+        },
+        "NO": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4426339"
+              ],
+              "total": "46"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4426339"
+              ],
+              "total": "27"
+            },
+            "passYds": {
+              "playerID": [
+                "4426339"
+              ],
+              "total": "214"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3054850"
+              ],
+              "total": "11"
+            },
+            "rushTD": {
+              "playerID": [
+                "3054850"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "3054850"
+              ],
+              "total": "45"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3929645"
+              ],
+              "total": "8"
+            },
+            "recYds": {
+              "playerID": [
+                "3929645"
+              ],
+              "total": "76"
+            },
+            "targets": {
+              "playerID": [
+                "4361370"
+              ],
+              "total": "13"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "3918310"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "13971"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "4369835",
+                "4241993"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4241993"
+              ],
+              "total": "7"
+            },
+            "tfl": {
+              "playerID": [
+                "13971",
+                "14958"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4241993",
+                "14958"
+              ],
+              "total": "9"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_NYG@WSH",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "WSH",
+      "away_team": "NYG",
+      "venue": "Northwest Stadium",
+      "game_time_et": "1:00p",
+      "game_time_pt": "10:00a",
+      "game_time_epoch": "1757264400.0",
+      "game_time_utc": "2025-09-07T17:00:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772827",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772827",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_NYG@WAS",
+      "team_id_home": "32",
+      "team_id_away": "24",
+      "top_performers": {
+        "NYG": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "14881"
+              ],
+              "total": "37"
+            },
+            "passCompletions": {
+              "playerID": [
+                "14881"
+              ],
+              "total": "17"
+            },
+            "passYds": {
+              "playerID": [
+                "14881"
+              ],
+              "total": "168"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4360516"
+              ],
+              "total": "10"
+            },
+            "rushYds": {
+              "playerID": [
+                "14881"
+              ],
+              "total": "44"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4569587"
+              ],
+              "total": "6"
+            },
+            "recYds": {
+              "playerID": [
+                "4595348"
+              ],
+              "total": "71"
+            },
+            "targets": {
+              "playerID": [
+                "4595348"
+              ],
+              "total": "12"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4373809",
+                "4429607",
+                "4242547"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "4035631"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "4035631"
+              ],
+              "total": "2"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3117253"
+              ],
+              "total": "7"
+            },
+            "tfl": {
+              "playerID": [
+                "4035631"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "3117253"
+              ],
+              "total": "16"
+            }
+          }
+        },
+        "WSH": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4426348"
+              ],
+              "total": "30"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4426348"
+              ],
+              "total": "19"
+            },
+            "passTD": {
+              "playerID": [
+                "4426348"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4426348"
+              ],
+              "total": "233"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4426348"
+              ],
+              "total": "11"
+            },
+            "rushTD": {
+              "playerID": [
+                "4575131",
+                "3126486"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4575131"
+              ],
+              "total": "82"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3126486"
+              ],
+              "total": "7"
+            },
+            "recTD": {
+              "playerID": [
+                "15835"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "3126486"
+              ],
+              "total": "77"
+            },
+            "targets": {
+              "playerID": [
+                "3126486"
+              ],
+              "total": "10"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "3925354"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "4259491"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "3925354",
+                "3928979"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "14979"
+              ],
+              "total": "5"
+            },
+            "tfl": {
+              "playerID": [
+                "14979",
+                "2980080",
+                "3925354",
+                "3928979",
+                "4430560",
+                "4259491",
+                "2969924"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "14979"
+              ],
+              "total": "10"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_TEN@DEN",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "DEN",
+      "away_team": "TEN",
+      "venue": "Empower Field at Mile High",
+      "game_time_et": "4:05p",
+      "game_time_pt": "01:05p",
+      "game_time_epoch": "1757275500.0",
+      "game_time_utc": "2025-09-07T20:05:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772832",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772832",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_TEN@DEN",
+      "team_id_home": "10",
+      "team_id_away": "31",
+      "top_performers": {
+        "TEN": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4688380"
+              ],
+              "total": "28"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4688380"
+              ],
+              "total": "12"
+            },
+            "passYds": {
+              "playerID": [
+                "4688380"
+              ],
+              "total": "112"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3916148"
+              ],
+              "total": "18"
+            },
+            "rushYds": {
+              "playerID": [
+                "3916148"
+              ],
+              "total": "60"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3925357"
+              ],
+              "total": "4"
+            },
+            "recYds": {
+              "playerID": [
+                "3916148"
+              ],
+              "total": "29"
+            },
+            "targets": {
+              "playerID": [
+                "3925357"
+              ],
+              "total": "8"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "3040572",
+                "4371973"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "4036134",
+                "3040572",
+                "4040432",
+                "4426817",
+                "4371973"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "4035369"
+              ],
+              "total": "4"
+            },
+            "sacks": {
+              "playerID": [
+                "4035369"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4426817"
+              ],
+              "total": "6"
+            },
+            "tfl": {
+              "playerID": [
+                "4426817"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4426817",
+                "3926229"
+              ],
+              "total": "9"
+            }
+          }
+        },
+        "DEN": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "4426338"
+              ],
+              "total": "2"
+            },
+            "passAttempts": {
+              "playerID": [
+                "4426338"
+              ],
+              "total": "40"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4426338"
+              ],
+              "total": "25"
+            },
+            "passTD": {
+              "playerID": [
+                "4426338"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "4426338"
+              ],
+              "total": "176"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4241985"
+              ],
+              "total": "16"
+            },
+            "rushTD": {
+              "playerID": [
+                "4241985"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4568490"
+              ],
+              "total": "70"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3128429"
+              ],
+              "total": "6"
+            },
+            "recTD": {
+              "playerID": [
+                "3128429"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "3128429"
+              ],
+              "total": "61"
+            },
+            "targets": {
+              "playerID": [
+                "3128429"
+              ],
+              "total": "9"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4382401"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "3915282",
+                "4360259"
+              ],
+              "total": "3"
+            },
+            "sacks": {
+              "playerID": [
+                "3915282",
+                "3919548",
+                "4040608",
+                "4360259",
+                "4567462",
+                "4687592"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4360853"
+              ],
+              "total": "7"
+            },
+            "tfl": {
+              "playerID": [
+                "4360259"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4360853"
+              ],
+              "total": "10"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_SF@SEA",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "SEA",
+      "away_team": "SF",
+      "venue": "Lumen Field",
+      "game_time_et": "4:05p",
+      "game_time_pt": "01:05p",
+      "game_time_epoch": "1757275500.0",
+      "game_time_utc": "2025-09-07T20:05:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772831",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772831",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_SF@SEA",
+      "team_id_home": "29",
+      "team_id_away": "28",
+      "top_performers": {
+        "SF": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "4361741"
+              ],
+              "total": "2"
+            },
+            "passAttempts": {
+              "playerID": [
+                "4361741"
+              ],
+              "total": "35"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4361741"
+              ],
+              "total": "26"
+            },
+            "passTD": {
+              "playerID": [
+                "4361741"
+              ],
+              "total": "2"
+            },
+            "passYds": {
+              "playerID": [
+                "4361741"
+              ],
+              "total": "277"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3117251"
+              ],
+              "total": "22"
+            },
+            "rushYds": {
+              "playerID": [
+                "3117251"
+              ],
+              "total": "69"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "3117251"
+              ],
+              "total": "9"
+            },
+            "recTD": {
+              "playerID": [
+                "4259147",
+                "3040151"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4428209"
+              ],
+              "total": "108"
+            },
+            "targets": {
+              "playerID": [
+                "3117251"
+              ],
+              "total": "10"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4427325",
+                "4565200"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "4259594",
+                "4040605"
+              ],
+              "total": "1"
+            },
+            "sacks": {
+              "playerID": [
+                "4040605"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4040605"
+              ],
+              "total": "6"
+            },
+            "tfl": {
+              "playerID": [
+                "4040605"
+              ],
+              "total": "3"
+            },
+            "totalTackles": {
+              "playerID": [
+                "3138826"
+              ],
+              "total": "8"
+            }
+          }
+        },
+        "SEA": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3912547"
+              ],
+              "total": "23"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3912547"
+              ],
+              "total": "16"
+            },
+            "passYds": {
+              "playerID": [
+                "3912547"
+              ],
+              "total": "150"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4426385"
+              ],
+              "total": "12"
+            },
+            "rushTD": {
+              "playerID": [
+                "4426385"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4426385"
+              ],
+              "total": "47"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4430878"
+              ],
+              "total": "9"
+            },
+            "recYds": {
+              "playerID": [
+                "4430878"
+              ],
+              "total": "124"
+            },
+            "targets": {
+              "playerID": [
+                "4430878"
+              ],
+              "total": "13"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "4362851",
+                "4372020"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "4362851"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "3115312",
+                "4567226"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "4046675"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4046675"
+              ],
+              "total": "8"
+            },
+            "tfl": {
+              "playerID": [
+                "16802"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4046675"
+              ],
+              "total": "10"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_HOU@LAR",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "LAR",
+      "away_team": "HOU",
+      "venue": "SoFi Stadium",
+      "game_time_et": "4:25p",
+      "game_time_pt": "01:25p",
+      "game_time_epoch": "1757276700.0",
+      "game_time_utc": "2025-09-07T20:25:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772723",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772723",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_HOU@LAR",
+      "team_id_home": "19",
+      "team_id_away": "13",
+      "top_performers": {
+        "HOU": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "4432577"
+              ],
+              "total": "1"
+            },
+            "passAttempts": {
+              "playerID": [
+                "4432577"
+              ],
+              "total": "27"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4432577"
+              ],
+              "total": "19"
+            },
+            "passYds": {
+              "playerID": [
+                "4432577"
+              ],
+              "total": "188"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3128720"
+              ],
+              "total": "13"
+            },
+            "rushYds": {
+              "playerID": [
+                "3128720"
+              ],
+              "total": "60"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4426496"
+              ],
+              "total": "4"
+            },
+            "recYds": {
+              "playerID": [
+                "4877706"
+              ],
+              "total": "32"
+            },
+            "targets": {
+              "playerID": [
+                "3117256",
+                "4258173"
+              ],
+              "total": "5"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4426350"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "2970204",
+                "4685724"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "4426350",
+                "4685724",
+                "3045172"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4602699"
+              ],
+              "total": "5"
+            },
+            "tfl": {
+              "playerID": [
+                "4685724"
+              ],
+              "total": "3"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4602699"
+              ],
+              "total": "9"
+            }
+          }
+        },
+        "LAR": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "12483"
+              ],
+              "total": "29"
+            },
+            "passCompletions": {
+              "playerID": [
+                "12483"
+              ],
+              "total": "21"
+            },
+            "passTD": {
+              "playerID": [
+                "12483"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "12483"
+              ],
+              "total": "245"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4430737"
+              ],
+              "total": "18"
+            },
+            "rushTD": {
+              "playerID": [
+                "4430737"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4430737"
+              ],
+              "total": "66"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4426515"
+              ],
+              "total": "10"
+            },
+            "recTD": {
+              "playerID": [
+                "4426553"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4426515"
+              ],
+              "total": "130"
+            },
+            "targets": {
+              "playerID": [
+                "4426515"
+              ],
+              "total": "11"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "4384549"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "4384549",
+                "4596363",
+                "3122630",
+                "4682983"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "4875196"
+              ],
+              "total": "2"
+            },
+            "sacks": {
+              "playerID": [
+                "4427120",
+                "4875196",
+                "4568217"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4242154"
+              ],
+              "total": "8"
+            },
+            "tfl": {
+              "playerID": [
+                "4427120",
+                "4875196",
+                "4568217"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4242154",
+                "4243181"
+              ],
+              "total": "10"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_DET@GB",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "GB",
+      "away_team": "DET",
+      "venue": "Lambeau Field",
+      "game_time_et": "4:25p",
+      "game_time_pt": "01:25p",
+      "game_time_epoch": "1757276700.0",
+      "game_time_utc": "2025-09-07T20:25:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772722",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772722",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_DET@GB",
+      "team_id_home": "12",
+      "team_id_away": "11",
+      "top_performers": {
+        "DET": {
+          "Passing": {
+            "int": {
+              "playerID": [
+                "3046779"
+              ],
+              "total": "1"
+            },
+            "passAttempts": {
+              "playerID": [
+                "3046779"
+              ],
+              "total": "39"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3046779"
+              ],
+              "total": "31"
+            },
+            "passTD": {
+              "playerID": [
+                "3046779"
+              ],
+              "total": "1"
+            },
+            "passYds": {
+              "playerID": [
+                "3046779"
+              ],
+              "total": "225"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4035538"
+              ],
+              "total": "11"
+            },
+            "rushYds": {
+              "playerID": [
+                "4035538"
+              ],
+              "total": "25"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4429795"
+              ],
+              "total": "10"
+            },
+            "recTD": {
+              "playerID": [
+                "5123663"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4430027"
+              ],
+              "total": "79"
+            },
+            "targets": {
+              "playerID": [
+                "4429795"
+              ],
+              "total": "10"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4592837"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "4372099",
+                "3051942"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4569465"
+              ],
+              "total": "5"
+            },
+            "tfl": {
+              "playerID": [
+                "4260409",
+                "4692025"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4569465"
+              ],
+              "total": "9"
+            }
+          }
+        },
+        "GB": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4036378"
+              ],
+              "total": "22"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4036378"
+              ],
+              "total": "16"
+            },
+            "passTD": {
+              "playerID": [
+                "4036378"
+              ],
+              "total": "2"
+            },
+            "passYds": {
+              "playerID": [
+                "4036378"
+              ],
+              "total": "188"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4047365"
+              ],
+              "total": "19"
+            },
+            "rushTD": {
+              "playerID": [
+                "4047365"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4047365"
+              ],
+              "total": "66"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4362249"
+              ],
+              "total": "3"
+            },
+            "recTD": {
+              "playerID": [
+                "4362249",
+                "4572680"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4361432"
+              ],
+              "total": "68"
+            },
+            "targets": {
+              "playerID": [
+                "4362249"
+              ],
+              "total": "5"
+            }
+          },
+          "Defense": {
+            "defensiveInterceptions": {
+              "playerID": [
+                "4428863"
+              ],
+              "total": "1"
+            },
+            "passDeflections": {
+              "playerID": [
+                "4428863",
+                "4379416"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "4361791",
+                "4046523"
+              ],
+              "total": "3"
+            },
+            "sacks": {
+              "playerID": [
+                "4361791",
+                "4361423"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4430438"
+              ],
+              "total": "8"
+            },
+            "tfl": {
+              "playerID": [
+                "4379416",
+                "4567224"
+              ],
+              "total": "2"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4430438"
+              ],
+              "total": "12"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250907_BAL@BUF",
+      "date": "20250907",
+      "week": 1,
+      "season": "2025",
+      "home_team": "BUF",
+      "away_team": "BAL",
+      "venue": "Highmark Stadium",
+      "game_time_et": "8:20p",
+      "game_time_pt": "05:20p",
+      "game_time_epoch": "1757290800.0",
+      "game_time_utc": "2025-09-08T00:20:00",
+      "game_status": "Completed",
+      "game_status_code": "2",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772918",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772918",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250907_BAL@BUF",
+      "team_id_home": "4",
+      "team_id_away": "3",
+      "top_performers": {
+        "BAL": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3916387"
+              ],
+              "total": "19"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3916387"
+              ],
+              "total": "14"
+            },
+            "passTD": {
+              "playerID": [
+                "3916387"
+              ],
+              "total": "2"
+            },
+            "passYds": {
+              "playerID": [
+                "3916387"
+              ],
+              "total": "209"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3043078"
+              ],
+              "total": "18"
+            },
+            "rushTD": {
+              "playerID": [
+                "3043078"
+              ],
+              "total": "2"
+            },
+            "rushYds": {
+              "playerID": [
+                "3043078"
+              ],
+              "total": "169"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4429615"
+              ],
+              "total": "7"
+            },
+            "recTD": {
+              "playerID": [
+                "15795",
+                "4429615"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4429615"
+              ],
+              "total": "143"
+            },
+            "targets": {
+              "playerID": [
+                "4429615"
+              ],
+              "total": "9"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4575517"
+              ],
+              "total": "2"
+            },
+            "qbHits": {
+              "playerID": [
+                "4035245",
+                "16772",
+                "4361422"
+              ],
+              "total": "1"
+            },
+            "sacks": {
+              "playerID": [
+                "4035245"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "3915189"
+              ],
+              "total": "8"
+            },
+            "tfl": {
+              "playerID": [
+                "4035245",
+                "4362139",
+                "4430831"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "3915189"
+              ],
+              "total": "10"
+            }
+          }
+        },
+        "BUF": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "3918298"
+              ],
+              "total": "46"
+            },
+            "passCompletions": {
+              "playerID": [
+                "3918298"
+              ],
+              "total": "33"
+            },
+            "passTD": {
+              "playerID": [
+                "3918298"
+              ],
+              "total": "2"
+            },
+            "passYds": {
+              "playerID": [
+                "3918298"
+              ],
+              "total": "394"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "3918298"
+              ],
+              "total": "14"
+            },
+            "rushTD": {
+              "playerID": [
+                "3918298"
+              ],
+              "total": "2"
+            },
+            "rushYds": {
+              "playerID": [
+                "4379399"
+              ],
+              "total": "44"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4635008"
+              ],
+              "total": "8"
+            },
+            "recTD": {
+              "playerID": [
+                "4635008",
+                "4385690"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "4635008"
+              ],
+              "total": "112"
+            },
+            "targets": {
+              "playerID": [
+                "4635008"
+              ],
+              "total": "11"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4362506"
+              ],
+              "total": "1"
+            },
+            "qbHits": {
+              "playerID": [
+                "3046287",
+                "4428548",
+                "4039303"
+              ],
+              "total": "1"
+            },
+            "sacks": {
+              "playerID": [
+                "3046287",
+                "4039303"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4039303"
+              ],
+              "total": "6"
+            },
+            "tfl": {
+              "playerID": [
+                "4039303"
+              ],
+              "total": "3"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4379778"
+              ],
+              "total": "7"
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "20250908_MIN@CHI",
+      "date": "20250908",
+      "week": 1,
+      "season": "2025",
+      "home_team": "CHI",
+      "away_team": "MIN",
+      "venue": "Soldier Field",
+      "game_time_et": "8:15p",
+      "game_time_pt": "05:15p",
+      "game_time_epoch": "1757376900.0",
+      "game_time_utc": "2025-09-09T00:15:00",
+      "game_status": "Live - In Progress",
+      "game_status_code": "1",
+      "season_type": "Regular Season",
+      "neutral_site": "False",
+      "espn_id": "401772810",
+      "espn_link": "https://www.espn.com/nfl/boxscore/_/gameId/401772810",
+      "cbs_link": "https://www.cbssports.com/nfl/gametracker/boxscore/NFL_20250908_MIN@CHI",
+      "team_id_home": "6",
+      "team_id_away": "21",
+      "top_performers": {
+        "MIN": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4433970"
+              ],
+              "total": "4"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4433970"
+              ],
+              "total": "3"
+            },
+            "passYds": {
+              "playerID": [
+                "4433970"
+              ],
+              "total": "13"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4360569"
+              ],
+              "total": "4"
+            },
+            "rushYds": {
+              "playerID": [
+                "4360569"
+              ],
+              "total": "14"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4036133",
+                "4262921",
+                "3921690"
+              ],
+              "total": "1"
+            },
+            "recYds": {
+              "playerID": [
+                "3921690"
+              ],
+              "total": "5"
+            },
+            "targets": {
+              "playerID": [
+                "4262921"
+              ],
+              "total": "2"
+            }
+          },
+          "Defense": {
+            "passDeflections": {
+              "playerID": [
+                "4629149"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4242436"
+              ],
+              "total": "3"
+            },
+            "tfl": {
+              "playerID": [
+                "5093973",
+                "4044540"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4242436",
+                "4430280",
+                "3133487"
+              ],
+              "total": "3"
+            }
+          }
+        },
+        "CHI": {
+          "Passing": {
+            "passAttempts": {
+              "playerID": [
+                "4431611"
+              ],
+              "total": "13"
+            },
+            "passCompletions": {
+              "playerID": [
+                "4431611"
+              ],
+              "total": "10"
+            },
+            "passYds": {
+              "playerID": [
+                "4431611"
+              ],
+              "total": "86"
+            }
+          },
+          "Rushing": {
+            "carries": {
+              "playerID": [
+                "4259545"
+              ],
+              "total": "4"
+            },
+            "rushTD": {
+              "playerID": [
+                "4431611"
+              ],
+              "total": "1"
+            },
+            "rushYds": {
+              "playerID": [
+                "4431611"
+              ],
+              "total": "30"
+            }
+          },
+          "Receiving": {
+            "receptions": {
+              "playerID": [
+                "4259545"
+              ],
+              "total": "3"
+            },
+            "recYds": {
+              "playerID": [
+                "3915416"
+              ],
+              "total": "35"
+            },
+            "targets": {
+              "playerID": [
+                "4259545",
+                "4431299",
+                "3915416"
+              ],
+              "total": "3"
+            }
+          },
+          "Defense": {
+            "qbHits": {
+              "playerID": [
+                "4242659",
+                "4429014"
+              ],
+              "total": "1"
+            },
+            "sacks": {
+              "playerID": [
+                "4242659",
+                "4429014"
+              ],
+              "total": "1"
+            },
+            "soloTackles": {
+              "playerID": [
+                "4430822"
+              ],
+              "total": "3"
+            },
+            "tfl": {
+              "playerID": [
+                "4242659",
+                "4570470",
+                "4429014"
+              ],
+              "total": "1"
+            },
+            "totalTackles": {
+              "playerID": [
+                "4430822"
+              ],
+              "total": "4"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "total_games": 15,
+  "api_usage": {
+    "calls_made_this_session": 981,
+    "daily_limit": 1000,
+    "remaining_calls": 19,
+    "percentage_used": 98.1,
+    "reset_timestamp": 61446,
+    "last_updated": 1757380420.501785,
+    "data_source": "rapidapi_headers",
+    "available": true,
+    "using_existing_client": true
+  }
+}

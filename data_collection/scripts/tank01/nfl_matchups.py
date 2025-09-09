@@ -116,13 +116,41 @@ class NFLMatchupsExtractor:
                     else:
                         current_week = 1
                     
+                    self.logger.info(f"Detected current week: {current_week}")
                     return {
                         'current_week': current_week,
                         'season': '2025',
                         'season_type': 'Regular Season'
                     }
             
+            # If no games today, try to find games from the past few days to determine week
+            self.logger.info("No games found for today, searching past days for week info...")
+            for days_back in range(1, 8):  # Check past 7 days
+                check_date = datetime.now() - timedelta(days=days_back)
+                date_str = check_date.strftime("%Y%m%d")
+                
+                response = self.tank01.get_daily_scoreboard(game_date=date_str, top_performers=True)
+                
+                if response and 'body' in response:
+                    games = response['body']
+                    if games:
+                        # Get the first game to extract week info
+                        first_game_id = list(games.keys())[0]
+                        game_info = self._get_game_info(first_game_id)
+                        if game_info and 'gameWeek' in game_info:
+                            week_str = game_info['gameWeek']
+                            week_match = week_str.replace('Week ', '') if 'Week ' in week_str else week_str
+                            current_week = int(week_match) if week_match.isdigit() else 1
+                            
+                            self.logger.info(f"Found week info from {date_str}: Week {current_week}")
+                            return {
+                                'current_week': current_week,
+                                'season': '2025',
+                                'season_type': 'Regular Season'
+                            }
+            
             # Fallback: assume current week 1
+            self.logger.warning("Could not determine current week, defaulting to Week 1")
             return {
                 'current_week': 1,
                 'season': '2025',
@@ -140,8 +168,9 @@ class NFLMatchupsExtractor:
             # NFL games typically span Thursday-Monday, so we need to look both backwards and forwards
             games_data = {}
             
-            # Check the past 3 days and next 4 days for games (Thursday to Monday)
-            for days_offset in range(-3, 5):  # -3 to +4 days
+            # Check the past 5 days and next 4 days for games (Thursday to Monday)
+            # This ensures we catch Thursday games even if they're further back
+            for days_offset in range(-5, 5):  # -5 to +4 days
                 check_date = datetime.now() + timedelta(days=days_offset)
                 date_str = check_date.strftime("%Y%m%d")
                 
@@ -159,12 +188,78 @@ class NFLMatchupsExtractor:
                                     'game_info': game_info,
                                     'date': date_str
                                 }
+                                self.logger.info(f"Found Week {week} game: {game_id} on {date_str}")
             
+            # If we didn't find any games, try a broader search
+            if not games_data:
+                self.logger.warning(f"No games found for Week {week} in the standard range. Trying broader search...")
+                # Try looking back up to 7 days and forward 6 days
+                for days_offset in range(-7, 7):  # -7 to +6 days
+                    check_date = datetime.now() + timedelta(days=days_offset)
+                    date_str = check_date.strftime("%Y%m%d")
+                    
+                    response = self.tank01.get_daily_scoreboard(game_date=date_str, top_performers=True)
+                    
+                    if response and 'body' in response:
+                        day_games = response['body']
+                        if day_games:
+                            for game_id, game_data in day_games.items():
+                                game_info = self._get_game_info(game_id)
+                                if game_info and game_info.get('gameWeek') == f'Week {week}':
+                                    games_data[game_id] = {
+                                        'game_data': game_data,
+                                        'game_info': game_info,
+                                        'date': date_str
+                                    }
+                                    self.logger.info(f"Found Week {week} game in broader search: {game_id} on {date_str}")
+            
+            # Special check for Thursday games - they might be further back
+            thursday_games = self._find_thursday_games(week, season)
+            if thursday_games:
+                games_data.update(thursday_games)
+                self.logger.info(f"Added {len(thursday_games)} Thursday games to the results")
+            
+            self.logger.info(f"Found {len(games_data)} total games for Week {week}")
             return games_data if games_data else None
             
         except Exception as e:
             self.logger.error(f"Error getting current week games: {e}")
             return None
+
+    def _find_thursday_games(self, week: int, season: str) -> Dict[str, Any]:
+        """Specifically look for Thursday games for the given week."""
+        try:
+            thursday_games = {}
+            
+            # Look back up to 10 days to find Thursday games
+            for days_back in range(1, 11):  # Check past 10 days
+                check_date = datetime.now() - timedelta(days=days_back)
+                date_str = check_date.strftime("%Y%m%d")
+                
+                # Check if this date is a Thursday
+                if check_date.weekday() == 3:  # Thursday is weekday 3
+                    self.logger.info(f"Checking Thursday {date_str} for Week {week} games...")
+                    
+                    response = self.tank01.get_daily_scoreboard(game_date=date_str, top_performers=True)
+                    
+                    if response and 'body' in response:
+                        day_games = response['body']
+                        if day_games:
+                            for game_id, game_data in day_games.items():
+                                game_info = self._get_game_info(game_id)
+                                if game_info and game_info.get('gameWeek') == f'Week {week}':
+                                    thursday_games[game_id] = {
+                                        'game_data': game_data,
+                                        'game_info': game_info,
+                                        'date': date_str
+                                    }
+                                    self.logger.info(f"Found Thursday Week {week} game: {game_id} on {date_str}")
+            
+            return thursday_games
+            
+        except Exception as e:
+            self.logger.error(f"Error finding Thursday games: {e}")
+            return {}
 
     def _get_game_info(self, game_id: str) -> Optional[Dict[str, Any]]:
         """Get detailed game information for a specific game."""
