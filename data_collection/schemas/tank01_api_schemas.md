@@ -608,7 +608,125 @@ Team defense players have a different data structure than individual players:
 - Game-specific performance metrics
 - Long plays and averages
 
-### 4. Team Roster (`getNFLTeamRoster`)
+### 4. Player Game Stats Scripts
+
+**Purpose**: Collect comprehensive game statistics for fantasy roster analysis using the `getNFLGamesForPlayer` endpoint.
+
+**Scripts**:
+- `tank01_my_roster_stats.py` - My roster player game stats
+- `tank01_opponent_roster_stats.py` - Opponent roster player game stats  
+- `tank01_available_players_stats.py` - Available players game stats
+
+**Parameters**:
+- `playerID`: Tank01 player ID
+- `season`: NFL season (default: "2025")
+- `fantasyPoints`: Include fantasy points calculation (true)
+
+**Response Processing**:
+Each script processes the `getNFLGamesForPlayer` response to extract:
+- Game-by-game statistics with fantasy points calculation
+- Season totals and averages
+- Recent performance (last 3 games)
+- Week and opponent information
+- Comprehensive markdown reporting
+
+**Output Structure**:
+```json
+{
+  "extraction_metadata": {
+    "source": "Tank01 API - [Script Type] Player Game Stats",
+    "extraction_timestamp": "2025-01-08T12:00:00.000000",
+    "yahoo_source": "Latest [source]_roster.py output",
+    "execution_stats": {
+      "yahoo_players_loaded": 15,
+      "players_matched": 14,
+      "players_unmatched": 1,
+      "total_games_collected": 42,
+      "api_calls": 15,
+      "errors": 0
+    }
+  },
+  "season_context": {
+    "nfl_season": "2025",
+    "current_week": 3,
+    "season_phase": "Regular Season",
+    "data_source": "Yahoo Fantasy API"
+  },
+  "matched_players": [
+    {
+      "yahoo_player": {...},
+      "tank01_data": {...},
+      "game_stats": {
+        "total_games": 2,
+        "games": [
+          {
+            "game_id": "20250105_140000_SF@BUF",
+            "game_date": "2025-01-05",
+            "week": "1",
+            "opponent": "BUF",
+            "fantasy_points": 18.4,
+            "passing": {...},
+            "rushing": {...},
+            "receiving": {...},
+            "defense": {...}
+          }
+        ],
+        "season_totals": {
+          "games_played": 2,
+          "fantasy_points": 35.2,
+          "passing": {...},
+          "rushing": {...},
+          "receiving": {...},
+          "defense": {...}
+        },
+        "season_averages": {
+          "fantasy_points": 17.6,
+          "passing": {...},
+          "rushing": {...},
+          "receiving": {...},
+          "defense": {...}
+        },
+        "recent_performance": [...]
+      }
+    }
+  ],
+  "tank01_api_usage": {
+    "session_usage": {...},
+    "api_calls_breakdown": {
+      "player_database_call": 1,
+      "game_stats_calls": 14,
+      "total_calls": 15
+    },
+    "efficiency_metrics": {
+      "calls_per_player": 1.07,
+      "match_rate_percentage": 93.3,
+      "total_games_collected": 42
+    }
+  }
+}
+```
+
+**Fantasy Points Calculation (PPR Scoring)**:
+- **Passing**: 0.04 points per yard, 4 points per TD, -2 points per INT
+- **Rushing**: 0.1 points per yard, 6 points per TD
+- **Receiving**: 0.1 points per yard, 6 points per TD, 1 point per reception
+- **Defense**: 6 points per TD, 2 points per INT/FR, 1 point per sack
+
+**File Naming Convention**:
+- Clean data: `{YYYYMMDD_HHMMSS_wk{week:02d}_[script_type]_stats.md`
+- Raw data: `{YYYYMMDD_HHMMSS_wk{week:02d}_[script_type]_stats_raw.json`
+- Output directory: `data_collection/outputs/tank01/[script_type]_stats/YYYY/MM/DD/`
+
+**Key Features**:
+- Season context detection and week-specific file naming
+- Comprehensive fantasy points calculation with PPR scoring
+- Season totals, averages, and recent performance analysis
+- Team defense handling with proper data structure
+- Graceful handling of early season limited game data
+- Position-based filtering for available players
+- Centralized API usage tracking with Pacific Time Zone support
+
+### 5. Team Roster (`getNFLTeamRoster`)
 
 **Purpose**: Get team roster with player statistics.
 

@@ -40,8 +40,8 @@ data_collection/
 ### 📊 **COMPLETION SUMMARY**
 - **Yahoo API Scripts**: 5/5 ✅ **COMPLETE** (my_roster, opponent_rosters, team_matchups, available_players, transaction_trends)
 - **Sleeper API Scripts**: 4/4 ✅ **COMPLETE** (my_roster, available_players, opponent_roster, trending)
-- **Tank01 API Scripts**: 5/5 ✅ **COMPLETE** (my_roster, available_players, opponent_roster, transaction_trends, nfl_matchups)
-- **Total Scripts**: 14/14 ✅ **COMPLETE** with 100% player matching and enrichment across all APIs
+- **Tank01 API Scripts**: 8/8 ✅ **COMPLETE** (my_roster, available_players, opponent_roster, transaction_trends, nfl_matchups, my_roster_stats, opponent_roster_stats, available_players_stats)
+- **Total Scripts**: 17/17 ✅ **COMPLETE** with 100% player matching and enrichment across all APIs
 
 ### 🔧 **LATEST ENHANCEMENTS (September 8, 2025)**
 - **AI Analyst Agent Integration**: ✅ **FULLY OPERATIONAL!** Complete AI agent with streamlined data processing
@@ -57,6 +57,28 @@ data_collection/
 - **Complete Reset Time Tracking**: Accurate limit reset time calculations with Pacific Time Zone support
 - **Standardized Reporting**: Consistent API usage reporting format across all scripts
 - **Enhanced Markdown Output**: All scripts now include complete API usage data with reset time in both top and bottom sections
+
+### 🆕 **NEW PLAYER GAME STATS FUNCTIONALITY (January 8, 2025)**
+- **Tank01 Season Stats Integration**: ✅ **COMPLETE!** Three new scripts for comprehensive season-long game statistics
+- **getNFLGamesForPlayer Endpoint**: ✅ **IMPLEMENTED!** Direct integration with Tank01's game stats endpoint
+- **Fantasy Points Calculation**: ✅ **PPR SCORING!** Complete fantasy points calculation with PPR scoring system
+- **Season Context Detection**: ✅ **AUTOMATIC!** Week-specific file naming and season context extraction
+- **Comprehensive Analysis**: ✅ **DETAILED!** Season totals, averages, recent performance, and game-by-game breakdowns
+- **Position-Based Filtering**: ✅ **CONFIGURABLE!** Available players filtered by position limits (QB: 2, RB: 2, WR: 2, TE: 2, K: 2, DEF: 2, FLEX: 2)
+- **Team Defense Handling**: ✅ **SPECIALIZED!** Proper handling of team defense players with appropriate data structure
+- **Early Season Support**: ✅ **GRACEFUL!** Handles limited game data in early weeks without breaking
+- **Centralized API Usage**: ✅ **TRACKING!** Consistent API usage tracking with Pacific Time Zone support
+
+**New Scripts Added**:
+- **`my_roster_stats.py`** - Season-long game statistics for my roster players
+- **`opponent_roster_stats.py`** - Season-long game statistics for opponent roster players  
+- **`available_players_stats.py`** - Season-long game statistics for available players
+
+**Output Structure**:
+- **Clean Data**: Comprehensive markdown reports with player summaries, season totals, averages, and recent performance
+- **Raw Data**: Complete JSON data with game-by-game statistics, fantasy points, and API usage tracking
+- **File Naming**: `{YYYYMMDD_HHMMSS_wk{week:02d}_[script_type]_stats.[md|json]`
+- **Directory Structure**: `data_collection/outputs/tank01/[script_type]_stats/YYYY/MM/DD/`
 
 ### 🚀 Quick Start
 
@@ -101,6 +123,12 @@ python3 matchups.py
 ### Tank01 NFL API Scripts
 - **`my_roster.py`** - Comprehensive Tank01 data for my roster players (projections, news, game stats, depth charts, team context)
 - **`available_players.py`** - Comprehensive Tank01 data for available players with 100% matching success
+- **`opponent_roster.py`** - Comprehensive Tank01 data for opponent roster players
+- **`transaction_trends.py`** - Transaction trends and waiver wire analysis
+- **`nfl_matchups.py`** - NFL matchup analysis and team performance
+- **`my_roster_stats.py`** - **NEW!** Season-long game statistics for my roster players using getNFLGamesForPlayer endpoint
+- **`opponent_roster_stats.py`** - **NEW!** Season-long game statistics for opponent roster players using getNFLGamesForPlayer endpoint
+- **`available_players_stats.py`** - **NEW!** Season-long game statistics for available players using getNFLGamesForPlayer endpoint
 
 ## 🔧 Script Behavior
 
