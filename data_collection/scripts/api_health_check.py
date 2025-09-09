@@ -84,14 +84,17 @@ class APIHealthChecker:
             print("✅ Authentication successful")
             yahoo_results["status"] = "authenticated"
             
-            # Test key endpoints
+            # Test key endpoints (all endpoints used by our scripts)
             endpoints = [
                 ("User Games", "users;use_login=1/games"),
                 ("My Team", "team/461.l.595012.t.3"),
                 ("League Info", "league/461.l.595012"),
                 ("Current Week", "league/461.l.595012/settings"),
                 ("Available Players", "league/461.l.595012/players;position=QB;status=A;count=5"),
-                ("Transactions", "league/461.l.595012/transactions;count=5")
+                ("Transactions", "league/461.l.595012/transactions;count=5"),
+                ("League Teams", "league/461.l.595012/teams"),
+                ("Scoreboard", "league/461.l.595012/scoreboard"),
+                ("Weekly Scoreboard", "league/461.l.595012/scoreboard;week=1")
             ]
             
             for name, endpoint in endpoints:
@@ -218,7 +221,7 @@ class APIHealthChecker:
                 "X-RapidAPI-Host": "tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com"
             }
             
-            # Test key endpoints
+            # Test key endpoints (all endpoints used by our scripts)
             endpoints = [
                 ("NFL Teams", "getNFLTeams"),
                 ("NFL Players", "getNFLPlayerList"),
@@ -226,7 +229,11 @@ class APIHealthChecker:
                 ("Depth Charts", "getNFLDepthCharts"),
                 ("NFL News", "getNFLNews"),
                 ("Player Stats", "getNFLGamesForPlayer?playerID=5981"),
-                ("Team Roster", "getNFLTeamRoster?teamAbv=PHI")
+                ("Team Roster", "getNFLTeamRoster?teamAbv=PHI"),
+                ("Player Info", "getNFLPlayerInfo?playerName=Josh%20Allen"),
+                ("Game Info", "getNFLGameInfo?gameID=20250908001"),
+                ("Daily Scoreboard", "getNFLScoresOnly?gameDate=20250907"),
+                ("Changelog", "getNFLChangelog?maxDays=7")
             ]
             
             for name, endpoint in endpoints:
