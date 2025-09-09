@@ -34,6 +34,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'shared'))
 from sleeper_client import SimpleSleeperClient
 from data_formatter import MarkdownFormatter
 from file_utils import DataFileManager
+from team_mapping import normalize_team_abbreviation
 
 # Configuration
 DEVELOPMENT_MODE = False  # Set to False for production
@@ -195,7 +196,8 @@ class SleeperAvailablePlayersExtractor:
                     name_l = self._normalize_name(name)
                     for sp in players_db.values():
                         sp_name = self._normalize_name(sp.get('full_name') or '')
-                        sp_team = sp.get('team')
+                        sp_team_raw = sp.get('team')
+                        sp_team = normalize_team_abbreviation(sp_team_raw, 'sleeper') if sp_team_raw else ''
                         if name_l == sp_name and (not team or not sp_team or sp_team == team):
                             sleeper_player = sp
                             break
@@ -205,8 +207,10 @@ class SleeperAvailablePlayersExtractor:
                     last = self._normalize_name(name).split()[-1]
                     for sp in players_db.values():
                         sp_name = self._normalize_name(sp.get('full_name') or '')
+                        sp_team_raw = sp.get('team')
+                        sp_team = normalize_team_abbreviation(sp_team_raw, 'sleeper') if sp_team_raw else ''
                         if sp_name.endswith(' ' + last) or sp_name == last:
-                            if (team and sp.get('team') == team) or (pos and sp.get('position') == pos):
+                            if (team and sp_team == team) or (pos and sp.get('position') == pos):
                                 sleeper_player = sp
                                 break
 
@@ -392,7 +396,7 @@ class SleeperAvailablePlayersExtractor:
     def _get_yahoo_player_team(self, yp: Dict[str, Any]) -> Optional[str]:
         team = yp.get('editorial_team_abbr') or yp.get('team') or None
         if isinstance(team, str):
-            return team.upper()
+            return normalize_team_abbreviation(team, 'yahoo')
         return team
 
     def _get_yahoo_player_position(self, yp: Dict[str, Any]) -> Optional[str]:
@@ -415,10 +419,13 @@ class SleeperAvailablePlayersExtractor:
     def _match_defense_by_team(self, players_db: Dict[str, Any], team: Optional[str]) -> Optional[Dict[str, Any]]:
         if not team or not players_db:
             return None
-        team = team.upper()
+        team_normalized = normalize_team_abbreviation(team, 'yahoo')
         for sp in players_db.values():
-            if sp.get('position') == 'DEF' and sp.get('team') == team:
-                return sp
+            if sp.get('position') == 'DEF':
+                sp_team_raw = sp.get('team')
+                sp_team = normalize_team_abbreviation(sp_team_raw, 'sleeper') if sp_team_raw else ''
+                if sp_team == team_normalized:
+                    return sp
         return None
 
     def save_data(self, data: Dict[str, Any]) -> bool:

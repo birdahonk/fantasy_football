@@ -179,8 +179,8 @@ class SleeperTrendingExtractor:
                 os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'my_roster'
             )
             base_dir = os.path.abspath(base_dir)
-            pattern = os.path.join(base_dir, '*_my_roster_raw_data.json')
-            files = sorted(glob.glob(pattern))
+            pattern = os.path.join(base_dir, '**', '*_my_roster_raw_data.json')
+            files = sorted(glob.glob(pattern, recursive=True))
             if not files:
                 return None
             

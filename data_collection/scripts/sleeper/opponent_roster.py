@@ -25,6 +25,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'shared'))
 from sleeper_client import SimpleSleeperClient
 from data_formatter import MarkdownFormatter
 from file_utils import DataFileManager
+from team_mapping import normalize_team_abbreviation
 
 
 class SleeperOpponentRosterExtractor:
@@ -153,9 +154,9 @@ class SleeperOpponentRosterExtractor:
 
             # Look for opponent roster files
             pattern = os.path.join(
-                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'opponent_rosters', '*_raw_data.json'
+                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'opponent_rosters', '**', '*_raw_data.json'
             )
-            files = glob.glob(pattern)
+            files = glob.glob(pattern, recursive=True)
             
             if not files:
                 self.logger.error("❌ No Yahoo opponent roster files found")
@@ -196,9 +197,9 @@ class SleeperOpponentRosterExtractor:
         try:
             # Look for team matchups files
             matchups_pattern = os.path.join(
-                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'team_matchups', '*_raw_data.json'
+                os.path.dirname(__file__), '..', '..', 'outputs', 'yahoo', 'team_matchups', '**', '*_raw_data.json'
             )
-            matchups_files = glob.glob(matchups_pattern)
+            matchups_files = glob.glob(matchups_pattern, recursive=True)
             
             if not matchups_files:
                 self.logger.error("❌ No team matchups files found")
@@ -259,8 +260,11 @@ class SleeperOpponentRosterExtractor:
         return str(name_data) if name_data else 'Unknown'
 
     def _get_yahoo_player_team(self, yahoo_player: Dict[str, Any]) -> str:
-        """Extract team from Yahoo player data."""
-        return yahoo_player.get('team', 'N/A')
+        """Extract team from Yahoo player data and normalize to standard format."""
+        yahoo_team = yahoo_player.get('editorial_team_abbr') or yahoo_player.get('team', 'N/A')
+        if yahoo_team == 'N/A':
+            return yahoo_team
+        return normalize_team_abbreviation(yahoo_team, 'yahoo')
 
     def _get_yahoo_player_position(self, yahoo_player: Dict[str, Any]) -> str:
         """Extract position from Yahoo player data."""
@@ -279,7 +283,8 @@ class SleeperOpponentRosterExtractor:
 
         for sp in players_db.values():
             sleeper_name = (sp.get('full_name') or '').lower().strip()
-            sleeper_team = (sp.get('team') or '').upper().strip()
+            sleeper_team_raw = sp.get('team') or ''
+            sleeper_team = normalize_team_abbreviation(sleeper_team_raw, 'sleeper') if sleeper_team_raw else ''
             sleeper_pos = (sp.get('position') or '').upper().strip()
 
             # Check name similarity (exact match or contains)
@@ -289,7 +294,7 @@ class SleeperOpponentRosterExtractor:
 
             # Check team match (only if team is provided)
             team_match = True  # Default to True if no team specified
-            if team_upper:
+            if team_upper and sleeper_team:
                 team_match = (team_upper == sleeper_team or 
                              team_upper in sleeper_team or 
                              sleeper_team in team_upper)
