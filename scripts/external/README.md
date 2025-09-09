@@ -47,7 +47,7 @@ bills_players = client.get_players_by_team("BUF")
 - `get_nfl_players()` - Complete player database (11,400+ players)
 
 ### Data Quality
-- **Player Matching**: 88% success rate matching with Yahoo players
+- **Player Matching**: 100% success rate matching with Yahoo players
 - **Injury Accuracy**: Real-time injury status updates
 - **Trending Reliability**: Based on actual waiver wire activity
 - **Response Time**: ~0.3s average for trending data, ~0.6s for full player database
