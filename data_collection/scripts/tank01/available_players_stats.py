@@ -823,24 +823,36 @@ class Tank01AvailablePlayersStatsExtractor:
                 if any(passing.values()):
                     report.append("- **Passing Totals:**")
                     for stat, value in passing.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Rushing stats
                 rushing = season_totals.get('rushing', {})
                 if any(rushing.values()):
                     report.append("- **Rushing Totals:**")
                     for stat, value in rushing.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Receiving stats
                 receiving = season_totals.get('receiving', {})
                 if any(receiving.values()):
                     report.append("- **Receiving Totals:**")
                     for stat, value in receiving.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Defense stats
                 defense = season_totals.get('defense', {})
@@ -867,24 +879,36 @@ class Tank01AvailablePlayersStatsExtractor:
                 if any(passing_avg.values()):
                     report.append("- **Passing Averages:**")
                     for stat, value in passing_avg.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value:.1f}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value:.1f}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Rushing averages
                 rushing_avg = season_averages.get('rushing', {})
                 if any(rushing_avg.values()):
                     report.append("- **Rushing Averages:**")
                     for stat, value in rushing_avg.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value:.1f}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value:.1f}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Receiving averages
                 receiving_avg = season_averages.get('receiving', {})
                 if any(receiving_avg.values()):
                     report.append("- **Receiving Averages:**")
                     for stat, value in receiving_avg.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value:.1f}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value:.1f}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 report.append("")
             
@@ -932,12 +956,21 @@ class Tank01AvailablePlayersStatsExtractor:
                     receiving = game.get('receiving', {})
                     
                     game_stats_summary = []
-                    if passing.get('passYds', 0) > 0:
-                        game_stats_summary.append(f"{passing.get('passYds', 0)} pass yds")
-                    if rushing.get('rushYds', 0) > 0:
-                        game_stats_summary.append(f"{rushing.get('rushYds', 0)} rush yds")
-                    if receiving.get('recYds', 0) > 0:
-                        game_stats_summary.append(f"{receiving.get('recYds', 0)} rec yds")
+                    try:
+                        if float(passing.get('passYds', 0)) > 0:
+                            game_stats_summary.append(f"{passing.get('passYds', 0)} pass yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(rushing.get('rushYds', 0)) > 0:
+                            game_stats_summary.append(f"{rushing.get('rushYds', 0)} rush yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(receiving.get('recYds', 0)) > 0:
+                            game_stats_summary.append(f"{receiving.get('recYds', 0)} rec yds")
+                    except (ValueError, TypeError):
+                        pass
                     
                     if game_stats_summary:
                         report.append(f"  - Key Stats: {', '.join(game_stats_summary)}")
@@ -963,12 +996,21 @@ class Tank01AvailablePlayersStatsExtractor:
                     receiving = game.get('receiving', {})
                     
                     key_stats = []
-                    if passing.get('passYds', 0) > 0:
-                        key_stats.append(f"{passing.get('passYds', 0)} pass yds")
-                    if rushing.get('rushYds', 0) > 0:
-                        key_stats.append(f"{rushing.get('rushYds', 0)} rush yds")
-                    if receiving.get('recYds', 0) > 0:
-                        key_stats.append(f"{receiving.get('recYds', 0)} rec yds")
+                    try:
+                        if float(passing.get('passYds', 0)) > 0:
+                            key_stats.append(f"{passing.get('passYds', 0)} pass yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(rushing.get('rushYds', 0)) > 0:
+                            key_stats.append(f"{rushing.get('rushYds', 0)} rush yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(receiving.get('recYds', 0)) > 0:
+                            key_stats.append(f"{receiving.get('recYds', 0)} rec yds")
+                    except (ValueError, TypeError):
+                        pass
                     
                     key_stats_str = ', '.join(key_stats) if key_stats else 'No stats'
                     
