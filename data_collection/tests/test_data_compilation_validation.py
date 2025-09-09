@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 
 # Add the project root to the path
-project_root = Path(__file__).parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 from ai_agents.comprehensive_data_processor import ComprehensiveDataProcessor
@@ -363,14 +363,20 @@ def save_sample_outputs(comprehensive_data):
     print(f"\n💾 SAVING SAMPLE OUTPUTS")
     print("-" * 30)
     
-    # Create validation test output directory
+    # Create validation test output directory with YYYY/MM/DD structure
     from datetime import datetime
     import pytz
     
     pacific_tz = pytz.timezone('US/Pacific')
-    timestamp = datetime.now(pacific_tz).strftime("%Y%m%d_%H%M%S")
+    now = datetime.now(pacific_tz)
+    timestamp = now.strftime("%Y%m%d_%H%M%S")
     
-    validation_dir = os.path.join(project_root, "data_collection", "outputs", "validation_tests")
+    # Create YYYY/MM/DD directory structure
+    year_dir = now.strftime("%Y")
+    month_dir = now.strftime("%m")
+    day_dir = now.strftime("%d")
+    
+    validation_dir = os.path.join(project_root, "data_collection", "outputs", "validation_tests", year_dir, month_dir, day_dir)
     os.makedirs(validation_dir, exist_ok=True)
     
     # Save comprehensive data as JSON
