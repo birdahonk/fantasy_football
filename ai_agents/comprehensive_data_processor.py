@@ -30,7 +30,7 @@ class ComprehensiveDataProcessor:
         my_roster = self._load_my_roster_data()
         opponent_roster = self._load_opponent_roster_data()
         available_players = self._load_available_players_data()
-        transaction_trends = self._load_transaction_trends()
+        # transaction_trends = self._load_transaction_trends()  # Excluded for now
         
         # Calculate total token usage
         total_tokens = (
@@ -45,7 +45,7 @@ class ComprehensiveDataProcessor:
             "my_roster": my_roster,
             "opponent_roster": opponent_roster,
             "available_players": available_players,
-            "transaction_trends": transaction_trends,
+            # "transaction_trends": transaction_trends,  # Excluded for now
             "total_tokens": total_tokens,
             "data_files": self._extract_all_data_files(),
             "processing_timestamp": datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -445,8 +445,13 @@ class ComprehensiveDataProcessor:
         yahoo_player_key = yahoo_player.get("player_key")
         
         for matched_player in other_players:
-            # Sleeper data structure: matched_players array with yahoo_player and sleeper_player keys
-            if "yahoo_player" in matched_player and "sleeper_player" in matched_player:
+            # Sleeper data structure: matched_players array with yahoo_data and sleeper_player keys
+            if "yahoo_data" in matched_player and "sleeper_player" in matched_player:
+                yahoo_data = matched_player["yahoo_data"]
+                if yahoo_data.get("player_key") == yahoo_player_key:
+                    return matched_player["sleeper_player"]
+            # Also check for yahoo_player key (for backward compatibility)
+            elif "yahoo_player" in matched_player and "sleeper_player" in matched_player:
                 yahoo_data = matched_player["yahoo_player"]
                 if yahoo_data.get("player_key") == yahoo_player_key:
                     return matched_player["sleeper_player"]
@@ -639,12 +644,31 @@ class ComprehensiveDataProcessor:
     
     def _load_sleeper_opponents(self) -> List[Dict[str, Any]]:
         """Load Sleeper opponents data"""
-        # Sleeper doesn't have opponent rosters, return empty
+        try:
+            opponent_file = self._find_latest_file("sleeper/opponent_roster", "*_raw_data.json")
+            if opponent_file:
+                with open(opponent_file, 'r') as f:
+                    data = json.load(f)
+                # Sleeper data structure: matched_players array
+                matched_players = data.get("matched_players", [])
+                logger.info(f"Loaded {len(matched_players)} Sleeper opponent players")
+                return matched_players
+        except Exception as e:
+            logger.error(f"Error loading Sleeper opponents: {e}")
         return []
     
     def _load_tank01_opponents(self) -> List[Dict[str, Any]]:
         """Load Tank01 opponents data"""
-        # Tank01 doesn't have opponent rosters, return empty
+        try:
+            opponent_file = self._find_latest_file("tank01/opponent_roster", "*_raw_data.json")
+            if opponent_file:
+                with open(opponent_file, 'r') as f:
+                    data = json.load(f)
+                matched_players = data.get("matched_players", [])
+                logger.info(f"Loaded {len(matched_players)} Tank01 opponent players")
+                return matched_players
+        except Exception as e:
+            logger.error(f"Error loading Tank01 opponents: {e}")
         return []
     
     def _load_yahoo_available(self) -> List[Dict[str, Any]]:
