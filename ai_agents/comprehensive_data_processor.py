@@ -30,6 +30,7 @@ class ComprehensiveDataProcessor:
         my_roster = self._load_my_roster_data()
         opponent_roster = self._load_opponent_roster_data()
         available_players = self._load_available_players_data()
+        nfl_matchups = self._load_nfl_matchups_data()
         # transaction_trends = self._load_transaction_trends()  # Excluded for now
         
         # Calculate total token usage
@@ -45,6 +46,7 @@ class ComprehensiveDataProcessor:
             "my_roster": my_roster,
             "opponent_roster": opponent_roster,
             "available_players": available_players,
+            "nfl_matchups": nfl_matchups,
             # "transaction_trends": transaction_trends,  # Excluded for now
             "total_tokens": total_tokens,
             "data_files": self._extract_all_data_files(),
@@ -138,8 +140,6 @@ class ComprehensiveDataProcessor:
             
             return {
                 "players_by_position": players_by_position,
-                "starting_lineup": starting_lineup,
-                "bench_players": bench_players,
                 "total_players": starting_count + bench_count,
                 "starting_count": starting_count,
                 "bench_count": bench_count,
@@ -251,8 +251,6 @@ class ComprehensiveDataProcessor:
             
             return {
                 "players_by_position": players_by_position,
-                "starting_lineup": starting_lineup,
-                "bench_players": bench_players,
                 "total_players": starting_count + bench_count,
                 "starting_count": starting_count,
                 "bench_count": bench_count,
@@ -321,6 +319,30 @@ class ComprehensiveDataProcessor:
             logger.error(f"Error loading available players data: {e}")
             return {"players_by_position": {}, "total_players": 0, "data_sources": []}
     
+    def _load_nfl_matchups_data(self) -> Dict[str, Any]:
+        """Load NFL matchups data from Tank01"""
+        try:
+            matchups_file = self._find_latest_file("tank01/nfl_matchups", "*_raw_data.json")
+            if matchups_file:
+                with open(matchups_file, 'r') as f:
+                    data = json.load(f)
+                
+                # Extract relevant matchups data
+                games = data.get("games", [])
+                season_context = data.get("season_context", {})
+                
+                return {
+                    "games": games,
+                    "total_games": len(games),
+                    "season": season_context.get("nfl_season"),
+                    "current_week": season_context.get("current_week"),
+                    "season_phase": season_context.get("season_phase"),
+                    "data_source": "tank01"
+                }
+        except Exception as e:
+            logger.error(f"Error loading NFL matchups: {e}")
+            return {"games": [], "total_games": 0, "data_source": "tank01"}
+    
     def _load_transaction_trends(self) -> Dict[str, Any]:
         """Load transaction trends data"""
         try:
@@ -387,18 +409,47 @@ class ComprehensiveDataProcessor:
         tank01_enriched = {}
         if tank01_data:
             # Handle different Tank01 data structures
-            if "yahoo_data" in tank01_data:
+            if "yahoo_data" in tank01_data and "tank01_data" in tank01_data:
                 # Tank01 available players structure: matched_players array with yahoo_data and tank01_data keys
                 tank01_data_section = tank01_data.get("tank01_data", {})
-                # Projection data is at root level for available players
-                projection_data = tank01_data.get("projection", {})
-                news_data = tank01_data.get("news", [])
-                game_stats_data = tank01_data.get("game_stats", {})
-                depth_chart_data = tank01_data.get("depth_chart", {})
-            else:
+                # For available players, projection data is at root level
+                # For opponent rosters, projection data is in tank01_data.fantasy_projections
+                if "projection" in tank01_data:
+                    # Available players structure
+                    projection_data = tank01_data.get("projection", {})
+                else:
+                    # Opponent roster structure - fantasy_projections is in tank01_data
+                    fantasy_projections = tank01_data_section.get("fantasy_projections", {})
+                    projection_data = {
+                        "fantasyPoints": fantasy_projections.get("fantasyPoints"),
+                        "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault"),
+                        "week_1": {
+                            "fantasy_points": fantasy_projections.get("fantasyPoints"),
+                            "fantasy_points_default": fantasy_projections.get("fantasyPointsDefault")
+                        }
+                    }
+                news_data = tank01_data.get("news", []) or tank01_data_section.get("recent_news", [])
+                game_stats_data = tank01_data.get("game_stats", {}) or tank01_data_section.get("game_stats", {})
+                depth_chart_data = tank01_data.get("depth_chart", {}) or tank01_data_section.get("depth_chart", {})
+            elif "yahoo_player" in tank01_data and "tank01_data" in tank01_data:
                 # Tank01 roster structure: matched_players array with yahoo_player and tank01_data keys
                 tank01_data_section = tank01_data.get("tank01_data", {})
                 # For roster data, fantasy_projections is directly in tank01_data
+                fantasy_projections = tank01_data_section.get("fantasy_projections", {})
+                projection_data = {
+                    "fantasyPoints": fantasy_projections.get("fantasyPoints"),
+                    "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault"),
+                    "week_1": {
+                        "fantasy_points": fantasy_projections.get("fantasyPoints"),
+                        "fantasy_points_default": fantasy_projections.get("fantasyPointsDefault")
+                    }
+                }
+                news_data = tank01_data_section.get("recent_news", [])
+                game_stats_data = tank01_data_section.get("game_stats", {})
+                depth_chart_data = tank01_data_section.get("depth_chart", {})
+            else:
+                # Fallback: assume it's a direct tank01_data structure
+                tank01_data_section = tank01_data
                 fantasy_projections = tank01_data_section.get("fantasy_projections", {})
                 projection_data = {
                     "fantasyPoints": fantasy_projections.get("fantasyPoints"),
@@ -763,5 +814,6 @@ class ComprehensiveDataProcessor:
             "yahoo_available": self._find_latest_file("yahoo/available_players", "*_raw_data.json"),
             "sleeper_available": self._find_latest_file("sleeper/available_players", "*_raw_data.json"),
             "tank01_available": self._find_latest_file("tank01/available_players", "*_raw_data.json"),
+            "tank01_nfl_matchups": self._find_latest_file("tank01/nfl_matchups", "*_raw_data.json"),
             "yahoo_transactions": self._find_latest_file("yahoo/transaction_trends", "*_raw_data.json")
         }
