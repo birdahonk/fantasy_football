@@ -206,6 +206,12 @@
 - [x] **Full AI Analyst Agent Testing** - ✅ **COMPLETE** - Analyst agent successfully generates comprehensive analysis with 146k tokens, specific recommendations, and breaking news integration
 - [x] **Tank01 Season Stats Integration** - ✅ **COMPLETE** - Added getNFLGamesForPlayer endpoint for end-of-game season stats tracking with three new scripts
 
+### **Post-Game Analysis System** 📊 **IN PROGRESS**
+- [ ] **Tank01 Weekly Projections Archive** - Multi-day projection collection script for historical analysis
+- [ ] **Post-Game Analysis Data Processor** - Data processing script for projection vs. actual performance analysis
+- [ ] **Quant AI Agent** - Post-game analysis AI agent for performance insights and strategic recommendations
+- [ ] **Cron Job Automation** - Automated scheduling system for projection collection and analysis (disabled for manual testing)
+
 ### **Roster Management Research** 🔬 **COMPLETE**
 - [x] **Yahoo API Roster Management Research** - Comprehensive documentation of position changes and add/drop transactions
 - [x] **API Endpoint Analysis** - Documented PUT methods for roster and transaction operations
@@ -225,6 +231,40 @@
 - [x] **Comprehensive Data Processor** - New class for loading, matching, and enriching player data across all APIs
 - [x] **Optimized Player Profiles** - Token-efficient data structure for AI agent consumption
 - [x] **Defense Player Data Collection** - Complete defense player matching and data collection across all APIs
+
+### **Post-Game Analysis System Details** 📊
+
+#### **Phase 1: Projection Archive Collection**
+**Script**: `tank01_weekly_projections_archive.py`
+- **Purpose**: Collect and store weekly projection data for historical analysis
+- **Collection Schedule**: 
+  - Thursday Afternoon: Thursday night players
+  - Sunday Morning: Sunday players
+  - Monday Afternoon: Monday night players
+- **Data Storage**: `data_collection/outputs/tank01/projections_archive/YYYY/week_XX/`
+- **Cron Jobs**: Disabled for manual testing, ready for webserver deployment
+
+#### **Phase 2: Data Processing**
+**Script**: `post_game_analysis_data_processor.py`
+- **Purpose**: Process historical data and prepare analysis inputs
+- **Data Sources**: Projection archive + player stats + matchup data
+- **Output**: Structured data for AI analysis
+- **Cron Jobs**: Disabled for manual testing
+
+#### **Phase 3: AI Analysis**
+**AI Agent**: `quant_post_game_analysis_agent.py`
+- **Purpose**: Generate comprehensive post-game analysis
+- **Analysis**: Performance vs. projections, roster comparisons, strategic insights
+- **Output**: Markdown reports with recommendations
+- **Cron Jobs**: Disabled for manual testing
+
+#### **Automation System**
+**Cron Jobs**: `scripts/automation/`
+- **Thursday 2:00 PM**: Collect Thursday projections
+- **Sunday 8:00 AM**: Collect Sunday projections  
+- **Monday 2:00 PM**: Collect Monday projections
+- **Tuesday 9:00 AM**: Run post-game analysis
+- **Status**: Disabled for manual testing, ready for webserver deployment
 
 ### **Future Enhancements**
 - [ ] **Web Application** - Flask web UI integration
