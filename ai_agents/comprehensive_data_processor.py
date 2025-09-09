@@ -280,6 +280,11 @@ class ComprehensiveDataProcessor:
             
             for yahoo_player in yahoo_available:
                 position = yahoo_player.get("display_position", "Unknown")
+                
+                # Handle multi-position players (FLEX) - same logic as data collection scripts
+                if position in ['W/R/T', 'W/R', 'Q/W/R/T', 'WR,TE', 'RB,TE', 'WR,RB', 'QB,WR']:
+                    position = 'FLEX'
+                
                 if position not in players_by_position:
                     players_by_position[position] = []
                 
@@ -293,11 +298,18 @@ class ComprehensiveDataProcessor:
                 )
                 players_by_position[position].append(enriched_player)
             
-            # Apply position limits
+            # Apply position limits (same logic as data collection scripts)
             limited_players = {}
+            position_counts = {pos: 0 for pos in self.player_limits.keys()}
+            
             for position, players in players_by_position.items():
+                limited_players[position] = []
                 limit = self.player_limits.get(position, 20)
-                limited_players[position] = players[:limit]
+                
+                for player in players:
+                    if position_counts[position] < limit:
+                        limited_players[position].append(player)
+                        position_counts[position] += 1
             
             return {
                 "players_by_position": limited_players,
@@ -435,6 +447,7 @@ class ComprehensiveDataProcessor:
             }
         
         return {
+            "name": yahoo_data.get("name", {}).get("full", "Unknown"),
             "yahoo_data": yahoo_data,
             "sleeper_data": sleeper_enriched if sleeper_enriched else None,
             "tank01_data": tank01_enriched if tank01_enriched else None
@@ -468,7 +481,7 @@ class ComprehensiveDataProcessor:
                 yahoo_data = matched_player["yahoo_player"]
                 if yahoo_data.get("player_key") == yahoo_player_key:
                     return matched_player
-            # Tank01 available players data structure: matched_players array with yahoo_data and tank01_data keys
+            # Tank01 available players data structure: yahoo_data and tank01_data keys
             elif "yahoo_data" in matched_player and "tank01_data" in matched_player:
                 yahoo_data = matched_player["yahoo_data"]
                 if yahoo_data.get("player_key") == yahoo_player_key:

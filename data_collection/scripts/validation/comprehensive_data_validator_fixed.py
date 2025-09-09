@@ -308,26 +308,49 @@ class ComprehensiveDataValidator:
             players_by_position = available_players.get('players_by_position', {})
             available_players_total = sum(len(players) for players in players_by_position.values() if isinstance(players, list))
             
-            # Count enrichment
+            # Log position counts for debugging
+            self.logger.info(f"Available players by position:")
+            for position, players in players_by_position.items():
+                if isinstance(players, list):
+                    self.logger.info(f"  {position}: {len(players)} players")
+            
+            # Count enrichment and identify missing players
             available_tank01_count = 0
             available_sleeper_count = 0
+            missing_tank01_players = []
+            missing_sleeper_players = []
             
             for position, players in players_by_position.items():
                 if isinstance(players, list):
                     for player in players:
                         if isinstance(player, dict):
+                            player_name = player.get('name', 'Unknown')
+                            yahoo_data = player.get('yahoo_data', {})
+                            yahoo_name = yahoo_data.get('name', {}).get('full', 'Unknown') if isinstance(yahoo_data, dict) else 'Unknown'
+                            
                             if player.get('tank01_data'):
                                 available_tank01_count += 1
+                            else:
+                                missing_tank01_players.append(f"{position}: {player_name} (Yahoo: {yahoo_name})")
+                            
                             if player.get('sleeper_data'):
                                 available_sleeper_count += 1
+                            else:
+                                missing_sleeper_players.append(f"{position}: {player_name} (Yahoo: {yahoo_name})")
             
             if available_tank01_count < available_players_total:
                 self._add_critical_error(f"Available players Tank01 enrichment: {available_tank01_count}/{available_players_total}")
+                self.logger.error(f"Missing Tank01 data for {len(missing_tank01_players)} players:")
+                for player in missing_tank01_players:
+                    self.logger.error(f"  - {player}")
             else:
                 self.logger.info(f"✅ Available players Tank01 enrichment: {available_tank01_count}/{available_players_total}")
             
             if available_sleeper_count < available_players_total:
                 self._add_critical_error(f"Available players Sleeper enrichment: {available_sleeper_count}/{available_players_total}")
+                self.logger.error(f"Missing Sleeper data for {len(missing_sleeper_players)} players:")
+                for player in missing_sleeper_players:
+                    self.logger.error(f"  - {player}")
             else:
                 self.logger.info(f"✅ Available players Sleeper enrichment: {available_sleeper_count}/{available_players_total}")
             

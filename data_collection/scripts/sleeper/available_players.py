@@ -123,8 +123,8 @@ class SleeperAvailablePlayersExtractor:
         for player in players:
             position = player.get('display_position', 'Unknown')
             
-            # Handle multi-position players (FLEX)
-            if position in ['W/R/T', 'W/R', 'Q/W/R/T']:
+            # Handle multi-position players (FLEX) - same logic as ComprehensiveDataProcessor
+            if position in ['W/R/T', 'W/R', 'Q/W/R/T', 'WR,TE', 'RB,TE', 'WR,RB', 'QB,WR']:
                 position = 'FLEX'
             
             # Check if we need more players for this position
