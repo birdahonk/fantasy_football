@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive Data Validation Script
+Comprehensive Data Validation Script - FIXED VERSION
 
 This script validates that ALL data collection scripts are working correctly
 and that NO players or enrichment data is missing from the final output.
@@ -12,7 +12,7 @@ Requirements:
 - Final output: Must have 100% enrichment with NO missing data
 
 Usage:
-    python3 data_collection/scripts/validation/comprehensive_data_validator.py
+    python3 data_collection/scripts/validation/comprehensive_data_validator_fixed.py
 """
 
 import os
@@ -216,8 +216,13 @@ class ComprehensiveDataValidator:
             return
         
         available_data = self._load_json_file(available_files[0])
-        available_matched = len(available_data.get('matched_players', []))
-        available_unmatched = len(available_data.get('unmatched_players', []))
+        processed_data = available_data.get('processed_data', {})
+        available_players = processed_data.get('available_players', [])
+        available_matched = len(available_players)
+        
+        # Check for unmatched players in efficiency metrics
+        efficiency_metrics = processed_data.get('efficiency_metrics', {})
+        available_unmatched = efficiency_metrics.get('players_unmatched', 0)
         
         if available_unmatched > 0:
             self._add_critical_error(f"Tank01 available_players: {available_unmatched} unmatched players")
@@ -240,26 +245,27 @@ class ComprehensiveDataValidator:
         self.logger.info("-" * 40)
         
         try:
-            processor = ComprehensiveDataProcessor(self.outputs_dir, DEFAULT_PLAYER_LIMITS)
-            result = processor.process_all_data()
+            # Initialize ComprehensiveDataProcessor with required parameters
+            data_dir = "data_collection/outputs"
+            player_limits = DEFAULT_PLAYER_LIMITS
+            processor = ComprehensiveDataProcessor(data_dir, player_limits)
+            data = processor.process_all_data()
             
-            # Validate my roster enrichment
-            my_roster = result.get('my_roster', {})
-            my_roster_players = my_roster.get('players_by_position', {})
-            my_roster_total = my_roster.get('total_players', 0)
+            # Validate my roster
+            my_roster = data.get('my_roster', {})
+            my_roster_players = my_roster.get('players', [])
+            my_roster_total = len(my_roster_players)
             
-            # Count enrichment
             my_roster_tank01_count = 0
             my_roster_sleeper_count = 0
             
-            for position, players in my_roster_players.items():
-                if isinstance(players, list):
-                    for player in players:
-                        if isinstance(player, dict):
-                            if player.get('tank01_data'):
-                                my_roster_tank01_count += 1
-                            if player.get('sleeper_data'):
-                                my_roster_sleeper_count += 1
+            if isinstance(my_roster_players, list):
+                for player in my_roster_players:
+                    if isinstance(player, dict):
+                        if player.get('tank01_data'):
+                            my_roster_tank01_count += 1
+                        if player.get('sleeper_data'):
+                            my_roster_sleeper_count += 1
             
             if my_roster_tank01_count < my_roster_total:
                 self._add_critical_error(f"My roster Tank01 enrichment: {my_roster_tank01_count}/{my_roster_total}")
@@ -271,39 +277,42 @@ class ComprehensiveDataValidator:
             else:
                 self.logger.info(f"✅ My roster Sleeper enrichment: {my_roster_sleeper_count}/{my_roster_total}")
             
-            # Validate opponent roster enrichment
-            opponent_roster = result.get('opponent_roster', {})
-            opponent_roster_players = opponent_roster.get('players_by_position', {})
-            opponent_roster_total = opponent_roster.get('total_players', 0)
+            # Validate opponent roster
+            opponent_roster = data.get('opponent_roster', {})
+            opponent_roster_players = opponent_roster.get('players', [])
+            opponent_roster_total = len(opponent_roster_players)
             
-            # Count enrichment
             opponent_tank01_count = 0
             opponent_sleeper_count = 0
             
-            for position, players in opponent_roster_players.items():
-                if isinstance(players, list):
-                    for player in players:
-                        if isinstance(player, dict):
-                            if player.get('tank01_data'):
-                                opponent_tank01_count += 1
-                            if player.get('sleeper_data'):
-                                opponent_sleeper_count += 1
+            if isinstance(opponent_roster_players, list):
+                for player in opponent_roster_players:
+                    if isinstance(player, dict):
+                        if player.get('tank01_data'):
+                            opponent_tank01_count += 1
+                        if player.get('sleeper_data'):
+                            opponent_sleeper_count += 1
+            
+            if opponent_tank01_count < opponent_roster_total:
+                self._add_critical_error(f"Opponent roster Tank01 enrichment: {opponent_tank01_count}/{opponent_roster_total}")
+            else:
+                self.logger.info(f"✅ Opponent roster Tank01 enrichment: {opponent_tank01_count}/{opponent_roster_total}")
             
             if opponent_sleeper_count < opponent_roster_total:
                 self._add_critical_error(f"Opponent roster Sleeper enrichment: {opponent_sleeper_count}/{opponent_roster_total}")
             else:
                 self.logger.info(f"✅ Opponent roster Sleeper enrichment: {opponent_sleeper_count}/{opponent_roster_total}")
             
-            # Validate available players enrichment
-            available_players = result.get('available_players', {})
-            available_players_by_position = available_players.get('players_by_position', {})
-            available_players_total = sum(len(players) for players in available_players_by_position.values())
+            # Validate available players
+            available_players = data.get('available_players', {})
+            players_by_position = available_players.get('players_by_position', {})
+            available_players_total = sum(len(players) for players in players_by_position.values() if isinstance(players, list))
             
             # Count enrichment
             available_tank01_count = 0
             available_sleeper_count = 0
             
-            for position, players in available_players_by_position.items():
+            for position, players in players_by_position.items():
                 if isinstance(players, list):
                     for player in players:
                         if isinstance(player, dict):
@@ -378,7 +387,9 @@ class ComprehensiveDataValidator:
         """Find latest files matching pattern in subdirectory."""
         search_path = os.path.join(self.outputs_dir, subdir, "**", pattern)
         files = glob.glob(search_path, recursive=True)
-        return sorted(files)
+        # Sort by modification time (newest first)
+        files.sort(key=os.path.getmtime, reverse=True)
+        return files
     
     def _load_json_file(self, file_path: str) -> Dict[str, Any]:
         """Load JSON file safely."""
@@ -392,44 +403,41 @@ class ComprehensiveDataValidator:
     def _extract_roster_players(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Extract players from Yahoo roster data."""
         players = []
-        # Yahoo my_roster data structure - CORRECTED based on actual analysis
+        # Yahoo my_roster data structure - CORRECTED based on documented schema
         roster_raw = data.get('roster_raw', {})
         fantasy_content = roster_raw.get('fantasy_content', {})
         team_data = fantasy_content.get('team', [])
         
-        if team_data and len(team_data) > 0:
-            team_info = team_data[0]
-            if isinstance(team_info, list) and len(team_info) > 1:
-                roster_data = team_info[1]
-                if isinstance(roster_data, dict) and 'roster' in roster_data:
-                    roster = roster_data['roster']
-                    # Extract players from roster structure - CORRECTED
-                    for key, value in roster.items():
-                        if key.isdigit() and isinstance(value, dict) and 'players' in value:
-                            players_data = value['players']
-                            for player_key, player_data in players_data.items():
-                                if player_key.isdigit() and isinstance(player_data, dict) and 'player' in player_data:
-                                    player_info = player_data['player']
-                                    if isinstance(player_info, list) and len(player_info) > 0:
-                                        players.append(player_info[0])
+        if team_data and len(team_data) > 1:
+            # team_data[0] is team metadata array, team_data[1] is roster data
+            roster_data = team_data[1]
+            if isinstance(roster_data, dict) and 'roster' in roster_data:
+                roster = roster_data['roster']
+                # Extract players from roster structure - CORRECTED
+                for key, value in roster.items():
+                    if key.isdigit() and isinstance(value, dict) and 'players' in value:
+                        players_data = value['players']
+                        for player_key, player_data in players_data.items():
+                            if player_key.isdigit() and isinstance(player_data, dict) and 'player' in player_data:
+                                player_info = player_data['player']
+                                if isinstance(player_info, list) and len(player_info) > 0:
+                                    players.append(player_info[0])
         
         return players
     
     def _extract_opponent_players(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Extract players from Yahoo opponent roster data."""
         players = []
-        # Yahoo opponent_rosters data structure
-        teams = data.get('teams', [])
-        for team in teams:
-            if isinstance(team, dict) and 'roster' in team:
-                roster = team['roster']
-                if isinstance(roster, dict) and 'players' in roster:
-                    players_data = roster['players']
-                    for player_key, player_data in players_data.items():
-                        if player_key.isdigit() and isinstance(player_data, dict) and 'player' in player_data:
-                            player_info = player_data['player']
-                            if isinstance(player_info, list) and len(player_info) > 0:
-                                players.append(player_info[0])
+        # Yahoo opponent_rosters data structure - CORRECTED based on documented schema
+        rosters = data.get('rosters', {})
+        
+        for team_key, team_data in rosters.items():
+            if isinstance(team_data, dict) and 'players' in team_data:
+                # team_data is already the roster data with players array
+                players_data = team_data['players']
+                if isinstance(players_data, list):
+                    players.extend(players_data)
+        
         return players
     
     def _extract_available_players(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:

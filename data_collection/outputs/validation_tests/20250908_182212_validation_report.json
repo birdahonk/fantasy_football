@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-09-08T18:22:12.187110",
+  "total_errors": 3,
+  "critical_errors": [
+    "Sleeper opponent_roster: 9 unmatched players",
+    "Tank01 opponent_roster: 15 unmatched players",
+    "Comprehensive data processor failed: ComprehensiveDataProcessor.__init__() missing 2 required positional arguments: 'data_dir' and 'player_limits'"
+  ],
+  "warnings": [],
+  "validation_summary": {},
+  "yahoo_data": {
+    "my_roster_players": [],
+    "opponent_players": [],
+    "available_players": []
+  },
+  "sleeper_data": {
+    "my_roster_matched": 15,
+    "my_roster_unmatched": 0,
+    "opponent_matched": 6,
+    "opponent_unmatched": 9,
+    "available_matched": 1095,
+    "available_unmatched": 0
+  },
+  "tank01_data": {
+    "my_roster_matched": 15,
+    "my_roster_unmatched": 0,
+    "opponent_matched": 0,
+    "opponent_unmatched": 15,
+    "available_matched": 5,
+    "available_unmatched": 0
+  }
+}
