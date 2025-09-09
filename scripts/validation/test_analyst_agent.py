@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 
 # Add project root to path
-project_root = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(project_root)
 
 from ai_agents.analyst_agent import AnalystAgent
