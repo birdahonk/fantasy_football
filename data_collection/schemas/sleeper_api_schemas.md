@@ -6,46 +6,153 @@ This document defines the expected response structures for Sleeper NFL API endpo
 
 ## ACTUAL PROCESSED DATA STRUCTURES
 
-### **Available Players Data Structure**
+### **1. My Roster Data Structure**
+**File**: `data_collection/outputs/sleeper/my_roster/YYYY/MM/DD/YYYYMMDD_HHMMSS_my_roster_raw_data.json`
+
+```json
+{
+  "extraction_metadata": {
+    "script": "sleeper_my_roster.py",
+    "extraction_timestamp": "2025-09-08T16:59:11.123456",
+    "execution_stats": {
+      "start_time": "2025-09-08 16:59:10.123456",
+      "api_calls": 0,
+      "errors": 0,
+      "players_processed": 15,
+      "players_matched": 15,
+      "players_unmatched": 0
+    }
+  },
+  "season_context": {...},
+  "matched_players": [
+    {
+      "yahoo_player": {
+        "player_key": "461.p.32671",
+        "player_id": "32671",
+        "name": {"full": "Joe Burrow", "first": "Joe", "last": "Burrow"},
+        "display_position": "QB",
+        "editorial_team_abbr": "Cin",
+        "bye_weeks": {"week": "10"},
+        "bye_week": "10"
+      },
+      "sleeper_player": {
+        "player_id": "string",
+        "full_name": "Joe Burrow",
+        "first_name": "Joe",
+        "last_name": "Burrow",
+        "position": "QB",
+        "team": "CIN",
+        "age": 27,
+        "years_exp": 5,
+        "height": "6'4\"",
+        "weight": "215",
+        "college": "LSU",
+        "yahoo_id": "32671"
+      },
+      "mapping": {
+        "match_type": "yahoo_id",
+        "confidence": "high"
+      }
+    }
+  ],
+  "unmatched_players": []
+}
+```
+
+### **2. Opponent Roster Data Structure**
+**File**: `data_collection/outputs/sleeper/opponent_roster/YYYY/MM/DD/YYYYMMDD_HHMMSS_opponent_roster_raw_data.json`
+
+```json
+{
+  "extraction_metadata": {
+    "script": "sleeper_opponent_roster.py",
+    "extraction_timestamp": "2025-09-08T17:21:15.713480",
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "execution_stats": {
+      "start_time": "2025-09-08 17:21:15.128964",
+      "api_calls": 0,
+      "errors": 0,
+      "players_processed": 15,
+      "players_matched": 15,
+      "players_unmatched": 0
+    }
+  },
+  "opponent_info": {
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "total_players": 15,
+    "matched_players": 15,
+    "unmatched_players": 0
+  },
+  "matched_players": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.31833",
+        "player_id": "31833",
+        "name": {"full": "Kyler Murray", "first": "Kyler", "last": "Murray"},
+        "display_position": "QB",
+        "editorial_team_abbr": "Ari",
+        "bye_weeks": {"week": "8"},
+        "bye_week": "8"
+      },
+      "sleeper_player": {
+        "player_id": "string",
+        "full_name": "Kyler Murray",
+        "first_name": "Kyler",
+        "last_name": "Murray",
+        "position": "QB",
+        "team": "ARI",
+        "age": 27,
+        "years_exp": 6,
+        "yahoo_id": "31833"
+      },
+      "match_type": "yahoo_id"
+    }
+  ],
+  "unmatched_players": []
+}
+```
+
+### **3. Available Players Data Structure**
 **File**: `data_collection/outputs/sleeper/available_players/YYYY/MM/DD/YYYYMMDD_HHMMSS_available_players_raw_data.json`
 
 ```json
 {
   "extraction_metadata": {
-    "extraction_date": "2025-09-08T00:26:09.369000",
-    "script_version": "1.0",
-    "development_mode": false,
-    "player_limits": {"QB": 20, "RB": 20, "WR": 20, "TE": 20, "K": 20, "DEF": 10, "FLEX": 15}
+    "script": "sleeper_available_players.py",
+    "extraction_timestamp": "2025-09-08T16:59:26.123456",
+    "execution_stats": {
+      "start_time": "2025-09-08 16:59:25.123456",
+      "api_calls": 0,
+      "errors": 0,
+      "players_processed": 110,
+      "players_matched": 110,
+      "players_unmatched": 0
+    }
   },
-  "season_context": {
-    "nfl_season": 2025,
-    "current_week": 1,
-    "season_phase": "Regular Season"
-  },
+  "season_context": {...},
   "matched_players": [
     {
       "yahoo_player": {
-        "player_id": "string",
-        "name": {"full": "string", "first": "string", "last": "string"},
-        "display_position": "QB|RB|WR|TE|K|DEF",
-        "editorial_team_abbr": "string",
-        "status": "string",
-        "bye_weeks": [number]
+        "player_key": "461.p.12345",
+        "player_id": "12345",
+        "name": {"full": "Evan Engram", "first": "Evan", "last": "Engram"},
+        "display_position": "TE",
+        "editorial_team_abbr": "Den",
+        "bye_weeks": {"week": "10"},
+        "bye_week": "10"
       },
       "sleeper_player": {
         "player_id": "string",
-        "first_name": "string",
-        "last_name": "string", 
-        "full_name": "string",
-        "position": "QB|RB|WR|TE|K|DEF",
-        "team": "string",
-        "age": number,
-        "years_exp": number,
-        "height": "string",
-        "weight": "string",
-        "college": "string",
-        "news_updated": "string",
-        "yahoo_id": "string"
+        "full_name": "Evan Engram",
+        "first_name": "Evan",
+        "last_name": "Engram",
+        "position": "TE",
+        "team": "DEN",
+        "age": 30,
+        "years_exp": 8,
+        "yahoo_id": "12345"
       },
       "mapping": {
         "match_method": "direct_yahoo_id|name_team_match|defense_team_match",
@@ -62,6 +169,95 @@ This document defines the expected response structures for Sleeper NFL API endpo
 - **Player Structure**: Each matched player contains both `yahoo_player` and `sleeper_player` data
 - **Position Access**: Use `player['yahoo_player']['display_position']` for position filtering
 - **Command Line Options**: Supports `--qb`, `--rb`, `--wr`, `--te`, `--k`, `--defense`, `--flex`, `--all`, `--dev` parameters
+
+### **4. Trending Players Data Structure**
+**File**: `data_collection/outputs/sleeper/trending/YYYY/MM/DD/YYYYMMDD_HHMMSS_trending_raw_data.json`
+
+```json
+{
+  "extraction_metadata": {
+    "source": "Sleeper API - Trending Players",
+    "extraction_timestamp": "2025-09-08T16:59:43.945700",
+    "lookback_period": "24 hours",
+    "nfl_state": {
+      "week": 1,
+      "leg": 1,
+      "season": "2025",
+      "season_type": "regular",
+      "league_season": "2025",
+      "previous_season": "2024",
+      "season_start_date": "2025-09-04",
+      "display_week": 1,
+      "league_create_season": "2025",
+      "season_has_scores": true
+    },
+    "execution_stats": {
+      "start_time": "2025-09-08 16:59:41.591454",
+      "api_calls": 3,
+      "errors": 0,
+      "trending_adds_count": 25,
+      "trending_drops_count": 25,
+      "enriched_players": 50,
+      "execution_time": 2.352834
+    }
+  },
+  "season_context": {...},
+  "trending_adds": [
+    {
+      "trend_type": "add",
+      "trend_count": 1234,
+      "player_id": "string",
+      "player_details": {...},
+      "trend_data": {...}
+    }
+  ],
+  "trending_drops": [
+    {
+      "trend_type": "drop",
+      "trend_count": 567,
+      "player_id": "string",
+      "player_details": {...},
+      "trend_data": {...}
+    }
+  ],
+  "raw_trending_adds": [
+    {
+      "player_id": "string",
+      "full_name": "Quentin Johnston",
+      "first_name": "Quentin",
+      "last_name": "Johnston",
+      "position": "WR",
+      "team": "LAC",
+      "age": 22,
+      "years_exp": 2,
+      "trending_count": 1234,
+      "trending_type": "add",
+      "yahoo_id": "string"
+    }
+  ],
+  "raw_trending_drops": [
+    {
+      "player_id": "string",
+      "full_name": "Marvin Mims",
+      "first_name": "Marvin",
+      "last_name": "Mims",
+      "position": "WR",
+      "team": "DEN",
+      "age": 22,
+      "years_exp": 2,
+      "trending_count": 567,
+      "trending_type": "drop",
+      "yahoo_id": "string"
+    }
+  ]
+}
+```
+
+**Key Notes:**
+- **Trending Data**: Separate arrays for `trending_adds` and `trending_drops` (25 each)
+- **Raw Data**: `raw_trending_adds` and `raw_trending_drops` contain full player details
+- **Player Structure**: Raw data includes complete Sleeper player information
+- **Trending Counts**: Shows how many times players were added/dropped in 24 hours
 
 ## API Details
 

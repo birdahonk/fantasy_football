@@ -40,17 +40,26 @@ This guide provides high-level structure guidance for working with API data in t
 **ALWAYS CHECK**: `data_collection/schemas/sleeper_api_schemas.md` for complete details
 
 #### **Key Patterns:**
-- **Available Players**: `matched_players` array contains enriched player data
-- **Player Structure**: Each player has `yahoo_player`, `sleeper_player`, and `mapping` objects
+- **My Roster**: `matched_players` array with `yahoo_player`, `sleeper_player`, `mapping` objects
+- **Opponent Roster**: `matched_players` array with `yahoo_data`, `sleeper_player`, `match_type` objects
+- **Available Players**: `matched_players` array contains 110 enriched players (optimized subset)
+- **Trending Players**: `trending_adds`, `trending_drops`, `raw_trending_adds`, `raw_trending_drops` arrays
 - **Position Data**: Use `player['yahoo_player']['display_position']` for position filtering
 - **Command Line**: Supports `--qb`, `--rb`, `--wr`, `--te`, `--k`, `--defense`, `--flex`, `--all`, `--dev` parameters
 
+#### **Critical Structure Differences:**
+- **My Roster**: Uses `yahoo_player` key for Yahoo data
+- **Opponent Roster**: Uses `yahoo_data` key for Yahoo data (different structure!)
+- **Available Players**: Uses `yahoo_player` key for Yahoo data
+- **Trending Players**: Uses `raw_trending_adds`/`raw_trending_drops` for full player data
+
 #### **Common Mistakes to Avoid:**
-- ❌ **Don't assume** position is at top level - it's in `yahoo_player.display_position`
+- ❌ **Don't assume** all scripts use same structure - opponent roster uses `yahoo_data` not `yahoo_player`
+- ❌ **Don't assume** position is at top level - it's in `yahoo_player.display_position` or `yahoo_data.display_position`
 - ❌ **Don't assume** all data is in arrays - check for dictionaries
-- ❌ **Don't assume** player data is nested - check top-level keys first
+- ❌ **Don't assume** available players has full 1,095 players - it's optimized to 110
 - ✅ **Always check** the actual structure before accessing data
-- ✅ **Use** `player['yahoo_player']['display_position']` for position filtering
+- ✅ **Use** correct key names based on script type (`yahoo_player` vs `yahoo_data`)
 
 ### **3. Tank01 API Data Structure**
 **ALWAYS CHECK**: `data_collection/schemas/tank01_api_schemas.md` for complete details
@@ -120,8 +129,34 @@ matchups = data['matchups']['week_1']['matchups']  # Array of matchup objects
 
 ### **Sleeper API Data Access:**
 ```python
-# Check schema file for exact structure
-# Usually: data['players'] or data['matched_players']
+# My Roster - STANDARD STRUCTURE
+matched_players = data['matched_players']  # Array of player objects
+for player in matched_players:
+    yahoo_data = player['yahoo_player']  # Yahoo player data
+    sleeper_data = player['sleeper_player']  # Sleeper player data
+    position = yahoo_data['display_position']
+    team = yahoo_data['editorial_team_abbr']
+
+# Opponent Roster - DIFFERENT STRUCTURE
+matched_players = data['matched_players']  # Array of player objects
+for player in matched_players:
+    yahoo_data = player['yahoo_data']  # Note: 'yahoo_data' not 'yahoo_player'
+    sleeper_data = player['sleeper_player']  # Sleeper player data
+    position = yahoo_data['display_position']
+    team = yahoo_data['editorial_team_abbr']
+
+# Available Players - STANDARD STRUCTURE (110 players)
+matched_players = data['matched_players']  # Array of 110 player objects
+for player in matched_players:
+    yahoo_data = player['yahoo_player']  # Yahoo player data
+    sleeper_data = player['sleeper_player']  # Sleeper player data
+    position = yahoo_data['display_position']
+
+# Trending Players - MULTIPLE ARRAYS
+trending_adds = data['trending_adds']  # Array of trending add objects
+trending_drops = data['trending_drops']  # Array of trending drop objects
+raw_adds = data['raw_trending_adds']  # Array of full player data for adds
+raw_drops = data['raw_trending_drops']  # Array of full player data for drops
 ```
 
 ### **Tank01 API Data Access:**
