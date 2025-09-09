@@ -480,17 +480,25 @@ Team defense players have a different data structure than individual players:
 ```json
 {
   "fantasy_projections": {
-    "fantasyPoints": "number",
+    "fantasyPoints": "null",
+    "fantasyPointsDefault": "number",
     "defTD": "number",
     "sacks": "number",
     "int": "number",
     "fumblesRecovered": "number",
     "safeties": "number",
     "pointsAllowed": "number",
-    "yardsAllowed": "number"
+    "yardsAllowed": "number",
+    "returnTD": "number",
+    "blockKick": "number"
   }
 }
 ```
+
+**⚠️ IMPORTANT: Defense Player Data Structure**:
+- **fantasyPoints**: Always `null` for defense players (team-based scoring)
+- **fantasyPointsDefault**: Single number value (not object) for defense players
+- **Other fields**: Standard defense statistics
 
 **Implementation Requirements**:
 1. **Weekly Projections Loading**: Scripts must call `getNFLProjections(week=current_week, archiveSeason=2025)` at startup
@@ -498,6 +506,44 @@ Team defense players have a different data structure than individual players:
 3. **Player Matching**: Match each player's `playerID` to projections data
 4. **Data Integration**: Add `fantasy_projections` field to each player's `tank01_data` section
 5. **Markdown Display**: Include fantasy projections in markdown reports with proper formatting
+
+## Comprehensive Data Processor Integration
+
+**Purpose**: Documents how Tank01 data integrates with the `ComprehensiveDataProcessor` for AI analyst agent consumption.
+
+**Data Structure Variations**:
+- **Available Players**: `projection` data at root level, `tank01_data` contains metadata
+- **Roster Players**: `fantasy_projections` within `tank01_data`, `yahoo_player` key structure
+- **Opponent Roster**: `fantasy_projections` within `tank01_data`, `yahoo_data` key structure
+
+**Comprehensive Output Integration**:
+```json
+{
+  "tank01_data": {
+    "player_id": "string",
+    "name": {"full": "string", "first": "string", "last": "string"},
+    "display_position": "string",
+    "team": "string",
+    "team_id": "string",
+    "projection": {
+      "fantasyPoints": "number|null",
+      "fantasyPointsDefault": "number|object",
+      "week_1": {
+        "fantasy_points": "number|null",
+        "fantasy_points_default": "number|object"
+      }
+    },
+    "news": "array",
+    "game_stats": "object",
+    "depth_chart": "object",
+    "team_context": "object"
+  }
+}
+```
+
+**Fantasy Points Data Types**:
+- **Non-Defense Players**: `fantasyPoints` (number), `fantasyPointsDefault` (object with standard/PPR/halfPPR)
+- **Defense Players**: `fantasyPoints` (null), `fantasyPointsDefault` (number)
 
 ### 3. Player Game Stats (`getNFLGamesForPlayer`)
 

@@ -424,8 +424,8 @@ Please provide a comprehensive analysis with specific recommendations for improv
         logger.info("Generating analysis with LLM...")
         analysis = self._call_llm(prompt)
         
-        # Save comprehensive reports
-        saved_files = self._save_comprehensive_reports(
+        # Save comprehensive reports with week number
+        saved_files = self._save_comprehensive_reports_with_week(
             comprehensive_data, web_research, analysis
         )
         
@@ -477,6 +477,9 @@ CRITICAL CONTEXT: This is the {nfl_season} NFL season, Week {current_week}. You 
 ## AVAILABLE PLAYERS ({available_players.get('total_players', 0)} players)
 {json.dumps(available_players.get('players_by_position', {}), indent=2)}
 
+## NFL MATCHUPS
+{json.dumps(comprehensive_data.get('nfl_matchups', {}), indent=2)}
+
 ## TRANSACTION TRENDS
 {json.dumps(transaction_trends, indent=2)}
 
@@ -487,10 +490,13 @@ CRITICAL CONTEXT: This is the {nfl_season} NFL season, Week {current_week}. You 
 
 ### 1. DATA UTILIZATION REQUIREMENTS
 - **MUST** analyze each player's projected points from Tank01 data (tank01_data.projection.fantasyPoints)
+- **MUST** analyze fantasy points defaults for all players (tank01_data.projection.fantasyPointsDefault)
 - **MUST** follow and summarize news links from Tank01 data (tank01_data.news)
 - **MUST** consider depth chart positions from Sleeper data (sleeper_data.depth_chart_position)
-- **MUST** cross-reference player IDs across all 3 APIs
+- **MUST** cross-reference player IDs across all 3 APIs (Yahoo, Sleeper, Tank01)
+- **MUST** use NFL matchups data for game times and opponent analysis
 - **MUST** use web research findings in your analysis
+- **MUST** understand that defense players have fantasyPoints=null but fantasyPointsDefault=number
 
 ### 2. REQUIRED OUTPUT FORMAT
 1. **Data Visibility Confirmation**: Show exactly what data you can see
@@ -554,6 +560,57 @@ Please provide a comprehensive analysis with specific recommendations for improv
             "json": json_filepath,
             "markdown": markdown_filepath,
             "player_data": player_data_filepath
+        }
+    
+    def _save_comprehensive_reports_with_week(self, comprehensive_data: Dict[str, Any], 
+                                            web_research: Dict[str, Any], analysis: str) -> Dict[str, str]:
+        """Save comprehensive reports including JSON, markdown, and comprehensive data processor output with week number"""
+        
+        timestamp = datetime.now(self.pacific_tz).strftime("%Y%m%d_%H%M%S")
+        season_context = comprehensive_data.get("season_context", {})
+        current_week = season_context.get("current_week", 1)
+        
+        output_dir = os.path.join(project_root, "data_collection", "outputs", "analyst_reports")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Save comprehensive JSON with week number
+        json_filepath = os.path.join(output_dir, f"week_{current_week:02d}_{timestamp}_comprehensive_analysis.json")
+        with open(json_filepath, 'w') as f:
+            json.dump({
+                "analysis": analysis,
+                "comprehensive_data": comprehensive_data,
+                "web_research": web_research,
+                "model_provider": self.model_provider,
+                "model_name": self.model_name,
+                "timestamp": timestamp,
+                "week": current_week
+            }, f, indent=2)
+        
+        # Save comprehensive markdown with week number
+        markdown_filepath = os.path.join(output_dir, f"week_{current_week:02d}_{timestamp}_comprehensive_analysis.md")
+        self._save_comprehensive_markdown_report(
+            comprehensive_data, web_research, analysis, markdown_filepath
+        )
+        
+        # Save comprehensive player data markdown with week number
+        player_data_filepath = os.path.join(output_dir, f"week_{current_week:02d}_{timestamp}_comprehensive_player_data.md")
+        self._save_comprehensive_player_data_markdown(comprehensive_data, player_data_filepath)
+        
+        # Save comprehensive data processor output (same format as validation tests)
+        comprehensive_data_filepath = os.path.join(output_dir, f"week_{current_week:02d}_{timestamp}_comprehensive_data_processor_output.json")
+        with open(comprehensive_data_filepath, 'w') as f:
+            json.dump(comprehensive_data, f, indent=2)
+        
+        logger.info(f"Comprehensive analysis saved to: {json_filepath}")
+        logger.info(f"Comprehensive markdown saved to: {markdown_filepath}")
+        logger.info(f"Comprehensive player data saved to: {player_data_filepath}")
+        logger.info(f"Comprehensive data processor output saved to: {comprehensive_data_filepath}")
+        
+        return {
+            "json": json_filepath,
+            "markdown": markdown_filepath,
+            "player_data": player_data_filepath,
+            "comprehensive_data": comprehensive_data_filepath
         }
     
     def _save_comprehensive_markdown_report(self, comprehensive_data: Dict[str, Any], 
@@ -992,15 +1049,21 @@ Please provide a comprehensive analysis following the format specified in your s
         output_dir = os.path.join(project_root, "data_collection", "outputs", "analyst_reports")
         os.makedirs(output_dir, exist_ok=True)
         
-        # Save JSON version with timestamp as prefix only
-        json_filename = f"{timestamp}_{filename_prefix}.json"
+        # Get week number for filename
+        optimized_data = analysis_result.get('optimized_data', {})
+        analysis_data = analysis_result.get('analysis_data', {})
+        season_context = optimized_data.get('season_context', analysis_data.get('season_context', {}))
+        current_week = season_context.get('current_week', 1)
+        
+        # Save JSON version with week number and timestamp
+        json_filename = f"week_{current_week:02d}_{timestamp}_{filename_prefix}.json"
         json_filepath = os.path.join(output_dir, json_filename)
         
         with open(json_filepath, 'w') as f:
             json.dump(analysis_result, f, indent=2)
         
-        # Save Markdown version with timestamp as prefix only
-        markdown_filename = f"{timestamp}_{filename_prefix}.md"
+        # Save Markdown version with week number and timestamp
+        markdown_filename = f"week_{current_week:02d}_{timestamp}_{filename_prefix}.md"
         markdown_filepath = os.path.join(output_dir, markdown_filename)
         
         # Extract the analysis content for markdown

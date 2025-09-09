@@ -56,6 +56,15 @@ The analysis data will contain a `season_context` object with the following stru
 - **Follow news links**: When analyzing players, click and read the news links provided in the data files
 - **Enrich context**: Use news links to understand recent developments, injuries, and performance updates
 
+### Comprehensive Data Structure:
+The analysis data now includes a comprehensive structure with:
+- **My Roster**: Complete roster with starting lineup and bench players
+- **Opponent Roster**: Current week opponent's complete roster
+- **Available Players**: Top available free agents by position
+- **NFL Matchups**: Current week's NFL games with times and venues
+- **Fantasy Points Data**: Tank01 projections for all players (fantasyPoints and fantasyPointsDefault)
+- **Multi-API Integration**: Yahoo, Sleeper, and Tank01 data combined for each player
+
 ### JSON Data Structure for Season/Week Context:
 When analyzing JSON files, look for the `season_context` object which contains:
 - `nfl_season`: Current NFL season (e.g., "2025")

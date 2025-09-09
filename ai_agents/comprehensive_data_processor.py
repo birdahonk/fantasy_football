@@ -37,7 +37,8 @@ class ComprehensiveDataProcessor:
         total_tokens = (
             self._calculate_token_usage(my_roster.get("players_by_position", {})) +
             self._calculate_token_usage(opponent_roster.get("players_by_position", {})) +
-            self._calculate_token_usage(available_players.get("players_by_position", {}))
+            self._calculate_token_usage(available_players.get("players_by_position", {})) +
+            self._calculate_nfl_matchups_tokens(nfl_matchups)
         )
         
         return {
@@ -796,13 +797,41 @@ class ComprehensiveDataProcessor:
         return None
     
     def _calculate_token_usage(self, players_by_position: Dict[str, List[Dict[str, Any]]]) -> int:
-        """Calculate estimated token usage for players"""
-        total_tokens = 0
-        for position, players in players_by_position.items():
-            for player in players:
-                # Rough estimate: 500 tokens per player
-                total_tokens += 500
-        return total_tokens
+        """Calculate actual token usage for players using tiktoken"""
+        try:
+            import tiktoken
+            encoding = tiktoken.get_encoding('cl100k_base')
+            
+            total_tokens = 0
+            for position, players in players_by_position.items():
+                for player in players:
+                    # Convert player data to JSON string and calculate actual tokens
+                    player_json = json.dumps(player, indent=2)
+                    player_tokens = len(encoding.encode(player_json))
+                    total_tokens += player_tokens
+            return total_tokens
+        except ImportError:
+            # Fallback to rough estimate if tiktoken not available
+            total_tokens = 0
+            for position, players in players_by_position.items():
+                for player in players:
+                    # Rough estimate: 2000 tokens per player (more accurate)
+                    total_tokens += 2000
+            return total_tokens
+    
+    def _calculate_nfl_matchups_tokens(self, nfl_matchups: Dict[str, Any]) -> int:
+        """Calculate token usage for NFL matchups data"""
+        try:
+            import tiktoken
+            encoding = tiktoken.get_encoding('cl100k_base')
+            
+            # Convert NFL matchups data to JSON string and calculate tokens
+            matchups_json = json.dumps(nfl_matchups, indent=2)
+            return len(encoding.encode(matchups_json))
+        except ImportError:
+            # Fallback to rough estimate if tiktoken not available
+            games_count = nfl_matchups.get("total_games", 0)
+            return games_count * 100  # Rough estimate: 100 tokens per game
     
     def _extract_all_data_files(self) -> Dict[str, str]:
         """Extract all data file paths"""
