@@ -37,6 +37,271 @@ The Tank01 API provides comprehensive NFL data including:
 - ✅ `getNFLPlayerInfo` - Individual player details
 - ✅ `getNFLChangelog` - API updates and changes
 
+## ACTUAL PROCESSED DATA STRUCTURES
+
+### **1. My Roster Data Structure**
+**File**: `data_collection/outputs/tank01/my_roster/YYYY/MM/DD/YYYYMMDD_HHMMSS_my_roster_raw_data.json`
+
+```json
+{
+  "extraction_metadata": {
+    "script": "tank01_my_roster.py",
+    "extraction_timestamp": "2025-09-08T12:53:06.123456",
+    "execution_stats": {
+      "start_time": "2025-09-08 12:53:05.123456",
+      "api_calls": 0,
+      "errors": 0,
+      "players_processed": 15,
+      "players_matched": 15,
+      "players_unmatched": 0
+    }
+  },
+  "season_context": {...},
+  "matched_players": [
+    {
+      "yahoo_player": {
+        "player_key": "461.p.32671",
+        "player_id": "32671",
+        "name": {"full": "Joe Burrow", "first": "Joe", "last": "Burrow"},
+        "display_position": "QB",
+        "editorial_team_abbr": "Cin",
+        "bye_weeks": {"week": "10"},
+        "bye_week": "10"
+      },
+      "tank01_data": {
+        "playerID": "string",
+        "longName": "Joe Burrow",
+        "pos": "QB",
+        "team": "CIN",
+        "age": 27,
+        "exp": 5,
+        "height": "6'4\"",
+        "weight": "215",
+        "school": "LSU",
+        "yahooPlayerID": "32671",
+        "espnID": "string",
+        "sleeperBotID": "string",
+        "fantasyProsPlayerID": "string",
+        "fantasy_projections": {...},
+        "recent_news": {...},
+        "game_stats": {...},
+        "depth_chart": {...},
+        "team_context": {...}
+      }
+    }
+  ],
+  "unmatched_players": [],
+  "tank01_api_usage": {
+    "calls_made": 15,
+    "calls_remaining": 985,
+    "reset_time": "2025-09-09T11:17:46.000Z"
+  }
+}
+```
+
+### **2. Opponent Roster Data Structure**
+**File**: `data_collection/outputs/tank01/opponent_roster/YYYY/MM/DD/YYYYMMDD_HHMMSS_opponent_roster_raw_data.json`
+
+```json
+{
+  "extraction_metadata": {
+    "script": "tank01_opponent_roster.py",
+    "extraction_timestamp": "2025-09-08T12:55:58.123456",
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "execution_stats": {
+      "start_time": "2025-09-08 12:55:57.123456",
+      "api_calls": 0,
+      "errors": 0,
+      "players_processed": 15,
+      "players_matched": 15,
+      "players_unmatched": 0
+    }
+  },
+  "opponent_info": {
+    "opponent_name": "Kissyface",
+    "opponent_team_key": "461.l.595012.t.5",
+    "total_players": 15,
+    "matched_players": 15,
+    "unmatched_players": 0
+  },
+  "matched_players": [
+    {
+      "yahoo_data": {
+        "player_key": "461.p.31833",
+        "player_id": "31833",
+        "name": {"full": "Kyler Murray", "first": "Kyler", "last": "Murray"},
+        "display_position": "QB",
+        "editorial_team_abbr": "Ari",
+        "bye_weeks": {"week": "8"},
+        "bye_week": "8"
+      },
+      "tank01_data": {
+        "playerID": "string",
+        "longName": "Kyler Murray",
+        "pos": "QB",
+        "team": "ARI",
+        "age": 27,
+        "exp": 6,
+        "yahooPlayerID": "31833"
+      },
+      "match_type": "yahoo_id"
+    }
+  ],
+  "unmatched_players": []
+}
+```
+
+### **3. Available Players Data Structure**
+**File**: `data_collection/outputs/tank01/available_players/YYYY/MM/DD/YYYYMMDD_HHMMSS_available_players_raw_data.json`
+
+```json
+{
+  "extraction_metadata": {...},
+  "season_context": {...},
+  "processed_data": {
+    "available_players": [
+      {
+        "yahoo_data": {
+          "player_key": "461.p.12345",
+          "player_id": "12345",
+          "name": {"full": "Evan Engram", "first": "Evan", "last": "Engram"},
+          "display_position": "TE",
+          "editorial_team_abbr": "Den",
+          "bye_weeks": {"week": "10"},
+          "bye_week": "10",
+          "percent_owned_value": "85.2"
+        },
+        "tank01_data": {
+          "playerID": "string",
+          "longName": "Evan Engram",
+          "pos": "TE",
+          "team": "DEN",
+          "age": 30,
+          "exp": 8,
+          "yahooPlayerID": "12345",
+          "fantasy_projections": {...},
+          "recent_news": {...},
+          "game_stats": {...},
+          "depth_chart": {...},
+          "team_context": {...}
+        },
+        "projection": {...},
+        "news": {...},
+        "game_stats": {...},
+        "depth_chart": {...},
+        "team_context": {...},
+        "display_position": "TE",
+        "name": "Evan Engram",
+        "team": "DEN"
+      }
+    ],
+    "injury_reports": [...],
+    "top_available": [...]
+  },
+  "cached_data": {...},
+  "efficiency_metrics": {
+    "players_processed": 125,
+    "players_matched": 125,
+    "match_rate": 100.0,
+    "execution_time_seconds": 360.09349,
+    "api_name": "Tank01",
+    "calls_made_this_session": 881,
+    "daily_limit": 1000,
+    "remaining_calls": 119,
+    "percentage_used": 88.1
+  }
+}
+```
+
+### **4. NFL Matchups Data Structure**
+**File**: `data_collection/outputs/tank01/nfl_matchups/YYYY/MM/DD/YYYYMMDD_HHMMSS_nfl_matchups_raw_data.json`
+
+```json
+{
+  "season_context": {
+    "nfl_season": 2025,
+    "current_week": 1,
+    "season_phase": "Regular Season"
+  },
+  "games": [
+    {
+      "game_id": "string",
+      "date": "2025-09-08",
+      "week": 1,
+      "season": 2025,
+      "home_team": "LAC",
+      "away_team": "KC",
+      "venue": "SoFi Stadium",
+      "game_time_et": "8:00p",
+      "game_time_pt": "5:00p",
+      "game_time_epoch": 1725840000,
+      "game_time_utc": "2025-09-09T01:00:00Z",
+      "game_status": "Completed",
+      "game_status_code": "F",
+      "season_type": "regular",
+      "neutral_site": false,
+      "espn_id": "string",
+      "espn_link": "string",
+      "cbs_link": "string",
+      "team_id_home": "string",
+      "team_id_away": "string",
+      "top_performers": [...]
+    }
+  ],
+  "total_games": 15,
+  "api_usage": {
+    "calls_made": 1,
+    "calls_remaining": 999,
+    "reset_time": "2025-09-09T11:17:46.000Z"
+  }
+}
+```
+
+### **5. Transaction Trends Data Structure**
+**File**: `data_collection/outputs/tank01/transaction_trends/YYYY/MM/DD/YYYYMMDD_HHMMSS_transaction_trends_raw_data.json`
+
+```json
+{
+  "yahoo_data": {...},
+  "league_players": [...],
+  "enriched_players": [
+    {
+      "yahoo_data": {
+        "name": "Cedric Tillman",
+        "position": "WR",
+        "team": "Cle",
+        "transaction_type": "add/drop_add",
+        "transaction_time": "2025-09-08T12:00:00Z",
+        "yahoo_data": {...}
+      },
+      "tank01_data": {
+        "player_id": "string",
+        "name": "Cedric Tillman",
+        "team": "CLE",
+        "position": "WR",
+        "yahoo_id": "string",
+        "sleeper_id": "string"
+      },
+      "match_status": "matched",
+      "match_confidence": "high",
+      "tank01_enrichment": {...}
+    }
+  ],
+  "enrichment_summary": {
+    "total_players": 38,
+    "matched_players": 38,
+    "unmatched_players": 0,
+    "match_rate": 100.0
+  },
+  "api_usage": {
+    "calls_made": 38,
+    "calls_remaining": 962,
+    "reset_time": "2025-09-09T11:17:46.000Z"
+  }
+}
+```
+
 ## Complete Endpoint Analysis
 
 ### 1. Player List (`getNFLPlayerList`)
