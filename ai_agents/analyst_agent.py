@@ -497,19 +497,22 @@ CRITICAL CONTEXT: This is the {nfl_season} NFL season, Week {current_week}. You 
 - **MUST** use NFL matchups data for game times and opponent analysis
 - **MUST** use web research findings in your analysis
 - **MUST** understand that defense players have fantasyPoints=null but fantasyPointsDefault=number
+- **MUST** analyze bye weeks for strategic roster management and team diversification
 
 ### 2. REQUIRED OUTPUT FORMAT
 1. **Data Visibility Confirmation**: Show exactly what data you can see
-2. **Individual Player Summaries**: For EACH player on your roster, provide a detailed summary based on:
+2. **Bye Week Analysis**: Comprehensive bye week strategy and team diversification analysis
+3. **Individual Player Summaries**: For EACH player on your roster, provide a detailed summary based on:
    - Web research findings about that specific player
    - News links provided in their recent_news data
    - Current injury status and role clarity
    - Recent performance trends and expectations
    - Projected fantasy points from fantasy_points field
-3. **Opponent Analysis**: Detailed analysis of your Week {current_week} opponent ({opponent_name})
-4. **Available Players Analysis**: Top recommendations with specific reasoning
-5. **Specific Recommendations**: Exact add/drop suggestions with projected points comparisons
-6. **News Integration**: How news links influenced your recommendations
+   - Bye week impact and team diversification considerations
+4. **Opponent Analysis**: Detailed analysis of your Week {current_week} opponent ({opponent_name})
+5. **Available Players Analysis**: Top recommendations with specific reasoning and bye week considerations
+6. **Specific Recommendations**: Exact add/drop suggestions with projected points comparisons and bye week strategy
+7. **News Integration**: How news links influenced your recommendations
 
 ### 3. CRITICAL INSTRUCTIONS
 - **MUST** use projected points data (fantasy_points field)
@@ -517,6 +520,24 @@ CRITICAL CONTEXT: This is the {nfl_season} NFL season, Week {current_week}. You 
 - **MUST** provide individual summary for each roster player based on web research and news
 - **MUST** use fantasy points for all projections (not Yahoo's 0 values)
 - **MUST** analyze your opponent's key players and their projected performance
+- **MUST** analyze bye weeks for strategic roster management and team diversification
+
+### 4. BYE WEEK ANALYSIS REQUIREMENTS
+- **MUST** identify all players on your roster by NFL team and their bye weeks
+- **MUST** analyze team concentration risk (e.g., too many CIN players = bad Week 10)
+- **MUST** provide bye week strategy recommendations for roster management
+- **MUST** consider bye week timing when making add/drop recommendations
+- **MUST** identify which weeks will be challenging due to bye week conflicts
+- **MUST** suggest roster moves to minimize bye week impact while maintaining competitive advantage
+- **MUST** analyze opponent's bye week situation for matchup advantages
+
+### 5. BYE WEEK STRATEGY GUIDELINES
+- **Team Diversification**: Avoid having more than 2-3 players from the same NFL team
+- **Bye Week Timing**: Consider upcoming bye weeks when adding players (avoid adding players with byes in 1-2 weeks)
+- **Position Depth**: Ensure adequate depth at each position to handle bye weeks
+- **Strategic Planning**: Plan 2-3 weeks ahead for bye week management
+- **Matchup Advantage**: Use opponent's bye week weaknesses to your advantage
+- **Emergency Planning**: Identify backup options for critical bye week weeks
 
 Please provide a comprehensive analysis with specific recommendations for improving your roster."""
         
