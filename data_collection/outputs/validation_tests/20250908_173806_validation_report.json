@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-09-08T17:38:06.814145",
+  "total_errors": 3,
+  "critical_errors": [
+    "Sleeper opponent_roster: 9 unmatched players",
+    "Tank01 opponent_roster: 15 unmatched players",
+    "Comprehensive data processor failed: 'str' object has no attribute 'get'"
+  ],
+  "warnings": [],
+  "validation_summary": {},
+  "yahoo_data": {
+    "my_roster_players": [],
+    "opponent_players": [],
+    "available_players": []
+  },
+  "sleeper_data": {
+    "my_roster_matched": 15,
+    "my_roster_unmatched": 0,
+    "opponent_matched": 6,
+    "opponent_unmatched": 9,
+    "available_matched": 1095,
+    "available_unmatched": 0
+  },
+  "tank01_data": {
+    "my_roster_matched": 15,
+    "my_roster_unmatched": 0,
+    "opponent_matched": 0,
+    "opponent_unmatched": 15,
+    "available_matched": 0,
+    "available_unmatched": 0
+  }
+}

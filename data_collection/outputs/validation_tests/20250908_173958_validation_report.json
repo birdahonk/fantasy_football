@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-09-08T17:39:58.640376",
+  "total_errors": 7,
+  "critical_errors": [
+    "Sleeper opponent_roster: 9 unmatched players",
+    "Tank01 opponent_roster: 15 unmatched players",
+    "My roster Tank01 enrichment: 0/15",
+    "My roster Sleeper enrichment: 0/15",
+    "Opponent roster Sleeper enrichment: 0/15",
+    "Available players Tank01 enrichment: 110/120",
+    "Available players Sleeper enrichment: 110/120"
+  ],
+  "warnings": [],
+  "validation_summary": {},
+  "yahoo_data": {
+    "my_roster_players": [],
+    "opponent_players": [],
+    "available_players": []
+  },
+  "sleeper_data": {
+    "my_roster_matched": 15,
+    "my_roster_unmatched": 0,
+    "opponent_matched": 6,
+    "opponent_unmatched": 9,
+    "available_matched": 1095,
+    "available_unmatched": 0
+  },
+  "tank01_data": {
+    "my_roster_matched": 15,
+    "my_roster_unmatched": 0,
+    "opponent_matched": 0,
+    "opponent_unmatched": 15,
+    "available_matched": 0,
+    "available_unmatched": 0
+  },
+  "comprehensive_processor": {
+    "my_roster_total": 15,
+    "my_roster_tank01": 0,
+    "my_roster_sleeper": 0,
+    "opponent_total": 15,
+    "opponent_tank01": 0,
+    "opponent_sleeper": 0,
+    "available_total": 120,
+    "available_tank01": 110,
+    "available_sleeper": 110
+  }
+}
