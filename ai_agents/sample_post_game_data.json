@@ -1,0 +1,181 @@
+{
+  "analysis_metadata": {
+    "source": "Post-Game Analysis Data Processor",
+    "processing_timestamp": "2025-01-14T09:00:00-08:00",
+    "week": 1,
+    "season": 2025,
+    "execution_stats": {
+      "players_analyzed": 80,
+      "errors": 0
+    }
+  },
+  "projections_summary": {
+    "total_projections": 500,
+    "collection_timestamp": "2025-01-08T14:00:00-08:00"
+  },
+  "roster_analyses": {
+    "my_roster": {
+      "roster_type": "my_roster",
+      "total_players": 15,
+      "players_analyzed": 15,
+      "total_projected_points": 120.5,
+      "total_actual_points": 135.2,
+      "total_performance_difference": 14.7,
+      "over_performers_count": 8,
+      "under_performers_count": 4,
+      "even_performers_count": 3,
+      "player_analysis": [
+        {
+          "player_name": "Josh Allen",
+          "position": "QB",
+          "team": "BUF",
+          "projected_fantasy_points": 25.5,
+          "actual_fantasy_points": 28.2,
+          "performance_difference": 2.7,
+          "performance_percentage": 110.6,
+          "over_under": "over"
+        },
+        {
+          "player_name": "Christian McCaffrey",
+          "position": "RB",
+          "team": "SF",
+          "projected_fantasy_points": 22.0,
+          "actual_fantasy_points": 18.5,
+          "performance_difference": -3.5,
+          "performance_percentage": 84.1,
+          "over_under": "under"
+        },
+        {
+          "player_name": "Tyreek Hill",
+          "position": "WR",
+          "team": "MIA",
+          "projected_fantasy_points": 18.5,
+          "actual_fantasy_points": 22.3,
+          "performance_difference": 3.8,
+          "performance_percentage": 120.5,
+          "over_under": "over"
+        },
+        {
+          "player_name": "Travis Kelce",
+          "position": "TE",
+          "team": "KC",
+          "projected_fantasy_points": 15.0,
+          "actual_fantasy_points": 16.8,
+          "performance_difference": 1.8,
+          "performance_percentage": 112.0,
+          "over_under": "over"
+        },
+        {
+          "player_name": "Buffalo Bills",
+          "position": "DEF",
+          "team": "BUF",
+          "projected_fantasy_points": 8.5,
+          "actual_fantasy_points": 12.0,
+          "performance_difference": 3.5,
+          "performance_percentage": 141.2,
+          "over_under": "over"
+        }
+      ]
+    },
+    "opponent_roster": {
+      "roster_type": "opponent_roster",
+      "total_players": 15,
+      "players_analyzed": 15,
+      "total_projected_points": 118.3,
+      "total_actual_points": 142.8,
+      "total_performance_difference": 24.5,
+      "over_performers_count": 10,
+      "under_performers_count": 3,
+      "even_performers_count": 2,
+      "player_analysis": [
+        {
+          "player_name": "Lamar Jackson",
+          "position": "QB",
+          "team": "BAL",
+          "projected_fantasy_points": 24.0,
+          "actual_fantasy_points": 31.5,
+          "performance_difference": 7.5,
+          "performance_percentage": 131.3,
+          "over_under": "over"
+        },
+        {
+          "player_name": "Derrick Henry",
+          "position": "RB",
+          "team": "TEN",
+          "projected_fantasy_points": 19.5,
+          "actual_fantasy_points": 25.2,
+          "performance_difference": 5.7,
+          "performance_percentage": 129.2,
+          "over_under": "over"
+        },
+        {
+          "player_name": "Davante Adams",
+          "position": "WR",
+          "team": "LV",
+          "projected_fantasy_points": 17.0,
+          "actual_fantasy_points": 20.5,
+          "performance_difference": 3.5,
+          "performance_percentage": 120.6,
+          "over_under": "over"
+        }
+      ]
+    },
+    "available_players": {
+      "roster_type": "available_players",
+      "total_players": 50,
+      "players_analyzed": 50,
+      "total_projected_points": 0,
+      "total_actual_points": 0,
+      "total_performance_difference": 0,
+      "over_performers_count": 15,
+      "under_performers_count": 20,
+      "even_performers_count": 15,
+      "player_analysis": [
+        {
+          "player_name": "Tyler Lockett",
+          "position": "WR",
+          "team": "SEA",
+          "projected_fantasy_points": 12.5,
+          "actual_fantasy_points": 18.2,
+          "performance_difference": 5.7,
+          "performance_percentage": 145.6,
+          "over_under": "over"
+        },
+        {
+          "player_name": "James Conner",
+          "position": "RB",
+          "team": "ARI",
+          "projected_fantasy_points": 14.0,
+          "actual_fantasy_points": 19.8,
+          "performance_difference": 5.8,
+          "performance_percentage": 141.4,
+          "over_under": "over"
+        },
+        {
+          "player_name": "Mike Evans",
+          "position": "WR",
+          "team": "TB",
+          "projected_fantasy_points": 16.5,
+          "actual_fantasy_points": 11.2,
+          "performance_difference": -5.3,
+          "performance_percentage": 67.9,
+          "over_under": "under"
+        }
+      ]
+    }
+  },
+  "matchup_data": {
+    "my_team": "birdahonkers",
+    "opponent_team": "Team 2",
+    "my_score": 135.2,
+    "opponent_score": 142.8,
+    "point_difference": -7.6,
+    "winner": "opponent"
+  },
+  "summary": {
+    "total_players_analyzed": 80,
+    "total_projected_points": 238.8,
+    "total_actual_points": 278.0,
+    "overall_performance_difference": 39.2
+  }
+}
