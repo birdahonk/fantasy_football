@@ -16,17 +16,25 @@ This guide provides high-level structure guidance for working with API data in t
 **ALWAYS CHECK**: `data_collection/schemas/yahoo_api_schemas.md` for complete details
 
 #### **Key Patterns:**
-- **My Roster**: `roster_players` array contains all player data
-- **Opponent Rosters**: `rosters` dictionary keyed by `team_key` (e.g., "461.l.595012.t.1")
-- **Team Matchups**: `matchups` array contains matchup objects
-- **Available Players**: `available_players` array contains 1,095+ players
+- **My Roster**: Complex nested structure - roster data at `team[1].roster` with players in numbered keys
+- **Opponent Rosters**: `rosters` dictionary keyed by `team_key` (e.g., "461.l.595012.t.1") with `players` arrays
+- **Team Matchups**: `matchups.week_1.matchups` array contains matchup objects
+- **Available Players**: `available_players` array contains 1,095+ players (or `all_players`)
 - **Transaction Trends**: `transactions` array contains transaction objects
 
+#### **Critical Parsing Notes:**
+- **My Roster**: Players are in `roster_raw.fantasy_content.team[1].roster.0.players` with complex nested structure
+- **Opponent Rosters**: Players are already processed into simple arrays in `rosters[team_key].players`
+- **Available Players**: Direct access to `available_players` array (1,095 players total)
+- **Team Matchups**: Nested under `matchups.week_1.matchups` with team pairs
+
 #### **Common Mistakes to Avoid:**
+- ❌ **Don't assume** my roster has simple structure - it's deeply nested
 - ❌ **Don't assume** `rosters` is an array - it's a dictionary keyed by team_key
 - ❌ **Don't assume** `teams` contains player data - it only has team metadata
+- ❌ **Don't assume** available players are in `players` - they're in `available_players`
 - ✅ **Always check** the actual structure before accessing data
-- ✅ **Use** `roster_players` for my roster, `rosters[team_key].players` for opponent rosters
+- ✅ **Use** complex parsing for my roster, simple access for opponent rosters
 
 ### **2. Sleeper API Data Structure**
 **ALWAYS CHECK**: `data_collection/schemas/sleeper_api_schemas.md` for complete details
@@ -82,19 +90,32 @@ This guide provides high-level structure guidance for working with API data in t
 
 ### **Yahoo API Data Access:**
 ```python
-# My Roster
-players = data['roster_players']  # Array of player objects
+# My Roster - COMPLEX NESTED STRUCTURE
+roster_raw = data.get('roster_raw', {})
+fantasy_content = roster_raw.get('fantasy_content', {})
+team_data = fantasy_content.get('team', [])
+if team_data and len(team_data) > 1:
+    roster_data = team_data[1]  # Roster data is at index 1
+    if isinstance(roster_data, dict) and 'roster' in roster_data:
+        roster = roster_data['roster']
+        # Extract players from numbered keys (0, 1, 2, etc.)
+        for key, value in roster.items():
+            if key.isdigit() and isinstance(value, dict) and 'players' in value:
+                players_data = value['players']
+                # Process players...
 
-# Opponent Rosters
+# Opponent Rosters - SIMPLE STRUCTURE
 rosters = data['rosters']  # Dictionary keyed by team_key
 for team_key, roster in rosters.items():
-    players = roster['players']  # Array of player objects
+    players = roster['players']  # Array of player objects (15-16 per team)
 
-# Available Players
+# Available Players - DIRECT ACCESS
 players = data['available_players']  # Array of 1,095+ player objects
+# OR
+players = data['all_players']  # Alternative player list
 
-# Team Matchups
-matchups = data['matchups']  # Array of matchup objects
+# Team Matchups - NESTED STRUCTURE
+matchups = data['matchups']['week_1']['matchups']  # Array of matchup objects
 ```
 
 ### **Sleeper API Data Access:**

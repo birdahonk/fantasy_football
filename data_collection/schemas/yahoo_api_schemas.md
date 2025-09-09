@@ -23,7 +23,36 @@ This document defines the expected response structures for Yahoo Fantasy Sports 
 ```json
 {
   "team_info": {...},
-  "roster_players": [...],  // ← Array of player objects
+  "roster_raw": {
+    "fantasy_content": {
+      "team": [
+        [  // ← Array of team metadata (24 items)
+          {"team_key": "461.l.595012.t.3"},
+          {"team_id": "3"},
+          {"name": "birdahonkers"},
+          // ... more team metadata
+        ],
+        {  // ← Roster data at index 1
+          "roster": {
+            "0": {
+              "players": {
+                "0": {
+                  "player": [
+                    [  // ← Player data array
+                      {"player_key": "461.p.32671"},
+                      {"player_id": "32671"},
+                      {"name": {"full": "Joe Burrow"}},
+                      // ... more player fields
+                    ]
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
   "season_context": {...},
   "extraction_metadata": {...}
 }
@@ -33,13 +62,17 @@ This document defines the expected response structures for Yahoo Fantasy Sports 
 ```json
 {
   "league_info": {...},
+  "season_context": {...},
   "teams": [...],           // ← Array of team metadata
   "rosters": {              // ← Dictionary keyed by team_key
     "461.l.595012.t.1": {
-      "players": [...]      // ← Array of player objects
+      "players": [...]      // ← Array of player objects (15-16 players per team)
+    },
+    "461.l.595012.t.2": {
+      "players": [...]
     }
+    // ... 10 teams total
   },
-  "season_context": {...},
   "extraction_metadata": {...}
 }
 ```
@@ -48,8 +81,34 @@ This document defines the expected response structures for Yahoo Fantasy Sports 
 ```json
 {
   "league_info": {...},
-  "matchups": [...],        // ← Array of matchup objects
-  "season_context": {...},
+  "season_context": {
+    "current_week": 1,
+    "week_info": {
+      "week": 1,
+      "week_start": "2025-09-04",
+      "week_end": "2025-09-08",
+      "status": "midevent"
+    }
+  },
+  "matchups": {
+    "week_1": {
+      "week": 1,
+      "matchups": [
+        {
+          "teams": [
+            {
+              "team_key": "461.l.595012.t.1",
+              "name": "Sinker Conkers"
+            },
+            {
+              "team_key": "461.l.595012.t.2", 
+              "name": "Team Name"
+            }
+          ]
+        }
+      ]
+    }
+  },
   "extraction_metadata": {...}
 }
 ```
@@ -57,12 +116,13 @@ This document defines the expected response structures for Yahoo Fantasy Sports 
 ### **4. Available Players** (`available_players_raw_data.json`):
 ```json
 {
+  "extraction_metadata": {...},
+  "season_context": {...},
   "available_players": [...], // ← Array of 1095+ player objects
   "injury_reports": [...],
   "whos_hot": [...],
   "top_available": [...],
-  "season_context": {...},
-  "extraction_metadata": {...}
+  "all_players": [...]        // ← Alternative player list
 }
 ```
 
@@ -78,21 +138,57 @@ This document defines the expected response structures for Yahoo Fantasy Sports 
 
 ### **Critical Parsing Patterns:**
 
-#### **1. List-of-Lists Structure:**
-```json
-"player": [
-  [ // First array: player properties
-    {"player_key": "461.p.32671"},
-    {"name": {"full": "Joe Burrow"}},
-    {"editorial_team_abbr": "Cin"}
-  ],
-  [ // Second array: position data
-    {"selected_position": [
-      {"coverage_type": "week", "week": "1"},
-      {"position": "QB"}  // ← Actual starting position!
-    ]}
-  ]
-]
+#### **1. My Roster Player Extraction:**
+```python
+# CORRECT: Extract players from Yahoo my_roster structure
+roster_raw = data.get('roster_raw', {})
+fantasy_content = roster_raw.get('fantasy_content', {})
+team_data = fantasy_content.get('team', [])
+
+players = []
+if team_data and len(team_data) > 1:  # Roster data is at index 1
+    roster_data = team_data[1]
+    if isinstance(roster_data, dict) and 'roster' in roster_data:
+        roster = roster_data['roster']
+        for key, value in roster.items():
+            if key.isdigit() and isinstance(value, dict) and 'players' in value:
+                players_data = value['players']
+                for player_key, player_data in players_data.items():
+                    if player_key.isdigit() and isinstance(player_data, dict) and 'player' in player_data:
+                        player_info = player_data['player']
+                        if isinstance(player_info, list) and len(player_info) > 0:
+                            # player_info[0] is a list of player properties
+                            player_dict = {}
+                            for item in player_info[0]:
+                                if isinstance(item, dict):
+                                    player_dict.update(item)
+                            players.append(player_dict)
+```
+
+#### **2. Opponent Rosters Player Extraction:**
+```python
+# CORRECT: Extract players from Yahoo opponent_rosters structure
+if 'rosters' in data:
+    rosters = data['rosters']
+    for team_key, roster_data in rosters.items():
+        if isinstance(roster_data, dict) and 'players' in roster_data:
+            players = roster_data['players']
+            if isinstance(players, list):
+                # players is already a list of player objects
+                for player in players:
+                    # Process each player object directly
+                    process_player(player)
+```
+
+#### **3. Available Players Extraction:**
+```python
+# CORRECT: Extract from available_players or all_players
+if 'available_players' in data:
+    players = data['available_players']  # List of 1095+ players
+    # Process players directly
+elif 'all_players' in data:
+    players = data['all_players']  # Alternative player list
+    # Process players directly
 ```
 
 #### **2. Numbered Key Navigation:**
