@@ -316,7 +316,81 @@ class Tank01AvailablePlayersStatsExtractor:
             self.stats["errors"] += 1
             return None
     
-    def _get_player_game_stats(self, tank01_player: Dict[str, Any], season: str = "2025") -> Dict[str, Any]:
+    def _get_team_defense_stats(self, team_abbr: str) -> Dict[str, Any]:
+        """
+        Get team-level defense stats using the getNFLTeams endpoint.
+        
+        Args:
+            team_abbr: Team abbreviation (e.g., 'PHI', 'DAL')
+            
+        Returns:
+            Dict containing team defense statistics
+        """
+        try:
+            self.logger.info(f"Fetching team defense stats for {team_abbr}")
+            
+            # Get team data from Tank01 API
+            team_data = self.tank01.get_nfl_teams(team_stats=True, team_stats_season=2025)
+            
+            if not team_data or 'body' not in team_data:
+                self.logger.warning(f"No team data found for {team_abbr}")
+                return {}
+            
+            teams = team_data.get('body', [])
+            if not isinstance(teams, list):
+                self.logger.warning(f"Invalid team data format for {team_abbr}")
+                return {}
+            
+            # Find the specific team
+            for team in teams:
+                if team.get('teamAbv', '').upper() == team_abbr.upper():
+                    team_data = team.get('teamStats', {})
+                    defense_stats = team_data.get('Defense', {})
+                    
+                    def safe_float(value, default=0.0):
+                        """Safely convert value to float"""
+                        try:
+                            return float(value) if value is not None else default
+                        except (ValueError, TypeError):
+                            return default
+                    
+                    interceptions = safe_float(defense_stats.get('defensiveInterceptions', 0))
+                    fumbles_recovered = safe_float(defense_stats.get('fumblesRecovered', 0))
+                    
+                    return {
+                        'pointsAllowed': safe_float(team.get('pa', 0)),
+                        'pointsFor': safe_float(team.get('pf', 0)),
+                        'yardsAllowed': safe_float(defense_stats.get('passingYardsAllowed', 0)) + safe_float(defense_stats.get('rushingYardsAllowed', 0)),
+                        'passYardsAllowed': safe_float(defense_stats.get('passingYardsAllowed', 0)),
+                        'rushYardsAllowed': safe_float(defense_stats.get('rushingYardsAllowed', 0)),
+                        'passTDAllowed': safe_float(defense_stats.get('passingTDAllowed', 0)),
+                        'rushTDAllowed': safe_float(defense_stats.get('rushingTDAllowed', 0)),
+                        'interceptions': interceptions,
+                        'fumblesRecovered': fumbles_recovered,
+                        'sacks': safe_float(defense_stats.get('sacks', 0)),
+                        'safeties': safe_float(defense_stats.get('safeties', 0)),
+                        'defTD': safe_float(defense_stats.get('defTD', 0)),
+                        'turnovers': interceptions + fumbles_recovered,
+                        'totalTackles': safe_float(defense_stats.get('totalTackles', 0)),
+                        'soloTackles': safe_float(defense_stats.get('soloTackles', 0)),
+                        'tacklesForLoss': safe_float(defense_stats.get('tfl', 0)),
+                        'qbHits': safe_float(defense_stats.get('qbHits', 0)),
+                        'passDeflections': safe_float(defense_stats.get('passDeflections', 0)),
+                        'twoPointConversionReturn': safe_float(defense_stats.get('twoPointConversionReturn', 0)),
+                        'wins': safe_float(team.get('wins', 0)),
+                        'losses': safe_float(team.get('loss', 0)),
+                        'ties': safe_float(team.get('tie', 0)),
+                        'raw_team_data': team
+                    }
+            
+            self.logger.warning(f"No team defense stats found for {team_abbr}")
+            return {}
+            
+        except Exception as e:
+            self.logger.error(f"Error getting team defense stats for {team_abbr}: {e}")
+            return {}
+    
+    def _get_player_game_stats(self, tank01_player: Dict[str, Any], season: str = "2025", team_defense_stats: Dict[str, Any] = None) -> Dict[str, Any]:
         """
         Get comprehensive game statistics for a player.
         
@@ -355,7 +429,7 @@ class Tank01AvailablePlayersStatsExtractor:
                     processed_games.append(processed_game)
             
             # Calculate season totals and averages
-            season_totals = self._calculate_season_totals(processed_games)
+            season_totals = self._calculate_season_totals(processed_games, team_defense_stats)
             season_averages = self._calculate_season_averages(processed_games, season_totals)
             
             # Get recent performance (last 3 games)
@@ -479,34 +553,42 @@ class Tank01AvailablePlayersStatsExtractor:
         """
         points = 0.0
         
+        def safe_float(value, default=0.0):
+            """Safely convert value to float"""
+            try:
+                return float(value) if value is not None else default
+            except (ValueError, TypeError):
+                return default
+        
         # Passing points
-        points += passing.get('passYds', 0) * 0.04  # 1 point per 25 yards
-        points += passing.get('passTD', 0) * 4      # 4 points per passing TD
-        points += passing.get('passInt', 0) * -2    # -2 points per interception
+        points += safe_float(passing.get('passYds', 0)) * 0.04  # 1 point per 25 yards
+        points += safe_float(passing.get('passTD', 0)) * 4      # 4 points per passing TD
+        points += safe_float(passing.get('passInt', 0)) * -2    # -2 points per interception
         
         # Rushing points
-        points += rushing.get('rushYds', 0) * 0.1   # 1 point per 10 yards
-        points += rushing.get('rushTD', 0) * 6      # 6 points per rushing TD
+        points += safe_float(rushing.get('rushYds', 0)) * 0.1   # 1 point per 10 yards
+        points += safe_float(rushing.get('rushTD', 0)) * 6      # 6 points per rushing TD
         
         # Receiving points (PPR)
-        points += receiving.get('recYds', 0) * 0.1  # 1 point per 10 yards
-        points += receiving.get('recTD', 0) * 6     # 6 points per receiving TD
-        points += receiving.get('receptions', 0) * 1 # 1 point per reception (PPR)
+        points += safe_float(receiving.get('recYds', 0)) * 0.1  # 1 point per 10 yards
+        points += safe_float(receiving.get('recTD', 0)) * 6     # 6 points per receiving TD
+        points += safe_float(receiving.get('receptions', 0)) * 1 # 1 point per reception (PPR)
         
         # Defense points (simplified)
-        points += defense.get('defTD', 0) * 6       # 6 points per defensive TD
-        points += defense.get('defInt', 0) * 2      # 2 points per interception
-        points += defense.get('defFR', 0) * 2       # 2 points per fumble recovery
-        points += defense.get('defSack', 0) * 1     # 1 point per sack
+        points += safe_float(defense.get('defTD', 0)) * 6       # 6 points per defensive TD
+        points += safe_float(defense.get('defInt', 0)) * 2      # 2 points per interception
+        points += safe_float(defense.get('defFR', 0)) * 2       # 2 points per fumble recovery
+        points += safe_float(defense.get('defSack', 0)) * 1     # 1 point per sack
         
         return round(points, 2)
     
-    def _calculate_season_totals(self, games: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _calculate_season_totals(self, games: List[Dict[str, Any]], team_defense_stats: Dict[str, Any] = None) -> Dict[str, Any]:
         """
         Calculate season totals from game data.
         
         Args:
             games: List of processed game data
+            team_defense_stats: Team defense stats for defense players
             
         Returns:
             Dict containing season totals
@@ -519,6 +601,32 @@ class Tank01AvailablePlayersStatsExtractor:
             'receiving': {},
             'defense': {}
         }
+        
+        # If no games but we have team defense stats, use those instead
+        if not games and team_defense_stats:
+            totals['games_played'] = 1  # Team defense stats represent 1 game
+            # Map team defense stats to our defense totals
+            totals['defense'] = {
+                'fumblesRecovered': team_defense_stats.get('fumblesRecovered', 0),
+                'interceptions': team_defense_stats.get('interceptions', 0),
+                'sacks': team_defense_stats.get('sacks', 0),
+                'safeties': team_defense_stats.get('safeties', 0),
+                'defTD': team_defense_stats.get('defTD', 0),
+                'totalTackles': team_defense_stats.get('totalTackles', 0),
+                'soloTackles': team_defense_stats.get('soloTackles', 0),
+                'tacklesForLoss': team_defense_stats.get('tacklesForLoss', 0),
+                'qbHits': team_defense_stats.get('qbHits', 0),
+                'passDeflections': team_defense_stats.get('passDeflections', 0),
+                'pointsAllowed': team_defense_stats.get('pointsAllowed', 0),
+                'yardsAllowed': team_defense_stats.get('yardsAllowed', 0),
+                'passYardsAllowed': team_defense_stats.get('passYardsAllowed', 0),
+                'rushYardsAllowed': team_defense_stats.get('rushYardsAllowed', 0),
+                'turnovers': team_defense_stats.get('turnovers', 0)
+            }
+            
+            # Calculate fantasy points for team defense
+            totals['fantasy_points'] = self._calculate_fantasy_points(totals['defense'])
+            return totals
         
         # Initialize stat categories
         stat_categories = ['passing', 'rushing', 'receiving', 'defense']
@@ -734,6 +842,18 @@ class Tank01AvailablePlayersStatsExtractor:
                         if value > 0:
                             report.append(f"  - {stat}: {value}")
                 
+                # Defense stats
+                defense = season_totals.get('defense', {})
+                if any(defense.values()):
+                    report.append("- **Defense Totals:**")
+                    for stat, value in defense.items():
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
+                
                 report.append("")
             
             # Season averages
@@ -766,6 +886,32 @@ class Tank01AvailablePlayersStatsExtractor:
                         if value > 0:
                             report.append(f"  - {stat}: {value:.1f}")
                 
+                report.append("")
+            
+            # Team defense stats (for defense players)
+            team_defense_stats = game_stats.get('team_defense_stats', {})
+            if team_defense_stats:
+                report.append("#### Team Defense Statistics")
+                report.append(f"- **Record**: {team_defense_stats.get('wins', 0)}-{team_defense_stats.get('losses', 0)}-{team_defense_stats.get('ties', 0)}")
+                report.append(f"- **Points For**: {team_defense_stats.get('pointsFor', 0)}")
+                report.append(f"- **Points Allowed**: {team_defense_stats.get('pointsAllowed', 0)}")
+                report.append(f"- **Total Yards Allowed**: {team_defense_stats.get('yardsAllowed', 0)}")
+                report.append(f"- **Pass Yards Allowed**: {team_defense_stats.get('passYardsAllowed', 0)}")
+                report.append(f"- **Rush Yards Allowed**: {team_defense_stats.get('rushYardsAllowed', 0)}")
+                report.append(f"- **Pass TDs Allowed**: {team_defense_stats.get('passTDAllowed', 0)}")
+                report.append(f"- **Rush TDs Allowed**: {team_defense_stats.get('rushTDAllowed', 0)}")
+                report.append(f"- **Interceptions**: {team_defense_stats.get('interceptions', 0)}")
+                report.append(f"- **Fumbles Recovered**: {team_defense_stats.get('fumblesRecovered', 0)}")
+                report.append(f"- **Sacks**: {team_defense_stats.get('sacks', 0)}")
+                report.append(f"- **Safeties**: {team_defense_stats.get('safeties', 0)}")
+                report.append(f"- **Defensive TDs**: {team_defense_stats.get('defTD', 0)}")
+                report.append(f"- **Turnovers**: {team_defense_stats.get('turnovers', 0)}")
+                report.append(f"- **Total Tackles**: {team_defense_stats.get('totalTackles', 0)}")
+                report.append(f"- **Solo Tackles**: {team_defense_stats.get('soloTackles', 0)}")
+                report.append(f"- **Tackles for Loss**: {team_defense_stats.get('tacklesForLoss', 0)}")
+                report.append(f"- **QB Hits**: {team_defense_stats.get('qbHits', 0)}")
+                report.append(f"- **Pass Deflections**: {team_defense_stats.get('passDeflections', 0)}")
+                report.append(f"- **2PT Conversion Returns**: {team_defense_stats.get('twoPointConversionReturn', 0)}")
                 report.append("")
             
             # Recent games
@@ -869,8 +1015,19 @@ class Tank01AvailablePlayersStatsExtractor:
             tank01_player = self._match_yahoo_to_tank01(yahoo_player)
             
             if tank01_player:
+                # For defense players, get team-level stats first
+                team_defense_stats = None
+                if tank01_player.get('isTeamDefense', False):
+                    team_abbr = tank01_player.get('team', '')
+                    if team_abbr:
+                        team_defense_stats = self._get_team_defense_stats(team_abbr)
+                
                 # Get comprehensive game stats
-                game_stats = self._get_player_game_stats(tank01_player, season="2025")
+                game_stats = self._get_player_game_stats(tank01_player, season="2025", team_defense_stats=team_defense_stats)
+                
+                # Add team defense stats to game stats for display
+                if team_defense_stats:
+                    game_stats['team_defense_stats'] = team_defense_stats
                 
                 # Update total games collected
                 self.stats["total_games_collected"] += game_stats.get('total_games', 0)

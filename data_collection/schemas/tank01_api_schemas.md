@@ -369,6 +369,109 @@ Team defense players have a different data structure than individual players:
 - **Team-Specific Fields**: Focus on teamID, team abbreviation, and position
 - **News Strategy**: Use team abbreviation for news retrieval (must normalize case)
 
+**⚠️ CRITICAL: Team Defense Stats Collection Issues (September 2025)**
+
+**Problem Identified**: The `getNFLGamesForPlayer` endpoint returns empty data for team defense players (DEF_XX), making it impossible to collect individual game statistics for team defenses.
+
+**Root Cause**: 
+- `getNFLGamesForPlayer` with `playerID="DEF_27"` returns `{"statusCode": 200, "body": []}`
+- Team defenses are aggregate entities, not individual players with game-by-game stats
+- Individual game data is not available at the team defense level
+
+**Solution Implemented**:
+- **Primary Data Source**: Use `getNFLTeams` endpoint with `team_stats=true` and `team_stats_season=2025`
+- **Team-Level Stats**: Extract comprehensive defense statistics from team-level data
+- **Season Totals Integration**: Map team defense stats to season totals calculation
+- **Fantasy Points Calculation**: Calculate fantasy points using team-level defense metrics
+
+**Team Defense Stats Data Structure** (from `getNFLTeams`):
+```json
+{
+  "teamAbv": "PHI",
+  "teamCity": "Philadelphia",
+  "teamName": "Eagles",
+  "teamID": "27",
+  "wins": "1",
+  "loss": "0",
+  "tie": "0",
+  "pa": "20",  // Points Allowed
+  "pf": "24",  // Points For
+  "teamStats": {
+    "Defense": {
+      "fumblesLost": "0",
+      "defTD": "0",
+      "fumbles": "0",
+      "fumblesRecovered": "1",
+      "twoPointConversionReturn": "0",
+      "soloTackles": "34",
+      "defensiveInterceptions": "0",
+      "qbHits": "1",
+      "tfl": "3",  // Tackles for Loss
+      "passDeflections": "6",
+      "passingTDAllowed": "0",
+      "passingYardsAllowed": "188",
+      "totalTackles": "60",
+      "rushingYardsAllowed": "119",
+      "sacks": "0",
+      "rushingTDAllowed": "2"
+    }
+  }
+}
+```
+
+**Defense Stats Mapping**:
+- **Points Allowed**: `team.pa` (string, needs conversion to float)
+- **Points For**: `team.pf` (string, needs conversion to float)
+- **Pass Yards Allowed**: `teamStats.Defense.passingYardsAllowed`
+- **Rush Yards Allowed**: `teamStats.Defense.rushingYardsAllowed`
+- **Total Yards Allowed**: `passingYardsAllowed + rushingYardsAllowed`
+- **Pass TDs Allowed**: `teamStats.Defense.passingTDAllowed`
+- **Rush TDs Allowed**: `teamStats.Defense.rushingTDAllowed`
+- **Interceptions**: `teamStats.Defense.defensiveInterceptions`
+- **Fumbles Recovered**: `teamStats.Defense.fumblesRecovered`
+- **Sacks**: `teamStats.Defense.sacks`
+- **Safeties**: `teamStats.Defense.safeties`
+- **Defensive TDs**: `teamStats.Defense.defTD`
+- **Total Tackles**: `teamStats.Defense.totalTackles`
+- **Solo Tackles**: `teamStats.Defense.soloTackles`
+- **Tackles for Loss**: `teamStats.Defense.tfl`
+- **QB Hits**: `teamStats.Defense.qbHits`
+- **Pass Deflections**: `teamStats.Defense.passDeflections`
+- **2PT Conversion Returns**: `teamStats.Defense.twoPointConversionReturn`
+
+**Fantasy Points Calculation** (Standard Defense Scoring):
+- **Points Allowed**: 0 points = 10, 1-6 points = 7, 7-13 points = 4, 14-20 points = 1, 21-27 points = 0, 28-34 points = -1, 35+ points = -4
+- **Fumbles Recovered**: 2 points each
+- **Interceptions**: 2 points each
+- **Sacks**: 1 point each
+- **Safeties**: 2 points each
+- **Defensive TDs**: 6 points each
+- **Total Tackles**: 50+ = 1 point
+- **Solo Tackles**: 30+ = 1 point
+- **Tackles for Loss**: 1 point each
+- **QB Hits**: 1 point each
+- **Pass Deflections**: 5+ = 1 point
+
+**Implementation Requirements**:
+1. **Team Defense Detection**: Check `tank01_player.get('isTeamDefense', False)`
+2. **Team Abbreviation Extraction**: Get team abbreviation from `tank01_player.get('team', '')`
+3. **Team Stats API Call**: Call `getNFLTeams(team_stats=True, team_stats_season=2025)`
+4. **Data Extraction**: Extract defense stats from `teamStats.Defense` section
+5. **Type Conversion**: Convert all string values to float using safe conversion
+6. **Season Totals Integration**: Pass team defense stats to `_calculate_season_totals()`
+7. **Markdown Display**: Show team defense stats in "Team Defense Statistics" section
+
+**Scripts Updated**:
+- ✅ `my_roster_stats.py` - Full defense stats integration
+- ✅ `opponent_roster_stats.py` - Full defense stats integration  
+- ✅ `available_players_stats.py` - Full defense stats integration
+
+**Data Quality Improvements**:
+- **Points Allowed**: Now correctly shows actual points allowed (e.g., 20.0 instead of 0.0)
+- **Season Totals**: Defense players now show proper games played (1) and fantasy points
+- **Comprehensive Stats**: All defense metrics now collected and displayed
+- **Fantasy Points**: Accurate calculation based on team-level performance
+
 ### 2. Weekly Projections (`getNFLProjections`)
 
 **Purpose**: Get fantasy projections for all players for a specific week.
