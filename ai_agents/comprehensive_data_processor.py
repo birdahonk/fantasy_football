@@ -359,151 +359,136 @@ class ComprehensiveDataProcessor:
     def _create_enriched_player_profile(self, yahoo_player: Dict[str, Any], 
                                       sleeper_data: Optional[Dict[str, Any]], 
                                       tank01_data: Optional[Dict[str, Any]]) -> Dict[str, Any]:
-        """Create enriched player profile with all API data"""
+        """Create streamlined enriched player profile combining all data sources"""
         
-        # Extract Yahoo data
-        yahoo_data = {
-            "player_key": yahoo_player.get("player_key"),
-            "player_id": yahoo_player.get("player_id"),
-            "name": yahoo_player.get("name", {}),
-            "display_position": yahoo_player.get("display_position"),
-            "team": yahoo_player.get("editorial_team_abbr"),
-            "bye_week": yahoo_player.get("bye_week"),
+        # Start with basic player info
+        player_profile = {
+            "name": yahoo_player.get("name", {}).get("full", "Unknown"),
+            "position": yahoo_player.get("display_position", "Unknown"),
+            "team": yahoo_player.get("editorial_team_abbr", "Unknown"),
+            "bye_week": yahoo_player.get("bye_week", "Unknown"),
             "injury_status": yahoo_player.get("status", "Healthy"),
-            "percent_owned": yahoo_player.get("percent_owned_value", "0")
+            "percent_owned": yahoo_player.get("percent_owned_value", "0"),
+            "roster_position": yahoo_player.get("selected_position", "Unknown")
         }
         
-        # Extract Sleeper data
-        sleeper_enriched = {}
-        if sleeper_data:
-            sleeper_enriched = {
-                "player_id": sleeper_data.get("player_id"),
-                "name": sleeper_data.get("full_name"),
-                "position": sleeper_data.get("position"),
-                "team": sleeper_data.get("team"),
-                "team_abbr": sleeper_data.get("team_abbr"),
-                "depth_chart_position": sleeper_data.get("depth_chart_position"),
-                "injury_status": sleeper_data.get("injury_status"),
-                "status": sleeper_data.get("status"),
-                "active": sleeper_data.get("active"),
-                "years_exp": sleeper_data.get("years_exp"),
-                "age": sleeper_data.get("age"),
-                "height": sleeper_data.get("height"),
-                "weight": sleeper_data.get("weight"),
-                "college": sleeper_data.get("college"),
-                "birth_date": sleeper_data.get("birth_date"),
-                "fantasy_positions": sleeper_data.get("fantasy_positions", []),
-                "player_ids": {
-                    "sleeper_id": sleeper_data.get("player_id"),
-                    "yahoo_id": sleeper_data.get("yahoo_id"),
-                    "espn_id": sleeper_data.get("espn_id"),
-                    "sportradar_id": sleeper_data.get("sportradar_id"),
-                    "gsis_id": sleeper_data.get("gsis_id"),
-                    "rotowire_id": sleeper_data.get("rotowire_id"),
-                    "fantasy_data_id": sleeper_data.get("fantasy_data_id"),
-                    "pandascore_id": sleeper_data.get("pandascore_id"),
-                    "oddsjam_id": sleeper_data.get("oddsjam_id")
-                }
-            }
-        
-        # Extract Tank01 data
-        tank01_enriched = {}
+        # Add fantasy points data (most important for analysis)
         if tank01_data:
             # Handle different Tank01 data structures
             if "yahoo_data" in tank01_data and "tank01_data" in tank01_data:
-                # Tank01 available players structure: matched_players array with yahoo_data and tank01_data keys
+                # Tank01 available players structure
                 tank01_data_section = tank01_data.get("tank01_data", {})
-                # For available players, projection data is at root level
-                # For opponent rosters, projection data is in tank01_data.fantasy_projections
                 if "projection" in tank01_data:
                     # Available players structure
                     projection_data = tank01_data.get("projection", {})
                 else:
-                    # Opponent roster structure - fantasy_projections is in tank01_data
+                    # Opponent roster structure
                     fantasy_projections = tank01_data_section.get("fantasy_projections", {})
                     projection_data = {
                         "fantasyPoints": fantasy_projections.get("fantasyPoints"),
-                        "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault"),
-                        "week_1": {
-                            "fantasy_points": fantasy_projections.get("fantasyPoints"),
-                            "fantasy_points_default": fantasy_projections.get("fantasyPointsDefault")
-                        }
+                        "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault")
                     }
-                news_data = tank01_data.get("news", []) or tank01_data_section.get("recent_news", [])
-                game_stats_data = tank01_data.get("game_stats", {}) or tank01_data_section.get("game_stats", {})
-                depth_chart_data = tank01_data.get("depth_chart", {}) or tank01_data_section.get("depth_chart", {})
             elif "yahoo_player" in tank01_data and "tank01_data" in tank01_data:
-                # Tank01 roster structure: matched_players array with yahoo_player and tank01_data keys
+                # Tank01 roster structure
                 tank01_data_section = tank01_data.get("tank01_data", {})
-                # For roster data, fantasy_projections is directly in tank01_data
                 fantasy_projections = tank01_data_section.get("fantasy_projections", {})
                 projection_data = {
                     "fantasyPoints": fantasy_projections.get("fantasyPoints"),
-                    "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault"),
-                    "week_1": {
-                        "fantasy_points": fantasy_projections.get("fantasyPoints"),
-                        "fantasy_points_default": fantasy_projections.get("fantasyPointsDefault")
-                    }
+                    "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault")
                 }
-                news_data = tank01_data_section.get("recent_news", [])
-                game_stats_data = tank01_data_section.get("game_stats", {})
-                depth_chart_data = tank01_data_section.get("depth_chart", {})
             else:
-                # Fallback: assume it's a direct tank01_data structure
+                # Fallback: direct tank01_data structure
                 tank01_data_section = tank01_data
                 fantasy_projections = tank01_data_section.get("fantasy_projections", {})
                 projection_data = {
                     "fantasyPoints": fantasy_projections.get("fantasyPoints"),
-                    "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault"),
-                    "week_1": {
-                        "fantasy_points": fantasy_projections.get("fantasyPoints"),
-                        "fantasy_points_default": fantasy_projections.get("fantasyPointsDefault")
-                    }
+                    "fantasyPointsDefault": fantasy_projections.get("fantasyPointsDefault")
                 }
-                news_data = tank01_data_section.get("recent_news", [])
-                game_stats_data = tank01_data_section.get("game_stats", {})
-                depth_chart_data = tank01_data_section.get("depth_chart", {})
             
-            tank01_enriched = {
-                "player_id": tank01_data_section.get("playerID"),
-                "name": {
-                    "full": tank01_data_section.get("longName"),
-                    "first": tank01_data_section.get("longName", "").split()[0] if tank01_data_section.get("longName") else "",
-                    "last": tank01_data_section.get("longName", "").split()[-1] if tank01_data_section.get("longName") else ""
-                },
-                "display_position": tank01_data_section.get("pos"),
-                "team": tank01_data_section.get("team"),
-                "team_id": tank01_data_section.get("teamID"),
-                "jersey_number": tank01_data_section.get("jerseyNum"),
-                "age": tank01_data_section.get("age"),
-                "height": tank01_data_section.get("height"),
-                "weight": tank01_data_section.get("weight"),
-                "college": tank01_data_section.get("school"),
-                "years_exp": tank01_data_section.get("exp"),
-                "last_game_played": tank01_data_section.get("lastGamePlayed"),
-                "injury": tank01_data_section.get("injury", {}),
-                "projection": projection_data,
-                "news": news_data,
-                "game_stats": game_stats_data,
-                "depth_chart": depth_chart_data,
-                "team_context": tank01_data_section.get("team_context", {}),
-                "player_ids": {
-                    "espn_id": tank01_data_section.get("espnID"),
-                    "sleeper_id": tank01_data_section.get("sleeperBotID"),
-                    "fantasypros_id": tank01_data_section.get("fantasyProsPlayerID"),
-                    "yahoo_id": tank01_data_section.get("yahooPlayerID"),
-                    "rotowire_id": tank01_data_section.get("rotoWirePlayerID"),
-                    "cbs_id": tank01_data_section.get("cbsPlayerID"),
-                    "fref_id": tank01_data_section.get("fRefID")
-                }
-            }
+            if projection_data:
+                player_profile["fantasy_points"] = projection_data.get("fantasyPoints")
+                player_profile["fantasy_points_default"] = projection_data.get("fantasyPointsDefault")
         
-        return {
-            "name": yahoo_data.get("name", {}).get("full", "Unknown"),
-            "yahoo_data": yahoo_data,
-            "sleeper_data": sleeper_enriched if sleeper_enriched else None,
-            "tank01_data": tank01_enriched if tank01_enriched else None
+        # Add key Sleeper data (minimal)
+        if sleeper_data:
+            player_profile["depth_chart_position"] = sleeper_data.get("depth_chart_position")
+            player_profile["years_exp"] = sleeper_data.get("years_exp")
+            player_profile["active"] = sleeper_data.get("active")
+            player_profile["age"] = sleeper_data.get("age")
+        
+        # Add recent news (keep current quantity, simplified format)
+        if tank01_data:
+            # Handle different Tank01 data structures for news
+            if "yahoo_data" in tank01_data and "tank01_data" in tank01_data:
+                news_data = tank01_data.get("news", []) or tank01_data.get("tank01_data", {}).get("recent_news", [])
+            elif "yahoo_player" in tank01_data and "tank01_data" in tank01_data:
+                news_data = tank01_data.get("tank01_data", {}).get("recent_news", [])
+            else:
+                news_data = tank01_data.get("recent_news", [])
+            
+            if news_data:
+                player_profile["recent_news"] = [
+                    {
+                        "title": item.get("title", ""),
+                        "link": item.get("link", "")
+                    }
+                    for item in news_data  # Keep all news items, just simplified format
+                ]
+            
+            # Add basic injury info from Tank01
+            if "yahoo_data" in tank01_data and "tank01_data" in tank01_data:
+                injury = tank01_data.get("tank01_data", {}).get("injury", {})
+            elif "yahoo_player" in tank01_data and "tank01_data" in tank01_data:
+                injury = tank01_data.get("tank01_data", {}).get("injury", {})
+            else:
+                injury = tank01_data.get("injury", {})
+            
+            if injury and injury.get("description"):
+                player_profile["injury_details"] = {
+                    "description": injury.get("description", ""),
+                    "designation": injury.get("designation", "")
+                }
+        
+        # Add deduplicated ID mappings (helpful for web research)
+        player_ids = {}
+        
+        # Sleeper IDs
+        if sleeper_data:
+            sleeper_ids = {
+                "sleeper_id": sleeper_data.get("player_id"),
+                "yahoo_id": sleeper_data.get("yahoo_id"),
+                "espn_id": sleeper_data.get("espn_id")
+            }
+            player_ids.update({k: v for k, v in sleeper_ids.items() if v is not None})
+        
+        # Tank01 IDs
+        if tank01_data:
+            if "yahoo_data" in tank01_data and "tank01_data" in tank01_data:
+                tank01_section = tank01_data.get("tank01_data", {})
+            elif "yahoo_player" in tank01_data and "tank01_data" in tank01_data:
+                tank01_section = tank01_data.get("tank01_data", {})
+            else:
+                tank01_section = tank01_data
+            
+            tank01_ids = {
+                "tank01_id": tank01_section.get("playerID"),
+                "fantasypros_id": tank01_section.get("fantasyProsPlayerID"),
+                "rotowire_id": tank01_section.get("rotoWirePlayerID")
+            }
+            player_ids.update({k: v for k, v in tank01_ids.items() if v is not None})
+        
+        # Yahoo IDs
+        yahoo_ids = {
+            "yahoo_player_key": yahoo_player.get("player_key"),
+            "yahoo_player_id": yahoo_player.get("player_id")
         }
+        player_ids.update({k: v for k, v in yahoo_ids.items() if v is not None})
+        
+        # Only add if we have IDs
+        if any(player_ids.values()):
+            player_profile["player_ids"] = {k: v for k, v in player_ids.items() if v is not None}
+        
+        return player_profile
     
     def _find_matching_player(self, yahoo_player: Dict[str, Any], other_players: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
         """Find matching player in other API data (Sleeper matched_players)"""

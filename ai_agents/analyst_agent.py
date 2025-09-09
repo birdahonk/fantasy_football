@@ -489,11 +489,11 @@ CRITICAL CONTEXT: This is the {nfl_season} NFL season, Week {current_week}. You 
 ## ANALYSIS INSTRUCTIONS
 
 ### 1. DATA UTILIZATION REQUIREMENTS
-- **MUST** analyze each player's projected points from Tank01 data (tank01_data.projection.fantasyPoints)
-- **MUST** analyze fantasy points defaults for all players (tank01_data.projection.fantasyPointsDefault)
-- **MUST** follow and summarize news links from Tank01 data (tank01_data.news)
-- **MUST** consider depth chart positions from Sleeper data (sleeper_data.depth_chart_position)
-- **MUST** cross-reference player IDs across all 3 APIs (Yahoo, Sleeper, Tank01)
+- **MUST** analyze each player's projected points (fantasy_points field)
+- **MUST** analyze fantasy points defaults for all players (fantasy_points_default field)
+- **MUST** follow and summarize news links from recent_news data
+- **MUST** consider depth chart positions from depth_chart_position field
+- **MUST** cross-reference player IDs across all 3 APIs using player_ids field
 - **MUST** use NFL matchups data for game times and opponent analysis
 - **MUST** use web research findings in your analysis
 - **MUST** understand that defense players have fantasyPoints=null but fantasyPointsDefault=number
@@ -502,20 +502,20 @@ CRITICAL CONTEXT: This is the {nfl_season} NFL season, Week {current_week}. You 
 1. **Data Visibility Confirmation**: Show exactly what data you can see
 2. **Individual Player Summaries**: For EACH player on your roster, provide a detailed summary based on:
    - Web research findings about that specific player
-   - News links provided in their Tank01 data
+   - News links provided in their recent_news data
    - Current injury status and role clarity
    - Recent performance trends and expectations
-   - Projected fantasy points from Tank01 data
+   - Projected fantasy points from fantasy_points field
 3. **Opponent Analysis**: Detailed analysis of your Week {current_week} opponent ({opponent_name})
 4. **Available Players Analysis**: Top recommendations with specific reasoning
 5. **Specific Recommendations**: Exact add/drop suggestions with projected points comparisons
 6. **News Integration**: How news links influenced your recommendations
 
 ### 3. CRITICAL INSTRUCTIONS
-- **MUST** use Tank01 projected points data (tank01_data.projection.fantasyPoints)
-- **MUST** follow and summarize news links from player data (tank01_data.news)
+- **MUST** use projected points data (fantasy_points field)
+- **MUST** follow and summarize news links from player data (recent_news field)
 - **MUST** provide individual summary for each roster player based on web research and news
-- **MUST** use Tank01 fantasy points for all projections (not Yahoo's 0 values)
+- **MUST** use fantasy points for all projections (not Yahoo's 0 values)
 - **MUST** analyze your opponent's key players and their projected performance
 
 Please provide a comprehensive analysis with specific recommendations for improving your roster."""
