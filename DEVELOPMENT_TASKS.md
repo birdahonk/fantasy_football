@@ -219,6 +219,11 @@
   - [ ] **System Prompt** - Core personality, role, and analysis framework
   - [ ] **Analysis Prompts** - Specific prompts for different analysis types
   - [ ] **Output Formatting** - Structured response templates and formatting guidelines
+  - [ ] **Token Usage Validation** - Test and validate token usage with Anthropic Opus 4.1 model (200k token limit)
+    - [ ] **Token Counting** - Count tokens for system prompt + analysis prompts + sample data
+    - [ ] **Data Optimization** - Optimize data structure to fit within 200k token limit
+    - [ ] **Prompt Refinement** - Refine prompts based on token usage analysis
+    - [ ] **Validation Testing** - Test with actual post-game data to ensure token limits are respected
   - [ ] **Prompt Testing** - Validate prompts with sample data and refine based on results
 
 #### **Phase 2: Manual Testing & Validation** 🧪
