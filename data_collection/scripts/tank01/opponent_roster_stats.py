@@ -349,17 +349,17 @@ class Tank01OpponentRosterStatsExtractor:
             current_path = Path(__file__).resolve()
             for parent in current_path.parents:
                 if parent.name == "data_collection":
-                    yahoo_output_dir = parent / "outputs" / "yahoo" / "opponent_roster"
+                    yahoo_output_dir = parent / "outputs" / "yahoo" / "opponent_rosters"
                     break
             else:
                 # Fallback: assume we're in the project root
-                yahoo_output_dir = Path("data_collection/outputs/yahoo/opponent_roster")
+                yahoo_output_dir = Path("data_collection/outputs/yahoo/opponent_rosters")
             
             if not yahoo_output_dir.exists():
                 raise FileNotFoundError(f"Yahoo opponent roster output directory not found: {yahoo_output_dir}")
             
             # Get the most recent file
-            roster_files = list(yahoo_output_dir.glob("**/*_opponent_roster_raw_data.json"))
+            roster_files = list(yahoo_output_dir.glob("**/*_opponent_rosters_raw_data.json"))
             if not roster_files:
                 raise FileNotFoundError("No Yahoo opponent roster raw data files found")
             
@@ -372,55 +372,25 @@ class Tank01OpponentRosterStatsExtractor:
             # Extract players from the Yahoo raw data
             players = []
             
-            # Handle the actual Yahoo data structure - simplified approach
+            # Handle the actual Yahoo data structure - rosters section with players
             try:
                 self.logger.debug(f"Raw data keys: {list(raw_data.keys())}")
-                roster_raw = raw_data.get('roster_raw', {})
-                self.logger.debug(f"Roster raw keys: {list(roster_raw.keys())}")
-                fantasy_content = roster_raw.get('fantasy_content', {})
-                self.logger.debug(f"Fantasy content keys: {list(fantasy_content.keys())}")
-                team_data = fantasy_content.get('team', [])
-                self.logger.debug(f"Team data type: {type(team_data)}, length: {len(team_data) if isinstance(team_data, list) else 'N/A'}")
+                rosters = raw_data.get('rosters', {})
+                self.logger.debug(f"Found {len(rosters)} rosters")
                 
-                if isinstance(team_data, list) and len(team_data) > 0:
-                    # Check both team data items
-                    for team_idx, team_info in enumerate(team_data):
-                        self.logger.debug(f"Team {team_idx} type: {type(team_info)}, length: {len(team_info) if isinstance(team_info, list) else 'N/A'}")
-                        if isinstance(team_info, list):
-                            # Find the roster section
-                            for i, item in enumerate(team_info):
-                                if isinstance(item, dict) and 'roster' in item:
-                                    self.logger.debug(f"Found roster at team {team_idx}, item {i}")
-                                    roster_data = item['roster']
-                                    if isinstance(roster_data, dict):
-                                        self.logger.debug(f"Roster data keys: {list(roster_data.keys())}")
-                                        # Look for players in roster
-                                        for key, value in roster_data.items():
-                                            if key.isdigit() and isinstance(value, dict) and 'players' in value:
-                                                self.logger.debug(f"Found players section at key {key}")
-                                                players_data = value['players']
-                                                if isinstance(players_data, dict):
-                                                    self.logger.debug(f"Players data keys: {list(players_data.keys())}")
-                                                    # Extract players
-                                                    for player_key, player_value in players_data.items():
-                                                        if player_key.isdigit() and isinstance(player_value, dict) and 'player' in player_value:
-                                                            self.logger.debug(f"Found player at key {player_key}")
-                                                            player_list = player_value['player']
-                                                            if isinstance(player_list, list):
-                                                                for player_item in player_list:
-                                                                    if isinstance(player_item, list):
-                                                                        # Flatten the player data
-                                                                        player_data = {}
-                                                                        for field in player_item:
-                                                                            if isinstance(field, dict):
-                                                                                player_data.update(field)
-                                                                        if player_data:
-                                                                            players.append(player_data)
-                                                                            self.logger.debug(f"Added player: {player_data.get('name', {}).get('full', 'Unknown')}")
+                for team_key, roster_data in rosters.items():
+                    team_players = roster_data.get('players', [])
+                    self.logger.debug(f"Team {team_key} has {len(team_players)} players")
+                    if team_players:
+                        self.logger.debug(f"First player sample: {team_players[0] if team_players else 'None'}")
+                    players.extend(team_players)
+                
+                self.logger.info(f"Extracted {len(players)} players from Yahoo data")
+                
             except Exception as e:
-                self.logger.error(f"Error parsing Yahoo opponent roster data: {e}")
-                # Try alternative parsing approach
-                players = self._parse_yahoo_roster_alternative(raw_data)
+                self.logger.error(f"Error extracting players from Yahoo data: {e}")
+                self.logger.debug(f"Raw data structure: {json.dumps(raw_data, indent=2)[:1000]}...")
+                return [], {}
             
             # If no players found, try the roster_players key
             if not players and 'roster_players' in raw_data:
@@ -1134,24 +1104,36 @@ class Tank01OpponentRosterStatsExtractor:
                 if any(passing.values()):
                     report.append("- **Passing Totals:**")
                     for stat, value in passing.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Rushing stats
                 rushing = season_totals.get('rushing', {})
                 if any(rushing.values()):
                     report.append("- **Rushing Totals:**")
                     for stat, value in rushing.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Receiving stats
                 receiving = season_totals.get('receiving', {})
                 if any(receiving.values()):
                     report.append("- **Receiving Totals:**")
                     for stat, value in receiving.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Defense stats
                 defense = season_totals.get('defense', {})
@@ -1178,24 +1160,36 @@ class Tank01OpponentRosterStatsExtractor:
                 if any(passing_avg.values()):
                     report.append("- **Passing Averages:**")
                     for stat, value in passing_avg.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value:.1f}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value:.1f}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Rushing averages
                 rushing_avg = season_averages.get('rushing', {})
                 if any(rushing_avg.values()):
                     report.append("- **Rushing Averages:**")
                     for stat, value in rushing_avg.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value:.1f}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value:.1f}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 # Receiving averages
                 receiving_avg = season_averages.get('receiving', {})
                 if any(receiving_avg.values()):
                     report.append("- **Receiving Averages:**")
                     for stat, value in receiving_avg.items():
-                        if value > 0:
-                            report.append(f"  - {stat}: {value:.1f}")
+                        try:
+                            if float(value) > 0:
+                                report.append(f"  - {stat}: {value:.1f}")
+                        except (ValueError, TypeError):
+                            if str(value) != '0' and str(value) != '0.0':
+                                report.append(f"  - {stat}: {value}")
                 
                 report.append("")
             
@@ -1243,12 +1237,21 @@ class Tank01OpponentRosterStatsExtractor:
                     receiving = game.get('receiving', {})
                     
                     game_stats_summary = []
-                    if passing.get('passYds', 0) > 0:
-                        game_stats_summary.append(f"{passing.get('passYds', 0)} pass yds")
-                    if rushing.get('rushYds', 0) > 0:
-                        game_stats_summary.append(f"{rushing.get('rushYds', 0)} rush yds")
-                    if receiving.get('recYds', 0) > 0:
-                        game_stats_summary.append(f"{receiving.get('recYds', 0)} rec yds")
+                    try:
+                        if float(passing.get('passYds', 0)) > 0:
+                            game_stats_summary.append(f"{passing.get('passYds', 0)} pass yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(rushing.get('rushYds', 0)) > 0:
+                            game_stats_summary.append(f"{rushing.get('rushYds', 0)} rush yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(receiving.get('recYds', 0)) > 0:
+                            game_stats_summary.append(f"{receiving.get('recYds', 0)} rec yds")
+                    except (ValueError, TypeError):
+                        pass
                     
                     if game_stats_summary:
                         report.append(f"  - Key Stats: {', '.join(game_stats_summary)}")
@@ -1274,12 +1277,21 @@ class Tank01OpponentRosterStatsExtractor:
                     receiving = game.get('receiving', {})
                     
                     key_stats = []
-                    if passing.get('passYds', 0) > 0:
-                        key_stats.append(f"{passing.get('passYds', 0)} pass yds")
-                    if rushing.get('rushYds', 0) > 0:
-                        key_stats.append(f"{rushing.get('rushYds', 0)} rush yds")
-                    if receiving.get('recYds', 0) > 0:
-                        key_stats.append(f"{receiving.get('recYds', 0)} rec yds")
+                    try:
+                        if float(passing.get('passYds', 0)) > 0:
+                            key_stats.append(f"{passing.get('passYds', 0)} pass yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(rushing.get('rushYds', 0)) > 0:
+                            key_stats.append(f"{rushing.get('rushYds', 0)} rush yds")
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        if float(receiving.get('recYds', 0)) > 0:
+                            key_stats.append(f"{receiving.get('recYds', 0)} rec yds")
+                    except (ValueError, TypeError):
+                        pass
                     
                     key_stats_str = ', '.join(key_stats) if key_stats else 'No stats'
                     
